@@ -1,0 +1,9 @@
+.wrapper {
+    @apply text-center;
+  .round {
+    @apply w-[70px] h-[70px] bg-[#828181] rounded-[50%];
+  }
+  .title {
+    @apply text-white;
+  }
+}

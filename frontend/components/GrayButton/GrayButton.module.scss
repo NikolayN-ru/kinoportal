@@ -1,0 +1,6 @@
+.Btn {
+  @apply flex items-center gap-[10px] p-[15px] bg-[#25222b] rounded-[10px];
+  .ico {
+    @apply w-[20px] h-[20px] rounded-[50%] bg-[#c0c0c2];
+  }
+}

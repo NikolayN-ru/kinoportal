@@ -1,0 +1,16 @@
+.wrapper {
+  @apply w-[150px] h-[250px] bg-[#555555] text-white relative rounded-[10px]
+    mb-[20px] cursor-pointer;
+
+  .label {
+    @apply bg-[red] rounded-[4px] absolute top-[5px] left-[5px] p-[5px];
+  }
+
+  .title {
+    @apply absolute bottom-[-30px] left-[5px] text-white opacity-[0.7];
+  }
+}
+
+.wrapper:hover {
+  @apply opacity-[0.9];
+}
