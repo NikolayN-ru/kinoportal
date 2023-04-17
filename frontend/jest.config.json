@@ -1,0 +1,13 @@
+{
+  "testEnvironment": "jest-environment-jsdom",
+  "moduleFileExtensions": ["js", "jsx", "ts", "tsx"],
+  "transform": {
+    "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
+  },
+  "testMatch": [
+    "**/*.test.tsx"
+  ],
+  "moduleNameMapper": {
+    "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+  }
+}
