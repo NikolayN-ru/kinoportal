@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
-import ActorRound from "../../components/Badge/ActorRound/ActorRound";
-import Quality from "../../components/Badge/Quality/Quality";
-import BadgeActor from "../../components/BadgeActor/BadgeActor";
-import GrayButton from "../../components/GrayButton";
-import SimilarFilmsItem from "../../components/similarFilmsItem/similarFilmsItem";
-import { useFilmItemQuery } from "../../redux/filmsApi";
+import ActorRound from "../../../components/Badge/ActorRound/ActorRound";
+import Quality from "../../../components/Badge/Quality/Quality";
+import BadgeActor from "../../../components/BadgeActor/BadgeActor";
+import GrayButton from "../../../components/GrayButton";
+import SimilarFilmsItem from "../../../components/similarFilmsItem/SimilarFilmsItem";
+import { useFilmItemQuery } from "../../../redux/filmsApi";
 import s from "./item.module.scss";
 
 const Index = () => {
