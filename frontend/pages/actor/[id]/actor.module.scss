@@ -12,8 +12,7 @@
   &Films {
     @apply mb-[40px];
     &Head {
-      @apply flex gap-[5px];
-      align-items: center;
+      @apply flex gap-[5px] items-center;
       h2 {
         @apply text-xl text-white;
       }
@@ -28,16 +27,13 @@
   }
 
   &Comments {
-    @apply mb-[30px] ;
+    @apply mb-[30px];
     h2 {
     }
     > div {
-      @apply flex justify-between gap-[20px];
-      align-items: center;
+      @apply flex justify-between gap-[20px] items-center;
       input {
-        @apply rounded-[5px] p-[10px] bg-light;
-        width: 300px;
-        height: 40px;
+        @apply rounded-[5px] p-[10px] bg-light w-[300px] h-[40px];
       }
       button {
         @apply p-[10px] bg-backgroundGrey rounded-[5px];
@@ -47,10 +43,10 @@
   &Popular {
     @apply mb-[10px];
     h2 {
-        @apply text-2xl mb-[20px] text-white;
+      @apply text-2xl mb-[20px] text-white;
     }
     &_items {
-        @apply flex gap-[20px];
+      @apply flex gap-[20px];
     }
   }
 }
