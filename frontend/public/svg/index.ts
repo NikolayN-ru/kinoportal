@@ -14,3 +14,4 @@ export {default as Twitter} from './twitter.svg';
 export {default as Callback} from './callback.svg';
 export {default as In} from './in.svg';
 export {default as TG} from './tg.svg';
+export {default as Search} from './search.svg';

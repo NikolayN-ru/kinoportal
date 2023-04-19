@@ -36,7 +36,6 @@ const iconTypes: IconTypes = {
   callback:Callback,
   in:In,
   tg:TG,
-
 };
 
 const IconComponent = ({ name, ...props }: IconComponentProps) => {
