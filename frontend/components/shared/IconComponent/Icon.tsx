@@ -15,6 +15,7 @@ import { Twitter } from "../../../public/svg/index";
 import { Callback } from "../../../public/svg/index";
 import { In } from "../../../public/svg/index";
 import { TG } from "../../../public/svg/index";
+
 type IconComponentProps = { name: string };
 type IconTypes = { [name: string]: ReactSVGComponent };
 
@@ -35,6 +36,7 @@ const iconTypes: IconTypes = {
   callback:Callback,
   in:In,
   tg:TG,
+
 };
 
 const IconComponent = ({ name, ...props }: IconComponentProps) => {

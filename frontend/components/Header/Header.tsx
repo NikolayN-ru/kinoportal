@@ -4,6 +4,7 @@ import GrayButton from "../GrayButton";
 import Button from "../shared/Button/Button";
 import Icon from "../shared/IconComponent/Icon";
 import Logo from "../shared/Logo/Logo";
+
 import s from "./Header.module.scss";
 import ModalSearch from "./ModalSearch/ModalSearch";
 
@@ -58,6 +59,7 @@ const Header = () => {
             <React.Fragment>
             <div className={s.btn__search} onClick={() => setModal(true)}>
               <div className={s.imgWrapper}>
+
                 <Icon name="search" />
               </div>
               Поиск
