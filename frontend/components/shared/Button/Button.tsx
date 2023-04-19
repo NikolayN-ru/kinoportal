@@ -1,9 +1,26 @@
-import s from './Button.module.scss';
-import { FC } from "react";
+import React, { FC } from 'react';
+import s from './GrayButton.module.scss';
 
-
-const Button: FC<any> = ({ content }) => {
-  return <div className={s.Button}>{content}</div>;
+type Button = {
+  title: string;
+  text?: string;
+  preamble?: string;
+  ico?: any;
 };
 
-export default Button;
+const GrayButton: FC<Button> = ({ title, text, preamble, ico }) => {
+  return (
+    <div className={s.Btn}>
+      {title}
+      {text && (
+        <div className={s.content}>
+          {preamble && <span className={s.preamble}>{preamble}</span>}
+          {text}
+        </div>
+      )}
+      {/* {ico && <div className={s.ico}></div>} */}
+    </div>
+  );
+};
+
+export default GrayButton;

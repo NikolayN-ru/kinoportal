@@ -1,63 +1,77 @@
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import GrayButton from "../GrayButton";
 import Button from "../shared/Button/Button";
 import Icon from "../shared/IconComponent/Icon";
 import Logo from "../shared/Logo/Logo";
-import style from "./Header.module.css";
+import s from "./Header.module.scss";
+import ModalSearch from "./ModalSearch/ModalSearch";
 
 const Header = () => {
+  const [isModal, setModal] = useState(false);
+  const onClose = () => {
+    setModal(false);
+  };
   return (
-    <div className={style.header}>
-      <div className={style.container}>
-        <div className={style.row}>
-          <div className={style.menu}>
-            <div className={style.logo}>
+    <div className={s.header}>
+      <div className={s.container}>
+        <div className={s.row}>
+          <div className={s.menu}>
+            <div className={s.logo}>
               <Logo />
             </div>
-            <div className={style.listItem}>
-              <div className={style.link}>
-                <a href="/" target="_blank">
+            <div className={s.listItem}>
+              <div className={s.link}>
+                <a className={s.link} href="/" target="_blank">
                   Мой Иви
                 </a>
               </div>
-              <div className={style.link}>
-                <a href="/" target="_blank">
+              <div className={s.link}>
+                <a className={s.link} href="/" target="_blank">
                   Что нового
                 </a>
               </div>
-              <div className={style.link}>
-                <a href="/" target="_blank">
+              <div className={s.link}>
+                <a className={s.link} href="/" target="_blank">
                   Фильмы
                 </a>
               </div>
-              <div className={style.link}>
-                <a href="/" target="_blank">
+              <div className={s.link}>
+                <a className={s.link} href="/" target="_blank">
                   Сериалы
                 </a>
               </div>
-              <div className={style.link}>
-                <a href="/" target="_blank">
+              <div className={s.link}>
+                <a className={s.link} href="/" target="_blank">
                   Мультфильмы
                 </a>
               </div>
-              <div className={style.link}>
-                <a href="/" target="_blank">
+              <div className={s.link}>
+                <a className={s.link} href="/" target="_blank">
                   TV+
                 </a>
               </div>
             </div>
           </div>
-          <div className={style.userBlock}>
-            <div className={style.btn__subscribe}>Оплатить подписку</div>
-            <div className={style.btn__search}>
-              <div className={style.imgWrapper}>
+          <div className={s.userBlock}>
+            <div className={s.btn__subscribe}>Оплатить подписку</div>
+            <React.Fragment>
+            <div className={s.btn__search} onClick={() => setModal(true)}>
+              <div className={s.imgWrapper}>
                 <Icon name="search" />
               </div>
               Поиск
             </div>
-            <div className={style.btn__notify}>
+            <ModalSearch
+                    visible={isModal}
+                    footer={<button onClick={onClose}>Закрыть</button>}
+                    onClose={onClose}
+                  />
+            </React.Fragment>
+            <div className={s.btn__notify}>
               <Icon name="notify" />
             </div>
-            <div className={style.btn__avatar}>
+            <div className={s.btn__avatar}>
               <Icon name="avatar" />
             </div>
           </div>

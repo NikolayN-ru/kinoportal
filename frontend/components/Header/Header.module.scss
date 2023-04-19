@@ -87,6 +87,11 @@
   fill: rgb(255, 255, 255, 0.48);
 }
 
+.btn__avatar svg {
+  width: 20px;
+  height: 20px;
+}
+
 .btn__avatar:hover path {
   fill: rgb(255, 255, 255, 1);
   transition: all 0.4s;
@@ -105,4 +110,13 @@
 
 .imgWrapper:only-child {
   margin-top: 4px;
+}
+
+@media (max-width:1160px) {
+  .container {
+    max-width: 1075px;
+  }
+  .listItem{
+display: none;
+  }
 }

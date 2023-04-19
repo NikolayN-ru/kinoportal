@@ -56,8 +56,16 @@
   .main-container {
     @apply flex flex-col grow mx-auto my-0;
 
-    min-width: theme('width.mobile');
-    max-width: theme('width.desktop');
+    min-width: theme("width.mobile");
+    max-width: theme("width.desktop");
+    width: 1216px;
+    min-height: calc(100vh - 548px);
   }
 }
 
+@media (max-width: 1160px) {
+  .main-container {
+    width: 100%;
+    max-width: 1075px;
+  }
+}
