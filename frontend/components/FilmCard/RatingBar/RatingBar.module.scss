@@ -1,0 +1,15 @@
+.bar {
+  @apply relative w-full bg-[#7f7a90]/[32] rounded-[2px];
+}
+
+.sizeS {
+  @apply h-[2px];
+}
+
+.sizeM {
+  @apply h-[4px];
+}
+
+.innerBar {
+  @apply absolute top-0 left-0 h-full bg-red rounded-[2px];
+}

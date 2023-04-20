@@ -1,0 +1,7 @@
+.container {
+  @apply absolute top-[16px] right-[16px] flex flex-col;
+}
+
+.button {
+  @apply z-10 w-[20px] h-[20px] mb-[10px] text-[20px] leading-[20px] bg-white;
+}
