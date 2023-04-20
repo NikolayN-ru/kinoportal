@@ -1,17 +1,16 @@
-import React, { FC, ReactComponentElement } from 'react';
+import React, { FC } from 'react';
 import s from './GrayButton.module.scss';
 
 type Button = {
-  title: string | JSX.Element;
-  className?:string;
+  title: string;
   text?: string;
   preamble?: string;
   ico?: any;
 };
 
-const GrayButton: FC<Button> = ({ title, text, preamble, className, ico }) => {
+const GrayButton: FC<Button> = ({ title, text, preamble, ico }) => {
   return (
-    <div className={`${s.Btn} ${className}`}>
+    <div className={s.Btn}>
       {title}
       {text && (
         <div className={s.content}>

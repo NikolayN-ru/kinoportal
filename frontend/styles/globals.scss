@@ -56,7 +56,9 @@
   .main-container {
     @apply relative flex flex-col grow w-full mx-auto my-0;
 
-    min-width: theme('width.mobile');
-    max-width: theme('width.desktop');
+    min-width: theme("width.mobile");
+    max-width: theme("width.desktop");
+    width: 1216px;
+    min-height: calc(100vh - 548px);
   }
 }
