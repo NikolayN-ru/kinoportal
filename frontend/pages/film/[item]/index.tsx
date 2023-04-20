@@ -1,15 +1,23 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import ActorRound from "../../../components/Badge/ActorRound/ActorRound";
 import Quality from "../../../components/Badge/Quality/Quality";
 import BadgeActor from "../../../components/BadgeActor/BadgeActor";
+import CollectionSlider from "../../../components/CollectionSlider/CollectionSlider";
 import GrayButton from "../../../components/GrayButton";
-import SimilarFilmsItem from "../../../components/similarFilmsItem/SimilarFilmsItem";
+import Title from "../../../components/Title/Title";
+import { collections } from "../../../mock/filmsData";
 import { useFilmItemQuery } from "../../../redux/filmsApi";
+import cn from 'classnames';
 import s from "./item.module.scss";
 
 const Index = () => {
   const router = useRouter();
-  const { data=[], error, isLoading } = useFilmItemQuery(String(router.query.id));
+  const {
+    data = [],
+    error,
+    isLoading,
+  } = useFilmItemQuery(String(router.query.id));
 
   if (isLoading) {
     return <div>LOADING</div>;
@@ -34,8 +42,8 @@ const Index = () => {
             <div className={s.mainLeftVideo}></div>
             <div className={s.mainBlockButton}>
               <GrayButton title="Треллер" />
-              <GrayButton />
-              <GrayButton />
+              <GrayButton title="Треллер"/>
+              <GrayButton title="Треллер"/>
             </div>
           </div>
           <div className={s.mainRight}>
@@ -108,19 +116,17 @@ const Index = () => {
             </div>
           </div>
         </div>
-
-        <div className={s.similarFilms}>
-          <h3>С фильмом «Спящие» смотрят</h3>
-          <div className={s.similarFilmsItems}>
-            <SimilarFilmsItem title="Mock data" choice={true} />
-            <SimilarFilmsItem title="Mock data" />
-            <SimilarFilmsItem title="Mock data" />
-            <SimilarFilmsItem title="Mock data" choice={true} />
-            <SimilarFilmsItem title="Mock data" />
-            <SimilarFilmsItem title="Mock data" choice={true} />
-          </div>
-        </div>
-
+        {collections.map((collection) => (
+          <section key={collection.id} className={s.pageSection}>
+            <Link
+              href={`/collections/${collection.link}`}
+              className={cn(s.titleLink, s.collectionTitle)}
+            >
+              <Title tag="h2" size="md" text="С фильмом «Спящие» смотрят" />
+            </Link>
+            <CollectionSlider items={collection.items} />
+          </section>
+        ))}
         <div className={s.actorSection}>
           <h3>Актёры и создатели</h3>
           <div className={s.actors}>

@@ -73,16 +73,6 @@
   }
 }
 
-.similarFilms {
-  @apply mb-[40px];
-  h3 {
-    @apply text-3xl mb-[10px];
-  }
-  &Items {
-    @apply flex flex-wrap justify-center gap-[30px];
-  }
-}
-
 .actorSection {
   h3 {
     @apply text-3xl mb-[20px];
@@ -92,8 +82,24 @@
   }
 }
 
-// LINE
 .line {
   @apply mb-[5px];
   border-bottom: 1px solid rgb(72, 72, 72);
+}
+
+.pageSection {
+  @apply py-[24px];
+}
+
+.titleLink {
+  @apply relative inline-flex justify-start pr-[14px] text-white;
+
+  &::after {
+    @apply absolute top-[6px] right-[0] bottom-[0] w-[6px] h-[16px] my-auto content-[""]
+    bg-[url('/svg/arrow-right.svg')] bg-no-repeat;
+  }
+}
+
+.collectionTitle {
+  @apply mb-[24px];
 }
