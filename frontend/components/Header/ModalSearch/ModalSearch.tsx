@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import s from "./ModalSearch.module.scss";
-// интерфейс для пропсов
+
 interface ModalProps {
   visible: boolean;
   footer: ReactElement | string;
@@ -8,7 +8,6 @@ interface ModalProps {
 }
 
 const Modal = ({ visible = false, footer = "", onClose }: ModalProps) => {
-  // создаем обработчик нажатия клавиши Esc
   const onKeydown = ({ key }: KeyboardEvent) => {
     switch (key) {
       case "Escape":
@@ -17,16 +16,13 @@ const Modal = ({ visible = false, footer = "", onClose }: ModalProps) => {
     }
   };
 
-  // c помощью useEffect цепляем обработчик к нажатию клавиш
   React.useEffect(() => {
     document.addEventListener("keydown", onKeydown);
     return () => document.removeEventListener("keydown", onKeydown);
   });
 
-  // если компонент невидим, то не отображаем его
   if (!visible) return null;
 
-  // или возвращаем верстку модального окна
   return (
     <div className={s.modal} onClick={onClose}>
       <div className={s.container}>
@@ -53,6 +49,7 @@ const Modal = ({ visible = false, footer = "", onClose }: ModalProps) => {
         </div>
       </div>
     </div>
+    // <></>
   );
 };
 

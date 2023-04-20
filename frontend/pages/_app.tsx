@@ -11,8 +11,8 @@ export default function App({ Component, pageProps }: AppProps) {
     <Provider store={store}>
       <MainContainer>
         <Header />
-        <Footer />
         <Component {...pageProps} />
+        <Footer />
       </MainContainer>
     </Provider>
   );
