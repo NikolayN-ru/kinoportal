@@ -1,0 +1,84 @@
+.cardContainer {
+  @apply relative flex flex-col mr-[20px];
+}
+
+.title {
+  @apply order-2 overflow-hidden h-[20px] leading-[20px]
+  font-semibold text-light whitespace-nowrap text-ellipsis
+  duration-[200ms];
+
+  &::before {
+    @apply absolute top-0 right-0 bottom-0 left-0 content-[""];
+  }
+
+  &:hover {
+    @apply text-white;
+  }
+}
+
+.card {
+  @apply order-1 relative overflow-hidden mb-[8px]
+  bg-backgroundSecondary rounded-default duration-[200ms] w-[150px] h-[235px];
+
+  transform-origin: 50% 100%;
+  transition-property: transform;
+}
+
+.poster,
+.info {
+  @apply absolute top-0 right-0 bottom-0 left-0;
+}
+
+.poster {
+  @apply scale-100 translate-y-0;
+
+  img {
+    @apply absolute w-full h-full object-cover;
+
+    will-change: transform;
+    transform-origin: 50% 100%;
+  }
+}
+
+.title:hover + .card {
+  transform: scale(1.04) translateY(0);
+}
+
+.ageLabel {
+  @apply absolute bottom-[4px] right-[4px] w-[24px] h-[16px]
+  text-[9.5px] text-center leading-[16px] font-bold tracking-[0.03em] whitespace-nowrap text-ellipsis
+  bg-backgroundSecondary/80 rounded-[4px];
+}
+
+.info {
+  @apply text-[13px] leading-[1.2] text-light
+  bg-[#07050e]/80 opacity-0 duration-[200ms];
+
+  transition-property: opacity;
+}
+
+.title:hover + .card .info {
+  @apply opacity-100;
+}
+
+.tools {
+  @apply opacity-0 duration-[1000ms];
+
+  transition-property: opacity;
+}
+
+.title:hover + .card .tools {
+  @apply opacity-100 duration-0;
+}
+
+.infoProperties {
+  @apply absolute right-[16px] bottom-[16px] left-[16px];
+}
+
+.rating {
+  @apply mb-[12px];
+}
+
+.infoRow {
+  @apply mt-[4px] line-clamp-2 text-ellipsis;
+}

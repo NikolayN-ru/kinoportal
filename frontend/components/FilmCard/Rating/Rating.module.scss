@@ -1,0 +1,16 @@
+.details {
+  @apply flex items-center mb-[4px];
+}
+
+.value {
+  @apply overflow-hidden h-[28px] mr-[8px]
+  text-[24px] leading-[28px] font-bold text-white text-ellipsis whitespace-nowrap;
+}
+
+.bars {
+  @apply relative top-[1px] grid gap-y-[2px] w-[20px];
+}
+
+.category {
+  @apply mb-[4px];
+}

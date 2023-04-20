@@ -26,6 +26,8 @@ module.exports = {
         green: '#73a32f',
         blue: '#00a5ff',
         purple: '#c447ff',
+        purpleDark: '#1f1b2e',
+        purpleDarkLighter: '#231f34',
         background: '#100e19',
         backgroundSecondary: '#1f1b2e',
         backgroundLight: '#312b45',
@@ -52,8 +54,17 @@ module.exports = {
         default: ['var(--ff-base)'],
       },
 
+      fontSize: {
+        default: '15px',
+        mobile: '15px',
+      },
+
       borderRadius: {
         default: '8px',
+      },
+
+      lineHeight: {
+        default: '1.4',
       },
     },
   },

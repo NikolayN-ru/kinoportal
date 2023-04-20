@@ -1,0 +1,23 @@
+.title {
+  @apply text-white font-bold;
+
+  a {
+    @apply text-white;
+  }
+}
+
+.lg {
+  @apply text-4xl;
+}
+
+.md {
+  @apply text-2xl;
+}
+
+.base {
+  @apply text-xl;
+}
+
+.sm {
+  @apply text-default;
+}

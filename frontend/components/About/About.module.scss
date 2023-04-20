@@ -1,0 +1,28 @@
+.description {
+  @apply mb-[8px] pt-[12px];
+
+  p {
+    @apply mb-[8px];
+
+    &:last-child {
+      @apply mb-[0];
+    }
+  }
+
+  ul {
+    @apply ml-[26px] list-disc;
+  }
+
+  li {
+    @apply mb-[8px];
+  }
+}
+
+.toggleButton {
+  @apply text-white font-semibold;
+}
+
+.isClose {
+  @apply line-clamp-2 text-ellipsis;
+
+}
