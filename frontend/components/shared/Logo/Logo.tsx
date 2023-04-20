@@ -8,18 +8,18 @@ export default function Logo() {
         <path d="M15.655 19.3922C15.655 17.5816 14.4843 15.9267 12.3314 15.9267C10.1785 15.9267 8.92969 17.5409 8.92969 19.2819C8.92969 21.1496 10.3309 22.6054 12.2933 22.6054C14.2556 22.6054 15.655 21.2593 15.655 19.3922Z" fill="white"/>
         <defs>
         <linearGradient id="paint0_linear_0_7" x1="38.5414" y1="63.12" x2="0.0179998" y2="5.496" gradientUnits="userSpaceOnUse">
-        <stop offset="0.798" stop-color="#F30745"/>
-        <stop offset="0.977" stop-color="#FFBCCE"/>
+        <stop offset="0.798" stopColor="#F30745"/>
+        <stop offset="0.977" stopColor="#FFBCCE"/>
         </linearGradient>
         <linearGradient id="paint1_linear_0_7" x1="16.7254" y1="24.0454" x2="9.87859" y2="23.1763" gradientUnits="userSpaceOnUse">
-        <stop offset="0.15" stop-color="white"/>
-        <stop offset="0.62" stop-color="white" stop-opacity="0.6"/>
-        <stop offset="1" stop-color="white" stop-opacity="0"/>
+        <stop offset="0.15" stopColor="white"/>
+        <stop offset="0.62" stopColor="white" stopOpacity="0.6"/>
+        <stop offset="1" stopColor="white" stopOpacity="0"/>
         </linearGradient>
         <linearGradient id="paint2_linear_0_7" x1="10.4109" y1="32.2046" x2="12.2683" y2="22.074" gradientUnits="userSpaceOnUse">
-        <stop offset="0.15" stop-color="white"/>
-        <stop offset="0.62" stop-color="white" stop-opacity="0.6"/>
-        <stop offset="1" stop-color="white" stop-opacity="0"/>
+        <stop offset="0.15" stopColor="white"/>
+        <stop offset="0.62" stopColor="white" stopOpacity="0.6"/>
+        <stop offset="1" stopColor="white" stopOpacity="0"/>
         </linearGradient>
         </defs>
         </svg>
