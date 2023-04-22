@@ -22,6 +22,6 @@
         // "@pages/*": ["pages/*"]
       }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/admin/componentsAdmin/Navbar/Navbar.jsx"],
   "exclude": ["node_modules"]
 }
