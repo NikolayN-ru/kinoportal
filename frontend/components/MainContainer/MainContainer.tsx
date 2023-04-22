@@ -1,10 +1,10 @@
-import { ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 
 interface MainContainerProps {
   children: ReactNode;
 }
 
-const MainContainer: React.FC<MainContainerProps> = ({ children }) => {
+const MainContainer:FC<MainContainerProps> = ({ children }) => {
   return (
     <div className={'main-container'}>
       <main>{children}</main>
