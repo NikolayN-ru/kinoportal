@@ -76,13 +76,12 @@
     box-shadow: 0px 0px 104px #a869f0;
   }
   & .image_wrap svg {
-    width: 56px;
-    height: 56px;
+    @apply w-[56px] h-[56px];
   }
 }
 
 .subFooter {
-  @apply flex mb-[47px];
+  @apply flex mb-[47px] mt-[10px];
 }
 
 .stores {

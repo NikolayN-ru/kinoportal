@@ -14,3 +14,7 @@ export {default as Twitter} from './twitter.svg';
 export {default as Callback} from './callback.svg';
 export {default as In} from './in.svg';
 export {default as TG} from './tg.svg';
+export {default as Play} from './play.svg';
+export {default as Save} from './save.svg';
+export {default as Share} from './share.svg';
+export {default as Like} from './like.svg';
