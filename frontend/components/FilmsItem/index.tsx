@@ -11,7 +11,7 @@ const FilmsItem = () => {
           <p>Rating ivi 7.5</p>
         </div>
       </div>
-      <button>Смотреть</button>
+      <button>подробнее</button>
     </div>
   );
 };

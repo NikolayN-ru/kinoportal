@@ -1,5 +1,5 @@
 .wrapper {
-  @apply bg-[#100e19] text-white max-w-full pb-[50px];
+  @apply bg-[#100e19] text-white max-w-full pb-[50px] cursor-default;
   &Main {
     @apply max-w-[1100px] my-0 mx-auto;
   }
@@ -25,13 +25,17 @@
 }
 
 .main {
-  @apply flex justify-center gap-[130px] mb-[30px] flex-wrap max-w-[100%];
-  .mainLeft {
+  @apply flex justify-between gap-[130px] mb-[30px] flex-wrap max-w-[100%] ml-0 pl-0;
+  &Left {
     @apply max-w-[500px];
-    .mainLeftVideo {
+    &Wrapper {
+      position: sticky;
+      top: 20px;
+    }
+    &Video {
       @apply bg-[#636363] mb-[10px] w-[600px] h-[350px];
     }
-    .mainLeftVideo:hover {
+    &Video:hover {
       @apply bg-[#2b2b2b];
     }
     .mainBlockButton {
@@ -102,4 +106,9 @@
 
 .collectionTitle {
   @apply mb-[24px];
+}
+
+.close {
+  height: 200px;
+  overflow: hidden;
 }

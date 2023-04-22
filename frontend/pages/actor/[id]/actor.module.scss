@@ -1,5 +1,5 @@
 .actor {
-  @apply mt-[40px];
+  @apply mt-[40px] flex flex-col items-center;
   &Image {
     @apply w-[120px] h-[120px] bg-[#fff] rounded-[10px] mb-1;
   }
@@ -33,10 +33,44 @@
     > div {
       @apply flex justify-between gap-[20px] items-center;
       input {
-        @apply rounded-[5px] p-[10px] bg-light w-[300px] h-[40px];
+        @apply rounded-[5px] p-[10px] bg-light w-[300px] h-[40px] text-primary;
       }
       button {
-        @apply p-[10px] bg-backgroundGrey rounded-[5px];
+        @apply p-[10px] bg-backgroundLight rounded-[5px];
+      }
+      .form {
+        .error {
+          @apply text-orange p-[5px];
+        }
+
+        .message {
+          @apply text-green p-[5px];
+        }
+
+        .input {
+          margin-right: 50px;
+          &:focus::placeholder {
+            transition: all 0.3s ease-in-out;
+            transform: translateY(-13px);
+          }
+          &:focus::placeholder {
+            font-size: 0.7em;
+          }
+          &:not(:placeholder-shown):not(:focus)::placeholder {
+            transform: translateY(-100%);
+            opacity: 1;
+          }
+        }
+      }
+
+      .formBtn {
+        @apply p-[10px] bg-backgroundLight rounded-[5px] w-[150px];
+        &:disabled {
+          @apply opacity-50;
+        }
+        &:hover {
+          @apply text-white cursor-pointer;
+        }
       }
     }
   }
