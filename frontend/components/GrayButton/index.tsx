@@ -12,7 +12,8 @@ type Button = {
 const GrayButton: FC<Button> = ({ title, text, preamble, className, ico }) => {
   return (
     <div className={`${s.Btn} ${className}`}>
-      {title}
+      {ico && ico}
+      {title && title}
       {text && (
         <div className={s.content}>
           {preamble && <span className={s.preamble}>{preamble}</span>}

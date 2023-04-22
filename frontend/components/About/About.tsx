@@ -1,12 +1,10 @@
-import { MouseEventHandler, useState } from 'react';
-
+import { MouseEventHandler, useState, FC } from 'react';
 import Title from '../Title/Title';
-
 import styles from './About.module.scss';
 
 const IS_CLOSE_DEFAULT = true;
 
-const About: React.FC = () => {
+const About: FC = () => {
   const [isClose, setIsClose] = useState<boolean>(IS_CLOSE_DEFAULT);
 
   const descriptionClassName = styles.description;

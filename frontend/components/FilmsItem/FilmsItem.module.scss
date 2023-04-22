@@ -5,13 +5,13 @@
     @apply w-[300px] flex mt-[10px] gap-[15px];
 
     img {
-      @apply w-[70px] h-[70px] bg-white rounded-[5px];
+      @apply w-[70px] h-[110px] bg-white rounded-[5px];
     }
   }
   button {
-    @apply h-[50px] px-[40px] bg-shadowPurple rounded-[10px] text-white opacity-[.6];
+    @apply h-[50px] px-[40px] bg-backgroundLight rounded-[10px] text-white opacity-[.8];
   }
   button:hover {
-    @apply opacity-[.3];
+    @apply opacity-[1];
   }
 }

@@ -3,7 +3,7 @@ import Icon from "../shared/IconComponent/Icon";
 import s from "./Footer.module.scss";
 import { FC } from "react";
 
-const Footer: FC<any> = () => {
+const Footer: FC = () => {
   return (
     <div className={s.footer}>
       <div className={s.container}>

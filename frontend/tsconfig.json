@@ -13,7 +13,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "baseUrl": ".",
+      "paths": {
+        "@components/*": ["components/*"],
+        "@public/*": ["public/*"],
+        "@redux/*": ["redux/*"],
+        // "@pages/*": ["pages/*"]
+      }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/admin/componentsAdmin/Navbar/Navbar.jsx"],
   "exclude": ["node_modules"]

@@ -1,7 +1,7 @@
-import { CollectionFilm } from '../../pages';
-import FilmCard from '../FilmCard/FilmCard';
+import { CollectionFilm } from "../../pages";
+import FilmCard from "../FilmCard";
 
-import styles from './CollectionSlider.module.scss';
+import styles from "./CollectionSlider.module.scss";
 
 interface CollectionSliderProps {
   items: CollectionFilm[];

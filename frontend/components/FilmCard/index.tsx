@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { CollectionFilm } from '../../pages';
-import FilmCardTools from './FilmCardTools/FilmCardTools';
+import FilmCardTools from './FilmCardTools';
 import Rating from './Rating/Rating';
 
 import styles from './FilmCard.module.scss';
