@@ -1,8 +1,8 @@
-import React, { FC, ReactComponentElement } from 'react';
+import React, { FC } from 'react';
 import s from './GrayButton.module.scss';
 
 type Button = {
-  title: string | JSX.Element;
+  title?: string | JSX.Element;
   className?:string;
   text?: string;
   preamble?: string;

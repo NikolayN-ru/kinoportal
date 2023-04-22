@@ -1,0 +1,86 @@
+.main {
+    width: 100%;
+    background-color: #fff;
+    color: black;
+    display: flex;
+    border-radius: 18px 15px 15px 18px;
+    margin: 40px 0;
+}
+.row {
+    width: 100%;
+}
+
+.header {
+    padding: 25px 15px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid #7d7d7d;
+}
+.title {
+    padding-left: 10px;
+    font-size: 40px;
+}
+
+.header_btns {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.add_btn {
+    color: #fff;
+    background-color: #4040f2;
+    padding: 10px 15px;
+    border-radius: 15px;
+}
+
+.search_btn {
+    padding: 10px;
+    border: 1px solid #7d7d7d;
+    border-radius: 50%;
+}
+
+.search_btn path {
+    fill: #000;
+}
+
+.settings_block {
+    width: 50%;
+    margin-top: 40px;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 25px;
+}
+
+.settings_title {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.setting {
+    display: flex;
+    gap: 15px;
+    font-size: 20px;
+}
+
+.setting_input {
+    background-color: #f5f2f2;
+    padding-left: 15px;
+    border-radius: 12px;
+    outline: none;
+}
+
+.setting_input::placeholder {
+    font-size: 14px;
+}
+.setting_input:focus {
+    background-color: #dcdbdb;
+}
+
+.save_btn {
+    width: 260px;
+    background-color: #4040f2;
+}
