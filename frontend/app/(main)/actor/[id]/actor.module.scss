@@ -1,0 +1,85 @@
+.actor {
+  @apply mt-[40px] flex flex-col items-center;
+  &Image {
+    @apply w-[120px] h-[120px] bg-[#fff] rounded-[10px] mb-1;
+  }
+  &Name {
+    @apply mb-[40px];
+    h1 {
+      @apply font-extrabold text-4xl text-white;
+    }
+  }
+  &Films {
+    @apply mb-[40px];
+    &Head {
+      @apply flex gap-[5px] items-center;
+      h2 {
+        @apply text-xl text-white;
+      }
+    }
+    &Label {
+      @apply flex border-b-[1px] border-solid border-gray-400;
+      &_btn {
+        @apply border-b-[4px] border-solid border-red;
+      }
+    }
+  }
+
+  &Comments {
+    @apply mb-[30px];
+    h2 {
+    }
+    > div {
+      @apply flex justify-between gap-[20px] items-center;
+      input {
+        @apply rounded-[5px] p-[10px] bg-light w-[300px] h-[40px] text-primary;
+      }
+      button {
+        @apply p-[10px] bg-backgroundLight rounded-[5px];
+      }
+      .form {
+        .error {
+          @apply text-orange p-[5px];
+        }
+
+        .message {
+          @apply text-green p-[5px];
+        }
+
+        .input {
+          @apply mr-[50px];
+          &:focus::placeholder {
+            @apply transition-all duration-300 ease-in-out;
+            transform: translateY(-13px);
+          }
+          &:focus::placeholder {
+            @apply text-sm;
+          }
+          &:not(:placeholder-shown):not(:focus)::placeholder {
+            transform: translateY(-100%);
+            opacity: 1;
+          }
+        }
+      }
+
+      .formBtn {
+        @apply p-[10px] bg-backgroundLight rounded-[5px] w-[150px];
+        &:disabled {
+          @apply opacity-50;
+        }
+        &:hover {
+          @apply text-white cursor-pointer;
+        }
+      }
+    }
+  }
+  &Popular {
+    @apply mb-[10px];
+    h2 {
+      @apply text-2xl mb-[20px] text-white;
+    }
+    &_items {
+      @apply flex gap-[20px];
+    }
+  }
+}

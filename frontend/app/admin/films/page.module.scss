@@ -1,0 +1,18 @@
+.head_row {
+  @apply flex w-full justify-between text-center p-[10px] bg-[#fafafa]
+  border-b-[1px] border-solid border-[#d7d5d5];
+}
+
+.head_title,
+.body_title {
+  @apply w-full;
+}
+
+.checkbox {
+  @apply mr-[20px];
+}
+
+.body_column {
+  @apply flex w-full justify-between items-center text-center p-[10px] bg-[#fafafa] min-h-[80px]
+  border-b-[1px] border-solid border-[#d7d5d5];
+}

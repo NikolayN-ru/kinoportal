@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -15,13 +19,32 @@
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": ".",
-      "paths": {
-        "@components/*": ["components/*"],
-        "@public/*": ["public/*"],
-        "@redux/*": ["redux/*"],
-        // "@pages/*": ["pages/*"]
+    "paths": {
+      "@components/*": [
+        "components/*"
+      ],
+      "@public/*": [
+        "public/*"
+      ],
+      "@redux/*": [
+        "redux/*"
+      ]
+      // "@pages/*": ["pages/*"]
+    },
+    "plugins": [
+      {
+        "name": "next"
       }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/admin/componentsAdmin/Navbar/Navbar.jsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/admin/componentsAdmin/Navbar/Navbar.jsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
