@@ -1,3 +1,5 @@
+'use client'
+
 import { configureStore } from "@reduxjs/toolkit";
 import userApi from "./userApi";
 import { allFilms } from "./filmsApi";

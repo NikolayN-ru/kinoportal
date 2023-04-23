@@ -11,7 +11,7 @@ interface Inputs {
   addComment: string;
 }
 
-const Index: FC<any> = () => {
+const _: FC<any> = () => {
   const [post, setPost] = useState<false | string>(false);
   const {
     register,
@@ -105,4 +105,4 @@ const Index: FC<any> = () => {
   );
 };
 
-export default Index;
+export default _;
