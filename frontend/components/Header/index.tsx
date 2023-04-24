@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useState } from "react";
 import Icon from "../shared/IconComponent/Icon";
 import Logo from "../shared/Logo/Logo";
@@ -15,7 +16,9 @@ const Header = () => {
         <div className={s.row}>
           <div className={s.menu}>
             <div className={s.logo}>
-              <Logo />
+              <Link href="/">
+                <Logo />
+              </Link>
             </div>
             <div className={s.listItem}>
               <div className={s.link}>
