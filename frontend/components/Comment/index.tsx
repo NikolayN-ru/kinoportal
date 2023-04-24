@@ -8,6 +8,7 @@ interface CommentI {
   count: number;
   content?: string;
 }
+
 const Comment: FC<CommentI> = ({ author, date, count, content }) => {
   return (
     <div className={s.wrapper}>
@@ -16,9 +17,13 @@ const Comment: FC<CommentI> = ({ author, date, count, content }) => {
           Angelina <span>31 мая 2015</span>
         </div>
         <div className={s.like}>
-          <Like />
+          <div className={s.likeHover}>
+            <Like />
+          </div>
           <span>{count}</span>
-          <Like className={s.deg} />
+          <div className={s.likeHover}>
+            <Like className={s.deg} />
+          </div>
         </div>
       </div>
       <div className={s.content}>
