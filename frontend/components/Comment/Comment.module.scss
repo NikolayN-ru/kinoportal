@@ -11,6 +11,18 @@
       .deg {
         @apply transform rotate-180;
       }
+
+      &Hover {
+        @apply cursor-pointer;
+        transition: 0.3s all;
+        &:hover {
+          scale: 1.2;
+          opacity: 0.7;
+        }
+        &:active {
+          scale: 2;
+        }
+      }
     }
   }
 }

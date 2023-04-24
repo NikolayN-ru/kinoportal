@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import s from "./ModalSearch.module.scss";
 
 interface ModalProps {
@@ -16,7 +16,7 @@ const Modal = ({ visible = false, footer = "", onClose }: ModalProps) => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.addEventListener("keydown", onKeydown);
     return () => document.removeEventListener("keydown", onKeydown);
   });
@@ -40,12 +40,30 @@ const Modal = ({ visible = false, footer = "", onClose }: ModalProps) => {
               />
             </div>
           </div>
-          {footer && <div className={s.modal_content}>
-            <div className={s.preset_inner}><a href="/" className={s.link_response}>Премьеры фильмов</a></div>
-            <div className={s.preset_inner}><a href="/" className={s.link_response}>Новинки подписки</a></div>
-            <div className={s.preset_inner}><a href="/" className={s.link_response}>Сериалы Amediateka</a></div>
-            <div className={s.preset_inner}><a href="/" className={s.link_response}>Высокий рейтинг</a></div>
-            </div>}
+          {footer && (
+            <div className={s.modal_content}>
+              <div className={s.preset_inner}>
+                <a href="/" className={s.link_response}>
+                  Премьеры фильмов
+                </a>
+              </div>
+              <div className={s.preset_inner}>
+                <a href="/" className={s.link_response}>
+                  Новинки подписки
+                </a>
+              </div>
+              <div className={s.preset_inner}>
+                <a href="/" className={s.link_response}>
+                  Сериалы Amediateka
+                </a>
+              </div>
+              <div className={s.preset_inner}>
+                <a href="/" className={s.link_response}>
+                  Высокий рейтинг
+                </a>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

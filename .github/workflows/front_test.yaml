@@ -1,23 +1,14 @@
 name: front tests
 on:
   push:
-    branches: 
-      - main
+    branches:
+      - "*"
     paths:
       - frontend/**
-  pull_request:
-    types: [opened,]
-    branches: 
-      - main
-    paths:
-      - frontend/**
-
+jobs:
   build-check:
     name: Tests - build app
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -25,11 +16,11 @@ on:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'npm'
+          cache: "npm"
           cache-dependency-path: frontend/package-lock.json
       - name: Install dependencies
         run: npm install
       - name: Build nextjs
         run: npm run build
-        env:
-          CI: true
+      - name: Start Next.js app
+        run: npm run start

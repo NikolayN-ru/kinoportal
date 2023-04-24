@@ -1,7 +1,15 @@
-import { FC, ReactNode } from "react";
-import { Provider } from "react-redux";
+import { Providers } from "../redux/provider";
 
-const layout: FC<{ children: ReactNode }> = ({ children }) => (
-    <>{children}</>
-);
-export default layout;
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="ru">
+      <body>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  );
+}

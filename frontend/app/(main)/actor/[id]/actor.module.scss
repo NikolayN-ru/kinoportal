@@ -18,9 +18,12 @@
       }
     }
     &Label {
-      @apply flex border-b-[1px] border-solid border-gray-400;
+      @apply flex border-b-[1px] border-solid border-gray-400 gap-[10px];
       &_btn {
-        @apply border-b-[4px] border-solid border-red;
+        @apply border-b-[3px] border-solid border-purpleDark;
+      }
+      &_btn:hover {
+        @apply border-b-[3px] border-solid border-red cursor-pointer;
       }
     }
   }
