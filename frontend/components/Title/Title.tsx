@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 import styles from './Title.module.scss';
 
 type TitleTag = 'h1' | 'h2' | 'h3';
@@ -12,7 +12,7 @@ interface TitleProps {
   className?: string;
 }
 
-const Title: React.FC<TitleProps> = ({ tag, size, text, className, children }) => {
+const Title: FC<TitleProps> = ({ tag, size, text, className, children }) => {
   const classNames = [styles.title];
   className && classNames.push(className);
   size && styles[size] && classNames.push(styles[size]);
