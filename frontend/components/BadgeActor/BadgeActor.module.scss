@@ -1,9 +1,13 @@
 .BadgeActor {
-  @apply w-[65px] h-[65px] p-[5px] bg-[#383840] rounded-[10px] relative;
+  @apply w-[65px] h-[65px] p-[5px] bg-[#383840] rounded-[10px] relative ;
   &Center {
     @apply bg-[#7da243] rounded-[5px] h-[55px] pt-[15px] text-center;
   }
   &Descriptiton {
     @apply text-xs text-center items-center max-w-[10px] absolute top-[69px] left-[0];
   }
+}
+
+.BadgeActor:hover {
+  @apply cursor-pointer opacity-[.7] transition-all scale-[1.02];
 }

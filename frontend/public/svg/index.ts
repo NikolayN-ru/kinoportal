@@ -18,3 +18,7 @@ export {default as ArrowRight} from './arrow-right.svg';
 export {default as StarRounded} from './star-rounded.svg';
 export {default as Bookmark} from './bookmark.svg';
 export {default as MagicWand} from './magic-wand.svg';
+export {default as Play} from './play.svg';
+export {default as Save} from './save.svg';
+export {default as Share} from './share.svg';
+export {default as Like} from './like.svg';

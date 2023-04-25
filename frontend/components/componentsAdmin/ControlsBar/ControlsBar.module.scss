@@ -1,0 +1,58 @@
+.controlsBar {
+    border-top: 1px solid #eaecee;
+    border-bottom: 1px solid #eaecee;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 5px;
+    margin: 5px 0;
+}
+
+.search_block {
+    display: flex;
+    gap: 15px;
+}
+.buttons_block {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 8px;
+    color: #000;
+    font-weight: 600;
+    background-color: #fff;
+    border: 1px solid #eaecee;
+    border-radius: 32px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #eaecee;
+}
+
+.input_block {
+    display: flex;
+    gap: 5px;
+}
+
+.input {
+    height: 40px;
+    border: 1px solid #eaecee;
+    border-radius: 32px;
+    padding-left: 15px;
+    outline: none;
+}
+
+.icon {
+    border-radius: 50%;
+    padding: 5px 12px;
+    background-color: #eaecee;
+}
+
+.icon path {
+    fill: #3c3c3c;
+}
