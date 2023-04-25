@@ -1,0 +1,7 @@
+.container {
+  @apply relative block pb-[30.4276%] bg-backgroundSecondary rounded-[16px];
+
+  img {
+    @apply absolute top-0 left-0 w-full h-full object-cover rounded-[16px];
+  }
+}

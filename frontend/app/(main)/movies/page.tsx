@@ -1,9 +1,10 @@
-import MainContainer from "@components/MainContainer/MainContainer";
+import MainContainer from '@components/MainContainer/MainContainer';
+import Title from '@components/Title/Title';
 
 export default function Home() {
   return (
     <MainContainer>
-      <h1></h1>
+      <Title tag="h1" size="lg" text="Фильмы смотреть онлайн" />
     </MainContainer>
   );
 }

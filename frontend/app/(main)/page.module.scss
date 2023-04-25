@@ -6,6 +6,10 @@
   @apply md:w-[75%] sm:w-full pr-[28px];
 }
 
+.promoSection {
+  @apply relative h-[63.33vh] max-h-[370px];
+}
+
 .subscribeSection {
   @apply pb-0;
 }
@@ -19,6 +23,6 @@
   }
 }
 
-.collectionTitle {
+.sectionTitle {
   @apply mb-[24px];
 }
