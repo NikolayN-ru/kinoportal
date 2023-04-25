@@ -1,7 +1,27 @@
 .container {
-  @apply absolute top-[16px] right-[16px] flex flex-col;
+  @apply flex flex-col;
+}
+
+.buttonContainer {
+  @apply z-50 relative flex w-[24px] h-[24px] mb-[6px];
 }
 
 .button {
-  @apply z-10 w-[20px] h-[20px] mb-[10px] text-[20px] leading-[20px] bg-white;
+  @apply relative w-full h-full;
+
+  svg {
+    @apply absolute top-0 right-0 bottom-0 left-0
+    w-full h-full m-auto;
+  }
+
+  &:hover {
+    svg path,
+    svg rect {
+      fill: #d9d7e0;
+    }
+  }
+}
+
+.button:hover + .tooltip {
+  @apply block;
 }

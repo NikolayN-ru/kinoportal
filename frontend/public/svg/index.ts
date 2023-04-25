@@ -14,3 +14,7 @@ export {default as Twitter} from './twitter.svg';
 export {default as Callback} from './callback.svg';
 export {default as In} from './in.svg';
 export {default as TG} from './tg.svg';
+export {default as ArrowRight} from './arrow-right.svg';
+export {default as StarRounded} from './star-rounded.svg';
+export {default as Bookmark} from './bookmark.svg';
+export {default as MagicWand} from './magic-wand.svg';

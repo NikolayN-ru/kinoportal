@@ -1,7 +1,9 @@
-import styles from './SubscriptionButton.module.scss';
+import { FC } from 'react';
 
-const SubscriptionButton: React.FC = () => {
-  return <button className={styles.button} data-text="30 дней подписки бесплатно" type="button" />;
+import s from './SubscriptionButton.module.scss';
+
+const SubscriptionButton: FC = () => {
+  return <button className={s.button} data-text="30 дней подписки бесплатно" type="button" />;
 };
 
 export default SubscriptionButton;
