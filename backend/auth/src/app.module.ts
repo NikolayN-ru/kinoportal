@@ -21,7 +21,7 @@ import { UserModule } from './user/user.module';
       AuthModule,
       UserModule,
   ],
-  controllers: [UserController],
-  providers: [UserService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

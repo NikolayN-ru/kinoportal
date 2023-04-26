@@ -28,7 +28,7 @@ export class AuthService {
 
         const candidate = await this.userRepository.findOne({where:{email: registrationDto.email}});
         if(candidate) {
-            throw new HttpException('Пользователь сущетсвует', HttpStatus.BAD_REQUEST)
+            throw new HttpException('Пользователь существует', HttpStatus.BAD_REQUEST)
         }
 
         const hashPassword = await bcrypt.hash(registrationDto.password, 5);
