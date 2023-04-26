@@ -1,0 +1,22 @@
+.cardContainer {
+  @apply flex flex-col;
+}
+
+.card {
+  @apply order-1 relative mb-[8px]
+  bg-backgroundSecondary rounded-default transition-transform w-full pb-[47.36842%];
+
+  img {
+    @apply absolute w-full h-full rounded-default object-cover;
+  }
+}
+
+.title {
+  @apply order-2 overflow-hidden h-[20px] leading-[20px]
+  font-semibold text-light whitespace-nowrap text-ellipsis
+  duration-[200ms];
+}
+
+.cardContainer:hover .title {
+  @apply text-white;
+}

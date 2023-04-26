@@ -1,0 +1,13 @@
+.tooltip {
+  @apply z-50 absolute translate-y-[-100%]
+  block w-max py-[8px] px-[8px] content-[attr(data-tooltip)]
+  text-[12px] font-semibold tracking-[0.02em] text-white bg-backgroundSecondary rounded-default;
+
+  &::before {
+    @apply absolute bottom-0 left-[8px] w-0 h-0 translate-y-[100%] content-[""]
+    border-s-[5px] border-s-transparent
+    border-e-[5px] border-e-transparent
+    border-t-[5px] border-t-backgroundSecondary
+    border-solid;
+  }
+}
