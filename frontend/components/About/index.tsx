@@ -1,5 +1,5 @@
 import { MouseEventHandler, useState, FC } from 'react';
-import Title from '../Title/Title';
+import Title from '../Title';
 import styles from './About.module.scss';
 
 const IS_CLOSE_DEFAULT = true;

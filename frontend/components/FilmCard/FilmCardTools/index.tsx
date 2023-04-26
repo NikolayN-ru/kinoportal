@@ -1,6 +1,6 @@
 import { FC, MouseEventHandler, useContext } from 'react';
 
-import { TooltipContext } from '../../CollectionSlider/CollectionSlider';
+import { TooltipContext } from '../../CollectionSlider';
 import Icon from '../../shared/IconComponent/Icon';
 
 import s from './FilmCardTools.module.scss';
