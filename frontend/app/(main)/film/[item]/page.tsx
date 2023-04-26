@@ -1,19 +1,22 @@
 "use client";
-import Link from "next/link";
+
 import { MouseEventHandler, useState } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import Link from "next/link";
+// import { useRouter } from "next/router";
 import cn from "classnames";
+
 import ActorRound from "@components/Badge/ActorRound/ActorRound";
 import Quality from "@components/Badge/Quality/Quality";
-import BadgeActor from "@components/BadgeActor/BadgeActor";
+import BadgeActor from "@components/BadgeActor";
 import CollectionSlider from "@components/CollectionSlider/CollectionSlider";
 import GrayButton from "@components/GrayButton";
 import Title from "@components/Title/Title";
-import { collections } from "../../../../mock/filmsData";
-import { useFilmItemQuery } from "@redux/filmsApi";
+import { collections } from "@mock/filmsData";
 import { Play, Save, Share } from "@public/svg";
+// import { useFilmItemQuery } from "@redux/filmsApi";
+
 import s from "./item.module.scss";
-// import { useRouter } from "next/router";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 const Index = () => {
   const [isClose, setIsClose] = useState<boolean>(true);
@@ -30,7 +33,6 @@ const Index = () => {
   // if (isLoading) {
   // return <div>LOADING</div>;
   // }
-
 
   const onToggleButtonClock: MouseEventHandler<
     HTMLButtonElement

@@ -9,12 +9,14 @@ interface CommentI {
   content?: string;
 }
 
-const Comment: FC<CommentI> = ({ author, date, count, content }) => {
+const cont = "Самый красивый, харизматичный и неповторимый Артист!!! Удачи, процветания, успехов, востребованности!!! Вы самый лучший и неповторимый!!!"
+
+const Comment: FC<CommentI> = ({ author='Angelina', date='31 мая 2015', count, content=cont }) => {
   return (
     <div className={s.wrapper}>
       <div className={s.header}>
         <div className={s.author}>
-          Angelina <span>31 мая 2015</span>
+          {author} <span>{date}</span>
         </div>
         <div className={s.like}>
           <div className={s.likeHover}>
@@ -27,9 +29,7 @@ const Comment: FC<CommentI> = ({ author, date, count, content }) => {
         </div>
       </div>
       <div className={s.content}>
-        Самый красивый, харизматичный и неповторимый Артист!!! Удачи,
-        процветания, успехов, востребованности!!! Вы самый лучший и
-        неповторимый!!!
+        {content}
       </div>
     </div>
   );

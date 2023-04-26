@@ -28,6 +28,9 @@
       ],
       "@redux/*": [
         "redux/*"
+      ],
+      "@mock/*": [
+        "mock/*"
       ]
       // "@pages/*": ["pages/*"]
     },
@@ -43,7 +46,7 @@
     "**/*.tsx",
     "pages/admin/componentsAdmin/Navbar/Navbar.jsx",
     ".next/types/**/*.ts"
-  ],
+, "components/componentsAdmin/Navbar/NavBar.text.jsx"  ],
   "exclude": [
     "node_modules"
   ]
