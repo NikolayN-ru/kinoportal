@@ -2,7 +2,7 @@ import { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { PromoItemType } from '../Promo';
+import { PromoItemType } from '..';
 
 import s from './PromoItem.module.scss';
 

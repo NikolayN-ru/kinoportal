@@ -1,35 +1,33 @@
-'use client'
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { MouseEventHandler, useState } from "react";
-import cn from "classnames";
-import ActorRound from "@components/Badge/ActorRound/ActorRound";
-import Quality from "@components/Badge/Quality/Quality";
-import BadgeActor from "@components/BadgeActor/BadgeActor";
-import CollectionSlider from "@components/CollectionSlider/CollectionSlider";
-import GrayButton from "@components/GrayButton";
-import Title from "@components/Title/Title";
-import { collections } from "../../../../mock/filmsData";
-import { useFilmItemQuery } from "@redux/filmsApi";
-import { Play, Save, Share } from "@public/svg";
-import s from "./item.module.scss";
+'use client';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { MouseEventHandler, useState } from 'react';
+import cn from 'classnames';
+import ActorRound from '@components/Badge/ActorRound/ActorRound';
+import Quality from '@components/Badge/Quality/Quality';
+import BadgeActor from '@components/BadgeActor/BadgeActor';
+import CollectionSlider from '@components/CollectionSlider';
+import GrayButton from '@components/GrayButton';
+import Title from '@components/Title';
+import { collections } from '../../../../mock/filmsData';
+import { useFilmItemQuery } from '@redux/filmsApi';
+import { Play, Save, Share } from '@public/svg';
+import s from './item.module.scss';
 
 const Index = () => {
   const [isClose, setIsClose] = useState<boolean>(true);
   // const router = useRouter();
   // const {
-    // data = [],
-    // error,
-    // isLoading,
+  // data = [],
+  // error,
+  // isLoading,
   // } = useFilmItemQuery(String(router.query.id));
 
   // if (isLoading) {
-    // return <div>LOADING</div>;
+  // return <div>LOADING</div>;
   // }
 
-  const onToggleButtonClock: MouseEventHandler<
-    HTMLButtonElement
-  > = (): void => {
+  const onToggleButtonClock: MouseEventHandler<HTMLButtonElement> = (): void => {
     setIsClose(!isClose);
   };
 
@@ -74,27 +72,21 @@ const Index = () => {
             </div>
             <div className={!isClose ? s.open : s.close}>
               <div className={s.mainRightDescription}>
-                Четвертая по счету работа блестящего дуэта настоящих
-                профессионалов своего дела Мартина Скорсезе и Леонардо ДиКаприо,
-                на этот раз в жанре мистического триллера с элементами
-                психологической драмы, никого не оставит равнодушным. Америка
-                середины 50-х. На удаленном от всего мира острове расположена
-                специальная лечебница для особо буйных душевнобольных
-                преступников. В клинике происходят странные события: при
-                загадочных обстоятельствах пропала одна из пациенток. Остров
-                хорошо охраняется, вокруг бескрайний океан, а катера приходят
-                лишь в строго определенное время и место. Побег полностью
-                исключен. В поисках разгадки на остров прибывают два судебных
-                пристава с большой земли: Тедди Дениелс, страдающий
-                необъяснимыми головными болями после трагической гибели жены, и
-                его напарник Чак Оул. Даже на первый взгляд им становится
-                понятно, что на острове творится что-то неладное. Охранники
-                постоянно начеку, держат палец на спусковом крючке, а
-                впоследствии выясняется, что руководство клиники скрывает
-                страшную тайну. Для того чтобы узнать, как дальше будут
-                развиваться события, рекомендуем смотреть онлайн «Остров
-                проклятых». Приглашаем посмотреть фильм «Остров проклятых» в
-                нашем онлайн-кинотеатре совершенно бесплатно в хорошем HD
+                Четвертая по счету работа блестящего дуэта настоящих профессионалов своего дела
+                Мартина Скорсезе и Леонардо ДиКаприо, на этот раз в жанре мистического триллера с
+                элементами психологической драмы, никого не оставит равнодушным. Америка середины
+                50-х. На удаленном от всего мира острове расположена специальная лечебница для особо
+                буйных душевнобольных преступников. В клинике происходят странные события: при
+                загадочных обстоятельствах пропала одна из пациенток. Остров хорошо охраняется,
+                вокруг бескрайний океан, а катера приходят лишь в строго определенное время и место.
+                Побег полностью исключен. В поисках разгадки на остров прибывают два судебных
+                пристава с большой земли: Тедди Дениелс, страдающий необъяснимыми головными болями
+                после трагической гибели жены, и его напарник Чак Оул. Даже на первый взгляд им
+                становится понятно, что на острове творится что-то неладное. Охранники постоянно
+                начеку, держат палец на спусковом крючке, а впоследствии выясняется, что руководство
+                клиники скрывает страшную тайну. Для того чтобы узнать, как дальше будут развиваться
+                события, рекомендуем смотреть онлайн «Остров проклятых». Приглашаем посмотреть фильм
+                «Остров проклятых» в нашем онлайн-кинотеатре совершенно бесплатно в хорошем HD
                 качестве. Приятного просмотра!
               </div>
               <div className={s.line}></div>
@@ -104,8 +96,8 @@ const Index = () => {
                 <p>Субтитры</p>
                 <p>Русский</p>
                 <span>
-                  <h3>Изображение и звук.</h3> Фактическое качество зависит от
-                  устройства и ограничений правообладателя.
+                  <h3>Изображение и звук.</h3> Фактическое качество зависит от устройства и
+                  ограничений правообладателя.
                 </span>
                 <div className={s.mainRightBudges}>
                   <Quality title="4К" />
@@ -120,7 +112,7 @@ const Index = () => {
             </div>
             {/* <p>Свернуть детали</p> */}
             <button className={s.toggleButton} onClick={onToggleButtonClock}>
-              {isClose ? "Развернуть" : "Свернуть"}
+              {isClose ? 'Развернуть' : 'Свернуть'}
             </button>
             <div className={s.line}></div>
             <div className={s.mainRightRaitingIvi}>
@@ -137,8 +129,7 @@ const Index = () => {
           <section key={collection.id} className={s.pageSection}>
             <Link
               href={`/collections/${collection.link}`}
-              className={cn(s.titleLink, s.collectionTitle)}
-            >
+              className={cn(s.titleLink, s.collectionTitle)}>
               <Title tag="h2" size="md" text="С фильмом «Спящие» смотрят" />
             </Link>
             <CollectionSlider items={collection.items} />

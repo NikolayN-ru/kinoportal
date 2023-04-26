@@ -2,8 +2,8 @@ import { FC, createContext, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { SwiperOptions, Navigation } from 'swiper';
 
+import FilmCard from '@components/FilmCard';
 import { CollectionFilm } from '../types/film';
-import FilmCard from '../FilmCard/FilmCard';
 import { useTooltip } from '../../hooks/useTooltip';
 import Tooltip from '../Tooltip/Tooltip';
 import { TooltipContextValue } from '../types/tooltip';
