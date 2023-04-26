@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
 
-import { CollectionFilm } from '../types/film';
+import { CollectionFilm } from '@mock/filmsData';
 import FilmCardTools from './FilmCardTools';
 import Rating from './Rating/Rating';
 

@@ -8,7 +8,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body>
-        <Providers>{children}</Providers>
+        <Providers children={children}></Providers>
       </body>
     </html>
   );
