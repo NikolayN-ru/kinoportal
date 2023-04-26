@@ -1,4 +1,4 @@
-import {Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany} from "typeorm";
+import {Column, Entity, PrimaryGeneratedColumn, ManyToOne} from "typeorm";
 import {Review} from "./review.entity";
 
 @Entity()

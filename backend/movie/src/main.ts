@@ -1,6 +1,5 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
-import process from "process";
 
 async function bootstrap() {
   const PORT = 3001;

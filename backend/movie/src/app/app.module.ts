@@ -6,6 +6,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {Review} from "../movie/entity/review.entity";
 import {Comment} from "../movie/entity/comment.entity";
+import {Country} from "../movie/entity/country.entity";
+import {Genre} from "../movie/entity/genre.entity";
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -15,7 +17,7 @@ import {Comment} from "../movie/entity/comment.entity";
       username: 'postgres',
       password: '12345678',
       database: 'movie',
-      entities: [Movie, Review, Comment],
+      entities: [Movie, Review, Comment, Country, Genre],
       synchronize: true,
     }),
     MovieModule,

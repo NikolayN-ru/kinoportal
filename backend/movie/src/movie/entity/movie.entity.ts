@@ -1,5 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany, JoinColumn } from "typeorm";
+import { Column, JoinTable, Entity, PrimaryGeneratedColumn, OneToMany, ManyToMany } from "typeorm";
 import {Review} from "./review.entity";
+import {Genre} from "./genre.entity";
+import {Country} from "./country.entity";
 
 @Entity()
 export class Movie{
@@ -7,20 +9,19 @@ export class Movie{
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({unique: true})
-    email: string;
+    @ManyToMany(() => Genre, (genre) => genre.movies )
+    @JoinTable()
+    genres: Genre[];
 
-    @Column("text", {array: true})
-    genre: string[];
+    @ManyToMany(() => Country, (country) => country.movies )
+    @JoinTable()
+    countries: Country[];
 
     @Column()
     year: number;
 
     @Column()
     country: string;
-
-    @Column()
-    password: string;
 
     @OneToMany(type => Review, (review) => review.movie)
     reviews: Review[];

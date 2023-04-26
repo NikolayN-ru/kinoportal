@@ -1,6 +1,8 @@
-import {Body, Controller, Get, Param, Post, Query, Req} from '@nestjs/common';
+import {Body, Controller, Get, Param, Post, Query} from '@nestjs/common';
 import {MovieService} from "./movie.service";
 import {CreateReviewDto} from "./dto/create-review.dto";
+import {EventPattern} from "@nestjs/microservices";
+import {CreateCommentDto} from "./dto/create-comment";
 
 @Controller('movie')
 export class MovieController {
@@ -34,4 +36,13 @@ export class MovieController {
         return this.movieService.createReview(+id, reviewDto);
     }
 
+    @EventPattern('get_comments')
+    async getReviewWithComments(id: number) {
+        return this.movieService.getReviewWithComments(id)
+    }
+
+    @EventPattern('create_comment')
+    async createComment(dto: CreateCommentDto) {
+        return this.movieService.createComment(dto);
+    }
 }

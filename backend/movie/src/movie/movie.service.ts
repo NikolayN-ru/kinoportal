@@ -1,14 +1,17 @@
 import {HttpStatus, Injectable} from '@nestjs/common';
 import {Movie} from "./entity/movie.entity";
 import {InjectRepository} from '@nestjs/typeorm';
-import {Repository, In, ArrayContainedBy, ArrayContains, ArrayOverlap} from 'typeorm';
+import {Repository, In, Between} from 'typeorm';
 import {Review} from "./entity/review.entity";
 import {CreateReviewDto} from "./dto/create-review.dto";
+import {Comment} from "./entity/comment.entity"
+import {CreateCommentDto} from "./dto/create-comment";
 
 @Injectable()
 export class MovieService {
     constructor(@InjectRepository(Movie) private movieRepository: Repository<Movie>,
-                @InjectRepository(Review) private reviewRepository: Repository<Review>) {}
+                @InjectRepository(Review) private reviewRepository: Repository<Review>,
+                @InjectRepository(Comment) private commentRepository: Repository<Comment>) {}
 
     async getMain() {
         try {
@@ -36,18 +39,107 @@ export class MovieService {
             if(country) {
                 countries = country.split(' ');
             }
-
-            console.log(genres);
-
-            const movies = await this.movieRepository.findBy({
-                genre: ArrayOverlap(genres),
-            })
-
-            // const movies = await this.movieRepository.createQueryBuilder("movie")
-            //     .select()
-            //     .where('ARRAYOVERLAP(genre, :gen) = true', {gen: ['1']})
-            //     .getMany()
-
+            let movies = [];
+            switch (years.length) {
+                case 1:
+                    if(countries) {
+                        if(genres) {
+                            movies = await this.movieRepository.findBy({
+                                genres: {
+                                    genre: In(genres)
+                                },
+                                countries: {
+                                    country: In(countries)
+                                },
+                                year: years[0]
+                            })
+                        } else {
+                            movies = await this.movieRepository.findBy({
+                                countries: {
+                                    country: In(countries)
+                                },
+                                year: years[0]
+                            })
+                        }
+                    } else {
+                        if(genres) {
+                            movies = await this.movieRepository.findBy({
+                                genres: {
+                                    genre: In(genres)
+                                },
+                                year: years[0]
+                            })
+                        } else {
+                            movies = await this.movieRepository.findBy({
+                                year: years[0]
+                            })
+                        }
+                    }
+                    break;
+                case 2:
+                    if(countries) {
+                        if(genres) {
+                            movies = await this.movieRepository.findBy({
+                                genres: {
+                                    genre: In(genres)
+                                },
+                                countries: {
+                                    country: In(countries)
+                                },
+                                year: Between(years[0], years[1])
+                            })
+                        } else {
+                            movies = await this.movieRepository.findBy({
+                                countries: {
+                                    country: In(countries)
+                                },
+                                year:  Between(years[0], years[1])
+                            })
+                        }
+                    } else {
+                        if(genres) {
+                            movies = await this.movieRepository.findBy({
+                                genres: {
+                                    genre: In(genres)
+                                },
+                                year: Between(years[0], years[1])
+                            })
+                        } else {
+                            movies = await this.movieRepository.findBy({
+                                year:  Between(years[0], years[1])
+                            })
+                        }
+                    }
+                    break;
+                default:
+                    if(countries) {
+                        if(genres) {
+                            movies = await this.movieRepository.findBy({
+                                genres: {
+                                    genre: In(genres)
+                                },
+                                countries: {
+                                    country: In(countries)
+                                },
+                            })
+                        } else {
+                            movies = await this.movieRepository.findBy({
+                                countries: {
+                                    country: In(countries)
+                                },
+                            })
+                        }
+                    } else {
+                        if(genres) {
+                            movies = await this.movieRepository.findBy({
+                                genres: {
+                                    genre: In(genres)
+                                },
+                            })
+                        }
+                    }
+                    break;
+            }
 
             return movies
         } catch (e) {
@@ -84,6 +176,51 @@ export class MovieService {
         try {
             const movie = await this.movieRepository.findOneBy({id: id});
             const review = await this.reviewRepository.save({...dto, movie});
+            return review;
+        } catch (e) {
+            return e.message;
+        }
+    }
+
+    async getReviewWithComments(id: number) {
+        try {
+            const review = await this.reviewRepository.findOne({
+                where: {
+                    id: id
+                },
+                relations:{
+                    comments: true
+                }
+            });
+            if(!review) return HttpStatus.NOT_FOUND
+            return review;
+        } catch (e) {
+            return e.message;
+        }
+    }
+
+    async createComment(dto: CreateCommentDto) {
+        try {
+            const review = await this.reviewRepository.findOne({
+                where: {
+                    id: dto.reviedId
+                },
+                relations: {
+                    comments: true
+                }
+            });
+            if(!review) return HttpStatus.NOT_FOUND;
+
+            const comment = await this.commentRepository.create({
+                id: dto.reviedId,
+                text: dto.comment,
+                review: review
+            });
+            await this.reviewRepository.save(comment);
+
+            review.comments.push(comment);
+            await this.reviewRepository.save(review);
+
             return review;
         } catch (e) {
             return e.message;
