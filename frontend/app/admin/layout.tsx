@@ -1,8 +1,8 @@
 import { FC, ReactNode } from "react";
 import GrayButton from "@components/GrayButton";
 import Icon from "@components/shared/IconComponent/Icon";
-import ControlsBar from "../../components/componentsAdmin/ControlsBar";
-import Navbar from "../../components/componentsAdmin/Navbar";
+import ControlsBar from "@components/componentsAdmin/ControlsBar";
+import Navbar from "@components/componentsAdmin/Navbar";
 import s from "./layout.module.scss";
 
 const HomeAdmin: FC<{ children: ReactNode }> = ({ children }) => {

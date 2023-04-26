@@ -1,14 +1,14 @@
-import { FC, useRef, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { SwiperOptions, Navigation } from 'swiper';
+import { FC, useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { SwiperOptions, Navigation } from "swiper";
 
-import { CompilationItem } from '../types/film';
-import CategoryCard from '../CategoryCard/CategoryCard';
-import SliderButton from '../SliderButton/SliderButton';
+import { CompilationItem } from "../types/film";
+import CategoryCard from "../CategoryCard";
+import SliderButton from "../SliderButton";
 
-import 'swiper/scss';
-import 'swiper/scss/navigation';
-import s from './CompilationSlider.module.scss';
+import "swiper/scss";
+import "swiper/scss/navigation";
+import s from "./CompilationSlider.module.scss";
 
 interface CompilationSliderProps {
   items: CompilationItem[];
@@ -38,13 +38,29 @@ const CompilationSlider: FC<CompilationSliderProps> = ({ items }) => {
 
   return (
     <div className={s.compilationList}>
-      <SliderButton direction={'prev'} ref={navigationPrevRef} className={s.prevButton} />
-      <SliderButton direction={'next'} ref={navigationNextRef} className={s.nextButton} />
+      <SliderButton
+        direction={"prev"}
+        ref={navigationPrevRef}
+        className={s.prevButton}
+      />
+      <SliderButton
+        direction={"next"}
+        ref={navigationNextRef}
+        className={s.nextButton}
+      />
 
-      <Swiper className={s.swiperContainer} onSwiper={setSwiper} {...swiperParams}>
+      <Swiper
+        className={s.swiperContainer}
+        onSwiper={setSwiper}
+        {...swiperParams}
+      >
         {items.map((item) => (
           <SwiperSlide key={item.id}>
-            <CategoryCard key={item.id} className={s.compilationItem} data={item} />
+            <CategoryCard
+              key={item.id}
+              className={s.compilationItem}
+              data={item}
+            />
           </SwiperSlide>
         ))}
       </Swiper>

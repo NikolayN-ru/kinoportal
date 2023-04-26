@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Icon from "../shared/IconComponent/Icon";
 import Logo from "../shared/Logo/Logo";
 import s from "./Header.module.scss";
-import ModalSearch from "./ModalSearch/ModalSearch";
+import ModalSearch from "./ModalSearch";
 
 const Header = () => {
   const [isModal, setModal] = useState(false);

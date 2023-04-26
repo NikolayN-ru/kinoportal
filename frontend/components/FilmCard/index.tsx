@@ -1,28 +1,29 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { FC } from 'react';
+import Image from "next/image";
+import Link from "next/link";
+import { FC } from "react";
 
-import { CollectionFilm } from '@mock/filmsData';
-import FilmCardTools from './FilmCardTools';
-import Rating from './Rating/Rating';
+import { CollectionFilm } from "@mock/filmsData";
+import FilmCardTools from "./FilmCardTools";
+import Rating from "./Rating";
 
-import s from './FilmCard.module.scss';
+import s from "./FilmCard.module.scss";
 
 interface FilmCardProps {
   data: CollectionFilm;
   className: string;
 }
 
-const IMAGE_PATH = '/images/';
+const IMAGE_PATH = "/images/";
 
 const FilmCard: FC<FilmCardProps> = ({ data, className }) => {
-  const { name, genre, year, country, rating, age, image, seasons, link } = data;
+  const { name, genre, year, country, rating, age, image, seasons, link } =
+    data;
 
   const containerClassNames = [s.cardContainer];
   className && containerClassNames.push(className);
 
   return (
-    <Link className={containerClassNames.join(' ')} href={`watch/${link}`}>
+    <Link className={containerClassNames.join(" ")} href={`watch/${link}`}>
       <div className={s.title}>{name}</div>
 
       <div className={s.card}>

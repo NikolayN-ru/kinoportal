@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import { FC } from "react";
 
-import { TooltipOptions } from '../types/tooltip';
+import { TooltipOptions } from "../types/tooltip";
 
-import s from './Tooltip.module.scss';
+import s from "./Tooltip.module.scss";
 
 const Tooltip: FC<TooltipOptions> = ({ text, coords }) => {
   const { x, y } = coords;

@@ -4,13 +4,13 @@ import s from "./page.module.scss";
 const ActorsAdmin = () => {
   return (
     <div>
-        <div className={s.head_row}>
-          <input className={s.checkbox} type="checkbox" name="" id="" />
-          <div className={s.head_title}>Имя</div>
-          <div className={s.head_title}>Участие в фильмах</div>
-          <div className={s.head_title}>Биография</div>
-          <div className={s.head_title}>Картинка</div>
-        </div>
+      <div className={s.head_row}>
+        <input className={s.checkbox} type="checkbox" name="" id="" />
+        <div className={s.head_title}>Имя</div>
+        <div className={s.head_title}>Участие в фильмах</div>
+        <div className={s.head_title}>Биография</div>
+        <div className={s.head_title}>Картинка</div>
+      </div>
       <div className={s.table_body}>
         <div className={s.body_row}>
           <div className={s.body_column}>

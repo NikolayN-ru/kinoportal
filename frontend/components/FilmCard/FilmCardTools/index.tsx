@@ -1,37 +1,41 @@
-import { FC, MouseEventHandler, useContext } from 'react';
+import { FC, MouseEventHandler, useContext } from "react";
 
-import { TooltipContext } from '../../CollectionSlider';
-import Icon from '../../shared/IconComponent/Icon';
+import { TooltipContext } from "../../CollectionSlider";
+import Icon from "../../shared/IconComponent/Icon";
 
-import s from './FilmCardTools.module.scss';
-import { HideTooltip, ShowTooltip, TooltipContextValue } from '../../types/tooltip';
+import s from "./FilmCardTools.module.scss";
+import {
+  HideTooltip,
+  ShowTooltip,
+  TooltipContextValue,
+} from "../../types/tooltip";
 
 type Tool = {
-  name: 'bookmarks' | 'similar' | 'grade' | 'dislike';
+  name: "bookmarks" | "similar" | "grade" | "dislike";
   icon: string;
   text: string;
 };
 
 const tools: Tool[] = [
   {
-    name: 'bookmarks',
-    icon: 'bookmark',
-    text: 'Смотреть позже',
+    name: "bookmarks",
+    icon: "bookmark",
+    text: "Смотреть позже",
   },
   {
-    name: 'similar',
-    icon: 'magicWand',
-    text: 'Похожее',
+    name: "similar",
+    icon: "magicWand",
+    text: "Похожее",
   },
   {
-    name: 'grade',
-    icon: 'starRounded',
-    text: 'Уже смотрел, оценить',
+    name: "grade",
+    icon: "starRounded",
+    text: "Уже смотрел, оценить",
   },
   {
-    name: 'dislike',
-    icon: 'bookmark',
-    text: 'Не нравится такое',
+    name: "dislike",
+    icon: "bookmark",
+    text: "Не нравится такое",
   },
 ];
 
@@ -49,14 +53,14 @@ const FilmCardTools: FC<FilmCardToolsProps> = ({ className }) => {
     const target = e.currentTarget;
     const buttonCoords = target.getBoundingClientRect();
 
-    showTooltip(buttonCoords.x, buttonCoords.y, target.dataset.text ?? '');
+    showTooltip(buttonCoords.x, buttonCoords.y, target.dataset.text ?? "");
   };
 
   const containerClassNames = [s.container];
   className && containerClassNames.push(className);
 
   return (
-    <div className={containerClassNames.join(' ')}>
+    <div className={containerClassNames.join(" ")}>
       {tools.map((tool) => (
         <div key={tool.name} className={s.buttonContainer}>
           <button
@@ -64,7 +68,8 @@ const FilmCardTools: FC<FilmCardToolsProps> = ({ className }) => {
             aria-label={tool.text}
             data-text={tool.text}
             onMouseEnter={setTooltip}
-            onMouseLeave={hideTooltip}>
+            onMouseLeave={hideTooltip}
+          >
             <Icon name={tool.icon} />
           </button>
         </div>

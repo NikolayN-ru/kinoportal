@@ -1,6 +1,6 @@
-import styles from './RatingBar.module.scss';
+import styles from "./RatingBar.module.scss";
 
-export type RatingBarMode = 's' | 'm';
+export type RatingBarMode = "s" | "m";
 
 interface RatingBarProps {
   className?: string;
@@ -20,7 +20,7 @@ const RatingBar: React.FC<RatingBarProps> = ({ className, value, mode }) => {
   const width = `${value}%`;
 
   return (
-    <div className={containerClassNames.join(' ')}>
+    <div className={containerClassNames.join(" ")}>
       <div className={styles.innerBar} style={{ width }}></div>
     </div>
   );

@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -20,18 +16,10 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@components/*": [
-        "components/*"
-      ],
-      "@public/*": [
-        "public/*"
-      ],
-      "@redux/*": [
-        "redux/*"
-      ],
-      "@mock/*": [
-        "mock/*"
-      ]
+      "@components/*": ["components/*"],
+      "@public/*": ["public/*"],
+      "@redux/*": ["redux/*"],
+      "@mock/*": ["mock/*"]
       // "@pages/*": ["pages/*"]
     },
     "plugins": [
@@ -45,9 +33,8 @@
     "**/*.ts",
     "**/*.tsx",
     "pages/admin/componentsAdmin/Navbar/Navbar.jsx",
-    ".next/types/**/*.ts"
-, "components/componentsAdmin/Navbar/NavBar.text.jsx"  ],
-  "exclude": [
-    "node_modules"
-  ]
+    ".next/types/**/*.ts",
+    "components/componentsAdmin/Navbar/NavBar.text.jsx"
+  ],
+  "exclude": ["node_modules"]
 }
