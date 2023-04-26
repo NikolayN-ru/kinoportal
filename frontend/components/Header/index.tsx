@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import { useState } from "react";
 import Icon from "../shared/IconComponent/Icon";
 import Logo from "../shared/Logo/Logo";
 import s from "./Header.module.scss";
