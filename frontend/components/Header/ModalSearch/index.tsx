@@ -1,4 +1,5 @@
-import { ReactElement, useEffect } from "react";
+import { FC, ReactElement, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import s from "./ModalSearch.module.scss";
 
 interface ModalProps {
@@ -7,7 +8,9 @@ interface ModalProps {
   onClose: () => void;
 }
 
-const Modal = ({ visible = false, footer = "", onClose }: ModalProps) => {
+const Modal: FC<ModalProps> = ({ visible = false, footer = "", onClose }) => {
+  const { t } = useTranslation();
+
   const onKeydown = ({ key }: KeyboardEvent) => {
     switch (key) {
       case "Escape":
@@ -31,12 +34,12 @@ const Modal = ({ visible = false, footer = "", onClose }: ModalProps) => {
         </span>
         <div className={s.modal_dialog} onClick={(e) => e.stopPropagation()}>
           <div className={s.modal_body}>
-            <div className={s.modal_title}>Поиск</div>
+            <div className={s.modal_title}>{t("header.search")}</div>
             <div className={s.search_input_form}>
               <input
                 className={s.input_search}
                 type="text"
-                placeholder="Фильмы, персоны, жанры"
+                placeholder={String(t("HeaderModal.MoviesPersonsGenres"))}
               />
             </div>
           </div>
@@ -44,22 +47,22 @@ const Modal = ({ visible = false, footer = "", onClose }: ModalProps) => {
             <div className={s.modal_content}>
               <div className={s.preset_inner}>
                 <a href="/" className={s.link_response}>
-                  Премьеры фильмов
+                  {t("HeaderModal.MoviePremieres")}
                 </a>
               </div>
               <div className={s.preset_inner}>
                 <a href="/" className={s.link_response}>
-                  Новинки подписки
+                  {t("HeaderModal.SubscriptionNews")}
                 </a>
               </div>
               <div className={s.preset_inner}>
                 <a href="/" className={s.link_response}>
-                  Сериалы Amediateka
+                  {t("HeaderModal.Amediateka")}
                 </a>
               </div>
               <div className={s.preset_inner}>
                 <a href="/" className={s.link_response}>
-                  Высокий рейтинг
+                  {t("HeaderModal.SubscriptionNews")}
                 </a>
               </div>
             </div>
@@ -67,7 +70,6 @@ const Modal = ({ visible = false, footer = "", onClose }: ModalProps) => {
         </div>
       </div>
     </div>
-    // <></>
   );
 };
 
