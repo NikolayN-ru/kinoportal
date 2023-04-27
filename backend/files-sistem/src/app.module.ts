@@ -1,9 +1,7 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Photo } from './entity/photo.entity';
-import { PhotoModule } from './entity/photo.module';
+import { FilesEntity } from './entity/files/files.entity';
+import { PhotoModule } from './entity/files/files.module';
 
 @Module({
   imports: [
@@ -13,13 +11,13 @@ import { PhotoModule } from './entity/photo.module';
     port: 5432,
     username: 'postgres',
     password: 'qwerty',
-    database: 'kinoportal',
-    entities: [Photo],
+    database: 'files',
+    entities: [FilesEntity],
     synchronize: true, 
     }),
     PhotoModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

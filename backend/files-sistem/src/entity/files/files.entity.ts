@@ -1,13 +1,13 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Photo{
+export class FilesEntity{
 
     @PrimaryGeneratedColumn()
-    photoId: number
+    fileId: number
 
     @Column({unique: true})
-    photoName:string
+    fileName:string
 
     @CreateDateColumn()
     createdAt:Date;

@@ -2,17 +2,17 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as uuid from 'uuid';
-import { Photo } from './photo.entity';
+import { FilesEntity } from './files/files.entity';
 
 
 @Injectable()
-export class FilesService {
+export class DirFilesService {
 
-    async createFile(file): Promise<string>{
+    async createFile(file: any, exp: string): Promise<string>{
         try{
-            const fileName = uuid.v4() + '.jpg';
+            const fileName = uuid.v4() + `.${exp}`;
             
-            const filePath = path.resolve(__dirname, '..','static');
+            const filePath = path.resolve(__dirname, '../../..','image');
             if(!fs.existsSync(filePath)){
                 fs.mkdirSync(filePath,{recursive: true})
             }
@@ -25,11 +25,11 @@ export class FilesService {
         }
     }
 
-    async deleteFile(file: Array<Photo>){
+    async deleteFile(files: Array<FilesEntity>){
         try{
-            for(let i = 0; i < file.length; i++){
-                const filePath = path.resolve(__dirname, '..','static', file[i].photoName.toString());
-                fs.unlink(filePath, err =>{ //удаляем файл
+            for(let i = 0; i < files.length; i++){
+                const filePath = path.resolve(__dirname, '../../..','image', files[i].fileName.toString());
+                fs.unlink(filePath, err =>{ 
                     if(err){}
                 });
             }
@@ -39,4 +39,11 @@ export class FilesService {
         }
     }
 
+    getFullFileName(filesNames:any){
+        let otv = [];
+        filesNames.forEach(item => {
+            otv.push({filename:path.resolve(__dirname, '../../..','image', item.fileName), id: item.assenceId})
+        })
+        return otv;
+    }
 }

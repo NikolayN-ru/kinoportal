@@ -1,4 +1,4 @@
-export class DeletePhotoByEntityDto{
+export class DeleteFileByEntityDto{
     assenceTable: string;
     assenceId: number;
 }
