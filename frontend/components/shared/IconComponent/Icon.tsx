@@ -19,6 +19,8 @@ import { ArrowRight } from "../../../public/svg/index";
 import { StarRounded } from "../../../public/svg/index";
 import { Bookmark } from "../../../public/svg/index";
 import { MagicWand } from "../../../public/svg/index";
+import { US } from "../../../public/svg/index";
+import { RUS } from "../../../public/svg/index";
 
 type IconComponentProps = { name: string };
 type IconTypes = { [name: string]: ReactSVGComponent };
@@ -44,6 +46,8 @@ const iconTypes: IconTypes = {
   starRounded: StarRounded,
   bookmark: Bookmark,
   magicWand: MagicWand,
+  us: US,
+  rus: RUS,
 };
 
 const IconComponent = ({ name, ...props }: IconComponentProps) => {
