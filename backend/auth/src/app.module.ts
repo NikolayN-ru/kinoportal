@@ -8,8 +8,6 @@ import { UserModule } from './user/user.module';
   imports: [
       TypeOrmModule.forRoot({
         type: "postgres",
-        // type: 'cockroachdb',
-        // url: 'postgresql://syst1337_gmail_com:KHnUBisY6kmPtbuVJhpxWA@oilier-toad-7177.7tc.cockroachlabs.cloud:26257/auth?sslmode=verify-full',
         host: 'localhost',
         port: 5432,
         username: 'postgres',
@@ -17,7 +15,6 @@ import { UserModule } from './user/user.module';
         database: 'auth',
         entities: [User],
         synchronize: true,
-        // ssl: true
     }),
       AuthModule,
       UserModule,
