@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    @apply box-border;
+  }
+
+  html,
+  body {
+    @apply min-h-screen m-0 p-0;
+  }
+
+  html {
+    @apply text-default text-primary font-sans font-normal not-italic;
+  }
+
+  body {
+    @apply overflow-x-hidden flex flex-col w-full h-full leading-default bg-background;
+  }
+
+  #__next {
+    @apply flex flex-col grow md:px-default sm:px-mobile;
+  }
+
+  main {
+    @apply grow;
+  }
+
+  a {
+    @apply text-link no-underline;
+  }
+
+  input,
+  textarea {
+    @apply rounded-none;
+
+    &::placeholder {
+      @apply opacity-100;
+    }
+
+    &:invalid {
+      @apply shadow-none;
+    }
+  }
+
+  select {
+    @apply rounded-none;
+  }
+}
+
+@layer components {
+  .main-container {
+    @apply relative flex flex-col grow w-full mx-auto my-0;
+
+    min-width: theme("width.mobile");
+    max-width: theme("width.desktop");
+    width: 1216px;
+    min-height: calc(100vh - 548px);
+  }
+}

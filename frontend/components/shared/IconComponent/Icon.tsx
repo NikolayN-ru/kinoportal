@@ -1,4 +1,4 @@
-import style from './Icon.module.scss';
+import style from "./Icon.module.scss";
 import { Search } from "../../../public/svg/index";
 import { Notify } from "../../../public/svg/index";
 import { Avatar } from "../../../public/svg/index";
@@ -15,6 +15,12 @@ import { Twitter } from "../../../public/svg/index";
 import { Callback } from "../../../public/svg/index";
 import { In } from "../../../public/svg/index";
 import { TG } from "../../../public/svg/index";
+import { ArrowRight } from "../../../public/svg/index";
+import { StarRounded } from "../../../public/svg/index";
+import { Bookmark } from "../../../public/svg/index";
+import { MagicWand } from "../../../public/svg/index";
+import { US } from "../../../public/svg/index";
+import { RUS } from "../../../public/svg/index";
 
 type IconComponentProps = { name: string };
 type IconTypes = { [name: string]: ReactSVGComponent };
@@ -23,19 +29,25 @@ const iconTypes: IconTypes = {
   search: Search,
   notify: Notify,
   avatar: Avatar,
-  mouthpiece:Mouthpiece,
-  message:Message,
-  tel:Tel,
-  apple:Apple,
-  android:Android,
-  tv:TV,
-  desktop:Desktop,
-  vk:VK,
-  ok:OK,
-  twitter:Twitter,
-  callback:Callback,
-  in:In,
-  tg:TG,
+  mouthpiece: Mouthpiece,
+  message: Message,
+  tel: Tel,
+  apple: Apple,
+  android: Android,
+  tv: TV,
+  desktop: Desktop,
+  vk: VK,
+  ok: OK,
+  twitter: Twitter,
+  callback: Callback,
+  in: In,
+  tg: TG,
+  arrowRight: ArrowRight,
+  starRounded: StarRounded,
+  bookmark: Bookmark,
+  magicWand: MagicWand,
+  us: US,
+  rus: RUS,
 };
 
 const IconComponent = ({ name, ...props }: IconComponentProps) => {

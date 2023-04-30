@@ -1,0 +1,44 @@
+.promo {
+  @apply absolute top-0 bottom-0 overflow-x-hidden;
+
+  right: calc((100% - 100vw) / 2);
+  left: calc((100% - 100vw) / 2);
+}
+
+.sliderContainer {
+  @apply absolute top-0 bottom-0 left-[50%] w-[3696px] h-full translate-x-[-50%];
+}
+
+.navButtonDisabled {
+  @apply hidden;
+}
+
+.prevButton {
+  width: calc((100vw - 1216px - 2*24px) / 2)!important;
+  transform: translateX(0)!important;
+
+  svg {
+    margin-left: auto!important;
+    margin-right: 16px!important;
+  }
+}
+
+.nextButton {
+  width: calc((100vw - 1216px - 2*24px) / 2)!important;
+  transform: translateX(0)!important;
+
+  svg {
+    margin-left: 16px!important;
+    margin-right: auto!important;
+    transform: translateY(14px)!important;
+  }
+}
+
+.slidePrev,
+.slideNext {
+  @apply opacity-[0.3];
+}
+
+.transparent {
+  @apply opacity-[0.3];
+}

@@ -8,24 +8,33 @@ interface CommentI {
   count: number;
   content?: string;
 }
-const Comment: FC<CommentI> = ({ author, date, count, content }) => {
+
+const cont =
+  "Самый красивый, харизматичный и неповторимый Артист!!! Удачи, процветания, успехов, востребованности!!! Вы самый лучший и неповторимый!!!";
+
+const Comment: FC<CommentI> = ({
+  author = "Angelina",
+  date = "31 мая 2015",
+  count,
+  content = cont,
+}) => {
   return (
     <div className={s.wrapper}>
       <div className={s.header}>
         <div className={s.author}>
-          Angelina <span>31 мая 2015</span>
+          {author} <span>{date}</span>
         </div>
         <div className={s.like}>
-          <Like />
+          <div className={s.likeHover}>
+            <Like />
+          </div>
           <span>{count}</span>
-          <Like className={s.deg} />
+          <div className={s.likeHover}>
+            <Like className={s.deg} />
+          </div>
         </div>
       </div>
-      <div className={s.content}>
-        Самый красивый, харизматичный и неповторимый Артист!!! Удачи,
-        процветания, успехов, востребованности!!! Вы самый лучший и
-        неповторимый!!!
-      </div>
+      <div className={s.content}>{content}</div>
     </div>
   );
 };

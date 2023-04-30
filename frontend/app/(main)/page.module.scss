@@ -1,0 +1,28 @@
+.pageSection {
+  @apply py-[24px];
+}
+
+.aboutSection {
+  @apply md:w-[75%] sm:w-full pr-[28px];
+}
+
+.promoSection {
+  @apply relative h-[63.33vh] max-h-[370px];
+}
+
+.subscribeSection {
+  @apply pb-0;
+}
+
+.titleLink {
+  @apply relative inline-flex justify-start pr-[14px] text-white;
+
+  &::after {
+    @apply absolute top-[6px] right-[0] bottom-[0] w-[6px] h-[16px] my-auto content-[""]
+    bg-[url('/svg/arrow-right.svg')] bg-no-repeat;
+  }
+}
+
+.sectionTitle {
+  @apply mb-[24px];
+}
