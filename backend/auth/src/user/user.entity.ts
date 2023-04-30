@@ -7,6 +7,10 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
+    @ApiProperty({example: 'Alex', description: 'Имя пользоавателя'})
+    @Column()
+    username: string;
+
     @ApiProperty({example: '134@gmail.ru', description: 'Почта пользоавателя'})
     @Column({unique: true})
     email: string;

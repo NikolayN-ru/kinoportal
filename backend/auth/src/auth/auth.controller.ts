@@ -1,25 +1,30 @@
-import {Body, Controller, Get, Post} from '@nestjs/common';
+import {Body, Request, Controller, Get, Post, UseGuards, UsePipes, ValidationPipe} from '@nestjs/common';
 import {AuthService} from "./auth.service";
 import {CreateUserDto} from "./dto/create-user.dto";
 import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
+import {GoogleOAuthGuard} from "./google/google-oauth.guard";
+import {LoginUserDto} from "./dto/login-user.dto";
+import {AuthGuard} from "@nestjs/passport";
 
 
 @ApiTags('Авторизация')
-@Controller('')
+@Controller('auth')
 export class AuthController {
 
     constructor(private authService: AuthService) {}
 
     @ApiOperation({summary: 'Логин пользователя'})
     @ApiResponse({status: 200, type: String})
-    @Post('auth/login')
-    login(@Body() userDto: CreateUserDto) {
+    @UsePipes(ValidationPipe)
+    @Post('/login')
+    login(@Body() userDto: LoginUserDto) {
         return this.authService.login(userDto);
     }
 
     @ApiOperation({summary: 'Регистрация пользователя'})
     @ApiResponse({status: 200, type: String})
-    @Post('auth/registration')
+    @UsePipes(ValidationPipe)
+    @Post('/registration')
     registration(@Body() registrationDto: CreateUserDto) {
         return this.authService.registration(registrationDto);
     }
@@ -27,5 +32,17 @@ export class AuthController {
     @Get('')
     regHello() {
         return 'hello auth'
+    }
+
+    @Get('/google-redirect')
+    @UseGuards(GoogleOAuthGuard)
+    googleLogin(@Request() req) {
+        return this.authService.otherLogin(req);
+    }
+
+    @Get('/vkontakte/callback')
+    @UseGuards(AuthGuard('vkontakte'))
+    vkLogin(@Request() req) {
+        return this.authService.otherLogin(req);
     }
 }
