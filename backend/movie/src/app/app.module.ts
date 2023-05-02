@@ -12,10 +12,10 @@ import {Genre} from "../movie/entity/genre.entity";
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: 'postgresMovie',
       port: 5432,
       username: 'postgres',
-      password: '12345678',
+      password: 'qwerty',
       database: 'movie',
       entities: [Movie, Review, Comment, Country, Genre],
       synchronize: true,

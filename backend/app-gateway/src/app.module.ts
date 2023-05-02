@@ -11,13 +11,25 @@ import { AdminController } from './admin/admin.controller';
         name: 'Actor',
         transport: Transport.RMQ,
         options: {
-          urls: ['amqp://localhost:5672'],
+          urls: ['amqp://rabbitmq:5672'],
           queue: 'actor-queue',
           queueOptions: {
             durable: false
           },
-        },
-      }])
+        },      
+      },
+      {
+        name: 'Movie',
+        transport: Transport.RMQ,
+        options: {
+          urls: ['amqp://rabbitmq:5672'],
+          queue: 'movie-queue',
+          queueOptions: {
+            durable: false
+          }
+        }
+      }
+    ])
   ],
   controllers: [ActorController,
     FilmController,

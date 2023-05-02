@@ -14,6 +14,8 @@ export class ActorService {
     private actorRepository: Repository<ActorEntity>,
     @Inject('Photo')
     private clientPhoto: ClientProxy,
+    @Inject('Movie')
+    private clientMovie: ClientProxy,
     private actorFilmService: ActorFilmService){}
 
 
@@ -80,10 +82,13 @@ export class ActorService {
         try{
             const actor = await this.checkingForExistence(actorId);
             const files = await this.clientPhoto.send('get.files',{arrActors:[actor.actorId], assenceTable: 'actor'}).toPromise();
+            const moviesId = (await this.actorFilmService.getFilmsForActor(actor.actorId)).map(item => item.filmId);
+            const movies = await this.clientMovie.send('get.movie.for.actor', moviesId).toPromise();
             return {
                 ...actor,
                 ...files[0],
-                id: undefined
+                id: undefined,
+                movies: movies
             };
         }   
         catch(e){
@@ -110,9 +115,9 @@ export class ActorService {
         }   
     }
 
-    async getActorsForFilm(actorActorId: any){
+    async getActorsForFilm(filmId: any){
         try{
-            let actors = this.actorFilmService.getActorsForFilms(actorActorId);
+            let actors = this.actorFilmService.getActorsForFilms(filmId);
             let arrActors = [];
             await actors.then(result => arrActors = result);
             const actorsId = await arrActors.map(item => item.actorId);

@@ -9,11 +9,11 @@ import { ActorFilmModule } from './entity/actor-film/actor.film.module';
   imports: [
     TypeOrmModule.forRoot({ 
     type: 'postgres',
-    host: 'localhost',
+    host: 'postgresActor',
     port: 5432,
     username: 'postgres',
     password: 'qwerty',
-    database: 'kinoportal',
+    database: 'actor',
     entities: [ActorEntity,ActorFilmEntity],
     synchronize: true, 
   }),

@@ -8,15 +8,22 @@ import { ActorWithImageDto } from "../dto/actor/actor.dto";
 @Controller('/film')
 export class FilmController {
   constructor(@Inject('Actor')
-  private clientActor: ClientProxy) {}
+  private clientActor: ClientProxy,
+  @Inject('Movie')
+  private clientMovie: ClientProxy) {}
 
 
   @Get(':id')
   @ApiResponse({status: 200, description: 'get all actor by film', type: [ActorWithImageDto]})
   @ApiResponse({status: 404, description: 'actors not found', type: HttpExceptionDto})
-  getAllActorForFilm(@Param('id') filmId : number){
+  async getAllActorForFilm(@Param('id') filmId : number){
     try{
-      return this.clientActor.send('get.all.actor.film', filmId);
+      const actors = await this.clientActor.send('get.all.actor.film', filmId).toPromise();
+      const movie = await this.clientMovie.send('get.movie', filmId).toPromise();
+      return {
+        ...movie,
+        actors: actors
+      }
     }
     catch(e){
       console.log(e);

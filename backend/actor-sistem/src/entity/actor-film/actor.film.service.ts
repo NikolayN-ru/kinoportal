@@ -25,7 +25,24 @@ export class ActorFilmService {
             .where('film.filmId =:filmId',{filmId})
             .getMany();
             if(actors.length === 0){
-                throw new HttpException('Нет актеров по такому фильму', HttpStatus.NOT_FOUND); 
+                return [];
+            }
+            return actors;
+        }   
+        catch(e){
+            throw e;
+        }   
+    }
+
+    async getFilmsForActor(actorId: any){
+        try{
+            let actors = await this.actorFilmRepository
+            .createQueryBuilder('film')
+            .innerJoin(ActorEntity, "actor", 'film.actorId = actor.actorId')
+            .where('actor.actorId =:actorId',{actorId})
+            .getMany();
+            if(actors.length === 0){
+                return [];
             }
             return actors;
         }   
