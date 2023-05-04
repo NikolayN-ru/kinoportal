@@ -9,6 +9,12 @@ import CollectionSlider from "@components/CollectionSlider/CollectionSlider";
 import SubscriptionButton from "@components/SubscriptionButton/SubscriptionButton";
 import { collections } from "../../mock/filmsData";
 import s from "./page.module.scss";
+//тестово
+import DropDownPage from "@components/Header/DropDownPage/DropDownPage";
+
+export {
+  DropDownPage,
+}
 
 export default function Home() {
   return (

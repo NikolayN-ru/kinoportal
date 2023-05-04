@@ -18,3 +18,4 @@ export {default as Play} from './play.svg';
 export {default as Save} from './save.svg';
 export {default as Share} from './share.svg';
 export {default as Like} from './like.svg';
+export {default as I} from './i.svg';

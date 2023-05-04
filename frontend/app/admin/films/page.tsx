@@ -1,8 +1,25 @@
+'use client'
+import { useState } from "react";
+import ModalAdmin from "../ModalAdmin/ModalAdmin";
 import s from "./page.module.scss";
 
 const FilmsAdmin = () => {
+  const [isModal, setModal] = useState(false);
+  const onClose = () => {
+    setModal(false);
+  };
   return (
     <div>
+      <div className={s.add_btn_block}>
+      <button className={s.add_btn} onClick={() => setModal(true)}>
+              Добавить +
+            </button>
+            <ModalAdmin
+              visible={isModal}
+              footer={<button onClick={onClose}>Закрыть</button>}
+              onClose={onClose}
+            />
+      </div>
       <div className={s.head_row}>
         <input className={s.checkbox} type="checkbox" name="" id="" />
         <div className={s.head_title}>Название</div>

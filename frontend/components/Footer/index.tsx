@@ -1,3 +1,4 @@
+import Link from "next/link";
 import GrayButton from "../GrayButton";
 import Icon from "../shared/IconComponent/Icon";
 import s from "./Footer.module.scss";
@@ -11,52 +12,49 @@ const Footer: FC = () => {
           <div className={s.column}>
             <div className={s.title}>О нас</div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                О компании
-              </a>
+              <Link className={s.link} href="https://corp.ivi.ru/" target="_blank">О компании</Link>
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                Вакансии
-              </a>
+            <Link className={s.link} href="https://corp.ivi.ru/career/#career-vacancy-block" target="_blank">Вакансии</Link>
+
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                Программа бета-тестирования
-              </a>
+            <Link className={s.link} href="https://www.ivi.ru/pages/beta/" target="_blank">Программа бета-тестирования</Link>
+                
+             
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                Информация для партнёров
-              </a>
+            <Link className={s.link} href="https://www.ivi.ru/info/partners" target="_blank">Информация для партнёров</Link>
+                
+              
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                Размещение рекламы
-              </a>
+            <Link className={s.link} href="https://corp.ivi.ru/advertisers/" target="_blank">Размещение рекламы</Link>
+                
+             
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                Пользовательское соглашение
-              </a>
+            <Link className={s.link} href="https://www.ivi.ru/info/agreement" target="_blank">Пользовательское соглашение</Link>
+                
+              
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                Политика конфиденциальности
-              </a>
+            <Link className={s.link} href="https://www.ivi.ru/info/confidential" target="_blank">Политика конфиденциальности</Link>
+                
+              
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                Комплаенс
-              </a>
+            <Link className={s.link} href="https://www.ivi.ru/info/goryachaya-liniya-komplaens" target="_blank">Комплаенс</Link>
+                
+              
             </div>
           </div>
           <div className={s.column}>
             <div className={s.title}>Разделы</div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                Мой иви
-              </a>
+            <Link className={s.link} href="https://www.ivi.ru/new" target="_blank">Мой иви</Link>
+
+             
             </div>
             <div className={s.item}>
               <a className={s.link} href="/" target="_blank">
