@@ -1,4 +1,4 @@
-import {HttpStatus, Injectable} from '@nestjs/common';
+import {HttpStatus, Inject, Injectable} from '@nestjs/common';
 import {Movie} from "./entity/movie.entity";
 import {InjectRepository} from '@nestjs/typeorm';
 import {Repository, In, Between} from 'typeorm';
@@ -6,12 +6,14 @@ import {Review} from "./entity/review.entity";
 import {CreateReviewDto} from "./dto/create-review.dto";
 import {Comment} from "./entity/comment.entity"
 import {CreateCommentDto} from "./dto/create-comment";
+import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
 export class MovieService {
     constructor(@InjectRepository(Movie) private movieRepository: Repository<Movie>,
                 @InjectRepository(Review) private reviewRepository: Repository<Review>,
-                @InjectRepository(Comment) private commentRepository: Repository<Comment>) {}
+                @InjectRepository(Comment) private commentRepository: Repository<Comment>,
+                @Inject('Photo') private clientPhoto: ClientProxy) {}
 
     async getMain() {
         try {
@@ -150,12 +152,48 @@ export class MovieService {
     async getMovie(id: number) {
         try {
             const movie = await this.movieRepository.findOneBy({id: id});
-            if(movie) return movie;
-            return HttpStatus.NOT_FOUND;
+            if(!movie) return HttpStatus.NOT_FOUND;
+            let movieInfo;
+            await this.getFilesForMovies([movie],'movie-main').then(res => movieInfo = res[0]);
+            return movieInfo
         } catch (e) {
             return e.message;
         }
 
+    }
+
+    async getMovies(moviesIds: Array<number>) {
+        try {
+            const movie = await this.movieRepository.createQueryBuilder()
+            .select('movie')
+            .from(Movie, "movie")
+            .where("movie.id in (:...moviesIds)", {moviesIds})
+            .getMany();
+            if(!movie) {
+                return HttpStatus.NOT_FOUND;
+            }
+
+            return this.getFilesForMovies(movie,'movie-main');
+
+        } catch (e) {
+            return e.message;
+        }
+
+    }
+
+    async getFilesForMovies(movies: Array<Movie>, assenceTable: string){
+        try{
+            const movieId = await movies.map(item => item.id);
+            const files = await this.clientPhoto.send('get.files',{arrActors: movieId, assenceTable: assenceTable}).toPromise();
+            if(!files) {
+                return movies
+            }
+            const otv = movies.map(movie => ({...movie, ...files.find(file => file.id === movie.id)}));
+            return otv
+        }
+        catch(e){
+            return e.message;
+        }
     }
 
     async getReviews(id: number) {

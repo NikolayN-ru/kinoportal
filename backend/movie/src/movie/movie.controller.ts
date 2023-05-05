@@ -1,7 +1,7 @@
 import {Body, Controller, Get, Param, Post, Query} from '@nestjs/common';
 import {MovieService} from "./movie.service";
 import {CreateReviewDto} from "./dto/create-review.dto";
-import {EventPattern} from "@nestjs/microservices";
+import {Ctx, EventPattern, MessagePattern, Payload, RmqContext} from "@nestjs/microservices";
 import {CreateCommentDto} from "./dto/create-comment";
 
 @Controller('movie')
@@ -44,5 +44,15 @@ export class MovieController {
     @EventPattern('create_comment')
     async createComment(dto: CreateCommentDto) {
         return this.movieService.createComment(dto);
+    }
+
+    @MessagePattern('get.movie.for.actor')
+    async getMovies(@Payload() data: any, @Ctx() context: RmqContext) {  
+        return this.movieService.getMovies(data);
+    }
+
+    @MessagePattern('get.movie')
+    async getMovieById(@Payload() data: any, @Ctx() context: RmqContext) {  
+        return this.movieService.getMovie(data);
     }
 }
