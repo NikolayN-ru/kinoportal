@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import s from "./BadgeActor.module.scss";
 
 const BadgeActor: FC<any> = ({ img, title }) => {

@@ -1,6 +1,6 @@
 .sliderPrev,
 .sliderNext {
-  @apply absolute top-0 bottom-0 z-10 flex w-[34px] my-auto;
+  @apply flex;
 
   svg {
     @apply my-auto w-[12px] h-[32px] translate-y-[-14px];
@@ -24,16 +24,12 @@
 }
 
 .sliderPrev {
-  @apply left-0 translate-x-[-100%];
-
   svg {
     @apply mr-auto rotate-180;
   }
 }
 
 .sliderNext {
-  @apply right-0 translate-x-full;
-
   svg {
     @apply ml-auto;
   }

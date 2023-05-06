@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-import Icon from '../shared/IconComponent/Icon';
+import Icon from '@components/shared/IconComponent/Icon';
 
 import s from './SliderButton.module.scss';
 

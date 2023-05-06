@@ -1,11 +1,11 @@
 .description {
-  @apply mb-[8px] pt-[12px];
+  @apply overflow-hidden mt-[12px] mb-[8px];
 
   p {
     @apply mb-[8px];
 
     &:last-child {
-      @apply mb-[0];
+      @apply mb-0;
     }
   }
 
@@ -23,6 +23,9 @@
 }
 
 .isClose {
-  @apply line-clamp-2 text-ellipsis;
+  @apply line-clamp-4 lg:line-clamp-2 text-ellipsis;
 
+  p, ul, li {
+    display: inline;
+  }
 }

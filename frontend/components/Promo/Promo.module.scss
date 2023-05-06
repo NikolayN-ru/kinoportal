@@ -6,31 +6,40 @@
 }
 
 .sliderContainer {
-  @apply absolute top-0 bottom-0 left-[50%] w-[3696px] h-full translate-x-[-50%];
+  @apply absolute top-0 bottom-0 left-[50%] h-full translate-x-[-50%]
+  w-promoContainerSM md:w-promoContainerMD lg:w-promoContainerLG xl:w-promoContainerXL;
 }
 
 .navButtonDisabled {
   @apply hidden;
 }
 
-.prevButton {
-  width: calc((100vw - 1216px - 2*24px) / 2)!important;
+.buttonPrev,
+.buttonNext {
+  @apply absolute top-0 bottom-0 z-10 hidden lg:flex my-auto lg:w-promoSliderButtonLG xxl:w-promoSliderButtonXL;
+}
+
+.buttonPrev {
+  @apply left-0 translate-x-[-100%];
+
   transform: translateX(0)!important;
 
   svg {
     margin-left: auto!important;
     margin-right: 16px!important;
+    transform: rotate(180deg) translateY(0)!important;
   }
 }
 
-.nextButton {
-  width: calc((100vw - 1216px - 2*24px) / 2)!important;
+.buttonNext {
+  @apply right-0 translate-x-full;
+
   transform: translateX(0)!important;
 
   svg {
     margin-left: 16px!important;
     margin-right: auto!important;
-    transform: translateY(14px)!important;
+    transform: translateY(0)!important;
   }
 }
 

@@ -4,12 +4,12 @@ import Link from 'next/link';
 
 import MainContainer from '@components/MainContainer';
 import Promo from '@components/Promo';
-import SubscriptionButton from '@components/SubscriptionButton';
+import SubscriptionButton from '@components/Button/SubscriptionButton';
 import About from '@components/About';
 import { collections, compilation } from 'mock/filmsData';
 import Title from '@components/Title';
-import CollectionSlider from '@components/CollectionSlider';
-import CompilationSlider from '@components/CompilationSlider';
+import CollectionSlider from '@components/Slider/CollectionSlider';
+import CompilationSlider from '@components/Slider/CompilationSlider';
 
 import s from './page.module.scss';
 
@@ -21,9 +21,7 @@ export default function Home() {
         качестве.
       </h1>
 
-      <section className={s.promoSection}>
-        <Promo />
-      </section>
+      <section className={s.promoSection}>{<Promo />}</section>
 
       <section className={s.pageSection + ' ' + s.subscribeSection}>
         <SubscriptionButton />
@@ -35,7 +33,7 @@ export default function Home() {
 
       <section className={s.pageSection}>
         <Title className={s.sectionTitle} tag="h2" size="md" text={compilation.name} />
-        <CompilationSlider items={compilation.items} />
+        {<CompilationSlider items={compilation.items} />}
       </section>
 
       {collections.map((collection) => (

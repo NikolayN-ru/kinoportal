@@ -1,21 +1,25 @@
 import { MouseEventHandler, useState, FC } from 'react';
+import cn from 'classnames/bind';
+
 import Title from '../Title';
-import styles from './About.module.scss';
+
+import s from './About.module.scss';
 
 const IS_CLOSE_DEFAULT = true;
 
 const About: FC = () => {
   const [isClose, setIsClose] = useState<boolean>(IS_CLOSE_DEFAULT);
 
-  const descriptionClassName = styles.description;
-  const isCloseClassName = styles.isClose;
-  const descriptionClassNames = isClose
-    ? [descriptionClassName, isCloseClassName]
-    : [descriptionClassName];
-
-  const onToggleButtonClock: MouseEventHandler<HTMLButtonElement> = (): void => {
+  const onToggleButtonClick: MouseEventHandler<HTMLButtonElement> = (): void => {
     setIsClose(!isClose);
   };
+
+  const styles = {
+    description: s.description,
+    isClose: s.isClose,
+  };
+  const containerClassNames = cn.bind(styles);
+  const containerClassName = containerClassNames('description', { isClose });
 
   return (
     <>
@@ -25,7 +29,7 @@ const About: FC = () => {
         text="Онлайн-кинотеатр Иви: фильмы в хорошем качестве всегда приносят настоящее удовольствие"
       />
 
-      <div className={descriptionClassNames.join(' ')}>
+      <div className={containerClassName}>
         <p>
           Случалось ли вам отказаться от просмотра интересного фильма из-за того, что его показывали
           в неудобное время? Приходилось ли искать в сети интернет, где смотреть фильмы онлайн? А
@@ -64,7 +68,7 @@ const About: FC = () => {
         </p>
         <p>Убедитесь в том, что смотреть онлайн – просто и удобно!</p>
       </div>
-      <button className={styles.toggleButton} onClick={onToggleButtonClock}>
+      <button className={s.toggleButton} onClick={onToggleButtonClick}>
         {isClose ? 'Развернуть' : 'Свернуть'}
       </button>
     </>

@@ -1,5 +1,6 @@
-import RatingBar from '../RatingBar/RatingBar';
-import styles from './Rating.module.scss';
+import RatingBar from '../RatingBar';
+
+import s from './Rating.module.scss';
 
 interface RatingProps {
   className?: string;
@@ -7,14 +8,14 @@ interface RatingProps {
 }
 
 const Rating: React.FC<RatingProps> = ({ className, value }) => {
-  const containerClassNames = [styles.container];
+  const containerClassNames = [s.container];
   className && containerClassNames.push(className);
 
   return (
     <div className={containerClassNames.join(' ')}>
-      <div className={styles.details}>
-        <div className={styles.value}>{String(value.toFixed(1)).replace('.', ',')}</div>
-        <div className={styles.bars}>
+      <div className={s.details}>
+        <div className={s.value}>{String(value.toFixed(1)).replace('.', ',')}</div>
+        <div className={s.bars}>
           <RatingBar value={38} mode={'s'} />
           <RatingBar value={33} mode={'s'} />
           <RatingBar value={22} mode={'s'} />
@@ -22,8 +23,8 @@ const Rating: React.FC<RatingProps> = ({ className, value }) => {
         </div>
       </div>
 
-      <div className={styles.mainBar}>
-        <div className={styles.category}>Актёры</div>
+      <div className={s.mainBar}>
+        <div className={s.category}>Актёры</div>
         <RatingBar value={65} mode={'m'} />
       </div>
     </div>
