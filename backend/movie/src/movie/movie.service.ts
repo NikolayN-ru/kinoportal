@@ -1,18 +1,18 @@
 import {HttpStatus, Inject, Injectable} from '@nestjs/common';
 import {Movie} from "./entity/movie.entity";
 import {InjectRepository} from '@nestjs/typeorm';
-import {Repository, In, Between} from 'typeorm';
+import {Repository, In, Between, MoreThan} from 'typeorm';
 import {Review} from "./entity/review.entity";
 import {CreateReviewDto} from "./dto/create-review.dto";
 import {Comment} from "./entity/comment.entity"
-import {CreateCommentDto} from "./dto/create-comment";
-import { ClientProxy } from '@nestjs/microservices';
+import {CreateCommentDto} from "./dto/create-comment.dto";
+import {CreateMovieDto} from "./dto/create-movie.dto";
+import {ClientProxy} from "@nestjs/microservices";
 
 @Injectable()
 export class MovieService {
     constructor(@InjectRepository(Movie) private movieRepository: Repository<Movie>,
                 @InjectRepository(Review) private reviewRepository: Repository<Review>,
-                @InjectRepository(Comment) private commentRepository: Repository<Comment>,
                 @Inject('Photo') private clientPhoto: ClientProxy) {}
 
     async getMain() {
@@ -27,121 +27,54 @@ export class MovieService {
 
     }
 
-    async getMovieWithFilter(genre: string, year: string, country: string) {
+    async getMovieWithFilter(genre: string, year: string, country: string, rating: number) {
         try {
             let genres, years, countries;
+            const param = {
+                genres: undefined,
+                countries: undefined,
+                year: undefined,
+                ratingIvi: undefined
+            };
+
             if(genre) {
                 genres = genre.split(' ');
+
+                param.genres = {
+                        genre: In(genres)
+                }
             }
+
             if(year) {
                 years = year.split('-').map(function (item) {
                     return parseInt(item);
                 });
+
+                switch (years.length) {
+                    case 1:
+                        param.year = years[0]
+                        break;
+                    case 2:
+                        param.year = Between(years[0], years[1])
+                        break;
+                }
             }
+
             if(country) {
                 countries = country.split(' ');
+
+                param.countries = {
+                    country: In(countries)
+                }
             }
-            let movies = [];
-            switch (years.length) {
-                case 1:
-                    if(countries) {
-                        if(genres) {
-                            movies = await this.movieRepository.findBy({
-                                genres: {
-                                    genre: In(genres)
-                                },
-                                countries: {
-                                    country: In(countries)
-                                },
-                                year: years[0]
-                            })
-                        } else {
-                            movies = await this.movieRepository.findBy({
-                                countries: {
-                                    country: In(countries)
-                                },
-                                year: years[0]
-                            })
-                        }
-                    } else {
-                        if(genres) {
-                            movies = await this.movieRepository.findBy({
-                                genres: {
-                                    genre: In(genres)
-                                },
-                                year: years[0]
-                            })
-                        } else {
-                            movies = await this.movieRepository.findBy({
-                                year: years[0]
-                            })
-                        }
-                    }
-                    break;
-                case 2:
-                    if(countries) {
-                        if(genres) {
-                            movies = await this.movieRepository.findBy({
-                                genres: {
-                                    genre: In(genres)
-                                },
-                                countries: {
-                                    country: In(countries)
-                                },
-                                year: Between(years[0], years[1])
-                            })
-                        } else {
-                            movies = await this.movieRepository.findBy({
-                                countries: {
-                                    country: In(countries)
-                                },
-                                year:  Between(years[0], years[1])
-                            })
-                        }
-                    } else {
-                        if(genres) {
-                            movies = await this.movieRepository.findBy({
-                                genres: {
-                                    genre: In(genres)
-                                },
-                                year: Between(years[0], years[1])
-                            })
-                        } else {
-                            movies = await this.movieRepository.findBy({
-                                year:  Between(years[0], years[1])
-                            })
-                        }
-                    }
-                    break;
-                default:
-                    if(countries) {
-                        if(genres) {
-                            movies = await this.movieRepository.findBy({
-                                genres: {
-                                    genre: In(genres)
-                                },
-                                countries: {
-                                    country: In(countries)
-                                },
-                            })
-                        } else {
-                            movies = await this.movieRepository.findBy({
-                                countries: {
-                                    country: In(countries)
-                                },
-                            })
-                        }
-                    } else {
-                        if(genres) {
-                            movies = await this.movieRepository.findBy({
-                                genres: {
-                                    genre: In(genres)
-                                },
-                            })
-                        }
-                    }
-                    break;
+
+            if(rating) {
+                param.ratingIvi = {
+                    rating: MoreThan(rating)
+                }
             }
+
+            const movies = await this.movieRepository.findBy(param);
 
             return movies
         } catch (e) {
@@ -151,24 +84,30 @@ export class MovieService {
 
     async getMovie(id: number) {
         try {
-            const movie = await this.movieRepository.findOneBy({id: id});
-            if(!movie) return HttpStatus.NOT_FOUND;
-            let movieInfo;
-            await this.getFilesForMovies([movie],'movie-main').then(res => movieInfo = res[0]);
-            return movieInfo
+            const movie = await this.movieRepository.findOne({
+                where: {
+                   id: id
+                },
+                relations : {
+                    genres: true,
+                    reviews: true,
+                    countries: true
+                }
+            });
+            if(movie) return movie;
+            return HttpStatus.NOT_FOUND;
         } catch (e) {
             return e.message;
         }
-
     }
 
     async getMovies(moviesIds: Array<number>) {
         try {
             const movie = await this.movieRepository.createQueryBuilder()
-            .select('movie')
-            .from(Movie, "movie")
-            .where("movie.id in (:...moviesIds)", {moviesIds})
-            .getMany();
+                .select('movie')
+                .from(Movie, "movie")
+                .where("movie.id in (:...moviesIds)", {moviesIds})
+                .getMany();
             if(!movie) {
                 return HttpStatus.NOT_FOUND;
             }
@@ -198,23 +137,45 @@ export class MovieService {
 
     async getReviews(id: number) {
         try {
-            const movie = await this.getMovie(id);
-            if(movie === HttpStatus.NOT_FOUND) return HttpStatus.NOT_FOUND
-            const reviews = await this.reviewRepository.findBy({movie:{
+            const movie = await this.movieRepository.findOne({
+                where: {
                     id: id
-                }});
+                },
+                relations: {
+                    reviews: true
+                }
+            });
+            if(!movie) return HttpStatus.NOT_FOUND;
+            const reviews = movie.reviews;
             return reviews
         } catch (e) {
             return e.message;
         }
-
     }
 
     async createReview(id: number, dto: CreateReviewDto) {
         try {
-            const movie = await this.movieRepository.findOneBy({id: id});
-            const review = await this.reviewRepository.save({...dto, movie});
-            return review;
+            const movie = await this.movieRepository.findOne({
+                where: {
+                    id: id
+                },
+                relations: {
+                    reviews: true
+                }
+            });
+            if(!movie) return HttpStatus.NOT_FOUND;
+
+            const review = new Review();
+            review.data = dto.data;
+            review.like = dto.like;
+            review.description = dto.description;
+            review.title = dto.title;
+            review.userName = dto.userName;
+
+            movie.reviews.push(review)
+            await this.movieRepository.save(movie);
+
+            return movie.reviews;
         } catch (e) {
             return e.message;
         }
@@ -249,12 +210,8 @@ export class MovieService {
             });
             if(!review) return HttpStatus.NOT_FOUND;
 
-            const comment = await this.commentRepository.create({
-                id: dto.reviedId,
-                text: dto.comment,
-                review: review
-            });
-            await this.reviewRepository.save(comment);
+            const comment = new Comment();
+            comment.text = dto.comment
 
             review.comments.push(comment);
             await this.reviewRepository.save(review);
@@ -262,6 +219,32 @@ export class MovieService {
             return review;
         } catch (e) {
             return e.message;
+        }
+    }
+
+    async createMovie(dto: CreateMovieDto) {
+        try {
+
+        } catch (e) {
+
+        }
+    }
+
+    async deleteMovie(id: number) {
+        try {
+            const movie = await this.movieRepository.delete({id: id});
+            if(!movie) return HttpStatus.NOT_FOUND;
+            return movie;
+        } catch (e) {
+            return e.message;
+        }
+    }
+
+    async updateMovie(id: number, dto) {
+        try {
+
+        } catch (e) {
+
         }
     }
 }

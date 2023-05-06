@@ -5,9 +5,9 @@ import {Movie} from "./entity/movie.entity";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {Review} from "./entity/review.entity";
 import {Comment} from "./entity/comment.entity";
-import {Genre} from "./entity/genre.entity";
-import {Country} from "./entity/country.entity";
-import { ClientsModule, Transport } from '@nestjs/microservices';
+import {Genre} from "../genre/entity/genre.entity";
+import {Country} from "../country/entity/country.entity";
+import {ClientsModule, Transport} from "@nestjs/microservices";
 
 @Module({
     controllers: [MovieController],
@@ -16,15 +16,15 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         TypeOrmModule.forFeature([Movie, Review, Comment, Genre, Country]),
         ClientsModule.register([
             {
-              name: 'Photo',
-              transport: Transport.RMQ,
-              options: {
-                urls: ['amqp://rabbitmq:5672'],
-                queue: 'photo-queue',
-                queueOptions: {
-                  durable: false
+                name: 'Photo',
+                transport: Transport.RMQ,
+                options: {
+                    urls: ['amqp://rabbitmq:5672'],
+                    queue: 'photo-queue',
+                    queueOptions: {
+                        durable: false
+                    },
                 },
-              },
             },
         ])
     ],

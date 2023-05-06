@@ -1,4 +1,12 @@
 
 export class CreateReviewDto {
-    readonly review: string;
+    readonly title: string;
+
+    readonly userName: string;
+
+    readonly data: number;
+
+    readonly like: number;
+
+    readonly description: string;
 }

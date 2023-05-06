@@ -9,9 +9,26 @@ export class Review {
     id: number;
 
     @Column()
-    text: string;
+    title: string;
 
-    @ManyToOne(type => Movie, (movie) => movie.reviews)
+    @Column()
+    userName: string;
+
+    @Column()
+    data: number;
+
+    @Column()
+    like: number;
+
+    @Column()
+    description: string;
+
+    @ManyToOne(type => Movie,
+        (movie) => movie.reviews,
+        {
+            onUpdate: "CASCADE",
+            onDelete: "CASCADE"
+        })
     movie: Movie;
 
     @OneToMany(type => Comment, (comment) => comment.review)
