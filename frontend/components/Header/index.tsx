@@ -1,30 +1,49 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Icon from "../shared/IconComponent/Icon";
 import Logo from "../shared/Logo/Logo";
 import s from "./Header.module.scss";
 import ModalSearch from "./ModalSearch/ModalSearch";
-import Link from "next/link";
-import { ROUTES } from "src/routes";
-// import DropDownPage from "./DropDownPage/DropDownPage";
 import { DropDown } from "@components/shared/ui-kit";
 import DropDownContentTV from "./DropDownPage/DropDownContentTV/DropDownContentTV";
-import DropDownContent, { Links } from "./DropDownPage/DropDownContent/DropDownContent";
+import DropDownContent, {
+  Links,
+} from "./DropDownPage/DropDownContent/DropDownContent";
+import DropDownNotify from "./DropDownPage/DropDownNotify/DropDownNotify";
 
 const Header = () => {
   const [isModal, setModal] = useState(false);
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [selectedLink, setSelectedLink] = useState<Links | undefined>();
-  const [isDropDownTVOpen, setIsDropDownTVOpen] = useState(false);
-  // const [isModal, setModal] = useState(false);
-  // const onClose = () => {
-  //   setModal(false);
-  // };
+
   function showDropDownBySelectedLink(link: Links): JSX.Element | undefined {
+    
+      if (selectedLink === Links.Notify) {
+        return (
+          <DropDown className={s.DropDownBody} isOpen={isDropDownOpen}>
+            <div className={s.menu_block}>
+              <ul className={s.menuDropDown}>
+                <DropDownNotify />
+              </ul>
+            </div>
+          </DropDown>
+        );
+      }
+      if (selectedLink === Links.TV) {
+        return (
+          <DropDown className={s.DropDownBody} isOpen={isDropDownOpen}>
+            <div className={s.menu_block}>
+              <ul className={s.menuDropDown}>
+                <DropDownContentTV />
+              </ul>
+            </div>
+          </DropDown>
+        );
+    }
     if (selectedLink === link) {
       return (
         <DropDown className={s.DropDownBody} isOpen={isDropDownOpen}>
           <div className={s.menu_block}>
-            <ul className={s.menuT}>
+            <ul className={s.menuDropDown}>
               <DropDownContent link={link} />
             </ul>
           </div>
@@ -33,18 +52,16 @@ const Header = () => {
     }
   }
 
-  function handleToggleDropDownTV() {
-    setIsDropDownTVOpen((prevState) => !prevState);
-  }
-
-  const handleToggleDropDown = (link: Links) => {
+  const handleToggleDropDown = (link: Links | undefined) => {
+    console.log("link", link);
     setSelectedLink(link);
     setIsDropDownOpen((prevState) => !prevState);
   };
-  const refToggleDropDown = useRef(null);
+
   const onClose = () => {
     setModal(false);
   };
+
   return (
     <div className={s.header}>
       <div className={s.container}>
@@ -53,76 +70,50 @@ const Header = () => {
             <div className={s.logo}>
               <Logo />
             </div>
-
-
-
-
-
             <section className={s.section}>
-      <nav className={s.navigation}>
-     
-          
-            <ul className={s.listItem}>
-              <li className={s.link} ref={refToggleDropDown}>
-                <span className={s.text}>Мой Иви</span>
-              </li> 
-              <li className={s.link} ref={refToggleDropDown}>
-                <span className={s.text}>Что нового</span>
-              </li>
-              <li
-                className={s.link}
-                ref={refToggleDropDown}
-                onMouseEnter={() => handleToggleDropDown(Links.Films)}
-                onMouseLeave={() => handleToggleDropDown(Links.Films)}
-              >
-                <span className={s.text}>Фильмы</span>{" "}
-                {showDropDownBySelectedLink(Links.Films)}
-              </li>
-              <li
-                className={s.link}
-                ref={refToggleDropDown}
-                onMouseEnter={() => handleToggleDropDown(Links.Serials)}
-                onMouseLeave={() => handleToggleDropDown(Links.Serials)}
-              >
-                <span className={s.text}>Сериалы</span>
-                {showDropDownBySelectedLink(Links.Serials)}
-              </li>
-              <li
-                className={s.link}
-                ref={refToggleDropDown}
-                onMouseEnter={() => handleToggleDropDown(Links.Multfilms)}
-                onMouseLeave={() => handleToggleDropDown(Links.Multfilms)}
-              >
-                <span className={s.text}>Мультфильмы</span>
-                {showDropDownBySelectedLink(Links.Multfilms)}
-              </li>
-              <li
-                className={s.link}
-                ref={refToggleDropDown}
-                onMouseEnter={handleToggleDropDownTV}
-                onMouseLeave={handleToggleDropDownTV}
-              >
-                <span className={s.text}>TV+</span>
-                <DropDown className={s.DropDownBody} isOpen={isDropDownTVOpen}>
-                  <div className={s.menu_block}>
-                    <ul className={s.menuT}>
-                      <DropDownContentTV />
-                    </ul>
+              <div className={s.navigation}>
+                <div className={s.list_item}>
+                  <div>
+                    <span className={s.text}>Мой Иви</span>
                   </div>
-                </DropDown>
-              </li>
-            </ul>
-
-      </nav>
-    </section>
-
-
-
-
-
-    
+                  <div>
+                    <span className={s.text}>Что нового</span>
+                  </div>
+                  <div
+                    onMouseEnter={() => handleToggleDropDown(Links.Films)}
+                    onMouseLeave={() => handleToggleDropDown(undefined)}
+                  >
+                    <span className={s.text}>Фильмы</span>{" "}
+                    {showDropDownBySelectedLink(Links.Films)}
+                  </div>
+                  <div
+                    onMouseEnter={() => handleToggleDropDown(Links.Serials)}
+                    onMouseLeave={() => handleToggleDropDown(undefined)}
+                  >
+                    <span className={s.text}>Сериалы</span>
+                    {showDropDownBySelectedLink(Links.Serials)}
+                  </div>
+                  <div
+                    onMouseEnter={() => handleToggleDropDown(Links.Multfilms)}
+                    onMouseLeave={() => handleToggleDropDown(undefined)}
+                  >
+                    <span className={s.text}>Мультфильмы</span>
+                    {showDropDownBySelectedLink(Links.Multfilms)}
+                  </div>
+                  <div
+                    onMouseEnter={() => handleToggleDropDown(Links.TV)}
+                    onMouseLeave={() => handleToggleDropDown(undefined)}
+                    // onMouseEnter={handleToggleDropDownTV}
+                    // onMouseLeave={handleToggleDropDownTV}
+                  >
+                    <span className={s.text}>TV+</span>
+                    {showDropDownBySelectedLink(Links.TV)}
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
-          <div className={s.userBlock}>
+          <div className={s.user_block}>
             <div className={s.btn__subscribe}>Оплатить подписку</div>
             <>
               <div className={s.btn__search} onClick={() => setModal(true)}>
@@ -137,11 +128,23 @@ const Header = () => {
                 onClose={onClose}
               />
             </>
-            <div className={s.btn__notify}>
-              <Icon name="notify" />
+
+            <div
+              className={s.btn__notify}
+              onMouseEnter={() => handleToggleDropDown(Links.Notify)}
+              onMouseLeave={() => handleToggleDropDown(undefined)}
+            >
+              <span className={s.text}>
+                <Icon name="notify" />
+              </span>
+
+              {/* {showDropDownBySelectedLink(Links.Notify)} */}
             </div>
+
             <div className={s.btn__avatar}>
-              <Icon name="avatar" />
+              <span className={s.text}>
+                <Icon name="avatar" />
+              </span>
             </div>
           </div>
         </div>

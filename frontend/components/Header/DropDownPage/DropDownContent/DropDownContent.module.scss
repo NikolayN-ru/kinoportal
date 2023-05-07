@@ -9,6 +9,7 @@
 .block {
     display: flex;
     flex-direction: column;
+    padding: 0 12px;
 }
 .list_item {
     display: flex;
@@ -53,6 +54,7 @@
     flex-direction: row;
     justify-content: space-between;
     width: 608px;
+    padding-right: 12px;
 }
 
 .content_block {

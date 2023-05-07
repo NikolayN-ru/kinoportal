@@ -11,6 +11,7 @@ export enum Links {
   Serials,
   Multfilms,
   TV,  
+  Notify,
 }
 
 export interface IGenre {
@@ -337,7 +338,7 @@ const content: IFilms = {
   sideContent,
 };
 
-interface DropDownContentProps {
+export interface DropDownContentProps {
   link: Links;
 }
 
