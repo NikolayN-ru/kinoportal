@@ -1,6 +1,7 @@
 import Image from "next/image";
-import img from "../../../public/stallone.jpg";
+import img from "@public/stallone.jpg";
 import s from "./page.module.scss";
+
 const ActorsAdmin = () => {
   return (
     <div>

@@ -28,13 +28,9 @@ const Comment: FC<CommentI> = ({ author='Angelina', date='31 мая 2015', count
           </div>
         </div>
       </div>
-<<<<<<< HEAD
       <div className={s.content}>
         {content}
       </div>
-=======
-      <div className={s.content}>{content}</div>
->>>>>>> main
     </div>
   );
 };

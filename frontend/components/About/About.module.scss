@@ -26,6 +26,6 @@
   @apply line-clamp-4 lg:line-clamp-2 text-ellipsis;
 
   p, ul, li {
-    display: inline;
+    @apply inline;
   }
 }

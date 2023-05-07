@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { SwiperSlide } from 'swiper/react';
 
 import Slider from '@components/Slider';
-import CategoryCard from '@components/CategoryCard/CategoryCard';
+import CategoryCard from '@components/CategoryCard';
 import { CompilationItem } from '@components/types/film';
 import { compilationSliderParams } from '../SliderParams';
 

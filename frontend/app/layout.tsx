@@ -1,4 +1,4 @@
-import { Providers } from "../redux/provider";
+import { Providers } from "@redux/provider";
 
 export default function RootLayout({
   children,

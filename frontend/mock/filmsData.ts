@@ -252,12 +252,3 @@ export const promoItems: PromoItemType[] = [
   },
 ];
 
-export const compilation: Compilation = {
-  name: "Самое интересное",
-  items: [
-    { id: 0, name: "Сериалы Иви", image: "interesting-1.jpg" },
-    { id: 1, name: "Новинки", image: "interesting-2.jpg" },
-    { id: 2, name: "Российские комедии", image: "interesting-3.jpg" },
-    { id: 3, name: "Лучшие детективы", image: "interesting-4.jpg" },
-  ],
-};

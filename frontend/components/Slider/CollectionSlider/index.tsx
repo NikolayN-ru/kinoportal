@@ -5,7 +5,7 @@ import Slider from '@components/Slider';
 import FilmCard from '@components/FilmCard';
 import { CollectionFilm } from '../../types/film';
 import { useTooltip } from '../../../hooks/useTooltip';
-import Tooltip from '../../Tooltip/Tooltip';
+import Tooltip from '../../Tooltip';
 import { TooltipContextValue } from '../../types/tooltip';
 import { collectionSliderParams } from '../SliderParams';
 

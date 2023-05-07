@@ -2,14 +2,15 @@
 
 import Link from 'next/link';
 
+import SubscriptionButton from '@components/Button/SubscriptionButton';
+import CompilationSlider from '@components/Slider/CompilationSlider';
+import CollectionSlider from '@components/Slider/CollectionSlider';
 import MainContainer from '@components/MainContainer';
 import Promo from '@components/Promo';
-import SubscriptionButton from '@components/Button/SubscriptionButton';
 import About from '@components/About';
-import { collections, compilation } from 'mock/filmsData';
 import Title from '@components/Title';
-import CollectionSlider from '@components/Slider/CollectionSlider';
-import CompilationSlider from '@components/Slider/CompilationSlider';
+
+import { collections, compilation } from 'mock/filmsData';
 
 import s from './page.module.scss';
 

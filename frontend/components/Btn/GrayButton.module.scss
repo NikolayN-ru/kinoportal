@@ -6,12 +6,9 @@
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
-  line-height: 13px;
+  @apply flex flex-col leading[13px];
 }
 
 .preamble {
-  color: #ffffffb8;
-  font-size: 10px;
+  @apply text-[#ffffffb8] text-[10px];
 }
