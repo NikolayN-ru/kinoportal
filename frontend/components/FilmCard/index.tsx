@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { FC } from 'react';
+import Image from "next/image";
+import Link from "next/link";
+import { FC } from "react";
 
 import { CollectionFilm } from '@components/types/film';
 import FilmCardTools from './FilmCardTools';
@@ -11,7 +11,7 @@ import BadgeFilm from '@components/BadgeFilm';
 
 import { BaseItemProps } from '@components/types/slider';
 
-import s from './FilmCard.module.scss';
+import s from "./FilmCard.module.scss";
 
 export interface FilmCardProps extends BaseItemProps {
   data: CollectionFilm;
@@ -21,13 +21,14 @@ const IMAGE_PATH = '/images/';
 const SEASONS_FORMS = ['сезон', 'сезона', 'сезонов'];
 
 const FilmCard: FC<FilmCardProps> = ({ data, className }) => {
-  const { name, genre, year, country, rating, age, image, seasons, link } = data;
+  const { name, genre, year, country, rating, age, image, seasons, link } =
+    data;
 
   const containerClassNames = [s.cardContainer];
   className && containerClassNames.push(className);
 
   return (
-    <Link className={containerClassNames.join(' ')} href={`watch/${link}`}>
+    <Link className={containerClassNames.join(" ")} href={`watch/${link}`}>
       <div className={s.title}>{name}</div>
 
       <div className={s.card}>

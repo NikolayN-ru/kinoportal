@@ -2,10 +2,11 @@ import Link from "next/link";
 import React, { useState } from "react";
 import Icon from "../shared/IconComponent/Icon";
 import Logo from "../shared/Logo/Logo";
+import ModalSearch from "./ModalSearch";
 import s from "./Header.module.scss";
-import ModalSearch from "./ModalSearch/ModalSearch";
 
 const Header = () => {
+  const { t, i18n } = useTranslation();
   const [isModal, setModal] = useState(false);
   const onClose = () => {
     setModal(false);
@@ -23,51 +24,57 @@ const Header = () => {
             <div className={s.listItem}>
               <div className={s.link}>
                 <a className={s.link} href="/" target="_blank">
-                  Мой Иви
+                  {t("header.myIvi")}
                 </a>
               </div>
               <div className={s.link}>
                 <a className={s.link} href="/" target="_blank">
-                  Что нового
+                  {t("header.whatsNew")}
                 </a>
               </div>
               <div className={s.link}>
                 <a className={s.link} href="/" target="_blank">
-                  Фильмы
+                  {t("header.films")}
                 </a>
               </div>
               <div className={s.link}>
                 <a className={s.link} href="/" target="_blank">
-                  Сериалы
+                  {t("header.serials")}
                 </a>
               </div>
               <div className={s.link}>
                 <a className={s.link} href="/" target="_blank">
-                  Мультфильмы
+                  {t("header.cartoon")}
                 </a>
               </div>
               <div className={s.link}>
                 <a className={s.link} href="/" target="_blank">
-                  TV+
+                  {t("header.TV")}
                 </a>
               </div>
             </div>
           </div>
           <div className={s.userBlock}>
-            <div className={s.btn__subscribe}>Оплатить подписку</div>
-            <>
-              <div className={s.btn__search} onClick={() => setModal(true)}>
-                <div className={s.imgWrapper}>
-                  <Icon name="search" />
-                </div>
-                Поиск
+            <button
+              onClick={() =>
+                i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru")
+              }
+            >{`${
+              i18n.language === "en" ? "изменить на RUS" : "change to EN"
+            }`}</button>
+            {i18n.language === "en" ? <Icon name="us" /> : <Icon name="rus" />}
+            <div className={s.btn__subscribe}>{t("header.pay")}</div>
+            <div className={s.btn__search} onClick={() => setModal(true)}>
+              <div className={s.imgWrapper}>
+                <Icon name="search" />
               </div>
-              <ModalSearch
-                visible={isModal}
-                footer={<button onClick={onClose}>Закрыть</button>}
-                onClose={onClose}
-              />
-            </>
+              {t("header.search")}
+            </div>
+            <ModalSearch
+              visible={isModal}
+              footer={<button onClick={onClose}>{t("header.close")}</button>}
+              onClose={onClose}
+            />
             <div className={s.btn__notify}>
               <Icon name="notify" />
             </div>

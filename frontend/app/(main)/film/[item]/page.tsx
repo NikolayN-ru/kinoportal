@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 'use client';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -14,19 +13,17 @@ import { collections } from '../../../../mock/filmsData';
 import { useFilmItemQuery } from '@redux/filmsApi';
 import { Play, Save, Share } from '@public/svg';
 import s from './item.module.scss';
-=======
 "use client";
 
 import { MouseEventHandler, useState } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
-// import { useRouter } from "next/router";
 import cn from "classnames";
 
-import ActorRound from "@components/Badge/ActorRound/ActorRound";
-import Quality from "@components/Badge/Quality/Quality";
-import BadgeActor from "@components/BadgeActor";
+import ActorRound from "@components/Badge/ActorRound";
 import CollectionSlider from "@components/CollectionSlider";
+import Quality from "@components/Badge/Quality";
+import BadgeActor from "@components/BadgeActor";
 import GrayButton from "@components/GrayButton";
 import Title from "@components/Title";
 import { collections } from "@mock/filmsData";
@@ -34,7 +31,6 @@ import { Play, Save, Share } from "@public/svg";
 // import { useFilmItemQuery } from "@redux/filmsApi";
 
 import s from "./item.module.scss";
->>>>>>> d37828a79ea6ed8c0d6bc81252c8c96ffffd6c74
 
 const Index = () => {
   const [isClose, setIsClose] = useState<boolean>(true);

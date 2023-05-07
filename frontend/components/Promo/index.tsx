@@ -52,7 +52,7 @@ const Promo: FC = () => {
 
   const [swiper, setSwiper] = useState<SwiperCore | null>(null);
 
-  swiper?.on('slideChange', function (swiper) {
+  swiper?.on("slideChange", function (swiper) {
     const slidesCount = swiper.slides.length;
 
     let prevSlideIndex = swiper.realIndex - 1;

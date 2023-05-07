@@ -59,7 +59,7 @@ module.exports = {
       },
 
       fontFamily: {
-        default: ['var(--ff-base)'],
+        default: ["var(--ff-base)"],
       },
 
       fontSize: {
@@ -68,14 +68,14 @@ module.exports = {
       },
 
       borderRadius: {
-        default: '8px',
+        default: "8px",
       },
 
       lineHeight: {
-        default: '1.4',
+        default: "1.4",
       },
     },
   },
-  
+
   plugins: [],
-}
+};

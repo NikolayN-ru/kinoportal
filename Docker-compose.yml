@@ -1,26 +1,115 @@
 version: '3.8'
 
 services:
-  frontend:
-    build: ./frontend
-    ports:
-      - "3000:3000"
+  # frontend:
+  #   build: ./frontend
+  #   ports:
+  #     - "3000:3000"
 
-  db:
-    image: postgres
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: mydb
-    volumes:
+  # db:
+  #   image: postgres
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #     POSTGRES_DB: mydb
+  #   volumes:
       # - db-data:/var/lib/postgresql/data
 
-  backend:
-    build: ./backend
+  # backend:
+  #   build: ./backend
+  #   ports:
+  #     - "4000:4000"
+  #   depends_on:
+  #     - db
+
+
+  # backend
+  app-gateway:
+    container_name: app-gateway
+    build:
+      context: ./backend/app-gateway
     ports:
-      - "4000:4000"
+      - 4000:4000
+    command: npm run start:dev
     depends_on:
-      - db
+      - rabbitmq
+    restart: always
+
+  actor:
+    container_name: actor-sistem
+    build:
+      context: ./backend/actor-sistem
+    command: npm run start:dev
+    depends_on:
+      - postgresActor
+      - rabbitmq
+    restart: always
+
+  files:
+    container_name: files-sistem
+    build:
+      context: ./backend/files-sistem
+    command: npm run start:dev
+    depends_on:
+      - postgresFiles
+      - rabbitmq
+    restart: always
+
+  movie:
+    container_name: movie
+    build:
+      context: ./backend/movie
+    command: npm run listen
+    depends_on:
+      - postgresMovie
+      - rabbitmq
+    restart: always
+
+  postgresActor:
+    container_name: postgresProfile
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: "actor"
+      POSTGRES_PASSWORD: qwerty
+      PG_DATA: /var/lib/postgresql/data
+    volumes:
+      - dataActor:/var/lib/postgresql/data
+    restart: always
+  
+  postgresFiles:
+    container_name: postgresFiles
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: "files"
+      POSTGRES_PASSWORD: qwerty
+      PG_DATA: /var/lib/postgresql/data
+    volumes:
+      - dataFiles:/var/lib/postgresql/data
+    restart: always
+  
+  postgresMovie:
+    container_name: postgresMovie
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: "movie"
+      POSTGRES_PASSWORD: qwerty
+      PG_DATA: /var/lib/postgresql/data
+    volumes:
+      - dataMovie:/var/lib/postgresql/data
+    restart: always
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:latest
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - 5672:5672
+      - 15672:15672
+    restart: always
 
 volumes:
-  db-data:
+  dataActor:
+  dataFiles:
+  dataMovie:
