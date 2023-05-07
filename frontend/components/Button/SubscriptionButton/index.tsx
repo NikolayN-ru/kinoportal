@@ -1,9 +1,9 @@
-import { FC } from 'react';
+import { FC } from "react";
 
-import Button from '@components/Button';
-import Icon from '@components/shared/IconComponent/Icon';
+import Button from "@components/Button";
+import Icon from "@components/shared/IconComponent/Icon";
 
-import s from './SubscriptionButton.module.scss';
+import s from "./SubscriptionButton.module.scss";
 
 const SubscriptionButton: FC = () => {
   return (

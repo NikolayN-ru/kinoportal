@@ -1,4 +1,5 @@
-import style from "./Icon.module.scss";
+import { FC } from "react";
+
 import { Search } from "../../../public/svg/index";
 import { Notify } from "../../../public/svg/index";
 import { Avatar } from "../../../public/svg/index";
@@ -22,6 +23,8 @@ import { MagicWand } from "../../../public/svg/index";
 import { Lightning } from "../../../public/svg/index";
 import { US } from "../../../public/svg/index";
 import { RUS } from "../../../public/svg/index";
+
+import s from "./Icon.module.scss";
 
 type IconComponentProps = { name: string; clsassName?: string };
 type IconTypes = { [name: string]: ReactSVGComponent };
@@ -48,14 +51,16 @@ const iconTypes: IconTypes = {
   bookmark: Bookmark,
   magicWand: MagicWand,
   lightning: Lightning,
-  US: US,
-  RUS: RUS,
+  us: US,
+  rus: RUS,
 };
 
-const IconComponent = ({ name, ...props }: IconComponentProps) => {
+const IconComponent: FC<IconComponentProps> = ({
+  name,
+  ...props
+}: IconComponentProps) => {
   let Icon = iconTypes[name];
-  // return <Icon className={style.icon} {...props} />;
-  return null;
+  return !!Icon && <Icon className={s.icon} {...props} />;
 };
 
 export default IconComponent;
