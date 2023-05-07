@@ -19,10 +19,11 @@ import { ArrowRight } from "../../../public/svg/index";
 import { StarRounded } from "../../../public/svg/index";
 import { Bookmark } from "../../../public/svg/index";
 import { MagicWand } from "../../../public/svg/index";
+import { Lightning } from "../../../public/svg/index";
 import { US } from "../../../public/svg/index";
 import { RUS } from "../../../public/svg/index";
 
-type IconComponentProps = { name: string };
+type IconComponentProps = { name: string; clsassName?: string };
 type IconTypes = { [name: string]: ReactSVGComponent };
 
 const iconTypes: IconTypes = {
@@ -46,13 +47,15 @@ const iconTypes: IconTypes = {
   starRounded: StarRounded,
   bookmark: Bookmark,
   magicWand: MagicWand,
-  us: US,
-  rus: RUS,
+  lightning: Lightning,
+  US: US,
+  RUS: RUS,
 };
 
 const IconComponent = ({ name, ...props }: IconComponentProps) => {
   let Icon = iconTypes[name];
-  return <Icon className={style.icon} {...props} />;
+  // return <Icon className={style.icon} {...props} />;
+  return null;
 };
 
 export default IconComponent;

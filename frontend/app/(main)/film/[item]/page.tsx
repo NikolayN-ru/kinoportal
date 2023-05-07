@@ -1,27 +1,28 @@
 "use client";
 
 import { MouseEventHandler, useState } from "react";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import cn from "classnames";
 
+import CollectionSlider from "@components/Slider/CollectionSlider";
 import ActorRound from "@components/Badge/ActorRound";
-import CollectionSlider from "@components/CollectionSlider";
 import Quality from "@components/Badge/Quality";
 import BadgeActor from "@components/BadgeActor";
 import GrayButton from "@components/GrayButton";
 import Title from "@components/Title";
-import { collections } from "@mock/filmsData";
 import { Play, Save, Share } from "@public/svg";
-// import { useFilmItemQuery } from "@redux/filmsApi";
+
+import { useFilmItemQuery } from "@redux/filmsApi";
+import { collections } from "@mock/filmsData";
 
 import s from "./item.module.scss";
 
 const Index = () => {
   const [isClose, setIsClose] = useState<boolean>(true);
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  // const router = useRouter();
+  // const pathname = usePathname();
+  // const searchParams = useSearchParams();
   // console.log(router, pathname, searchParams);
   // const {
   // data = [],

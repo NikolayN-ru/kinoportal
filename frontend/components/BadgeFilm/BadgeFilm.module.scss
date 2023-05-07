@@ -1,0 +1,35 @@
+.badge {
+  @apply inline-flex pt-[2px] pb-[3px] px-[8px]
+  text-[11px] md:text-[13px] leading-[1.2] text-white font-bold
+  rounded-[10px];
+}
+
+.colorDefault {
+  @apply bg-backgroundLight;
+
+  box-shadow: var(--shadow-default);
+}
+
+.orange {
+  @apply bg-orange;
+
+  box-shadow: var(--shadow-orange);
+}
+
+.red {
+  @apply bg-red;
+
+  box-shadow: var(--shadow-red);
+}
+
+.green {
+  @apply bg-green;
+
+  box-shadow: var(--shadow-green);
+}
+
+.blue {
+  @apply bg-blue;
+
+  box-shadow: var(--shadow-blue);
+}

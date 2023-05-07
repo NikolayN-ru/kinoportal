@@ -1,0 +1,22 @@
+.button {
+  @apply flex items-center justify-center gap-[10px] mx-auto p-[15px]
+  text-mobile lg:text-default font-semibold text-white bg-purpleDark rounded-default cursor-pointer
+  hover:bg-purpleDarkLighter transition-all;
+
+  &.red {
+    @apply bg-red hover:bg-redHover;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  line-height: 13px;
+}
+
+.preamble {
+  color: #ffffffb8;
+  font-size: 10px;
+}
+
+

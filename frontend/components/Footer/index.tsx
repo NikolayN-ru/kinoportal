@@ -3,6 +3,8 @@ import Icon from "../shared/IconComponent/Icon";
 import s from "./Footer.module.scss";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
+import "../../i18n";
+
 
 const Footer: FC = () => {
   const { t } = useTranslation();

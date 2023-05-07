@@ -1,7 +1,17 @@
 .container {
-  @apply relative block pb-[30.4276%] bg-backgroundSecondary rounded-[16px];
+  @apply relative block h-[42vw] md:h-[28.9vw] xl:h-[370px] bg-backgroundSecondary rounded-[16px];
 
   img {
-    @apply absolute top-0 left-0 w-full h-full object-cover rounded-[16px];
+    @apply absolute top-0 left-0 w-full h-full object-cover rounded-[12px] md:rounded-[16px];
   }
+}
+
+.badgeAge {
+  @apply absolute top-[10px] md:top-[20px] lg:top-[20px] left-[12px] md:left-[20px] lg:left-[24px];
+}
+
+.button {
+  @apply hidden md:flex absolute bottom-[16px] lg:bottom-[20px] left-[20px] lg:left-[24px]
+  h-[32px] lg:h-[40px] mr-auto pt-[5px] pb-[7px] lg:pt-[9px] lg:pb-[11px] px-[15px]
+  leading-[1];
 }

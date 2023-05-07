@@ -1,5 +1,5 @@
-import MainContainer from "@components/MainContainer";
-import Title from "@components/Title";
+import MainContainer from '@components/MainContainer';
+import Title from '@components/Title';
 
 export default function Home() {
   return (
