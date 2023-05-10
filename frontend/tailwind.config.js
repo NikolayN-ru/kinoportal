@@ -1,18 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     screens: {
-      'sm': '320px',
-      'md': '600px',
-      'lg': '1024px',
-      'xl': '1280px',
-      'xxl': '1320px',
+      sm: '320px',
+      md: '600px',
+      lg: '1024px',
+      xl: '1280px',
+      xxl: '1320px',
     },
 
     extend: {
@@ -40,6 +40,10 @@ module.exports = {
         gradientPurpleStart: 'var(--color-gradient-purple-start)',
         gradientPurpleEnd: 'var(--color-gradient-purple-end)',
         shadowPurple: 'var(--color-shadow-purple)',
+        optionText: 'var(--color-option-text)',
+        selectedValues: 'var(--color-selected-values)',
+        purpleSelected: 'var(--color-purple-selected)',
+        separator: 'var(--color-separator)',
       },
 
       width: {
@@ -59,7 +63,7 @@ module.exports = {
       },
 
       fontFamily: {
-        default: ["var(--ff-base)"],
+        default: ['var(--ff-base)'],
       },
 
       fontSize: {
@@ -68,11 +72,11 @@ module.exports = {
       },
 
       borderRadius: {
-        default: "8px",
+        default: '8px',
       },
 
       lineHeight: {
-        default: "1.4",
+        default: '1.4',
       },
     },
   },

@@ -1,0 +1,44 @@
+.label {
+  @apply flex items-center justify-between
+  text-[13px] font-semibold text-optionText cursor-pointer
+  transition-colors duration-[80ms];
+
+  &:hover {
+    @apply text-white;
+
+    .mark {
+      @apply opacity-[32%];
+    }
+  }
+
+  &:not(:hover) {
+    @apply duration-[400ms];
+
+    .mark {
+      @apply duration-[400ms];
+    }
+  }
+
+  input[type="checkbox"]:checked {
+    & ~ .mark {
+      @apply opacity-[100%];
+
+      &::before {
+        @apply opacity-[100%];
+      }
+    }
+
+    & ~ .text {
+      @apply text-white;
+    }
+  }
+}
+
+.mark {
+  @apply relative w-[16px] h-[16px] rounded-[50%] border-2 border-white opacity-[0];
+
+  &::before {
+    @apply absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]
+    content-[""] bg-white border-2 border-white rounded-[50%] opacity-[0];
+  }
+}

@@ -1,28 +1,31 @@
 import { FC } from "react";
 
-import { Search } from "../../../public/svg/index";
-import { Notify } from "../../../public/svg/index";
-import { Avatar } from "../../../public/svg/index";
-import { Mouthpiece } from "../../../public/svg/index";
-import { Message } from "../../../public/svg/index";
-import { Tel } from "../../../public/svg/index";
-import { Apple } from "../../../public/svg/index";
-import { Android } from "../../../public/svg/index";
-import { TV } from "../../../public/svg/index";
-import { Desktop } from "../../../public/svg/index";
-import { VK } from "../../../public/svg/index";
-import { OK } from "../../../public/svg/index";
-import { Twitter } from "../../../public/svg/index";
-import { Callback } from "../../../public/svg/index";
-import { In } from "../../../public/svg/index";
-import { TG } from "../../../public/svg/index";
-import { ArrowRight } from "../../../public/svg/index";
-import { StarRounded } from "../../../public/svg/index";
-import { Bookmark } from "../../../public/svg/index";
-import { MagicWand } from "../../../public/svg/index";
-import { Lightning } from "../../../public/svg/index";
-import { US } from "../../../public/svg/index";
-import { RUS } from "../../../public/svg/index";
+import {
+  Android,
+  Apple,
+  ArrowRight,
+  Avatar,
+  Bookmark,
+  Callback,
+  Checkmark,
+  Desktop,
+  In,
+  Lightning,
+  MagicWand,
+  Message,
+  Mouthpiece,
+  Notify,
+  OK,
+  RUS,
+  Search,
+  StarRounded,
+  TG,
+  TV,
+  Tel,
+  Twitter,
+  US,
+  VK,
+} from "@public/svg";
 
 import s from "./Icon.module.scss";
 
@@ -53,12 +56,10 @@ const iconTypes: IconTypes = {
   lightning: Lightning,
   us: US,
   rus: RUS,
+  checkmark: Checkmark,
 };
 
-const IconComponent: FC<IconComponentProps> = ({
-  name,
-  ...props
-}: IconComponentProps) => {
+const IconComponent: FC<IconComponentProps> = ({ name, ...props }) => {
   let Icon = iconTypes[name];
   return !!Icon && <Icon className={s.icon} {...props} />;
 };
