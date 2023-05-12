@@ -1,4 +1,5 @@
-import style from "./Icon.module.scss";
+import { FC } from "react";
+
 import { Search } from "../../../public/svg/index";
 import { Notify } from "../../../public/svg/index";
 import { Avatar } from "../../../public/svg/index";
@@ -19,10 +20,13 @@ import { ArrowRight } from "../../../public/svg/index";
 import { StarRounded } from "../../../public/svg/index";
 import { Bookmark } from "../../../public/svg/index";
 import { MagicWand } from "../../../public/svg/index";
+import { Lightning } from "../../../public/svg/index";
 import { US } from "../../../public/svg/index";
 import { RUS } from "../../../public/svg/index";
 
-type IconComponentProps = { name: string };
+import s from "./Icon.module.scss";
+
+type IconComponentProps = { name: string; clsassName?: string };
 type IconTypes = { [name: string]: ReactSVGComponent };
 
 const iconTypes: IconTypes = {
@@ -46,13 +50,17 @@ const iconTypes: IconTypes = {
   starRounded: StarRounded,
   bookmark: Bookmark,
   magicWand: MagicWand,
+  lightning: Lightning,
   us: US,
   rus: RUS,
 };
 
-const IconComponent = ({ name, ...props }: IconComponentProps) => {
+const IconComponent: FC<IconComponentProps> = ({
+  name,
+  ...props
+}: IconComponentProps) => {
   let Icon = iconTypes[name];
-  return <Icon className={style.icon} {...props} />;
+  return !!Icon && <Icon className={s.icon} {...props} />;
 };
 
 export default IconComponent;

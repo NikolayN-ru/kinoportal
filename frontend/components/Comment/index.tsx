@@ -9,15 +9,9 @@ interface CommentI {
   content?: string;
 }
 
-const cont =
-  "Самый красивый, харизматичный и неповторимый Артист!!! Удачи, процветания, успехов, востребованности!!! Вы самый лучший и неповторимый!!!";
+const cont = "Самый красивый, харизматичный и неповторимый Артист!!! Удачи, процветания, успехов, востребованности!!! Вы самый лучший и неповторимый!!!"
 
-const Comment: FC<CommentI> = ({
-  author = "Angelina",
-  date = "31 мая 2015",
-  count,
-  content = cont,
-}) => {
+const Comment: FC<CommentI> = ({ author='Angelina', date='31 мая 2015', count, content=cont }) => {
   return (
     <div className={s.wrapper}>
       <div className={s.header}>
@@ -34,7 +28,9 @@ const Comment: FC<CommentI> = ({
           </div>
         </div>
       </div>
-      <div className={s.content}>{content}</div>
+      <div className={s.content}>
+        {content}
+      </div>
     </div>
   );
 };

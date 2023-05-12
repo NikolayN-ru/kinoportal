@@ -19,7 +19,7 @@
       "@components/*": ["components/*"],
       "@public/*": ["public/*"],
       "@redux/*": ["redux/*"],
-      "@mock/*": ["mock/*"]
+      "@mock/*": ["mock/*"],
       // "@pages/*": ["pages/*"]
     },
     "plugins": [

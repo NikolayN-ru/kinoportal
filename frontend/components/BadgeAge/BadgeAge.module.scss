@@ -1,0 +1,5 @@
+.badge {
+  @apply w-[24px] h-[16px]
+  text-[8px] md:text-[9.5px] text-white text-center leading-[16px] font-bold tracking-[0.03em] whitespace-nowrap text-ellipsis
+  bg-black rounded-[4px] opacity-[0.48];
+}
