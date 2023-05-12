@@ -1,6 +1,7 @@
-import { Controller } from '@nestjs/common';
+import {Controller, HttpException, HttpStatus} from '@nestjs/common';
 import {EventPattern} from "@nestjs/microservices";
 import {GenreService} from "./genre.service";
+import {UpdateGenreDto} from "./dto/update-genre.dto";
 
 @Controller('genre')
 export class GenreController {
@@ -17,7 +18,7 @@ export class GenreController {
     }
 
     @EventPattern('update.genre')
-    updateGenre(id: number, genre: string) {
-        return this.genreService.updateGenre(id, genre);
+    updateGenre(dto: UpdateGenreDto) {
+        return this.genreService.updateGenre(dto.id, dto.genre);
     }
 }

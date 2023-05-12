@@ -14,7 +14,7 @@ export class Country {
         (movie) => movie.countries,
         {
             onDelete: "CASCADE",
-            onUpdate: "CASCADE"
+            onUpdate: "CASCADE",
         })
     movies: Movie[];
 }

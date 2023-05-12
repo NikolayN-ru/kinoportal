@@ -1,6 +1,7 @@
 import { Controller } from '@nestjs/common';
 import {EventPattern} from "@nestjs/microservices";
 import {CountryService} from "./country.service";
+import {UpdateCountryDto} from "./dto/update-country.dto";
 
 @Controller('country')
 export class CountryController {
@@ -18,8 +19,8 @@ export class CountryController {
     }
 
     @EventPattern('update.country')
-    updateCountry(id: number, country: string) {
-        return this.countryService.updateCountry(id, country);
+    updateCountry(dto: UpdateCountryDto) {
+        return this.countryService.updateCountry(dto.id, dto.country);
     }
 
 }

@@ -31,6 +31,10 @@ export class Review {
         })
     movie: Movie;
 
-    @OneToMany(type => Comment, (comment) => comment.review)
+    @OneToMany(type => Comment,
+        (comment) => comment.review,
+        {
+            cascade: true
+        })
     comments: Comment[];
 }

@@ -4,23 +4,32 @@ import {CreateReviewDto} from "./dto/create-review.dto";
 import {Ctx, EventPattern, MessagePattern, Payload, RmqContext} from "@nestjs/microservices";
 import {CreateCommentDto} from "./dto/create-comment.dto";
 import {CreateMovieDto} from "./dto/create-movie.dto";
+import {UpdateMovieDto} from "./dto/update-movie.dto";
 
 @Controller('movie')
 export class MovieController {
 
     constructor(private movieService: MovieService) {}
 
+    // @Get('')
+    // getMain() {
+    //     return this.movieService.getMain();
+    // }
+
     @Get('')
-    getMain() {
-        return this.movieService.getMain();
+    sortMovies(@Query('sort') sort: string) {
+        return this.movieService.sortMovies(sort)
     }
 
     @Get('/filters')
     getMovieWithFilter(@Query('genre') genre?: string,
                        @Query('year') year?: string,
                        @Query('country') country?: string,
-                       @Query('rating') rating?: string,) {
-        return this.movieService.getMovieWithFilter(genre, year, country, +rating);
+                       @Query('rating') rating?: string,
+                       @Query('votes') votes?: string,
+                       @Query('actor') actor?: string,
+                       @Query('director') director?: string) {
+        return this.movieService.getMovieWithFilter(genre, year, country, +rating, +votes, actor, director);
     }
 
     @Get('/:id')
@@ -49,7 +58,7 @@ export class MovieController {
     }
 
     @EventPattern('create.movie')
-    createMovie(dto: CreateMovieDto) {
+    createMovie(@Body() dto: CreateMovieDto) {
         return this.movieService.createMovie(dto);
     }
 
@@ -59,8 +68,13 @@ export class MovieController {
     }
 
     @EventPattern('update.movie')
-    updateMovie(id: number, dto) {
-        return this.movieService.updateMovie(id, dto);
+    updateMovie(dto: UpdateMovieDto) {
+        return this.movieService.updateMovie(dto.id, dto.title);
+    }
+
+    @EventPattern('get.all.movies')
+    getAllMovies() {
+        return this.movieService.getAllMovies();
     }
 
     @MessagePattern('get.movie.for.actor')

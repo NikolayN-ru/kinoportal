@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn} from "typeorm";
 import {ApiProperty} from "@nestjs/swagger";
+import {Role} from "../auth/roles.entity";
 
 @Entity()
 export class User {
@@ -18,4 +19,14 @@ export class User {
     @ApiProperty({example: 'feffa234a', description: 'Пароль пользоавателя'})
     @Column()
     password: string;
+
+    @ManyToMany(() => Role,
+        (role) => role.users,
+        {
+            onDelete: "CASCADE",
+            onUpdate: "CASCADE",
+            cascade: true
+        })
+    @JoinTable()
+    roles: Role[];
 }

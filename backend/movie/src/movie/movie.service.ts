@@ -1,18 +1,22 @@
 import {HttpStatus, Inject, Injectable} from '@nestjs/common';
 import {Movie} from "./entity/movie.entity";
 import {InjectRepository} from '@nestjs/typeorm';
-import {Repository, In, Between, MoreThan} from 'typeorm';
+import {Between, In, MoreThan, Repository} from 'typeorm';
 import {Review} from "./entity/review.entity";
 import {CreateReviewDto} from "./dto/create-review.dto";
 import {Comment} from "./entity/comment.entity"
 import {CreateCommentDto} from "./dto/create-comment.dto";
 import {CreateMovieDto} from "./dto/create-movie.dto";
 import {ClientProxy} from "@nestjs/microservices";
+import {Genre} from "../genre/entity/genre.entity";
+import {Country} from "../country/entity/country.entity";
 
 @Injectable()
 export class MovieService {
     constructor(@InjectRepository(Movie) private movieRepository: Repository<Movie>,
                 @InjectRepository(Review) private reviewRepository: Repository<Review>,
+                @InjectRepository(Genre) private genreRepository: Repository<Genre>,
+                @InjectRepository(Country) private countryRepository: Repository<Country>,
                 @Inject('Photo') private clientPhoto: ClientProxy) {}
 
     async getMain() {
@@ -24,17 +28,26 @@ export class MovieService {
         } catch (e) {
             return e.message;
         }
-
     }
 
-    async getMovieWithFilter(genre: string, year: string, country: string, rating: number) {
+    async getAllMovies() {
         try {
+            return this.movieRepository.find();
+        } catch (e) {
+            return e.message
+        }
+    }
+
+    async getMovieWithFilter(genre: string, year: string, country: string, rating: number, votes: number, actor: string, director: string) {
+        try {
+            // поиск по актерам и режиссерам
             let genres, years, countries;
             const param = {
                 genres: undefined,
                 countries: undefined,
                 year: undefined,
-                ratingIvi: undefined
+                rating: undefined,
+                votes: undefined
             };
 
             if(genre) {
@@ -69,13 +82,16 @@ export class MovieService {
             }
 
             if(rating) {
-                param.ratingIvi = {
-                    rating: MoreThan(rating)
-                }
+                param.rating = MoreThan(rating)
+            }
+
+            if(votes) {
+                param.votes = MoreThan(votes);
             }
 
             const movies = await this.movieRepository.findBy(param);
 
+            if(!movies) return HttpStatus.NOT_FOUND;
             return movies
         } catch (e) {
             return e.message;
@@ -94,8 +110,8 @@ export class MovieService {
                     countries: true
                 }
             });
-            if(movie) return movie;
-            return HttpStatus.NOT_FOUND;
+            if(!movie) return HttpStatus.NOT_FOUND;
+            return movie;
         } catch (e) {
             return e.message;
         }
@@ -117,12 +133,11 @@ export class MovieService {
         } catch (e) {
             return e.message;
         }
-
     }
 
     async getFilesForMovies(movies: Array<Movie>, assenceTable: string){
         try{
-            const movieId = await movies.map(item => item.id);
+            const movieId = movies.map(item => item.id);
             const files = await this.clientPhoto.send('get.files',{arrActors: movieId, assenceTable: assenceTable}).toPromise();
             if(!files) {
                 return movies
@@ -146,8 +161,7 @@ export class MovieService {
                 }
             });
             if(!movie) return HttpStatus.NOT_FOUND;
-            const reviews = movie.reviews;
-            return reviews
+            return movie.reviews
         } catch (e) {
             return e.message;
         }
@@ -224,27 +238,100 @@ export class MovieService {
 
     async createMovie(dto: CreateMovieDto) {
         try {
+            const genres = await this.checkGenres(dto.genres);
+            const countries = await this.checkCountries(dto.countries);
 
+            const movie = new Movie();
+            movie.title = dto.title;
+            movie.titleEng = dto.titleEng;
+            movie.year = dto.year;
+            movie.quality = dto.quality;
+            movie.rating = dto.rating;
+            movie.description = dto.description;
+            movie.genres = genres;
+            movie.countries = countries;
+            movie.imgVideo = dto.imgVideo;
+            // передача актеров, режиссеров
+
+            await this.movieRepository.save(movie);
+
+            return movie
         } catch (e) {
-
+            return e.message;
         }
     }
 
     async deleteMovie(id: number) {
         try {
             const movie = await this.movieRepository.delete({id: id});
+            if(!movie.affected) return HttpStatus.NOT_FOUND;
+            return 'Фильм удален';
+        } catch (e) {
+            return e.message;
+        }
+    }
+
+    async updateMovie(id: number, title: string) {
+        try {
+            const movie = await this.movieRepository.findOneBy({
+                id: id
+            });
             if(!movie) return HttpStatus.NOT_FOUND;
+
+            movie.title = title;
+            await this.movieRepository.save(movie);
+
             return movie;
         } catch (e) {
             return e.message;
         }
     }
 
-    async updateMovie(id: number, dto) {
+    async sortMovies(sort: string) {
         try {
-
+            const movies = await this.movieRepository.createQueryBuilder()
+                    .select('movie')
+                    .from(Movie, "movie")
+                    .orderBy('movie.' + sort, sort === 'title' ? "ASC" : "DESC")
+                    .getMany();
+            if(!movies) return HttpStatus.NOT_FOUND;
+            return movies;
         } catch (e) {
-
+            return e.message;
         }
+    }
+
+    private async checkGenres(genres: string) {
+        let arrayGenres = genres.split(',');
+
+        const genresFromDB = await this.genreRepository.find();
+
+        return arrayGenres.map(function (genre) {
+            let newGenre = genresFromDB.find(genreDB => genreDB.genre === genre);
+
+            if (!newGenre) {
+                newGenre = new Genre();
+                newGenre.genre = genre;
+            }
+
+            return newGenre
+        });
+    }
+
+    private async checkCountries(countries: string) {
+        const arrayCountries = countries.split(',');
+
+        const countriesFromDB = await this.countryRepository.find();
+
+        return arrayCountries.map(function (country) {
+            let newCountry = countriesFromDB.find(countryDB => countryDB.country === country);
+
+            if(!newCountry) {
+                newCountry = new Country();
+                newCountry.country = country;
+            }
+
+            return newCountry
+        })
     }
 }

@@ -15,8 +15,8 @@ export class UserService {
     async getComments(userId: number, reviewId: number) {
         try {
             const user = await this.userRepository.findOneBy({id: userId});
-            // if(!user) return HttpStatus.NOT_FOUND;
-            const reviewWithComments = await this.client.send('get_comments', reviewId);
+            if(!user) return HttpStatus.NOT_FOUND;
+            const reviewWithComments = await this.client.send('get.comments', reviewId);
             return reviewWithComments;
         } catch (e) {
             return e.message;
@@ -28,7 +28,7 @@ export class UserService {
         try {
             const user = await this.userRepository.findOneBy({id: userId});
             if(!user) return HttpStatus.NOT_FOUND;
-            const review = await this.client.send('create_comment', {reviewId: reviewId, comment: dto.comment})
+            const review = await this.client.send('create.comment', {reviewId: reviewId, comment: dto.comment})
             return review;
         } catch (e) {
             return e.message;

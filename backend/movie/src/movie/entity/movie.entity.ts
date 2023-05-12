@@ -13,7 +13,7 @@ export class Movie{
     title: string;
 
     @Column()
-    typeVideo: string;
+    titleEng: string;
 
     @Column()
     year: number;
@@ -24,11 +24,11 @@ export class Movie{
     @Column()
     imgVideo: string;
 
-    @Column("simple-json")
-    ratingIvi: {
-        rating: number,
-        numberGrade: number
-    }
+    @Column()
+    rating: number;
+
+    @Column()
+    votes: number;
 
     @Column()
     description: string;
@@ -45,7 +45,8 @@ export class Movie{
         (genre) => genre.movies,
         {
             onDelete: "CASCADE",
-            onUpdate: "CASCADE"
+            onUpdate: "CASCADE",
+            cascade: true
         })
     @JoinTable()
     genres: Genre[];
@@ -54,12 +55,16 @@ export class Movie{
         (country) => country.movies,
         {
             onDelete: "CASCADE",
-            onUpdate: "CASCADE"
+            onUpdate: "CASCADE",
+            cascade: true
         })
     @JoinTable()
     countries: Country[];
 
     @OneToMany(type => Review,
-        (review) => review.movie)
+        (review) => review.movie,
+        {
+            cascade: true
+        })
     reviews: Review[];
 }

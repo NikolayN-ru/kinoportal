@@ -1,4 +1,4 @@
-import {Column, Entity, PrimaryGeneratedColumn, OneToMany, ManyToMany} from "typeorm";
+import {Column, Entity, PrimaryGeneratedColumn, ManyToMany} from "typeorm";
 import {Movie} from "../../movie/entity/movie.entity";
 
 @Entity()
@@ -14,7 +14,7 @@ export class Genre{
         (movie) => movie.genres,
         {
             onDelete: "CASCADE",
-            onUpdate: "CASCADE"
+            onUpdate: "CASCADE",
         })
     movies: Movie[];
 }
