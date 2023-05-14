@@ -13,28 +13,29 @@
 
 .menu {
   @apply flex flex-row items-center gap-[30px];
+  width: 100%;
 }
 
 .logo {
   @apply cursor-pointer;
-  // position: relative;
   z-index: 15;
 }
 
 .section {
+  @apply flex flex-row items-center gap-[30px] justify-between;
   width: 100%;
   z-index: 0;
 }
 
 .navigation {
-  // position: relative;
-  z-index: 0;
+  @apply flex gap-[16px];
+  z-index: 15;
 }
 
 .DropDownBody {
   opacity: 0;
   animation: ani 0.4s forwards;
-  height: 480px;
+  height: 100%;
   position: absolute;
   top: 0;
   left: -15px;
@@ -62,15 +63,11 @@
   flex-wrap: wrap;
   margin-top: 80px;
   border-top: 1px solid rgba(255, 255, 255, 0.196);
-  max-width: 100%;
+  width: 100%;
 }
 
-.list_item {
-  @apply flex gap-[16px];
-  // position: relative;
-  z-index: 15;
-}
-.text {
+.text,
+.text_avatar {
   display: block;
   position: relative;
   z-index: 15;
@@ -78,7 +75,8 @@
   cursor: pointer;
 }
 
-.text:hover {
+.text:hover,
+.text_avatar:hover {
   @apply text-white;
   transition: all 0.4s;
 }
@@ -100,9 +98,6 @@
   font-size: 15px;
   font-weight: 600;
 }
-.btn__notify {
-  z-index: 15;
-}
 .btn {
   &__subscribe {
     @apply text-white py-[8.5px] px-[12px] rounded-[8px] text-xs font-semibold;
@@ -114,9 +109,6 @@
   }
 
   &__avatar {
-    @apply rounded-[8px] py-[12px] px-[11px];
-    border: 2px solid rgba(255, 255, 255, 0.48);
-    z-index: 15;
     &:hover {
       border-color: #ffffff;
       transition: all 0.4s;
@@ -126,6 +118,15 @@
     }
   }
 }
+
+.text_avatar {
+  @apply rounded-[8px] py-[12px] px-[11px];
+  border: 2px solid rgba(255, 255, 255, 0.48);
+}
+
+.text_avatar:hover {
+  border-color: #ffffff;
+} 
 
 .btn__subscribe:hover,
 .btn__search:hover {

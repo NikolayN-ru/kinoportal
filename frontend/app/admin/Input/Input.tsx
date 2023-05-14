@@ -1,15 +1,22 @@
-import React, { FC } from 'react';
+import React, { FC } from "react";
 
-type InputType = {
-    value?: string;
-    label?: string;
-    name?:string;
-    placeholder:string;
-    type:string;
-    className:string;
-  };
+export type InputType = {
+  value?: string;
+  label?: string;
+  name?: string;
+  placeholder: string;
+  type: string;
+  className: string;
+};
 
-const Input: FC<InputType> = ({ value, label, name, placeholder, type, className }) => (
+const Input: FC<InputType> = ({
+  value,
+  label,
+  name,
+  placeholder,
+  type,
+  className,
+}) => (
   <div className="form-group">
     {label && <label htmlFor="input-field">{label}</label>}
     <input

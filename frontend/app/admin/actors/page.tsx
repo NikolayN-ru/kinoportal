@@ -1,34 +1,35 @@
-'use client'
+"use client";
 import Image from "next/image";
 import img from "../../../public/stallone.jpg";
 import s from "./page.module.scss";
-import ModalAdmin from "../ModalAdmin/ModalAdmin";
 import { useState } from "react";
+import ModalAdminActor from "./ModalAdminActor/ModalAdminActor";
 const ActorsAdmin = () => {
-
   const [isModal, setModal] = useState(false);
   const onClose = () => {
     setModal(false);
   };
   return (
     <div>
-            <div className={s.add_btn_block}>
-      <button className={s.add_btn} onClick={() => setModal(true)}>
-              Добавить +
-            </button>
-            <ModalAdmin
-              visible={isModal}
-              footer={<button onClick={onClose}>з</button>}
-              onClose={onClose}
-            />
+      <div className={s.add_btn_block}>
+        <button className={s.add_btn} onClick={() => setModal(true)}>
+          Добавить +
+        </button>
+        <ModalAdminActor
+          title="Добавить актёра"
+          visible={isModal}
+          footer={<button onClick={onClose}>з</button>}
+          onClose={onClose}
+          placeholder="Имя"
+        />
       </div>
-        <div className={s.head_row}>
-          <input className={s.checkbox} type="checkbox" name="" id="" />
-          <div className={s.head_title}>Имя</div>
-          <div className={s.head_title}>Участие в фильмах</div>
-          <div className={s.head_title}>Биография</div>
-          <div className={s.head_title}>Картинка</div>
-        </div>
+      <div className={s.head_row}>
+        <input className={s.checkbox} type="checkbox" name="" id="" />
+        <div className={s.head_title}>Имя</div>
+        <div className={s.head_title}>Участие в фильмах</div>
+        <div className={s.head_title}>Биография</div>
+        <div className={s.head_title}>Картинка</div>
+      </div>
       <div className={s.table_body}>
         <div className={s.body_row}>
           <div className={s.body_column}>

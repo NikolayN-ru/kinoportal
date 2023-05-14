@@ -67,7 +67,6 @@ const Modal = ({ visible = false, footer = "", onClose }: ModalProps) => {
         </div>
       </div>
     </div>
-    // <></>
   );
 };
 

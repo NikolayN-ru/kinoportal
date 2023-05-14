@@ -1,7 +1,7 @@
-'use client'
+"use client";
 import { useState } from "react";
-import ModalAdmin from "../ModalAdmin/ModalAdmin";
 import s from "./page.module.scss";
+import ModalAdminFilm from "./ModalAdminFilm/ModalAdminFilm";
 
 const FilmsAdmin = () => {
   const [isModal, setModal] = useState(false);
@@ -11,14 +11,16 @@ const FilmsAdmin = () => {
   return (
     <div>
       <div className={s.add_btn_block}>
-      <button className={s.add_btn} onClick={() => setModal(true)}>
-              Добавить +
-            </button>
-            <ModalAdmin
-              visible={isModal}
-              footer={<button onClick={onClose}>Закрыть</button>}
-              onClose={onClose}
-            />
+        <button className={s.add_btn} onClick={() => setModal(true)}>
+          Добавить +
+        </button>
+        <ModalAdminFilm
+          title="Добавить фильм"
+          visible={isModal}
+          footer={<button onClick={onClose}>Закрыть</button>}
+          onClose={onClose}
+          placeholder="Название"
+        />
       </div>
       <div className={s.head_row}>
         <input className={s.checkbox} type="checkbox" name="" id="" />
