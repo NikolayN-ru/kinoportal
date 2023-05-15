@@ -13,13 +13,25 @@ export class FilmController {
   private clientMovie: ClientProxy) {}
 
 
+  @Get('/all')
+  async getAllFilm(){
+    return await this.clientMovie.send('get.all.movies', '').toPromise();
+  }
+
   @Get(':id')
-  @ApiResponse({status: 200, description: 'get all actor by film', type: [ActorWithImageDto]})
-  @ApiResponse({status: 404, description: 'actors not found', type: HttpExceptionDto})
+  @ApiResponse({status: 200, description: 'get all film by id', type: [ActorWithImageDto]})
+  @ApiResponse({status: 404, description: 'film not found', type: HttpExceptionDto})
   async getAllActorForFilm(@Param('id') filmId : number){
     try{
-      const actors = await this.clientActor.send('get.all.actor.film', filmId).toPromise();
       const movie = await this.clientMovie.send('get.movie', filmId).toPromise();
+      let actors = [];
+      if(movie === 404){
+        return {
+          status:404,
+          message:'Not found'
+        }
+      }
+      actors = await this.clientActor.send('get.all.actor.film', filmId).toPromise();
       return {
         ...movie,
         actors: actors

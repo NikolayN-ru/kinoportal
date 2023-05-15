@@ -7,16 +7,17 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ActorFilmService } from '../actor-film/actor.film.service';
 import { ActorFilmModule } from '../actor-film/actor.film.module';
 import { ActorFilmEntity } from '../actor-film/actor.film.entity';
+import { RoleEntity } from '../roles/actor.film.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ActorEntity, ActorFilmEntity]),
+    TypeOrmModule.forFeature([ActorEntity, ActorFilmEntity, RoleEntity]),
     ClientsModule.register([
       {
         name: 'Photo',
         transport: Transport.RMQ,
         options: {
-          urls: ['amqp://rabbitmq:5672'],
+          urls: ['amqp://localhost:5672'],
           queue: 'photo-queue',
           queueOptions: {
             durable: false
@@ -27,7 +28,7 @@ import { ActorFilmEntity } from '../actor-film/actor.film.entity';
         name: 'Movie',
         transport: Transport.RMQ,
         options: {
-          urls: ['amqp://rabbitmq:5672'],
+          urls: ['amqp://localhost:5672'],
           queue: 'movie-queue',
           queueOptions: {
             durable: false

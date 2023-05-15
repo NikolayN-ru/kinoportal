@@ -5,8 +5,9 @@ import {Movie} from "./entity/movie.entity";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {Review} from "./entity/review.entity";
 import {Comment} from "./entity/comment.entity";
-import {Genre} from "./entity/genre.entity";
-import {Country} from "./entity/country.entity";
+import {Genre} from "./../genre/entity/genre.entity";
+import {Country} from "./../country/entity/country.entity";
+
 import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
@@ -19,8 +20,19 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
               name: 'Photo',
               transport: Transport.RMQ,
               options: {
-                urls: ['amqp://rabbitmq:5672'],
+                urls: ['amqp://localhost:5672'],
                 queue: 'photo-queue',
+                queueOptions: {
+                  durable: false
+                },
+              },
+            },
+            {
+              name: 'Actor',
+              transport: Transport.RMQ,
+              options: {
+                urls: ['amqp://localhost:5672'],
+                queue: 'actor-queue',
                 queueOptions: {
                   durable: false
                 },

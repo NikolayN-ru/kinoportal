@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ActorEntity } from './actor.entity';
 import { Repository } from 'typeorm';
 import { ActorDto } from '../..//dto/actor.dto'
-import { AddActorDto } from 'src/dto/add.actor.dto';
+import { AddActorDto } from '../../dto/add.actor.dto';
 import { ClientProxy } from '@nestjs/microservices';
 import { ActorFilmService } from '../actor-film/actor.film.service';
 
@@ -83,7 +83,10 @@ export class ActorService {
             const actor = await this.checkingForExistence(actorId);
             const files = await this.clientPhoto.send('get.files',{arrActors:[actor.actorId], assenceTable: 'actor'}).toPromise();
             const moviesId = (await this.actorFilmService.getFilmsForActor(actor.actorId)).map(item => item.filmId);
-            const movies = await this.clientMovie.send('get.movie.for.actor', moviesId).toPromise();
+            let movies = []
+            if(moviesId.length !== 0){
+                movies = await this.clientMovie.send('get.movie.for.actor', moviesId).toPromise();
+            }
             return {
                 ...actor,
                 ...files[0],
@@ -102,6 +105,9 @@ export class ActorService {
     async getAllActors(){
         try{
             const actors = await this.actorRepository.findBy({});
+            if(actors.length === 0){
+                return [];
+            }
             const actorsId = await actors.map(item => item.actorId);
             const files = await this.clientPhoto.send('get.files',{arrActors: actorsId, assenceTable: 'actor'}).toPromise();
             const otv = actors.map(actor => ({...actor, ...files.find(file => file.id === actor.actorId)}));
@@ -117,12 +123,13 @@ export class ActorService {
 
     async getActorsForFilm(filmId: any){
         try{
-            let actors = this.actorFilmService.getActorsForFilms(filmId);
-            let arrActors = [];
-            await actors.then(result => arrActors = result);
-            const actorsId = await arrActors.map(item => item.actorId);
+            let actors = await this.actorFilmService.getActorsForFilms(filmId);
+            if(actors.length === 0){
+                return [];
+            }
+            const actorsId = await actors.map(item => item.actorId);
             const files = await this.clientPhoto.send('get.files',{arrActors: actorsId, assenceTable: 'actor'}).toPromise();
-            const otv = await arrActors.map(actor => ({...actor, ...files.find(file => file.id === actor.actorId)}));
+            const otv = await actors.map(actor => ({...actor, ...files.find(file => file.id === actor.actorId)}));
             return otv.map(actor => ({...actor, id: undefined}))
         }   
         catch(e){

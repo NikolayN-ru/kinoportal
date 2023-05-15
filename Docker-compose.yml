@@ -1,27 +1,10 @@
 version: '3.8'
 
 services:
-  # frontend:
-  #   build: ./frontend
-  #   ports:
-  #     - "3000:3000"
-
-  # db:
-  #   image: postgres
-  #   environment:
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_PASSWORD: postgres
-  #     POSTGRES_DB: mydb
-  #   volumes:
-      # - db-data:/var/lib/postgresql/data
-
-  # backend:
-  #   build: ./backend
-  #   ports:
-  #     - "4000:4000"
-  #   depends_on:
-  #     - db
-
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
 
   # backend
   app-gateway:
@@ -41,7 +24,7 @@ services:
       context: ./backend/actor-sistem
     command: npm run start:dev
     depends_on:
-      - postgresActor
+      - postgresactor
       - rabbitmq
     restart: always
 
@@ -65,11 +48,13 @@ services:
       - rabbitmq
     restart: always
 
-  postgresActor:
-    container_name: postgresProfile
-    image: postgres:latest
+  postgresactor:
+    container_name: postgresActor
+    build:
+      context: ./init
+      dockerfile: actor.dockerfile
     environment:
-      POSTGRES_DB: "actor"
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: qwerty
       PG_DATA: /var/lib/postgresql/data
     volumes:

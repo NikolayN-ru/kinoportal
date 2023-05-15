@@ -21,6 +21,10 @@ export class FilesService {
                 .where("files.assenceTable =:assenceTable", {assenceTable})
                 .andWhere("files.assenceId in (:...assenceId)", {assenceId})
                 .getMany();
+            
+            if(files.length === 0){
+                return [];
+            }
             return this.dirFileService.getFullFileName(files);
         }
         catch(e){
@@ -56,6 +60,18 @@ export class FilesService {
             throw new Error('Ошибка при создании файла');
         }
     }
+
+    async createMainFileForFilm( image: any){
+        try{
+            const exp = image.originalname.split('.')[1];
+            const fileName = await this.dirFileService.createFile(image,exp);
+            return fileName;
+        }
+        catch(e){
+            throw new Error('Ошибка при создании файла');
+        }
+    }
+    
 
     async deleteEntity(assenceTable: string, id:number){
         try{

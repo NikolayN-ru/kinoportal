@@ -28,32 +28,4 @@ export class ActorController {
   getActor(@Param('id') actorId : number){
     return this.clientActor.send('get.actor', actorId)
   }
-
-  @Post()
-  @UseInterceptors(FilesInterceptor('image'))
-  @ApiBody({type: ActorWithImageDto})
-  @ApiResponse({status: 201, description: 'post actor', type: String})
-  @ApiResponse({status: 400, description: 'first_name or last_name not entered', type: HttpExceptionDto})
-  addActor(@Body() actorDto: AddActorDto, 
-  @UploadedFiles() image: Array<Express.Multer.File>){
-    return this.clientActor.send('post.actor', {actorDto,image}).toPromise(); 
-  }
-
-  @Put()
-  @ApiBody({type: ActorDto})
-  @ApiResponse({status: 200, description: 'update actor', type: String})
-  @ApiResponse({status: 400, description: 'id not entered', type: HttpExceptionDto})
-  @ApiResponse({status: 404, description: 'actor not found', type: HttpExceptionDto})
-  updateActor(@Body() actorDto: ActorDto){
-    return this.clientActor.send('put.actor', actorDto).toPromise();
-  }
-
-  @Delete()
-  @ApiBody({type: ActorIdDto})
-  @ApiResponse({status: 200, description: 'delete actor', type: String})
-  @ApiResponse({status: 400, description: 'id not entered', type: HttpExceptionDto})
-  @ApiResponse({status: 404, description: 'actor not found', type: HttpExceptionDto})
-  deleteActor(@Body() actorIdDto: ActorIdDto){
-    return this.clientActor.send('delete.actor', actorIdDto).toPromise();
-  }
 }

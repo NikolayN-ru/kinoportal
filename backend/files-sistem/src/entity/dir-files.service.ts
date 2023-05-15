@@ -25,14 +25,27 @@ export class DirFilesService {
         }
     }
 
-    async deleteFile(files: Array<FilesEntity>){
+    async deleteFile(files: Array<any>){
         try{
             for(let i = 0; i < files.length; i++){
                 const filePath = path.resolve(__dirname, '../../..','image', files[i].fileName.toString());
+                console.log(filePath);
                 fs.unlink(filePath, err =>{ 
                     if(err){}
                 });
             }
+        }
+        catch(e){
+            throw new HttpException('Произошла ошибка при удалении файла', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async deleteMainFile(file: string){
+        try{
+            const filePath = path.resolve(__dirname, '../../..','image', file.toString());
+            fs.unlink(filePath, err =>{ 
+                if(err){}
+            });
         }
         catch(e){
             throw new HttpException('Произошла ошибка при удалении файла', HttpStatus.INTERNAL_SERVER_ERROR);
