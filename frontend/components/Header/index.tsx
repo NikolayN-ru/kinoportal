@@ -4,7 +4,6 @@ import Icon from "../shared/IconComponent/Icon";
 import Logo from "../shared/Logo/Logo";
 import ModalSearch from "./ModalSearch";
 import s from "./Header.module.scss";
-import ModalSearch from "./ModalSearch/ModalSearch";
 import { DropDown } from "@components/shared/ui-kit";
 import DropDownContentTV from "./DropDownPage/DropDownContentTV/DropDownContentTV";
 import DropDownContent from "./DropDownPage/DropDownContent/DropDownContent";

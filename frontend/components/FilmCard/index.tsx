@@ -10,19 +10,18 @@ import { declensionOfNum } from 'utils';
 import BadgeFilm from '@components/BadgeFilm';
 
 import s from './FilmCard.module.scss';
-import { BaseItemProps } from '@components/types/slider';
+// import { BaseItemProps } from '@components/types/slider';
 
-import s from "./FilmCard.module.scss";
-
-export interface FilmCardProps extends BaseItemProps {
-  data: CollectionFilm;
-  className: string;
-}
+// export interface FilmCardProps extends BaseItemProps {
+  // data: CollectionFilm;
+  // className: string;
+// }
 
 const IMAGE_PATH = '/images/';
 const SEASONS_FORMS = ['сезон', 'сезона', 'сезонов'];
 
-const FilmCard: FC<FilmCardProps> = ({ data, className }) => {
+// const FilmCard: FC<FilmCardProps> = ({ data, className }) => {
+const FilmCard: FC<any> = ({ data, className }) => {
   const { name, genre, year, country, rating, age, image, seasons, link } =
     data;
 
