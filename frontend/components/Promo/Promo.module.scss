@@ -1,0 +1,53 @@
+.promo {
+  @apply absolute top-0 bottom-0 overflow-x-hidden;
+
+  right: calc((100% - 100vw) / 2);
+  left: calc((100% - 100vw) / 2);
+}
+
+.sliderContainer {
+  @apply absolute top-0 bottom-0 left-[50%] h-full translate-x-[-50%]
+  w-promoContainerSM md:w-promoContainerMD lg:w-promoContainerLG xl:w-promoContainerXL;
+}
+
+.navButtonDisabled {
+  @apply hidden;
+}
+
+.buttonPrev,
+.buttonNext {
+  @apply absolute top-0 bottom-0 z-10 hidden lg:flex my-auto lg:w-promoSliderButtonLG xxl:w-promoSliderButtonXL;
+}
+
+.buttonPrev {
+  @apply left-0 translate-x-[-100%];
+
+  transform: translateX(0)!important;
+
+  svg {
+    margin-left: auto!important;
+    margin-right: 16px!important;
+    transform: rotate(180deg) translateY(0)!important;
+  }
+}
+
+.buttonNext {
+  @apply right-0 translate-x-full;
+
+  transform: translateX(0)!important;
+
+  svg {
+    margin-left: 16px!important;
+    margin-right: auto!important;
+    transform: translateY(0)!important;
+  }
+}
+
+.slidePrev,
+.slideNext {
+  @apply opacity-[0.3];
+}
+
+.transparent {
+  @apply opacity-[0.3];
+}

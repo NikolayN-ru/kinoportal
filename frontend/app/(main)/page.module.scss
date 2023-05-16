@@ -1,9 +1,13 @@
 .pageSection {
-  @apply py-[24px];
+  @apply py-[12px] md:py-[20px] lg:py-[24px];
 }
 
 .aboutSection {
-  @apply md:w-[75%] sm:w-full pr-[28px];
+  @apply w-full md:w-[90%] lg:w-[75%] md:pr-[14px] lg:pr-[28px];
+}
+
+.promoSection {
+  @apply relative h-[42vw] md:h-[28.9vw] xl:h-[370px];
 }
 
 .subscribeSection {
@@ -19,6 +23,6 @@
   }
 }
 
-.collectionTitle {
+.sectionTitle {
   @apply mb-[24px];
 }

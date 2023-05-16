@@ -21,10 +21,10 @@ const _: FC<any> = ({ children }) => {
         </div>
         <div className={s.actorFilmsLabel}>
           <Link href={"/actor/1/director"}>
-          <div className={s.actorFilmsLabel_btn}>Режиссер</div>
+            <div className={s.actorFilmsLabel_btn}>Режиссер</div>
           </Link>
           <Link href={"/actor/1/actor"}>
-          <div className={s.actorFilmsLabel_btn}>Aктер</div>
+            <div className={s.actorFilmsLabel_btn}>Aктер</div>
           </Link>
         </div>
         {children}

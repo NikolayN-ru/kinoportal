@@ -1,30 +1,37 @@
-'use client'
+"use client";
+
+import { MouseEventHandler, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { MouseEventHandler, useState } from "react";
 import cn from "classnames";
-import ActorRound from "@components/Badge/ActorRound/ActorRound";
-import Quality from "@components/Badge/Quality/Quality";
-import BadgeActor from "@components/BadgeActor/BadgeActor";
-import CollectionSlider from "@components/CollectionSlider/CollectionSlider";
+
+import CollectionSlider from "@components/Slider/CollectionSlider";
+import ActorRound from "@components/Badge/ActorRound";
+import Quality from "@components/Badge/Quality";
+import BadgeActor from "@components/BadgeActor";
 import GrayButton from "@components/GrayButton";
-import Title from "@components/Title/Title";
-import { collections } from "../../../../mock/filmsData";
-import { useFilmItemQuery } from "@redux/filmsApi";
+import Title from "@components/Title";
 import { Play, Save, Share } from "@public/svg";
+
+import { useFilmItemQuery } from "@redux/filmsApi";
+import { collections } from "@mock/filmsData";
+
 import s from "./item.module.scss";
 
 const Index = () => {
   const [isClose, setIsClose] = useState<boolean>(true);
   // const router = useRouter();
+  // const pathname = usePathname();
+  // const searchParams = useSearchParams();
+  // console.log(router, pathname, searchParams);
   // const {
-    // data = [],
-    // error,
-    // isLoading,
+  // data = [],
+  // error,
+  // isLoading,
   // } = useFilmItemQuery(String(router.query.id));
 
   // if (isLoading) {
-    // return <div>LOADING</div>;
+  // return <div>LOADING</div>;
   // }
 
   const onToggleButtonClock: MouseEventHandler<
@@ -147,11 +154,11 @@ const Index = () => {
         <div className={s.actorSection}>
           <h3>Актёры и создатели</h3>
           <div className={s.actors}>
-            <ActorRound title="name" role="actor" link="/actor/1" />
-            <ActorRound title="name" role="actor" />
-            <ActorRound title="name" role="actor" />
-            <ActorRound title="name" role="actor" />
-            <ActorRound title="name" role="actor" />
+            <ActorRound title="name" role="actor" link="/actor/1/director" />
+            <ActorRound title="name" role="actor" link="/actor/1/director" />
+            <ActorRound title="name" role="actor" link="/actor/1/director" />
+            <ActorRound title="name" role="actor" link="/actor/1/director" />
+            <ActorRound title="name" role="actor" link="/actor/1/director" />
           </div>
         </div>
       </div>

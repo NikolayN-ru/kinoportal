@@ -1,8 +1,8 @@
 "use client";
 import { FC, ReactNode, useState } from "react";
 import Icon from "@components/shared/IconComponent/Icon";
-import ControlsBar from "../../components/componentsAdmin/ControlsBar";
-import Navbar from "../../components/componentsAdmin/Navbar/Navbar";
+import ControlsBar from "@components/componentsAdmin/ControlsBar";
+import Navbar from "@components/componentsAdmin/Navbar";
 import s from "./layout.module.scss";
 import "./admin.scss";
 import ModalAdminAuth from "./ModalAdminAuth/ModalAdminAuth";

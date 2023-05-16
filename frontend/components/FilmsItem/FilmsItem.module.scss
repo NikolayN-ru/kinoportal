@@ -8,10 +8,4 @@
       @apply w-[70px] h-[110px] bg-white rounded-[5px];
     }
   }
-  button {
-    @apply h-[50px] px-[40px] bg-backgroundLight rounded-[10px] text-white opacity-[.8];
-  }
-  button:hover {
-    @apply opacity-[1];
-  }
 }

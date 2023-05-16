@@ -1,3 +1,4 @@
+
 import style from "./Icon.module.scss";
 import { Search } from "../../../public/svg/index";
 import { Notify } from "../../../public/svg/index";
@@ -25,7 +26,18 @@ import { Certificate } from "../../../public/svg/index";
 import { TvChannels } from "../../../public/svg/index";
 import { Wallet } from "../../../public/svg/index";
 import { ShareSmall } from "../../../public/svg/index";
-type IconComponentProps = { name: string; className?: string };
+import { ArrowRight } from "../../../public/svg/index";
+import { StarRounded } from "../../../public/svg/index";
+import { Bookmark } from "../../../public/svg/index";
+import { MagicWand } from "../../../public/svg/index";
+import { Lightning } from "../../../public/svg/index";
+import { US } from "../../../public/svg/index";
+import { RUS } from "../../../public/svg/index";
+
+import s from "./Icon.module.scss";
+import { FC } from "react";
+
+type IconComponentProps = { name: string; clsassName?: string };
 type IconTypes = { [name: string]: ReactSVGComponent };
 
 const iconTypes: IconTypes = {
@@ -45,6 +57,13 @@ const iconTypes: IconTypes = {
   callback: Callback,
   in: In,
   tg: TG,
+  arrowRight: ArrowRight,
+  starRounded: StarRounded,
+  bookmark: Bookmark,
+  magicWand: MagicWand,
+  lightning: Lightning,
+  us: US,
+  rus: RUS,
   i: I,
   notifyBig: NotifyBig,
   favorite: Favorite,
@@ -57,9 +76,12 @@ const iconTypes: IconTypes = {
   share_small:ShareSmall,
 };
 
-const IconComponent = ({ name, className, ...props }: IconComponentProps) => {
+const IconComponent: FC<IconComponentProps> = ({
+  name,
+  ...props
+}: IconComponentProps) => {
   let Icon = iconTypes[name];
-  return <Icon className={className} {...props} />;
+  return !!Icon && <Icon className={s.icon} {...props} />;
 };
 
 export default IconComponent;

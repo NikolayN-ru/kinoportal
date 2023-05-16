@@ -1,6 +1,6 @@
 import IconComponent from "../../shared/IconComponent/Icon";
 import s from "./ControlsBar.module.scss";
-import GrayButton from '../../GrayButton/index';
+import GrayButton from "../../GrayButton/index";
 const ControlsBar = () => {
   return (
     <div className={s.controlsBar}>
@@ -10,7 +10,10 @@ const ControlsBar = () => {
           <GrayButton className={s.btn} title="Сортировка" />
           <div className={s.input_block}>
             <input className={s.input} type="text" placeholder="Поиск" />
-            <GrayButton className={s.icon} title={<IconComponent name='search'/>} />
+            <GrayButton
+              className={s.icon}
+              title={<IconComponent name="search" />}
+            />
           </div>
         </div>
         <div className={s.buttons_block}>

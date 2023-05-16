@@ -1,0 +1,36 @@
+.sliderPrev,
+.sliderNext {
+  @apply flex;
+
+  svg {
+    @apply my-auto w-[12px] h-[32px] translate-y-[-14px];
+    
+    path {
+      @apply duration-[200ms] fill-light;
+    }
+  }
+
+  &:hover {
+    svg path {
+      @apply duration-[200ms] fill-white;
+    }
+  }
+
+  &:active {
+    svg {
+      @apply scale-[0.8];
+    }
+  }
+}
+
+.sliderPrev {
+  svg {
+    @apply mr-auto rotate-180;
+  }
+}
+
+.sliderNext {
+  svg {
+    @apply ml-auto;
+  }
+}

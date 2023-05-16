@@ -7,3 +7,5 @@ It is allowed to store some components inside the `app` structure. However, it i
 ## Clean Code
 
 This is the most abstract level of code standardization. It's related to the implementations independent of the programming language. It will help the readability of your code.
+
+перед ПР форматируем файлы командой - npm run format

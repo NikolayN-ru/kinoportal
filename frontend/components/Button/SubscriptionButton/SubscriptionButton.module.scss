@@ -1,0 +1,18 @@
+.button {
+  @apply w-full h-[34px] lg:h-[42px] overflow-hidden
+  text-mobile bg-no-repeat bg-center bg-top bg-[length:auto_full] lg:text-default;
+
+  background-image: url("/svg/teaser-title-pattern.svg")!important;
+
+  svg {
+    @apply w-[18px] lg:w-[24px] h-[22px] lg:h-[32px];
+  }
+
+  &:hover:not(:active) {
+    @apply bg-purpleDarkLighter duration-[80ms];
+  }
+
+  &:not(:hover):not(:active) {
+    @apply bg-purpleDark duration-[400ms];
+  }
+}
