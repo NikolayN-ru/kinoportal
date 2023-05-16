@@ -1,0 +1,115 @@
+.modal {
+  @apply fixed top-0 bottom-0 left-0 right-0 w-[100%] z-[9999] flex justify-center;
+  background-color: rgba(14, 15, 18, 0.944);
+  animation-name: appear;
+  animation-duration: 300ms;
+}
+.container {
+  @apply w-[100%] max-w-[1140px];
+  
+}
+
+.modal_dialog {
+  @apply w-[100%] flex text-left flex-col overflow-hidden h-[100%] rounded-[10px];
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slide-in;
+  animation-duration: 0.5s;
+  
+}
+
+.modal_content {
+  @apply flex flex-col items-start justify-center py-[24px] px-0 gap-[15px];
+}
+
+.modal_body {
+  @apply relative w-[100%];
+  background-color: #f2f2f2;
+  max-height: 330px;
+  border-radius: 12px;
+  margin-top: 100px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.input_search {
+  @apply relative w-[500px] py-[8px] px-[10px] rounded-[10px];
+  font-size: 14px;
+  background-color: #d9d7e0;
+  outline: none;
+  height: 40px;
+  
+}
+
+.input_search:focus::placeholder {
+  color: #000;
+  font-size: 12px;
+  transform: translateY(-10px);
+  transition: transform 400ms, color 200ms;
+}
+.input_search::placeholder {
+  color: #000;
+}
+.search_input_form {
+  @apply flex flex-col gap-[25px] relative;
+  margin: 0 auto;
+}
+
+.add_btn_block {
+  display: flex;
+  margin-top: 20px;
+}
+.log_btn {
+  width: 30%;
+  color: #fff;
+  font-weight: 600;
+  background-color: #4040f2;
+}
+
+.modal_title {
+  @apply flex mb-[20px] text-center text-white;
+  justify-content: center;
+  padding: 20px 0 0 0;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: bold;
+  color: #000;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slide-in {
+  from {
+    transform: translateY(-150px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 945px) {
+  .check__image {
+    @apply p-[17px];
+  }
+
+  .modal_dialog {
+    @apply max-w-[500px] h-[300px];
+  }
+
+  .modal_content {
+    font-size: 14px;
+    padding: 0 20px 20px 20px;
+  }
+  .modal_title {
+    font-size: 20px;
+  }
+}

@@ -1,0 +1,117 @@
+.content {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+.block {
+    display: flex;
+    flex-direction: column;
+    padding: 0 12px;
+}
+.list_item {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 380px;
+    max-height: 335px;
+}
+.singleColumn {
+    width: 220px;
+}
+.title {
+    display: block;
+    margin-bottom: 8px;
+    color: #ffffff;
+    height: 22px;
+}
+.item {
+    width: 170px;
+}
+.list_item_years {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.years_block {
+    margin-top: 24px;
+}
+
+.years_title {
+    color: #ffffff;
+}
+.item:hover {
+    @apply text-white;
+    transition: all 0.4s;
+}
+
+.sideContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 608px;
+    padding-right: 12px;
+}
+
+.content_block {
+    position: relative;
+
+    padding-left: 16px;
+    border-left: 1px solid #ffffff32;
+}
+
+.sideContent_list_item {
+   
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.sideContent_item {
+    position: relative;
+}
+
+.sideContent_item:hover {
+    @apply text-white;
+    transition: all 0.4s;
+}
+.sideContent_item:hover::before {
+    content: "";
+    position: absolute;
+    border-left: 2px solid #ffffff;
+    border-radius: 10px;
+    height: 20px;
+    left: -17px;
+    transition: all 0.4s;
+}
+
+.sideContent_Widget_block {
+    display: flex;
+    flex-direction: column;
+    width: 244px;
+    height: 310px;
+}
+
+.note {
+    margin-top: 20px;
+    font-size: 10px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.315);
+}
+
+.tv {
+    margin-top: 25px;
+    padding: 12.5px 0;
+    background-color: #312b45;
+}
+
+.reverse {
+    @keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(250px * 7))}
+    }
+}

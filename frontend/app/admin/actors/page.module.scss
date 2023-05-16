@@ -3,6 +3,19 @@
   border-b-[1px] border-solid border-[#d7d5d5];
 }
 
+.add_btn_block {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px;
+}
+.add_btn {
+  color: #fff;
+  font-weight: 600;
+  background-color: #4040f2;
+  padding: 10px 15px;
+  border-radius: 15px;
+}
+
 .head_title,
 .body_title {
   @apply w-full;
@@ -15,4 +28,8 @@
 .body_column {
   @apply flex w-full justify-between items-center text-center p-[10px] bg-[#fafafa] min-h-[80px]
   border-b-[1px] border-solid border-[#d7d5d5];
+}
+
+.actor_img {
+  @apply mx-auto;
 }
