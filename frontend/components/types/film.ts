@@ -28,3 +28,16 @@ export type Compilation = {
   name: string;
   items: CompilationItem[];
 };
+
+export type PromoItemType = {
+  id: number;
+  name: string;
+  link: string;
+  image: string;
+  age: number;
+};
+
+export type FilmBadge = {
+  text: string;
+  color: string;
+};

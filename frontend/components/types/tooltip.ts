@@ -13,7 +13,11 @@ export type TooltipState = {
   options: TooltipOptions;
 };
 
-export type ShowTooltip = (targetX: number, targetY: number, text: string) => void;
+export type ShowTooltip = (
+  targetX: number,
+  targetY: number,
+  text: string
+) => void;
 export type HideTooltip = () => void;
 
 export type UseTooltipResult = [
@@ -23,6 +27,6 @@ export type UseTooltipResult = [
 ];
 
 export type TooltipContextValue = {
-  showTooltip: ShowTooltip,
-  hideTooltip: HideTooltip
+  showTooltip: ShowTooltip;
+  hideTooltip: HideTooltip;
 } | null;

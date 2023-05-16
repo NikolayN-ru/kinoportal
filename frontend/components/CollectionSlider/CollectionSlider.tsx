@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { SwiperOptions, Navigation } from 'swiper';
 
 import { CollectionFilm } from '../types/film';
-import FilmCard from '../FilmCard/FilmCard';
+import FilmCard from '../FilmCard';
 import { useTooltip } from '../../hooks/useTooltip';
 import Tooltip from '../Tooltip/Tooltip';
 import { TooltipContextValue } from '../types/tooltip';

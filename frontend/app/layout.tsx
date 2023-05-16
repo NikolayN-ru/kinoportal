@@ -1,4 +1,4 @@
-import { Providers } from "../redux/provider";
+import { Providers } from "@redux/provider";
 
 export default function RootLayout({
   children,
@@ -8,7 +8,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body>
-        <Providers>{children}</Providers>
+        <Providers children={children}></Providers>
       </body>
     </html>
   );

@@ -1,4 +1,4 @@
-import GrayButton from "../../components/GrayButton";
+import GrayButton from "@components/GrayButton";
 import s from "./settings/SettingsAdmin.module.scss";
 
 const SettingsAdmin = () => {

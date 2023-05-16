@@ -2,107 +2,114 @@ import GrayButton from "../GrayButton";
 import Icon from "../shared/IconComponent/Icon";
 import s from "./Footer.module.scss";
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import "../../i18n";
+
 
 const Footer: FC = () => {
+  const { t } = useTranslation();
   return (
     <div className={s.footer}>
       <div className={s.container}>
         <div className={s.row}>
           <div className={s.column}>
-            <div className={s.title}>О нас</div>
+            <div className={s.title}>{t("footer.about")}</div>
             <div className={s.item}>
               <a className={s.link} href="/" target="_blank">
-                О компании
+                {t("footer.aboutCompany")}
               </a>
             </div>
             <div className={s.item}>
               <a className={s.link} href="/" target="_blank">
-                Вакансии
+                {t("footer.jobs")}
               </a>
             </div>
             <div className={s.item}>
               <a className={s.link} href="/" target="_blank">
-                Программа бета-тестирования
+                {t("footer.beta")}
               </a>
             </div>
             <div className={s.item}>
               <a className={s.link} href="/" target="_blank">
-                Информация для партнёров
+                {t("footer.information")}
               </a>
             </div>
             <div className={s.item}>
               <a className={s.link} href="/" target="_blank">
-                Размещение рекламы
+                {t("footer.advertising")}
               </a>
             </div>
             <div className={s.item}>
               <a className={s.link} href="/" target="_blank">
-                Пользовательское соглашение
+                {t("footer.termsOfUse")}
               </a>
             </div>
             <div className={s.item}>
               <a className={s.link} href="/" target="_blank">
-                Политика конфиденциальности
+                {t("footer.provacyPolicy")}
               </a>
             </div>
             <div className={s.item}>
               <a className={s.link} href="/" target="_blank">
-                Комплаенс
+                {t("footer.compliance")}
               </a>
             </div>
           </div>
           <div className={s.column}>
-            <div className={s.title}>Разделы</div>
+            <div className={s.title}>{t("footer.sections")}</div>
             <div className={s.item}>
               <a className={s.link} href="/" target="_blank">
-                Мой иви
+                {t("footer.myIvi")}
               </a>
             </div>
             <div className={s.item}>
               <a className={s.link} href="/" target="_blank">
-                Что нового
+                {t("footer.whatsNew")}
               </a>
             </div>
             <div className={s.item}>
               <a className={s.link} href="/" target="_blank">
-                Фильмы
+                {t("footer.films")}
               </a>
             </div>
             <div className={s.item}>
               <a className={s.link} href="/" target="_blank">
-                Сериалы
+                {t("footer.serials")}
               </a>
             </div>
             <div className={s.item}>
               <a className={s.link} href="/" target="_blank">
-                Мультфильмы
+                {t("footer.cartoon")}
               </a>
             </div>
             <div className={s.item}>
               <a className={s.link} href="/" target="_blank">
-                TV+
+                {t("footer.TV")}
               </a>
             </div>
             <div className={s.item}>
               <a className={s.link} href="/" target="_blank">
-                Что посмотреть
+                {t("footer.whatToSee")}
               </a>
             </div>
             <div className={s.item}>
               <a href="/" target="_blank">
-                <span className={s.gradient}>Активация сертификата</span>
+                <span className={s.gradient}>{t("footer.certificate")}</span>
               </a>
             </div>
           </div>
           <div className={s.column}>
-            <div className={s.title}>Служба поддержки</div>
+            <div className={s.title}>{t("footer.support")}</div>
             <div className={s.description_block}>
-              <div className={s.description}>Мы всегда готовы вам помочь.</div>
-              <div className={s.description}>Наши операторы онлайн 24/7</div>
+              <div className={s.description}>{t("footer.helpYou")}</div>
+              <div className={s.description}>{t("footer.operators")} 24/7</div>
             </div>
             <div className={s.support_block}>
               <div className={s.chat}>
-                <GrayButton className={s.chat_btn} title="Написать в чате" />
+                <GrayButton
+                  className={s.chat_btn}
+                  title={String(t("footer.writeChat"))}
+                />
               </div>
               <div className={s.contact__icons}>
                 <GrayButton
@@ -116,7 +123,7 @@ const Footer: FC = () => {
               </div>
               <div className={s.ask_block}>
                 <span className={s.ask_text}>ask.ivi.ru</span>
-                Ответы на вопросы
+                {t("footer.answersQuestions")}
               </div>
             </div>
           </div>
@@ -126,7 +133,7 @@ const Footer: FC = () => {
                 <Icon name="mouthpiece" />
               </div>
               <div className={s.footer_widget_text}>
-                Смотрите фильмы, сериалы и мультфильмы без рекламы
+                {t("footer.watchMovies")}
               </div>
             </div>
           </div>
@@ -138,7 +145,7 @@ const Footer: FC = () => {
                 <GrayButton
                   className={s.overturn_btn}
                   title={<Icon name="apple" />}
-                  preamble="Загрузить в"
+                  preamble={String(t("footer.download"))}
                   text="App Store"
                 />
               </div>
@@ -146,7 +153,7 @@ const Footer: FC = () => {
                 <GrayButton
                   className={s.overturn_btn}
                   title={<Icon name="android" />}
-                  preamble="Доступно в"
+                  preamble={String(t("footer.available"))}
                   text="Google Play"
                 />
               </div>
@@ -154,7 +161,7 @@ const Footer: FC = () => {
                 <GrayButton
                   className={s.overturn_btn}
                   title={<Icon name="tv" />}
-                  preamble="Смотрите на"
+                  preamble={String(t("footer.look"))}
                   text="Smart TV"
                 />
               </div>
@@ -162,7 +169,7 @@ const Footer: FC = () => {
                 <GrayButton
                   className={s.overturn_btn}
                   title={<Icon name="desktop" />}
-                  text="Все устройства"
+                  text={String(t("footer.allDevices"))}
                 />
               </div>
             </div>

@@ -1,6 +1,6 @@
-import GrayButton from "../../components/GrayButton";
-import Icon from "../../components/shared/IconComponent/Icon";
-import Navbar from "../../components/componentsAdmin/Navbar/Navbar";
+import GrayButton from "@components/GrayButton";
+import Icon from "@components/shared/IconComponent/Icon";
+import Navbar from "@components/componentsAdmin/Navbar";
 import s from "./settings/SettingsAdmin.module.scss";
 
 const SettingsAdmin = () => {
