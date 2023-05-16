@@ -8,10 +8,15 @@
 .content {
   display: flex;
   flex-direction: column;
-  line-height: 13px;
+  line-height: 20px;
 }
 
 .preamble {
   color: #ffffffb8;
   font-size: 10px;
+}
+
+.small {
+  font-size: 13px;
+  color: #ffffffb7;
 }
