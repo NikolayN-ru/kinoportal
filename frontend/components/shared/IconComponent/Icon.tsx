@@ -1,5 +1,5 @@
-
-import style from "./Icon.module.scss";
+import { FC } from "react";
+import style from './Icon.module.scss';
 import { Search } from "../../../public/svg/index";
 import { Notify } from "../../../public/svg/index";
 import { Avatar } from "../../../public/svg/index";

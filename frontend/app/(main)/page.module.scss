@@ -10,6 +10,10 @@
   @apply relative h-[42vw] md:h-[28.9vw] xl:h-[370px];
 }
 
+.promoSection {
+  @apply relative h-[63.33vh] max-h-[370px];
+}
+
 .subscribeSection {
   @apply pb-0;
 }

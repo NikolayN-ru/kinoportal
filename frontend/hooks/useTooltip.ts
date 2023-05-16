@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 import {
   HideTooltip,
   ShowTooltip,
   TooltipState,
-  UseTooltipResult,
-} from "../components/types/tooltip";
+  UseTooltipResult
+} from '../components/types/tooltip';
 
 const TOOLTIP_STATE_HIDDEN = {
   isVisible: false,
