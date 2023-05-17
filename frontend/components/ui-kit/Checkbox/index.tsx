@@ -1,7 +1,7 @@
 import { ChangeEventHandler, FC } from "react";
 import cn from "classnames/bind";
 
-import Icon from "@components/shared/IconComponent/Icon";
+import Icon from "@components/ui-kit/IconComponent/Icon";
 
 import s from "./Checkbox.module.scss";
 

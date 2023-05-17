@@ -1,25 +1,27 @@
-import { FC, MouseEventHandler, ReactNode, useState, useEffect } from "react";
+import {
+  FC,
+  MouseEventHandler,
+  ReactNode,
+  useState,
+  useEffect,
+  createContext,
+} from "react";
 import cn from "classnames/bind";
 
-import Icon from "@components/shared/IconComponent/Icon";
+import Icon from "@components/ui-kit/IconComponent/Icon";
 
 import s from "./Select.module.scss";
 
 interface SelectProps {
-  className?: string;
   title: string;
   selectedValues: string[];
   name: string;
   children: ReactNode;
 }
 
-const Select: FC<SelectProps> = ({
-  className,
-  title,
-  selectedValues,
-  name,
-  children,
-}) => {
+export const SelectContext = createContext<boolean | null>(null);
+
+const Select: FC<SelectProps> = ({ title, selectedValues, name, children }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const styles = {
@@ -65,7 +67,9 @@ const Select: FC<SelectProps> = ({
         </div>
       </div>
 
-      <div className={s.dropdown}>{children}</div>
+      <SelectContext.Provider value={isOpen}>
+        <div className={s.dropdown}>{children}</div>
+      </SelectContext.Provider>
     </div>
   );
 };

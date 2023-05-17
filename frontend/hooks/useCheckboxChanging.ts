@@ -5,10 +5,11 @@ export type UseCheckboxChangingResult = [
   onCheckboxChange: (optionName: string, isChecked: boolean) => void
 ];
 
-export const useCheckboxChanging = (optionsDefault: string[]): UseCheckboxChangingResult => {
-  const [selectedOptions, setSelectedOptions] = useState<string[]>(
-    optionsDefault
-  );
+export const useCheckboxChanging = (
+  optionsDefault: string[]
+): UseCheckboxChangingResult => {
+  const [selectedOptions, setSelectedOptions] =
+    useState<string[]>(optionsDefault);
 
   const onCheckboxChange = (optionName: string, isChecked: boolean) => {
     if (isChecked) {
@@ -18,7 +19,7 @@ export const useCheckboxChanging = (optionsDefault: string[]): UseCheckboxChangi
       setSelectedOptions(updatedOptions);
       return;
     }
-  
+
     setSelectedOptions([...selectedOptions, optionName]);
   };
 

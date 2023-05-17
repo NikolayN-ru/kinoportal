@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 
-import SubscriptionButton from "@components/Button/SubscriptionButton";
 import CompilationSlider from "@components/Slider/CompilationSlider";
 import CollectionSlider from "@components/Slider/CollectionSlider";
 import MainContainer from "@components/MainContainer";
 import Promo from "@components/Promo";
 import PageDescription from "@components/PageDescription";
 import Title from "@components/Title";
+import SubscriptionButton from "@components/ui-kit/Button/SubscriptionButton";
 
 import { collections, compilation } from "mock/filmsData";
 

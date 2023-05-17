@@ -47,7 +47,7 @@
     --color-gradient-purple-start: #a869f0;
     --color-gradient-purple-end: #834cc2;
     --color-shadow-purple: #a869f0;
-    --color-option-text: rgba(217,215,224,.8);
+    --color-option-text: rgba(217,215,224, 0.8);
     --color-selected-values: #a5a1b2;
     --color-purple-selected: #7e798f;
     --color-separator: rgba(255, 255, 255, 0.32);
@@ -108,5 +108,9 @@
     mx-auto my-0 pb-[24px];
 
     min-height: calc(100vh - 548px);
+  }
+
+  .range-slider-mark {
+    @apply text-[15px] text-white font-semibold whitespace-nowrap;
   }
 }

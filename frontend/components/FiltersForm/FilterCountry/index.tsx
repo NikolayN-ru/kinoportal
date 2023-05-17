@@ -9,6 +9,7 @@ import Checkbox from "@components/ui-kit/Checkbox";
 import { useCheckboxChanging } from "hooks/useCheckboxChanging";
 
 import s from "./FilterCountry.module.scss";
+import CountriesSlider from "./CountriesSlider";
 
 const countries = [
   "Австралия",
@@ -59,7 +60,9 @@ const FilterCountry: FC<FilterProps> = ({ title }) => {
   return (
     <Select title={title} selectedValues={selectedOptions} name="country">
       <div className={s.optionsWrapper}>
-        <SelectOptionsList columns={3}>
+        <CountriesSlider items={countries} />
+
+        <SelectOptionsList columns={3} separated>
           {countries.map((country) => {
             const isChecked = selectedOptions.some(
               (option) => option === country

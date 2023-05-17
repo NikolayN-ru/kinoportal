@@ -1,12 +1,12 @@
-import { FC } from 'react';
-import { SwiperSlide } from 'swiper/react';
+import { FC } from "react";
+import { SwiperSlide } from "swiper/react";
 
-import Slider from '@components/Slider';
-import CategoryCard from '@components/CategoryCard';
-import { CompilationItem } from '@components/types/film';
-import { compilationSliderParams } from '../SliderParams';
+import Slider from "@components/Slider";
+import CategoryCard from "@components/CategoryCard";
+import { CompilationItem } from "@components/types/film";
+import { compilationSliderParams } from "../SliderParams";
 
-import s from './CompilationSlider.module.scss';
+import s from "./CompilationSlider.module.scss";
 
 interface CompilationSliderProps {
   items: CompilationItem[];
@@ -15,7 +15,7 @@ interface CompilationSliderProps {
 const CompilationSlider: FC<CompilationSliderProps> = ({ items }) => {
   return (
     <div className={s.compilationList}>
-      <Slider params={compilationSliderParams}>
+      <Slider params={compilationSliderParams} titles={true}>
         {items.map((item) => (
           <SwiperSlide key={item.id}>
             <CategoryCard key={item.id} data={item} />

@@ -1,12 +1,11 @@
 import Link from "next/link";
 import React, { useState } from "react";
-import Icon from "../shared/IconComponent/Icon";
-import Logo from "../shared/Logo/Logo";
+import Icon from "../ui-kit/IconComponent/Icon";
+import Logo from "../ui-kit/Logo/Logo";
 import ModalSearch from "./ModalSearch";
 import s from "./Header.module.scss";
 import { useTranslation } from "react-i18next";
 import "../../i18n.js";
-
 
 const Header = () => {
   const { t, i18n } = useTranslation();

@@ -1,3 +1,24 @@
-.filtersContainer {
-  @apply grid grid-cols-3 gap-x-[12px] p-[16px] bg-purpleDark rounded-[6px];
+.section {
+  @apply grid grid-cols-3 gap-[12px];
+}
+
+.mainContainer {
+  @apply p-[16px] bg-purpleDark rounded-[6px];
+}
+
+.rangeItems,
+.searchItems {
+  @apply col-start-1 col-end-[-1];
+}
+
+.rangeContainer {
+  @apply mt-[16px] px-[6px] pb-[16px];
+}
+
+.searchItems {
+  @apply mt-[30px];
+}
+
+.resetButtonContainer {
+  @apply col-start-1 col-end-[-1];
 }

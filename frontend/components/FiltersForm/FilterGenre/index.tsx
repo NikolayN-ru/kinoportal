@@ -56,7 +56,7 @@ const FilterGenre: FC<FilterProps> = ({ title }) => {
       <div className={s.optionsWrapper}>
         <GenresSlider items={genres} />
 
-        <SelectOptionsList columns={3}>
+        <SelectOptionsList columns={3} separated>
           {genres.map((genre) => {
             const isChecked = selectedOptions.some(
               (option) => option === genre

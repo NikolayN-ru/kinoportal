@@ -1,15 +1,15 @@
-import { FC, createContext, useEffect, useRef, useState } from 'react';
-import { SwiperSlide } from 'swiper/react';
+import { FC, createContext, useEffect, useRef, useState } from "react";
+import { SwiperSlide } from "swiper/react";
 
-import Slider from '@components/Slider';
-import FilmCard from '@components/FilmCard';
-import { CollectionFilm } from '../../types/film';
-import { useTooltip } from '../../../hooks/useTooltip';
-import Tooltip from '../../Tooltip';
-import { TooltipContextValue } from '../../types/tooltip';
-import { collectionSliderParams } from '../SliderParams';
+import Slider from "@components/Slider";
+import FilmCard from "@components/FilmCard";
+import FilmCardTooltip from "@components/FilmCard/FilmCardTooltip";
+import { CollectionFilm } from "../../types/film";
+import { useTooltip } from "../../../hooks/useTooltip";
+import { TooltipContextValue } from "../../types/tooltip";
+import { collectionSliderParams } from "../SliderParams";
 
-import s from './CollectionSlider.module.scss';
+import s from "./CollectionSlider.module.scss";
 
 export interface CollectionSliderProps {
   items: CollectionFilm[];
@@ -19,7 +19,8 @@ export const TooltipContext = createContext<TooltipContextValue>(null);
 
 const CollectionSlider: FC<CollectionSliderProps> = ({ items }) => {
   const sliderContainerRef = useRef<HTMLDivElement>(null);
-  const [containerElement, setContainerElement] = useState<HTMLDivElement | null>(null);
+  const [containerElement, setContainerElement] =
+    useState<HTMLDivElement | null>(null);
   const [tooltip, showTooltip, hideTooltip] = useTooltip(containerElement);
 
   useEffect(() => {
@@ -28,10 +29,15 @@ const CollectionSlider: FC<CollectionSliderProps> = ({ items }) => {
 
   return (
     <div className={s.container} ref={sliderContainerRef}>
-      {tooltip.isVisible && <Tooltip {...tooltip.options} />}
+      {tooltip.isVisible && <FilmCardTooltip {...tooltip.options} />}
 
       <TooltipContext.Provider value={{ showTooltip, hideTooltip }}>
-        <Slider params={collectionSliderParams}>
+        <Slider
+          className={s.sliderWrapper}
+          params={collectionSliderParams}
+          titles={true}
+          nextClassName={s.sliderNext}
+        >
           {items.map((item) => (
             <SwiperSlide key={item.id}>
               <FilmCard key={item.id} data={item} />

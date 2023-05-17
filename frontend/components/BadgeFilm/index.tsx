@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import { FC } from "react";
 
-import { FilmBadge } from '@components/types/film';
+import { FilmBadge } from "@components/types/film";
 
-import s from './BadgeFilm.module.scss';
+import s from "./BadgeFilm.module.scss";
 
 interface BadgeFilmProps {
   className?: string;
@@ -15,7 +15,7 @@ const BadgeFilm: FC<BadgeFilmProps> = ({ className, option }) => {
   const badgeClassNames = [s.badge, s[color] || s.colorDefault];
   className && badgeClassNames.push(className);
 
-  return <div className={badgeClassNames.join(' ')}>{text}</div>;
+  return <div className={badgeClassNames.join(" ")}>{text}</div>;
 };
 
 export default BadgeFilm;

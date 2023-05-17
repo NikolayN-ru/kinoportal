@@ -30,7 +30,7 @@
 }
 
 .dropdown {
-  @apply absolute bottom-[-4px] left-0 z-10 hidden p-[16px] pt-[4px] translate-y-[100%]
+  @apply absolute bottom-[-4px] left-0 z-10 hidden overflow-hidden p-[16px] translate-y-[100%]
   bg-backgroundLight rounded-[4px];
 }
 

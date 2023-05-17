@@ -1,9 +1,8 @@
 "use client";
 
-import { ChangeEventHandler, FC, useState } from "react";
+import { FC, useState } from "react";
 
 import { FilterProps } from "@components/types/filters";
-import { useCheckboxChanging } from "hooks/useCheckboxChanging";
 import Select from "@components/ui-kit/Select";
 import SelectOptionsList from "@components/ui-kit/Select/SelectOptionsList";
 import Radio from "@components/ui-kit/Radio";

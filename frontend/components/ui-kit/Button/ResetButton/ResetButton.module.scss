@@ -1,0 +1,46 @@
+.button {
+  @apply relative p-[8px] pl-[24px]
+  text-[15px] font-semibold text-white transition-colors duration-[80ms];
+
+  &::before,
+  &::after {
+    @apply absolute top-0 bottom-0 left-[8px] translate-x-[-50%]
+    w-[3px] h-[20px] my-auto
+    content-[""] bg-white rounded-[2px] transition-colors duration-[80ms];
+  }
+
+  &::before {
+    @apply rotate-[45deg];
+  }
+
+  &::after {
+    @apply rotate-[-45deg];
+  }
+
+  &:hover {
+    @apply text-red;
+
+    &::before,
+    &::after {
+      @apply bg-red;
+    }
+  }
+
+  &:not(:hover) {
+    @apply duration-[400ms];
+
+    &::before,
+    &::after {
+      @apply duration-[400ms];
+    }
+  }
+
+  &:disabled {
+    @apply opacity-[32%] text-white;
+
+    &::before,
+    &::after {
+      @apply bg-white;
+    }
+  }
+}

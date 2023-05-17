@@ -1,0 +1,9 @@
+.sliderTrack {
+  @apply flex transition-transform duration-[400ms];
+}
+
+.sliderItem {
+  @apply py-[8px] px-[16px]
+  text-[13px] leading-[16px] font-semibold whitespace-nowrap
+  border border-separator rounded-[32px] cursor-pointer transition-colors;
+}

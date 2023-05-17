@@ -1,4 +1,4 @@
-import { SwiperOptions } from 'swiper';
+import { SwiperOptions } from "swiper";
 
 export const breakpoints = {
   sm: 320,

@@ -14,4 +14,7 @@
   @apply grid-cols-3;
 }
 
+.separated {
+  @apply border-t border-t-separator;
+}
 

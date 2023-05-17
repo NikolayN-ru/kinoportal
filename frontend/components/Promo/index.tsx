@@ -1,13 +1,15 @@
-import React, { FC, useRef, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Autoplay, Navigation, SwiperOptions } from 'swiper';
+import React, { FC, useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Autoplay, Navigation, SwiperOptions } from "swiper";
 
-import { promoItems } from '@mock/filmsData';
-import PromoItem from './PromoItem';
-import SliderButton from '@components/Button/SliderButton';
-import { breakpoints } from '@components/Slider/SliderParams';
+import { promoItems } from "@mock/filmsData";
+import PromoItem from "./PromoItem";
+import { breakpoints } from "@components/Slider/SliderParams";
+import SliderButton, {
+  ButtonSize,
+} from "@components/ui-kit/Button/SliderButton";
 
-import s from './Promo.module.scss';
+import s from "./Promo.module.scss";
 
 const Promo: FC = () => {
   const navigationPrevRef = useRef<HTMLButtonElement>(null);
@@ -67,8 +69,18 @@ const Promo: FC = () => {
 
   return (
     <div className={s.promo}>
-      <SliderButton direction={'prev'} ref={navigationPrevRef} className={s.buttonPrev} />
-      <SliderButton direction={'next'} ref={navigationNextRef} className={s.buttonNext} />
+      <SliderButton
+        direction={"prev"}
+        ref={navigationPrevRef}
+        className={s.buttonPrev}
+        size={ButtonSize.MD}
+      />
+      <SliderButton
+        direction={"next"}
+        ref={navigationNextRef}
+        className={s.buttonNext}
+        size={ButtonSize.MD}
+      />
 
       <div className={s.sliderContainer}>
         <Swiper onSwiper={setSwiper} {...swiperParams}>
@@ -76,7 +88,11 @@ const Promo: FC = () => {
             <SwiperSlide key={item.id}>
               <PromoItem
                 data={item}
-                className={index === prevIndex || index === nextIndex ? s.transparent : ''}
+                className={
+                  index === prevIndex || index === nextIndex
+                    ? s.transparent
+                    : ""
+                }
                 isCurrent={index === swiper?.realIndex}
               />
             </SwiperSlide>
