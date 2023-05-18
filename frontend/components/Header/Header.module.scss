@@ -1,52 +1,114 @@
 .container {
   @apply max-w-[1216px] my-[0] mx-auto;
+  position: relative;
+  z-index: 15;
 }
 
 .row {
   @apply h-[72px] flex flex-row justify-between;
   font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  z-index: 15;
 }
 
 .menu {
   @apply flex flex-row items-center gap-[30px];
+  width: 100%;
 }
 
 .logo {
   @apply cursor-pointer;
+  z-index: 15;
 }
 
-.listItem {
-  @apply flex gap-[30px];
+.section {
+  @apply flex flex-row items-center gap-[30px] justify-between;
+  width: 100%;
+  z-index: 0;
 }
 
-.link,
+.navigation {
+  @apply flex gap-[16px];
+  z-index: 15;
+}
+
+.DropDownBody {
+  opacity: 0;
+  animation: ani 0.4s forwards;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: -15px;
+  background-color: #1f1b2e;
+}
+
+.menu_block {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  color: rgba(255, 255, 255, 0.48);
+  background-color: #1f1b2e;
+  width: 1245px;
+  height: 500px;
+  border-radius: 12px;
+  background-color: #1f1b2e;
+}
+
+.menuDropDown {
+  position: absolute;
+  z-index: 0;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 80px;
+  border-top: 1px solid rgba(255, 255, 255, 0.196);
+  width: 100%;
+}
+
+.text,
+.text_avatar {
+  display: block;
+  position: relative;
+  z-index: 15;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.text:hover,
+.text_avatar:hover {
+  @apply text-white;
+  transition: all 0.4s;
+}
+
+@keyframes ani {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .btn__subscribe,
 .btn__search {
   @apply cursor-pointer;
+  z-index: 15;
   color: rgba(255, 255, 255, 0.48);
   font-size: 15px;
   font-weight: 600;
 }
-
 .btn {
   &__subscribe {
     @apply text-white py-[8.5px] px-[12px] rounded-[8px] text-xs font-semibold;
     background: rgb(214, 36, 158);
-    background: linear-gradient(
-      90deg,
-      rgba(214, 36, 158, 1) 0%,
-      rgba(196, 71, 255, 1) 0%,
-      rgba(232, 0, 60, 1) 74%
-    );
+    background: linear-gradient(90deg, rgba(214, 36, 158, 1) 0%, rgba(196, 71, 255, 1) 0%, rgba(232, 0, 60, 1) 74%);
   }
   &__search {
     @apply flex gap-[5px];
   }
 
   &__avatar {
-    @apply rounded-[8px] py-[12px] px-[11px];
-    border: 2px solid rgba(255, 255, 255, 0.48);
-
     &:hover {
       border-color: #ffffff;
       transition: all 0.4s;
@@ -57,18 +119,26 @@
   }
 }
 
-.link:hover,
+.text_avatar {
+  @apply rounded-[8px] py-[12px] px-[11px];
+  border: 2px solid rgba(255, 255, 255, 0.48);
+}
+
+.text_avatar:hover {
+  border-color: #ffffff;
+} 
+
 .btn__subscribe:hover,
 .btn__search:hover {
   @apply text-white;
   transition: all 0.4s;
 }
 
-.userBlock {
+.user_block {
   @apply flex gap-[30px] items-center;
 }
 
- .btn__avatar path {
+.btn__avatar path {
   fill: rgb(255, 255, 255, 0.48);
 }
 

@@ -1,5 +1,5 @@
 .HomeAdmin {
-    max-width: 1100px;
+    max-width: 1440px;
     margin: 0 auto;
     width: 100%;
     background-color: #fff;
@@ -14,7 +14,7 @@
 }
 
 .header {
-    padding: 25px 15px;
+    padding: 15px 15px;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -30,12 +30,7 @@
     gap: 20px;
 }
 
-.add_btn {
-    color: #fff;
-    background-color: #4040f2;
-    padding: 10px 15px;
-    border-radius: 15px;
-}
+
 
 .search_btn {
     padding: 10px;
@@ -45,4 +40,37 @@
 
 .search_btn path {
     fill: #000;
+}
+
+.login_block {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.login {
+    display: flex;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border: 3px solid #7d7d7d;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.login path {
+    fill: #7d7d7d;
+}
+
+.login svg {
+    height: 30px;
+    width: 30px;
+    margin: 0 auto;
+}
+
+.login:hover {
+    border: 3px solid #3b3b3b;
+}
+
+.login:hover path {
+    fill: #3b3b3b;
 }

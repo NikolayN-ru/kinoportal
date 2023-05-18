@@ -3,6 +3,22 @@
   border-b-[1px] border-solid border-[#d7d5d5];
 }
 
+.add_btn_block {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px;
+}
+.add_btn {
+  color: #fff;
+  font-weight: 600;
+  background-color: #4040f2;
+  padding: 10px 15px;
+  border-radius: 15px;
+}
+
+.add_btn:hover {
+  background-color: #3535cd;
+}
 .head_title,
 .body_title {
   @apply w-full;

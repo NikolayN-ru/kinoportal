@@ -1,11 +1,17 @@
-import { FC, ReactNode } from "react";
-import GrayButton from "@components/GrayButton";
+"use client";
+import { FC, ReactNode, useState } from "react";
 import Icon from "@components/ui-kit/IconComponent/Icon";
 import ControlsBar from "@components/componentsAdmin/ControlsBar";
 import Navbar from "@components/componentsAdmin/Navbar";
 import s from "./layout.module.scss";
+import "./admin.scss";
+import ModalAdminAuth from "./ModalAdminAuth/ModalAdminAuth";
 
 const HomeAdmin: FC<{ children: ReactNode }> = ({ children }) => {
+  const [isModal, setModal] = useState(false);
+  const onClose = () => {
+    setModal(false);
+  };
   return (
     <div className={s.HomeAdmin}>
       <Navbar />
@@ -13,9 +19,19 @@ const HomeAdmin: FC<{ children: ReactNode }> = ({ children }) => {
         <div className={s.header}>
           <div className={s.title}>Главная</div>
           <div className={s.header_btns}>
-            <GrayButton className={s.add_btn} title="Добавить +" />
             <div className={s.search_btn}>
               <Icon name="search" />
+            </div>
+            <div className={s.login_block}>
+              <div className={s.login} onClick={() => setModal(true)}>
+                <Icon name="avatar" />
+                <ModalAdminAuth
+                  title="Авторизация"
+                  visible={isModal}
+                  onClose={onClose}
+                  placeholder="Название"
+                />
+              </div>
             </div>
           </div>
         </div>

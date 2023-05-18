@@ -1,3 +1,5 @@
+import Link from "next/link";
+import GrayButton from "../GrayButton";
 import { FC } from "react";
 import Icon from "../ui-kit/IconComponent/Icon";
 import Button from "@components/ui-kit/Button";
@@ -14,52 +16,49 @@ const Footer: FC = () => {
           <div className={s.column}>
             <div className={s.title}>{t("footer.about")}</div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                {t("footer.aboutCompany")}
-              </a>
+              <Link className={s.link} href="https://corp.ivi.ru/" target="_blank">{t("footer.aboutCompany")}</Link>
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                {t("footer.jobs")}
-              </a>
+            <Link className={s.link} href="https://corp.ivi.ru/career/#career-vacancy-block" target="_blank">{t("footer.jobs")}</Link>
+
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                {t("footer.beta")}
-              </a>
+            <Link className={s.link} href="https://www.ivi.ru/pages/beta/" target="_blank">{t("footer.beta")}</Link>
+                
+             
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                {t("footer.information")}
-              </a>
+            <Link className={s.link} href="https://www.ivi.ru/info/partners" target="_blank">{t("footer.information")}</Link>
+                
+              
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                {t("footer.advertising")}
-              </a>
+            <Link className={s.link} href="https://corp.ivi.ru/advertisers/" target="_blank">{t("footer.advertising")}</Link>
+                
+             
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                {t("footer.termsOfUse")}
-              </a>
+            <Link className={s.link} href="https://www.ivi.ru/info/agreement" target="_blank">{t("footer.termsOfUse")}</Link>
+                
+              
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                {t("footer.provacyPolicy")}
-              </a>
+            <Link className={s.link} href="https://www.ivi.ru/info/confidential" target="_blank">{t("footer.provacyPolicy")}</Link>
+                
+              
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                {t("footer.compliance")}
-              </a>
+            <Link className={s.link} href="https://www.ivi.ru/info/goryachaya-liniya-komplaens" target="_blank">{t("footer.compliance")}</Link>
+                
+              
             </div>
           </div>
           <div className={s.column}>
             <div className={s.title}>{t("footer.sections")}</div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                {t("footer.myIvi")}
-              </a>
+            <Link className={s.link} href="https://www.ivi.ru/new" target="_blank">{t("footer.myIvi")}</Link>
+
+             
             </div>
             <div className={s.item}>
               <a className={s.link} href="/" target="_blank">
