@@ -1,5 +1,4 @@
-import Icon from "@components/shared/IconComponent/Icon";
-import DropDownWidget from "../DropDownWidget/DropDownWidget";
+import Icon from "@components/ui-kit/IconComponent/Icon";
 import s from "./DropDownNotify.module.scss";
 
 const DropDownNotify = () => {

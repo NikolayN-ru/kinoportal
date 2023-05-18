@@ -11,6 +11,7 @@ interface ButtonProps {
   ico?: any;
   type?: "button" | "submit" | "reset";
   color?: string;
+  small?: string;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -21,6 +22,7 @@ const Button: FC<ButtonProps> = ({
   ico,
   type,
   color,
+  small,
 }) => {
   type = type || "button";
 
@@ -45,6 +47,7 @@ const Button: FC<ButtonProps> = ({
         <div className={s.content}>
           {preamble && <span className={s.preamble}>{preamble}</span>}
           {text}
+          {small && <span className={s.small}>{small}</span>}
         </div>
       )}
     </button>
