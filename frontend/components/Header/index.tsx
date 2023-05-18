@@ -1,7 +1,7 @@
 import Link from "next/link";
+import Icon from "../ui-kit/IconComponent/Icon";
+import Logo from "../ui-kit/Logo/Logo";
 import React, { useEffect, useRef, useState } from "react";
-import Icon from "../shared/IconComponent/Icon";
-import Logo from "../shared/Logo/Logo";
 import ModalSearch from "./ModalSearch";
 import s from "./Header.module.scss";
 import { DropDown } from "@components/shared/ui-kit";

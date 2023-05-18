@@ -1,4 +1,4 @@
-import IconComponent from "../../shared/IconComponent/Icon";
+import IconComponent from "../../ui-kit/IconComponent/Icon";
 import s from "./ControlsBar.module.scss";
 import GrayButton from "../../GrayButton/index";
 const ControlsBar = () => {

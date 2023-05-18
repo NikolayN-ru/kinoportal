@@ -1,10 +1,6 @@
-.swiperContainer {
-  @apply mx-[-12px] mt-[-12px] px-[12px] pt-[12px];
-}
-
 .buttonPrev,
 .buttonNext {
-  @apply hidden lg:flex absolute top-0 bottom-0 z-10 w-[32px] xl:w-[34px] my-auto;
+  @apply hidden lg:flex absolute top-0 bottom-0 z-10 my-auto;
 }
 
 .buttonPrev {

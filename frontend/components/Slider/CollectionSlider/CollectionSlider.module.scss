@@ -1,5 +1,11 @@
 .container {
-  @apply relative;
+  @apply relative mr-[-24px];
 }
 
+.sliderWrapper {
+  @apply mx-[-12px] mt-[-12px] px-[12px] pt-[12px];
+}
 
+.sliderNext {
+  @apply right-[24px];
+}

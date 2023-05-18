@@ -1,5 +1,5 @@
 import { FC } from "react";
-import style from './Icon.module.scss';
+
 import { Search } from "../../../public/svg/index";
 import { Notify } from "../../../public/svg/index";
 import { Avatar } from "../../../public/svg/index";
@@ -35,7 +35,6 @@ import { US } from "../../../public/svg/index";
 import { RUS } from "../../../public/svg/index";
 
 import s from "./Icon.module.scss";
-import { FC } from "react";
 
 type IconComponentProps = { name: string; clsassName?: string };
 type IconTypes = { [name: string]: ReactSVGComponent };

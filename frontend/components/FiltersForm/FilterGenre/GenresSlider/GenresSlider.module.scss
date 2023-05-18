@@ -1,0 +1,14 @@
+.container {
+  @apply relative mb-[16px];
+
+  width: calc(100% - 12px);
+}
+
+.sliderPrev,
+.sliderNext {
+  background-color: var(--background-light)!important;
+}
+
+.sliderPrev {
+  @apply translate-x-[0];
+}

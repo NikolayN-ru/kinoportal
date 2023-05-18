@@ -1,6 +1,6 @@
 "use client";
 import { FC, ReactNode, useState } from "react";
-import Icon from "@components/shared/IconComponent/Icon";
+import Icon from "@components/ui-kit/IconComponent/Icon";
 import ControlsBar from "@components/componentsAdmin/ControlsBar";
 import Navbar from "@components/componentsAdmin/Navbar";
 import s from "./layout.module.scss";

@@ -24,7 +24,11 @@ export const useTooltip = (container: HTMLElement | null): UseTooltipResult => {
   const containerX = container?.getBoundingClientRect().x ?? 0;
   const containerY = container?.getBoundingClientRect().y ?? 0;
 
-  const showTooltip: ShowTooltip = (targetX: number, targetY: number, text: string) => {
+  const showTooltip: ShowTooltip = (
+    targetX: number,
+    targetY: number,
+    text: string
+  ) => {
     const x = targetX - containerX;
     const y = targetY - containerY;
 

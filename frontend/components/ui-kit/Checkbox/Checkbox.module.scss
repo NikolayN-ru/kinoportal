@@ -1,0 +1,42 @@
+.label {
+  @apply flex items-center justify-between
+  text-[13px] font-semibold text-optionText cursor-pointer
+  transition-colors duration-[80ms];
+
+  &:hover {
+    @apply text-white;
+
+    .mark {
+      svg path {
+        @apply fill-optionText duration-[80ms];
+      }
+    }
+  }
+
+  &:not(:hover) {
+    @apply duration-[400ms];
+
+    .mark {
+      svg path {
+        @apply duration-[400ms];
+      }
+    }
+  }
+
+  input[type="checkbox"]:checked {
+    & ~ .mark svg path {
+      @apply fill-white;
+    }
+
+    & ~ .text {
+      @apply text-white;
+    }
+  }
+}
+
+.mark {
+  svg path {
+    @apply fill-transparent transition-colors;
+  }
+}
+

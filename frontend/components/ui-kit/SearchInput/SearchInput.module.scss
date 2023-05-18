@@ -1,0 +1,95 @@
+.container {
+  @apply relative h-[40px];
+
+  &:hover {
+    .deleteButton {
+      @apply opacity-[85%];
+    }
+
+    .input {
+      border-bottom: 2px solid rgba(49, 43, 69, 0.4);
+    }
+  }
+
+  &:not(:hover) {
+    .deleteButton,
+    .input {
+      @apply duration-[400ms];
+    }
+  }
+}
+
+.input {
+  @apply block w-full h-full pt-[18px] pr-[40px] pb-[2px] pl-[12px]
+  text-[15px] text-purpleDark font-semibold bg-light rounded-default
+  transition-colors duration-[80ms];
+  
+  border-bottom: 2px solid rgba(49, 43, 69, 0.2);
+
+  &:focus {
+    border-bottom: 2px solid rgba(49, 43, 69, 0.4);
+    outline: none;
+  }
+
+  &:focus ~ .searchIcon {
+    @apply opacity-[40%] duration-[80ms];
+  }
+
+  &:not(:focus),
+  &:not(:focus) ~ .searchIcon,
+  &:not(:focus) ~ .placeholder {
+    @apply duration-[400ms];
+  }
+}
+
+.placeholder {
+  @apply absolute top-[10px] right-[40px] left-[12px]
+  overflow-hidden h-[20px] my-auto 
+  text-[15px] leading-[20px] font-semibold whitespace-nowrap text-ellipsis
+  cursor-text transition-all duration-[80ms];
+}
+
+.activePlaceholder {
+  @apply top-[6px] h-[12px] text-[12px] leading-[12px];
+}
+
+.button {
+  @apply absolute top-0 right-0 bottom-0 w-[40px] transition-opacity duration-[80ms];
+}
+
+.deleteButton {
+  @apply opacity-[30%];
+
+  .icon {
+    @apply hidden;
+  }
+
+  &::before,
+  &::after {
+    @apply absolute top-0 right-0 bottom-0 left-0
+    w-[1px] h-[18px] m-auto content-[""]
+    bg-backgroundLight rounded-[1px] rotate-[45deg];
+  }
+
+  &::after {
+    @apply rotate-[-45deg];
+  }
+
+  &:focus {
+    @apply opacity-[85%];
+
+    outline: none;
+  }
+}
+
+.searchIcon {
+  @apply opacity-[20%];
+
+  .icon {
+    @apply absolute top-0 right-0 bottom-0 left-0 block m-auto;
+
+    path {
+      fill: var(--background-light);
+    }
+  }
+}

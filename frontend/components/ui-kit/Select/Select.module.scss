@@ -1,0 +1,51 @@
+.container {
+  @apply relative z-0;
+}
+
+.selectedContainer {
+  @apply flex justify-between items-center h-[56px] py-[8px] px-[16px]
+  bg-backgroundLight rounded-[4px] cursor-pointer transition-colors duration-[400ms];
+}
+
+.icon {
+  @apply ml-[16px];
+  
+  svg {
+    @apply w-[18px] h-[18px] rotate-90;
+  }
+}
+
+.titleContainer {
+  @apply grow flex flex-col justify-between min-w-[30px];
+}
+
+.title {
+  @apply h-[20px] overflow-hidden
+  text-default leading-[20px] text-white font-semibold whitespace-nowrap text-ellipsis;
+}
+
+.selectedValues {
+  @apply max-h-[16px] overflow-hidden mt-[4px]
+  text-[13px] leading-[16px] text-selectedValues font-semibold whitespace-nowrap text-ellipsis;
+}
+
+.dropdown {
+  @apply absolute bottom-[-4px] left-0 z-10 hidden overflow-hidden p-[16px] translate-y-[100%]
+  bg-backgroundLight rounded-[4px];
+}
+
+.isOpen {
+  @apply z-10;
+
+  .selectedContainer {
+    @apply bg-purpleSelected;
+  }
+
+  .icon svg {
+    @apply rotate-[-90deg];
+  }
+
+  .dropdown {
+    @apply block min-w-full;
+  }
+}

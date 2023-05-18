@@ -1,14 +1,9 @@
 import { FC, MouseEventHandler, useContext } from "react";
 
-import { TooltipContext } from '../../Slider/CollectionSlider';
-import Icon from '../../shared/IconComponent/Icon';
+import { TooltipContext } from "../../Slider/CollectionSlider";
+import Icon from "../../ui-kit/IconComponent/Icon";
 
 import s from "./FilmCardTools.module.scss";
-import {
-  HideTooltip,
-  ShowTooltip,
-  TooltipContextValue,
-} from "../../types/tooltip";
 
 type Tool = {
   name: "bookmarks" | "similar" | "grade" | "dislike";
