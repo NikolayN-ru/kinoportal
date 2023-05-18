@@ -1,11 +1,11 @@
-import Icon from "@components/shared/IconComponent/Icon";
-import DropDownWidget from "../DropDownWidget/DropDownWidget";
-import s from "./DropDownAvatar.module.scss";
-import GrayButton from "@components/GrayButton";
-import SubscriptionSector from "./SubscriptionSector/SubscriptionSector";
+import React, { useState } from "react";
 import Link from "next/link";
-import { useState } from "react";
-import React from "react";
+
+import Icon from "@components/ui-kit/IconComponent/Icon";
+import Button from "@components/ui-kit/Button";
+import SubscriptionSector from "./SubscriptionSector/SubscriptionSector";
+
+import s from "./DropDownAvatar.module.scss";
 
 const DropDownAvatar = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -38,12 +38,12 @@ const DropDownAvatar = () => {
       <div className={s.icon_sub}>
         <Icon name="diamond" />
       </div>
-      <GrayButton className={s.button_sub} text="Подписки" small="Подключить" />
+      <Button className={s.button_sub} text="Подписки" small="Подключить" />
     </div>
   );
   const content = (
     <div className={s.auth_content}>
-      <GrayButton
+      <Button
         className={s.button_auth}
         text="Войти или зарегистрироваться"
       />
@@ -81,44 +81,44 @@ const DropDownAvatar = () => {
               <div className={s.icon}>
                 <Icon name="video" />
               </div>
-              <GrayButton className={s.button} text="Покупки" />
+              <Button className={s.button} text="Покупки" />
             </div>
             <div className={s.button_item} onMouseEnter={handleMouseLeave}>
               <div className={s.icon}>
                 <Icon name="favorite" />
               </div>
-              <GrayButton className={s.button} text="Смотреть позже" />
+              <Button className={s.button} text="Смотреть позже" />
             </div>
             <div className={s.button_item} onMouseEnter={handleMouseLeave}>
               <div className={s.icon}>
                 <Icon name="history" />
               </div>
-              <GrayButton className={s.button} text="История просмотров" />
+              <Button className={s.button} text="История просмотров" />
             </div>
             {triggerElement}
             <div className={s.button_item} onMouseEnter={handleMouseLeave}>
               <div className={s.icon}>
                 <Icon name="certificate" />
               </div>
-              <GrayButton className={s.button} text="Активация сертификата" />
+              <Button className={s.button} text="Активация сертификата" />
             </div>
             <div className={s.button_item} onMouseEnter={handleMouseLeave}>
               <div className={s.icon}>
                 <Icon name="tv_channels" />
               </div>
-              <GrayButton className={s.button} text="Вход по коду" />
+              <Button className={s.button} text="Вход по коду" />
             </div>
             <div className={s.button_item} onMouseEnter={handleMouseLeave}>
               <div className={s.icon}>
                 <Icon name="wallet" />
               </div>
-              <GrayButton className={s.button} text="Способы оплаты" />
+              <Button className={s.button} text="Способы оплаты" />
             </div>
             <div className={s.button_item} onMouseEnter={handleMouseLeave}>
               <div className={s.icon}>
                 <Icon name="share_small" />
               </div>
-              <GrayButton className={s.button} text="Пригласить друзей" />
+              <Button className={s.button} text="Пригласить друзей" />
             </div>
           </div>
         </div>

@@ -1,8 +1,10 @@
 import React from "react";
-import s from "./DropDownContentTV.module.scss";
+
 import DropDownWidget from "../DropDownWidget/DropDownWidget";
-import GrayButton from "@components/GrayButton";
-import Icon from "@components/shared/IconComponent/Icon";
+import Button from "@components/ui-kit/Button";
+import Icon from "@components/ui-kit/IconComponent/Icon";
+
+import s from "./DropDownContentTV.module.scss";
 
 export interface IGenreTV {
   id: string;
@@ -36,13 +38,13 @@ const DropDownContentTV = () => {
             );
           })}
         </div>
-        <GrayButton className={s.side_content_btn} text="Телепрограмма" />
+        <Button className={s.side_content_btn} text="Телепрограмма" />
       </div>
       <div className={s.main_content}>
         <div className={s.main_content_popular}></div>
         <div className={s.main_content_Widget_block}>
           <DropDownWidget />
-          <GrayButton
+          <Button
             className={s.tv}
             title={<Icon name="tv" />}
             text="Смотреть на Smart TV"

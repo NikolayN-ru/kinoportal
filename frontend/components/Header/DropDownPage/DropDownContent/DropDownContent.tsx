@@ -1,14 +1,13 @@
-import GrayButton from "@components/GrayButton";
-import s from "./DropDownContent.module.scss";
-import Icon from "@components/shared/IconComponent/Icon";
-import Carousel from "@components/Header/Carousel/Carousel";
 import { FC } from "react";
 import Link from "next/link";
+import Button from "@components/ui-kit/Button";
+import s from "./DropDownContent.module.scss";
+import Icon from "@components/ui-kit/IconComponent/Icon";
+import Carousel from "@components/Header/Carousel/Carousel";
 import DropDownWidget from "../DropDownWidget/DropDownWidget";
 import { genres, countries, years, sideContent } from "./allCollectionsContent";
 import { IFilms } from "./interfaces/FilmsInteface";
 import { Links } from "./interfaces/LinksEnum";
-
 
 const content: IFilms = {
   genres: genres,
@@ -82,8 +81,8 @@ const DropDownContent: FC<DropDownContentProps> = ({ link }) => {
           </div>
         </div>
         <div className={s.sideContent_Widget_block}>
-            <DropDownWidget />
-          <GrayButton
+          <DropDownWidget />
+          <Button
             className={s.tv}
             title={<Icon name="tv" />}
             text="Смотреть на Smart TV"

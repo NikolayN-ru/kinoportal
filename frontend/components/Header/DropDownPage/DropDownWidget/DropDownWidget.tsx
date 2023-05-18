@@ -1,8 +1,9 @@
-import GrayButton from '@components/GrayButton';
 import Carousel from '@components/Header/Carousel/Carousel';
-import Icon from '@components/shared/IconComponent/Icon';
+import Icon from '@components/ui-kit/IconComponent/Icon';
+import Button from '@components/ui-kit/Button';
 import React from 'react';
 import s from './DropDownWidget.module.scss';
+
 const DropDownWidget = () => {
     return (
         <div className={s.widget}>
@@ -19,7 +20,7 @@ const DropDownWidget = () => {
           </div>
         </div>
         <div className={s.emerge_block}>
-          <GrayButton className={s.subscribtion_btn} title="Подключить" />
+          <Button className={s.subscribtion_btn} title="Подключить" />
           <span className={s.note}>Отключить можно в любой момент</span>
         </div>
       </div>
