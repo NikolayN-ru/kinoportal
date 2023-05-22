@@ -4,7 +4,7 @@ import SwiperCore, { Autoplay, Navigation, SwiperOptions } from "swiper";
 
 import { promoItems } from "@mock/filmsData";
 import PromoItem from "./PromoItem";
-import { breakpoints } from "@components/Slider/SliderParams";
+import { breakpoints } from "@components/Slider/breakpoints";
 import SliderButton, {
   ButtonSize,
 } from "@components/ui-kit/Button/SliderButton";

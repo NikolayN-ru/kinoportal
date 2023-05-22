@@ -7,7 +7,7 @@ import FilmCardTooltip from "@components/FilmCard/FilmCardTooltip";
 import { CollectionFilm } from "../../types/film";
 import { useTooltip } from "../../../hooks/useTooltip";
 import { TooltipContextValue } from "../../types/tooltip";
-import { collectionSliderParams } from "../SliderParams";
+import { collectionSliderParams } from "./parameters";
 
 import s from "./CollectionSlider.module.scss";
 
@@ -35,7 +35,7 @@ const CollectionSlider: FC<CollectionSliderProps> = ({ items }) => {
         <Slider
           className={s.sliderWrapper}
           params={collectionSliderParams}
-          titles={true}
+          withTitles={true}
           nextClassName={s.sliderNext}
         >
           {items.map((item) => (

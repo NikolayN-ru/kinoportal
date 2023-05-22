@@ -27,7 +27,6 @@ const SearchInput: FC<SearchInputProps> = ({
   const [value, setValue] = useState<string>("");
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  console.log(value);
 
   const removeInputFocus = (e: MouseEvent) => {
     if (
@@ -49,7 +48,6 @@ const SearchInput: FC<SearchInputProps> = ({
   }, []);
 
   const onInputChange: ChangeEventHandler<HTMLInputElement> = (e): void => {
-    console.log("INPUT > ", e.currentTarget.value);
     setValue(e.currentTarget.value);
   };
 

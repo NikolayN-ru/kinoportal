@@ -251,3 +251,139 @@ export const promoItems: PromoItemType[] = [
     age: 6,
   },
 ];
+
+export const genresIconNames = [
+  {
+    genre: "Комедии",
+    iconName: "comedyMask",
+  },
+  {
+    genre: "Драмы",
+    iconName: "dramaMask",
+  },
+  {
+    genre: "Триллеры",
+    iconName: "thriller",
+  },
+  {
+    genre: "Приключения",
+    iconName: "adventures",
+  },
+  {
+    genre: "Зарубежные",
+    iconName: "globe",
+  },
+  {
+    genre: "Мелодрамы",
+    iconName: "hearts",
+  },
+  {
+    genre: "Фантастика",
+    iconName: "sciFi",
+  },
+  {
+    genre: "Фэнтези",
+    iconName: "fantasy",
+  },
+  {
+    genre: "Семейные",
+    iconName: "family",
+  },
+  {
+    genre: "Боевики",
+    iconName: "gun",
+  },
+  {
+    genre: "Ужасы",
+    iconName: "horror",
+  },
+  {
+    genre: "Артхаус",
+    iconName: "arthouse",
+  },
+  {
+    genre: "Биография",
+    iconName: "biography",
+  },
+  {
+    genre: "Вестерн",
+    iconName: "western",
+  },
+  {
+    genre: "Военные",
+    iconName: "war",
+  },
+  {
+    genre: "Детективы",
+    iconName: "detective",
+  },
+  {
+    genre: "Для детей",
+    iconName: "children",
+  },
+  {
+    genre: "Исторические",
+    iconName: "historical",
+  },
+  {
+    genre: "Катастрофы",
+    iconName: "catastrophe",
+  },
+  {
+    genre: "Криминал",
+    iconName: "criminal",
+  },
+  {
+    genre: "Мистические",
+    iconName: "mystic",
+  },
+  {
+    genre: "Музыкальные",
+    iconName: "music",
+  },
+  {
+    genre: "По комиксам",
+    iconName: "comics",
+  },
+  {
+    genre: "Русские",
+    iconName: "russian",
+  },
+  {
+    genre: "Советские",
+    iconName: "soviet",
+  },
+  {
+    genre: "Спорт",
+    iconName: "sports",
+  },
+];
+
+export const genres: string[] = [
+  "Артхаус",
+  "Биография",
+  "Боевики",
+  "Вестерн",
+  "Военные",
+  "Детективы",
+  "Для детей",
+  "Драмы",
+  "Зарубежные",
+  "Исторические",
+  "Катастрофы",
+  "Комедии",
+  "Криминал",
+  "Мелодрамы",
+  "Мистические",
+  "Музыкальные",
+  "По комиксам",
+  "Приключения",
+  "Русские",
+  "Семейные",
+  "Советские",
+  "Спорт",
+  "Триллеры",
+  "Ужасы",
+  "Фантастика",
+  "Фэнтези",
+];

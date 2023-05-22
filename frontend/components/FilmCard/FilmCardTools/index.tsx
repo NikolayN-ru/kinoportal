@@ -29,7 +29,7 @@ const tools: Tool[] = [
   },
   {
     name: "dislike",
-    icon: "bookmark",
+    icon: "declension",
     text: "Не нравится такое",
   },
 ];

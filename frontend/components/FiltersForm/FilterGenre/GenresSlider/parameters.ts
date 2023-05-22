@@ -1,29 +1,20 @@
+import { breakpoints } from "@components/Slider/breakpoints";
 import { SwiperOptions } from "swiper";
 
-export const breakpoints = {
-  sm: 320,
-  md: 600,
-  lg: 1024,
-  xl: 1280,
-};
-
-export const collectionSliderParams: SwiperOptions = {
+export const genresSliderParamsMini: SwiperOptions = {
   breakpoints: {
     [breakpoints.md]: {
-      slidesPerView: 5,
+      slidesPerView: 4,
       slidesPerGroup: 1,
-      spaceBetween: 12,
     },
     [breakpoints.lg]: {
-      slidesPerView: 7,
-      slidesPerGroup: 6,
-      spaceBetween: 24,
+      slidesPerView: 5,
+      slidesPerGroup: 2,
       allowTouchMove: false,
     },
     [breakpoints.xl]: {
-      slidesPerView: 7,
-      slidesPerGroup: 6,
-      spaceBetween: 24,
+      slidesPerView: 5,
+      slidesPerGroup: 2,
       allowTouchMove: false,
     },
   },
@@ -33,25 +24,28 @@ export const collectionSliderParams: SwiperOptions = {
   allowTouchMove: true,
 };
 
-export const compilationSliderParams: SwiperOptions = {
+export const genresSliderParamsFull: SwiperOptions = {
   breakpoints: {
     [breakpoints.md]: {
-      spaceBetween: 12,
-      slidesPerView: 2,
+      slidesPerView: 4,
+      slidesPerGroup: 3,
+      spaceBetween: 24,
     },
     [breakpoints.lg]: {
+      slidesPerView: 5,
+      slidesPerGroup: 4,
       spaceBetween: 24,
-      slidesPerView: 3,
-      allowTouchMove: false,
+      allowTouchMove: true,
     },
     [breakpoints.xl]: {
+      slidesPerView: 7,
+      slidesPerGroup: 6,
       spaceBetween: 24,
-      slidesPerView: 4,
       allowTouchMove: false,
     },
   },
-  spaceBetween: 12,
-  slidesPerView: 1,
+  slidesPerView: 2,
   slidesPerGroup: 1,
+  spaceBetween: 16,
   allowTouchMove: true,
 };

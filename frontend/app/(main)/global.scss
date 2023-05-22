@@ -113,4 +113,8 @@
   .range-slider-mark {
     @apply text-[15px] text-white font-semibold whitespace-nowrap;
   }
+
+  .pageSection {
+    @apply py-[12px] md:py-[20px] lg:py-[24px];
+  }
 }

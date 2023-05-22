@@ -25,11 +25,11 @@ export default function Home() {
 
       <section className={s.promoSection}>{<Promo />}</section>
 
-      <section className={s.pageSection + " " + s.subscribeSection}>
+      <section className={"pageSection " + s.subscribeSection}>
         <SubscriptionButton />
       </section>
 
-      <section className={s.pageSection + " " + s.aboutSection}>
+      <section className={"pageSection " + s.aboutSection}>
         <Title
           className={s.descriptionTitle}
           tag="h2"
@@ -39,7 +39,7 @@ export default function Home() {
         <PageDescription />
       </section>
 
-      <section className={s.pageSection}>
+      <section className="pageSection">
         <Title
           className={s.sectionTitle}
           tag="h2"
@@ -50,7 +50,7 @@ export default function Home() {
       </section>
 
       {collections.map((collection) => (
-        <section key={collection.id} className={s.pageSection}>
+        <section key={collection.id} className="pageSection">
           <Link
             href={`/collections/${collection.link}`}
             className={s.titleLink + " " + s.sectionTitle}
