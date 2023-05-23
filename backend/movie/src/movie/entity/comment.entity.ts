@@ -10,6 +10,11 @@ export class Comment {
     @Column()
     text: string;
 
-    @ManyToOne(type => Review, review => review.comments)
+    @ManyToOne(type => Review,
+            review => review.comments,
+        {
+            onDelete: "CASCADE",
+            onUpdate: "CASCADE"
+        })
     review: Review;
 }

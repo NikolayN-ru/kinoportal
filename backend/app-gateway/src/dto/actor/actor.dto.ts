@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { MovieDto } from "../movie/movie.dto";
 
 export class ActorDto{
     @ApiProperty()
@@ -18,4 +19,12 @@ export class ActorWithImageDto{
     actorDto: ActorDto
     @ApiProperty()
     image: any
+}
+
+export class ActorWitMovie{
+    @ApiProperty()
+    actor: ActorWithImageDto
+    
+    @ApiProperty()
+    movie: MovieDto
 }
