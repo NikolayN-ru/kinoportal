@@ -25,13 +25,6 @@ export class AdminController {
   @Inject('Movie')
   private clientMovie: ClientProxy) {}
 
-  @Get('/actor')
-  @ApiResponse({status: 200, description: 'get all actor', type: [ActorWithImageDto]})
-  @ApiResponse({status: 404, description: 'actors not found', type: HttpExceptionDto})
-  getAllActor(){
-    return this.clientActor.send('get.all.actor', '')
-  }
-
   @Post('/actor')
   @UseInterceptors(FilesInterceptor('image'))
   @ApiBody({type: ActorWithImageDto})
@@ -61,39 +54,62 @@ export class AdminController {
   }
   
   @Post('/genre')
+  @ApiBody({type: CreateGenreDto})
+  @ApiResponse({status: 200, description: 'post genre', type: String})
+  @ApiResponse({status: 400, description: 'Такой жанр уже есть', type: HttpExceptionDto})
   createGenre(@Body() dto: CreateGenreDto) {
       return this.clientMovie.send('create.genre', dto.genre);
   }
 
   @Delete('/genre')
+  @ApiBody({type: DeleteGenreDto})
+  @ApiResponse({status: 200, description: 'delete genre', type: String})
+  @ApiResponse({status: 404, description: 'genre not found', type: HttpExceptionDto})
   deleteGenre(@Body() dto: DeleteGenreDto) {
       return this.clientMovie.send('delete.genre', dto.id);
   }
 
   @Put('/genre')
+  @ApiBody({type: UpdateGenreDto})
+  @ApiResponse({status: 200, description: 'post genre', type: String})
+  @ApiResponse({status: 400, description: 'Такой жанр уже есть', type: HttpExceptionDto})
+  @ApiResponse({status: 404, description: 'genre not found', type: HttpExceptionDto})
   updateGenre(@Body() dto: UpdateGenreDto) {
       return this.clientMovie.send('update.genre', dto);
   }
 
   @Post('/country')
+  @ApiBody({type: CreateCountryDto})
+  @ApiResponse({status: 200, description: 'post country', type: String})
+  @ApiResponse({status: 400, description: 'Такая страна уже есть', type: HttpExceptionDto})
   createCountry(@Body() dto: CreateCountryDto) {
       return this.clientMovie.send('create.country', dto.country);
   }
 
   @Delete('/country')
+  @ApiBody({type: DeleteCountryDto})
+  @ApiResponse({status: 200, description: 'delete country', type: String})
+  @ApiResponse({status: 404, description: 'genre not found', type: HttpExceptionDto})
   deleteCountry(@Body() dto: DeleteCountryDto) {
       return this.clientMovie.send('delete.country', dto.id);
   }
 
   @Put('/country')
+  @ApiBody({type: UpdateCountryDto})
+  @ApiResponse({status: 200, description: 'post country', type: String})
+  @ApiResponse({status: 400, description: 'Такая страна уже есть', type: HttpExceptionDto})
+  @ApiResponse({status: 404, description: 'country not found', type: HttpExceptionDto})
   async updateCountry(@Body() dto: UpdateCountryDto) {
       return this.clientMovie.send('update.country', dto);
   }
 
   @Post('/movie')
   @UseInterceptors(FilesInterceptor('image'))
+  @ApiBody({type: CreateMovieDto})
+  @ApiResponse({status: 201, description: 'post movie', type: String})
+  @ApiResponse({status: 400, description: 'Неверные данные', type: HttpExceptionDto})
   createMovie(@Body() data: CreateMovieDto,
-  @UploadedFiles() image: Array<Express.Multer.File>){
+  @UploadedFiles() image: Array<any>){
     try{
       return this.clientMovie.send('create.movie', {data: data,image: image}).toPromise();
     }
@@ -103,17 +119,20 @@ export class AdminController {
   }
 
   @Delete('/movie')
+  @ApiBody({type: DeleteMovieDto})
+  @ApiResponse({status: 200, description: 'delete movie', type: String})
+  @ApiResponse({status: 404, description: 'movie not found', type: HttpExceptionDto})
   deleteMovie(@Body() dto: DeleteMovieDto) {
       return  this.clientMovie.send('delete.movie', dto.id)
   }
 
   @Put('/movie')
+  @ApiBody({type: UpdateCountryDto})
+  @ApiResponse({status: 200, description: 'post movie', type: String})
+  @ApiResponse({status: 400, description: 'Неверные данные', type: HttpExceptionDto})
+  @ApiResponse({status: 404, description: 'movie not found', type: HttpExceptionDto})
   updateMovie(@Body() dto: UpdateMovieDto) {
       return this.clientMovie.send('update.movie', dto)
   }
 
-  @Get('/movie')
-  getAllMovies() {
-      return this.clientMovie.send('get.all.movies', '')
-  }
 }
