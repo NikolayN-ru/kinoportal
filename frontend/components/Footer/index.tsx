@@ -1,8 +1,11 @@
+import Link from "next/link";
 import GrayButton from "../GrayButton";
-import Icon from "../shared/IconComponent/Icon";
-import s from "./Footer.module.scss";
 import { FC } from "react";
+import Icon from "../ui-kit/IconComponent/Icon";
+import Button from "@components/ui-kit/Button";
+import s from "./Footer.module.scss";
 import { useTranslation } from "react-i18next";
+import "../../i18n";
 
 const Footer: FC = () => {
   const { t } = useTranslation();
@@ -13,52 +16,49 @@ const Footer: FC = () => {
           <div className={s.column}>
             <div className={s.title}>{t("footer.about")}</div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                {t("footer.aboutCompany")}
-              </a>
+              <Link className={s.link} href="https://corp.ivi.ru/" target="_blank">{t("footer.aboutCompany")}</Link>
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                {t("footer.jobs")}
-              </a>
+            <Link className={s.link} href="https://corp.ivi.ru/career/#career-vacancy-block" target="_blank">{t("footer.jobs")}</Link>
+
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                {t("footer.beta")}
-              </a>
+            <Link className={s.link} href="https://www.ivi.ru/pages/beta/" target="_blank">{t("footer.beta")}</Link>
+                
+             
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                {t("footer.information")}
-              </a>
+            <Link className={s.link} href="https://www.ivi.ru/info/partners" target="_blank">{t("footer.information")}</Link>
+                
+              
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                {t("footer.advertising")}
-              </a>
+            <Link className={s.link} href="https://corp.ivi.ru/advertisers/" target="_blank">{t("footer.advertising")}</Link>
+                
+             
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                {t("footer.termsOfUse")}
-              </a>
+            <Link className={s.link} href="https://www.ivi.ru/info/agreement" target="_blank">{t("footer.termsOfUse")}</Link>
+                
+              
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                {t("footer.provacyPolicy")}
-              </a>
+            <Link className={s.link} href="https://www.ivi.ru/info/confidential" target="_blank">{t("footer.provacyPolicy")}</Link>
+                
+              
             </div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                {t("footer.compliance")}
-              </a>
+            <Link className={s.link} href="https://www.ivi.ru/info/goryachaya-liniya-komplaens" target="_blank">{t("footer.compliance")}</Link>
+                
+              
             </div>
           </div>
           <div className={s.column}>
             <div className={s.title}>{t("footer.sections")}</div>
             <div className={s.item}>
-              <a className={s.link} href="/" target="_blank">
-                {t("footer.myIvi")}
-              </a>
+            <Link className={s.link} href="https://www.ivi.ru/new" target="_blank">{t("footer.myIvi")}</Link>
+
+             
             </div>
             <div className={s.item}>
               <a className={s.link} href="/" target="_blank">
@@ -104,20 +104,17 @@ const Footer: FC = () => {
             </div>
             <div className={s.support_block}>
               <div className={s.chat}>
-                <GrayButton
+                <Button
                   className={s.chat_btn}
                   title={String(t("footer.writeChat"))}
                 />
               </div>
               <div className={s.contact__icons}>
-                <GrayButton
+                <Button
                   className={s.contact_btn}
                   title={<Icon name="message" />}
                 />
-                <GrayButton
-                  className={s.contact_btn}
-                  title={<Icon name="tel" />}
-                />
+                <Button className={s.contact_btn} title={<Icon name="tel" />} />
               </div>
               <div className={s.ask_block}>
                 <span className={s.ask_text}>ask.ivi.ru</span>
@@ -140,7 +137,7 @@ const Footer: FC = () => {
           <div className={s.stores}>
             <div className={s.overturn}>
               <div className={s.overturn_btn_wrap}>
-                <GrayButton
+                <Button
                   className={s.overturn_btn}
                   title={<Icon name="apple" />}
                   preamble={String(t("footer.download"))}
@@ -148,7 +145,7 @@ const Footer: FC = () => {
                 />
               </div>
               <div className={s.overturn_btn_wrap}>
-                <GrayButton
+                <Button
                   className={s.overturn_btn}
                   title={<Icon name="android" />}
                   preamble={String(t("footer.available"))}
@@ -156,7 +153,7 @@ const Footer: FC = () => {
                 />
               </div>
               <div className={s.overturn_btn_wrap}>
-                <GrayButton
+                <Button
                   className={s.overturn_btn}
                   title={<Icon name="tv" />}
                   preamble={String(t("footer.look"))}
@@ -164,7 +161,7 @@ const Footer: FC = () => {
                 />
               </div>
               <div className={s.overturn_btn_wrap}>
-                <GrayButton
+                <Button
                   className={s.overturn_btn}
                   title={<Icon name="desktop" />}
                   text={String(t("footer.allDevices"))}
@@ -182,28 +179,22 @@ const Footer: FC = () => {
           </div>
           <div className={s.community}>
             <div className={s.community_link}>
-              <GrayButton className={s.social} title={<Icon name="vk" />} />
+              <Button className={s.social} title={<Icon name="vk" />} />
             </div>
             <div className={s.community_link}>
-              <GrayButton className={s.social} title={<Icon name="ok" />} />
+              <Button className={s.social} title={<Icon name="ok" />} />
             </div>
             <div className={s.community_link}>
-              <GrayButton
-                className={s.social}
-                title={<Icon name="twitter" />}
-              />
+              <Button className={s.social} title={<Icon name="twitter" />} />
             </div>
             <div className={s.community_link}>
-              <GrayButton
-                className={s.social}
-                title={<Icon name="callback" />}
-              />
+              <Button className={s.social} title={<Icon name="callback" />} />
             </div>
             <div className={s.community_link}>
-              <GrayButton className={s.social} title={<Icon name="in" />} />
+              <Button className={s.social} title={<Icon name="in" />} />
             </div>
             <div className={s.community_link}>
-              <GrayButton className={s.social} title={<Icon name="tg" />} />
+              <Button className={s.social} title={<Icon name="tg" />} />
             </div>
           </div>
         </div>

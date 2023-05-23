@@ -2,16 +2,18 @@
 
 import Link from "next/link";
 
-import SubscriptionButton from "@components/SubscriptionButton";
-import CompilationSlider from "@components/CompilationSlider";
-import CollectionSlider from "@components/CollectionSlider";
+import CompilationSlider from "@components/Slider/CompilationSlider";
+import CollectionSlider from "@components/Slider/CollectionSlider";
 import MainContainer from "@components/MainContainer";
 import Promo from "@components/Promo";
-import About from "@components/About";
+import PageDescription from "@components/PageDescription";
 import Title from "@components/Title";
+import SubscriptionButton from "@components/ui-kit/Button/SubscriptionButton";
+
 import { collections, compilation } from "mock/filmsData";
 
 import s from "./page.module.scss";
+
 
 export default function Home() {
   return (
@@ -21,16 +23,20 @@ export default function Home() {
         бесплатно в хорошем качестве.
       </h1>
 
-      <section className={s.promoSection}>
-        <Promo />
-      </section>
+      <section className={s.promoSection}>{<Promo />}</section>
 
       <section className={s.pageSection + " " + s.subscribeSection}>
         <SubscriptionButton />
       </section>
 
       <section className={s.pageSection + " " + s.aboutSection}>
-        <About />
+        <Title
+          className={s.descriptionTitle}
+          tag="h2"
+          size="base"
+          text="Онлайн-кинотеатр Иви: фильмы в хорошем качестве всегда приносят настоящее удовольствие"
+        />
+        <PageDescription />
       </section>
 
       <section className={s.pageSection}>
@@ -40,7 +46,7 @@ export default function Home() {
           size="md"
           text={compilation.name}
         />
-        <CompilationSlider items={compilation.items} />
+        {<CompilationSlider items={compilation.items} />}
       </section>
 
       {collections.map((collection) => (

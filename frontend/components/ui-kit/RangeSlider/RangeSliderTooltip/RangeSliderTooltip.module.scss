@@ -1,0 +1,11 @@
+.tooltip {
+  @apply top-[100%] px-[12px]
+  text-[15px] font-semibold text-white bg-backgroundLight;
+
+  transform: translate(calc(-50% + 5px), 14px);
+
+  &::before {
+    @apply top-0 right-[50%] translate-y-[-100%] translate-x-[50%]
+    rotate-[180deg] border-t-backgroundLight;
+  }
+}

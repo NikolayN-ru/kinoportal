@@ -34,5 +34,4 @@ export class ActorController {
   getActor(@Param('id') actorId : number){
     return this.clientActor.send('get.actor', actorId)
   }
-
 }

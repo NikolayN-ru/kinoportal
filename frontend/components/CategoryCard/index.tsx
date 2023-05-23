@@ -2,12 +2,13 @@ import { FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import s from "./CategoryCard.module.scss";
+import { BaseItemProps } from "@components/types/slider";
 import { CompilationItem } from "../types/film";
 
-interface CategoryCardProps {
+import s from "./CategoryCard.module.scss";
+
+export interface CategoryCardProps extends BaseItemProps {
   data: CompilationItem;
-  className: string;
 }
 
 const IMAGE_PATH = "/images/interesting/";

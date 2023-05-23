@@ -1,0 +1,21 @@
+.container {
+  @apply flex flex-col justify-between items-center h-[88px] py-[16px] px-[8px]
+  border border-separator rounded-[6px] cursor-pointer transition-colors;
+
+  &:hover {
+    @apply bg-purpleSelected border-purpleSelected duration-[80ms];
+  }
+
+  &:not(:hover) {
+    @apply duration-[400ms];
+  }
+}
+
+.text {
+  @apply overflow-hidden h-[16px] mt-auto
+  text-[13px] leading-[16px] font-semibold text-white text-center whitespace-nowrap text-ellipsis;
+}
+
+.icon {
+  @apply w-auto h-[32px];
+}

@@ -1,0 +1,20 @@
+.container {
+  @apply grid gap-x-[40px];
+}
+
+.oneColumn {
+
+}
+
+.twoColumns {
+
+}
+
+.threeColumns {
+  @apply grid-cols-3;
+}
+
+.separated {
+  @apply border-t border-t-separator;
+}
+

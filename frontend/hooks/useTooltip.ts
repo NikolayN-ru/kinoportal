@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 import {
   HideTooltip,
   ShowTooltip,
   TooltipState,
-  UseTooltipResult,
-} from "../components/types/tooltip";
+  UseTooltipResult
+} from '../components/types/tooltip';
 
 const TOOLTIP_STATE_HIDDEN = {
   isVisible: false,
@@ -21,13 +21,16 @@ const TOOLTIP_STATE_HIDDEN = {
 export const useTooltip = (container: HTMLElement | null): UseTooltipResult => {
   const [tooltip, setTooltip] = useState<TooltipState>(TOOLTIP_STATE_HIDDEN);
 
+  const containerX = container?.getBoundingClientRect().x ?? 0;
+  const containerY = container?.getBoundingClientRect().y ?? 0;
+
   const showTooltip: ShowTooltip = (
     targetX: number,
     targetY: number,
     text: string
   ) => {
-    const x = targetX - (container?.getBoundingClientRect().x ?? 0);
-    const y = targetY - (container?.getBoundingClientRect().y ?? 0);
+    const x = targetX - containerX;
+    const y = targetY - containerY;
 
     setTooltip({
       isVisible: true,

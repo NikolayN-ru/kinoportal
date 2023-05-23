@@ -1,0 +1,28 @@
+.content {
+    display: flex;
+    flex-direction: row;
+    margin-top: 25px;
+    height: 250px;
+}
+
+
+.main_content {
+    padding: 0 12px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.icon svg {
+width: 73px;
+height: 73px;
+}
+
+.notify_text {
+    font-size: 24px;
+    color: rgba($color: #ffffff, $alpha: 0.48);
+    margin-top: 25px;
+}

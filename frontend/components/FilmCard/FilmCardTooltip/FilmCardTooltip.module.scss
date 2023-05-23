@@ -1,0 +1,8 @@
+.tooltip {
+  @apply translate-y-[-100%] content-[attr(data-tooltip)]
+  text-[12px] font-semibold tracking-[0.02em] text-white bg-backgroundSecondary;
+
+  &::before {
+    @apply bottom-0 left-[8px] translate-y-[100%];
+  }
+}

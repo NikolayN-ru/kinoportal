@@ -1,0 +1,56 @@
+.sliderPrev,
+.sliderNext {
+  @apply flex;
+
+  svg {
+    @apply my-auto;
+    
+    path {
+      @apply duration-[200ms] fill-light;
+    }
+  }
+
+  &:hover {
+    svg path {
+      @apply duration-[200ms] fill-white;
+    }
+  }
+
+  &:active {
+    svg {
+      @apply scale-[0.8];
+    }
+  }
+}
+
+.sliderPrev {
+  svg {
+    @apply mr-auto rotate-180;
+  }
+}
+
+.sliderNext {
+  svg {
+    @apply ml-auto;
+  }
+}
+
+.sm {
+  @apply w-[20px] xl:w-[20px];
+
+  svg {
+    @apply w-[10px] h-[24px];
+  }
+}
+
+.md {
+  @apply w-[32px] xl:w-[34px];
+
+  svg {
+    @apply w-[12px] h-[32px];
+  }
+}
+
+.offset {
+  @apply translate-y-[-14px]
+}

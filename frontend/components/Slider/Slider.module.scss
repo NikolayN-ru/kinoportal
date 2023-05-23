@@ -1,0 +1,16 @@
+.buttonPrev,
+.buttonNext {
+  @apply hidden lg:flex absolute top-0 bottom-0 z-10 my-auto;
+}
+
+.buttonPrev {
+  @apply left-0 translate-x-[-100%];
+}
+
+.buttonNext {
+  @apply right-0 translate-x-full;
+}
+
+.navButtonDisabled {
+  display: none!important;
+}

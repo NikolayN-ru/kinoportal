@@ -1,77 +1,37 @@
-import { FC, useRef, useState } from "react";
+import React, { FC, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { SwiperOptions, Navigation, Autoplay } from "swiper";
+import SwiperCore, { Autoplay, Navigation, SwiperOptions } from "swiper";
 
-import PromoItem from "./PromoItem/PromoItem";
-import SliderButton from "../SliderButton";
+import { promoItems } from "@mock/filmsData";
+import PromoItem from "./PromoItem";
+import { breakpoints } from "@components/Slider/SliderParams";
+import SliderButton, {
+  ButtonSize,
+} from "@components/ui-kit/Button/SliderButton";
 
-import "swiper/scss";
-import "swiper/scss/navigation";
 import s from "./Promo.module.scss";
-
-export type PromoItemType = {
-  id: number;
-  name: string;
-  link: string;
-  image: string;
-  age: number;
-};
-
-const promoItems: PromoItemType[] = [
-  {
-    id: 0,
-    name: "Пансион",
-    link: "pansion",
-    image: "promo-1.png",
-    age: 16,
-  },
-  {
-    id: 1,
-    name: "Тайна пропавшей деревни",
-    link: "taina-propavshej-derevni",
-    image: "promo-2.jpg",
-    age: 16,
-  },
-  {
-    id: 2,
-    name: "Моя ужасная сестра",
-    link: "487282",
-    image: "promo-3.jpg",
-    age: 6,
-  },
-  {
-    id: 3,
-    name: "Папы",
-    link: "208079",
-    image: "promo-4.jpg",
-    age: 6,
-  },
-  {
-    id: 4,
-    name: "Стажер",
-    link: "stazher",
-    image: "promo-5.jpg",
-    age: 16,
-  },
-  {
-    id: 5,
-    name: "Бумеранг",
-    link: "193567",
-    image: "promo-6.jpg",
-    age: 6,
-  },
-];
 
 const Promo: FC = () => {
   const navigationPrevRef = useRef<HTMLButtonElement>(null);
   const navigationNextRef = useRef<HTMLButtonElement>(null);
+
   const [prevIndex, setPrevIndex] = useState<number | null>(null);
   const [nextIndex, setNextIndex] = useState<number | null>(null);
 
   const swiperParams: SwiperOptions = {
-    breakpoints: {},
-    spaceBetween: 24,
-    slidesPerView: 3,
+    breakpoints: {
+      [breakpoints.md]: {
+        spaceBetween: 12,
+      },
+      [breakpoints.lg]: {
+        spaceBetween: 24,
+        allowTouchMove: false,
+      },
+      [breakpoints.xl]: {
+        spaceBetween: 24,
+        allowTouchMove: false,
+      },
+    },
     modules: [Navigation, Autoplay],
     navigation: {
       prevEl: navigationPrevRef.current,
@@ -81,10 +41,12 @@ const Promo: FC = () => {
     autoplay: {
       delay: 10000,
     },
+    spaceBetween: 12,
+    slidesPerView: 3,
     slidesPerGroup: 1,
     speed: 500,
     loop: true,
-    allowTouchMove: false,
+    allowTouchMove: true,
     centeredSlides: true,
     slideNextClass: s.slideNext,
     slidePrevClass: s.slidePrev,
@@ -110,12 +72,14 @@ const Promo: FC = () => {
       <SliderButton
         direction={"prev"}
         ref={navigationPrevRef}
-        className={s.prevButton}
+        className={s.buttonPrev}
+        size={ButtonSize.MD}
       />
       <SliderButton
         direction={"next"}
         ref={navigationNextRef}
-        className={s.nextButton}
+        className={s.buttonNext}
+        size={ButtonSize.MD}
       />
 
       <div className={s.sliderContainer}>
@@ -129,6 +93,7 @@ const Promo: FC = () => {
                     ? s.transparent
                     : ""
                 }
+                isCurrent={index === swiper?.realIndex}
               />
             </SwiperSlide>
           ))}

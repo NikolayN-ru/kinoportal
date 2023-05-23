@@ -3,6 +3,56 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --vw-sm: 320px;
+    --vw-md: 600px;
+    --vw-lg: 1024px;
+    --vw-xl: 1280px;
+    --vw-xxl: 1320px;
+
+    --content-width-desktop: 1216px;
+    --content-width-mobile: 272px;
+
+    --padding-default: 32px;
+    --padding-mobile: 24px;
+
+    --promo-container-width-sm: calc(3 * (100vw - 2 * var(--padding-mobile)) + 2 * 12px);
+    --promo-container-width-md: calc(3 * (100vw - 2 * var(--padding-default)) + 2 * 12px);
+    --promo-container-width-lg: calc(3 * (100vw - 2 * var(--padding-default)) + 2 * 24px);
+    --promo-container-width-xl: calc(3 * var(--content-width-desktop) + 2 * 24px);
+
+    --promo-slider-button-width-lg: var(--padding-default);
+    --promo-slider-button-width-xl: calc((100vw - var(--content-width-desktop) - 2*24px) / 2);
+
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-primary: #a5a1b2;
+    --color-light: #d9d7e0;
+    --color-orange: #ff542e;
+    --shadow-orange: 0px 4px 12px rgba(255, 84, 46, 0.4);
+    --color-red: #ea003d;
+    --shadow-red: 0px 4px 12px rgba(234, 0, 61, 0.4);
+    --color-red-hover: #ff0f4d;
+    --color-green: #73a32f;
+    --shadow-green: 0px 4px 12px rgba(115, 163, 47, 0.4);
+    --color-blue: #00a5ff;
+    --shadow-blue: 0px 4px 12px rgba(0, 165, 255, 0.4);
+    --color-purple: #c447ff;
+    --color-purple-dark: #1f1b2e;
+    --color-purple-dark-lighter: #231f34;
+    --background: #100e19;
+    --background-secondary: #1f1b2e;
+    --background-light: #312b45;
+    --shadow-default: 0px 4px 12px rgba(49, 43, 69, 0.4);
+    --color-gradient-purple-start: #a869f0;
+    --color-gradient-purple-end: #834cc2;
+    --color-shadow-purple: #a869f0;
+    --color-option-text: rgba(217,215,224, 0.8);
+    --color-selected-values: #a5a1b2;
+    --color-purple-selected: #7e798f;
+    --color-separator: rgba(255, 255, 255, 0.32);
+  }
+
   *,
   *::before,
   *::after {
@@ -15,11 +65,11 @@
   }
 
   html {
-    @apply text-default text-primary font-sans font-normal not-italic;
+    @apply text-mobile md:text-default text-primary font-sans font-normal not-italic;
   }
 
   body {
-    @apply overflow-x-hidden flex flex-col w-full h-full leading-default bg-background;
+    @apply overflow-x-hidden flex flex-col w-full h-full px-mobile md:px-default leading-default bg-background;
   }
 
   #__next {
@@ -54,11 +104,13 @@
 
 @layer components {
   .main-container {
-    @apply relative flex flex-col grow w-full mx-auto my-0;
+    @apply relative flex flex-col grow w-full min-w-[theme("width.mobile")] xl:max-w-[theme("width.desktop")]
+    mx-auto my-0 pb-[24px];
 
-    min-width: theme("width.mobile");
-    max-width: theme("width.desktop");
-    width: 1216px;
     min-height: calc(100vh - 548px);
+  }
+
+  .range-slider-mark {
+    @apply text-[15px] text-white font-semibold whitespace-nowrap;
   }
 }

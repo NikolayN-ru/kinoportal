@@ -1,0 +1,35 @@
+.container {
+  @apply relative;
+}
+
+.sliderPrev,
+.sliderNext {
+  background-color: var(--background-light)!important;
+}
+
+.sliderPrev {
+  @apply translate-x-[0];
+}
+
+.sliderPrev,
+.sliderNext {
+  @apply absolute top-0 bottom-0 z-10;
+
+  background-color: var(--background-light)!important;
+}
+
+.sliderPrev {
+  @apply left-0;
+}
+
+.sliderNext{
+  @apply right-0 translate-x-[100%];
+}
+
+.isDisabled {
+  @apply hidden;
+}
+
+.sliderWrapper {
+  @apply overflow-hidden;
+}

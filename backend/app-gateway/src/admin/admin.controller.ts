@@ -134,5 +134,4 @@ export class AdminController {
   updateMovie(@Body() dto: UpdateMovieDto) {
       return this.clientMovie.send('update.movie', dto)
   }
-
 }
