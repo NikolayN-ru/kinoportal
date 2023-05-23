@@ -24,7 +24,7 @@ export class Movie{
     @Column()
     imgVideo: string;
 
-    @Column()
+    @Column({type: "real"})
     rating: number;
 
     @Column()

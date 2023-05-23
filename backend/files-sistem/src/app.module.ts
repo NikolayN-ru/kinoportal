@@ -7,7 +7,7 @@ import { PhotoModule } from './entity/files/files.module';
   imports: [
     TypeOrmModule.forRoot({ 
     type: 'postgres',
-    host: 'localhost',
+    host: 'postgresFiles',
     port: 5432,
     username: 'postgres',
     password: 'qwerty',

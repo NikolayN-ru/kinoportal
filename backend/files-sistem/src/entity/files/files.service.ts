@@ -45,7 +45,7 @@ export class FilesService {
             })
         }
         catch(e){
-            throw new Error('Ошибка при добавлении записей в бд с файлами');
+            throw new Error('Ошибка при сохранении entity с файлами');
         }
     }
 
@@ -57,7 +57,7 @@ export class FilesService {
             return file.fileId;
         }
         catch(e){
-            throw new Error('Ошибка при создании файла');
+            throw new Error('Ошибка при создании записи файла в бд');
         }
     }
 
@@ -68,7 +68,7 @@ export class FilesService {
             return fileName;
         }
         catch(e){
-            throw new Error('Ошибка при создании файла');
+            throw new Error('Ошибка при создании основного файла');
         }
     }
     

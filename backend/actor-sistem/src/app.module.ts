@@ -10,7 +10,7 @@ import { RoleEntity } from './entity/roles/actor.film.entity';
   imports: [
     TypeOrmModule.forRoot({ 
     type: 'postgres',
-    host: 'localhost',
+    host: 'postgresActor',
     port: 5432,
     username: 'postgres',
     password: 'qwerty',

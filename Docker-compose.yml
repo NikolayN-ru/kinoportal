@@ -1,10 +1,10 @@
 version: '3.8'
 
 services:
-  frontend:
-    build: ./frontend
-    ports:
-      - "3000:3000"
+  # frontend:
+  #   build: ./frontend
+  #   ports:
+  #     - "3000:3000"
 
   # backend
   app-gateway:
@@ -34,7 +34,7 @@ services:
       context: ./backend/files-sistem
     command: npm run start:dev
     depends_on:
-      - postgresFiles
+      - postgresfiles
       - rabbitmq
     restart: always
 
@@ -44,14 +44,14 @@ services:
       context: ./backend/movie
     command: npm run listen
     depends_on:
-      - postgresMovie
+      - postgresmovie
       - rabbitmq
     restart: always
 
   postgresactor:
     container_name: postgresActor
     build:
-      context: ./init
+      context: ./initActor
       dockerfile: actor.dockerfile
     environment:
       POSTGRES_USER: postgres
@@ -61,22 +61,26 @@ services:
       - dataActor:/var/lib/postgresql/data
     restart: always
   
-  postgresFiles:
+  postgresfiles:
     container_name: postgresFiles
-    image: postgres:latest
+    build:
+      context: ./initFiles
+      dockerfile: file.dockerfile
     environment:
-      POSTGRES_DB: "files"
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: qwerty
       PG_DATA: /var/lib/postgresql/data
     volumes:
       - dataFiles:/var/lib/postgresql/data
     restart: always
   
-  postgresMovie:
+  postgresmovie:
     container_name: postgresMovie
-    image: postgres:latest
+    build:
+      context: ./initMovie
+      dockerfile: movie.dockerfile
     environment:
-      POSTGRES_DB: "movie"
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: qwerty
       PG_DATA: /var/lib/postgresql/data
     volumes:

@@ -6,7 +6,7 @@ export class FilesEntity{
     @PrimaryGeneratedColumn()
     fileId: number
 
-    @Column({unique: true})
+    @Column()
     fileName:string
 
     @CreateDateColumn()

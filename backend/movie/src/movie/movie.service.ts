@@ -27,7 +27,10 @@ export class MovieService {
             })
             return movies
         } catch (e) {
-            return e.message;
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 
@@ -35,7 +38,10 @@ export class MovieService {
         try {
             return this.movieRepository.find();
         } catch (e) {
-            return e.message
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 
@@ -108,7 +114,10 @@ export class MovieService {
             if(!movies) return HttpStatus.NOT_FOUND;
             return movies;
         } catch (e) {
-            return e.message;
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 
@@ -129,8 +138,10 @@ export class MovieService {
             await this.getFilesForMovies([movie],'movie').then(res => movieInfo = res[0]);
             return movieInfo
         } catch (e) {
-            console.log(e);
-            return e.message;
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 
@@ -148,7 +159,10 @@ export class MovieService {
             return movie;
 
         } catch (e) {
-            return e.message;
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 
@@ -163,7 +177,10 @@ export class MovieService {
             return otv
         }
         catch(e){
-            return e.message;
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 
@@ -180,7 +197,10 @@ export class MovieService {
             if(!movie) return HttpStatus.NOT_FOUND;
             return movie.reviews
         } catch (e) {
-            return e.message;
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 
@@ -208,7 +228,10 @@ export class MovieService {
 
             return movie.reviews;
         } catch (e) {
-            return e.message;
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 
@@ -225,7 +248,10 @@ export class MovieService {
             if(!review) return HttpStatus.NOT_FOUND
             return review;
         } catch (e) {
-            return e.message;
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 
@@ -249,7 +275,10 @@ export class MovieService {
 
             return review;
         } catch (e) {
-            return e.message;
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 
@@ -269,7 +298,6 @@ export class MovieService {
             movie.countries = countries;
             movie.votes = dto.votes;
 
-
             if(images.length !== 0){
                 movie.imgVideo = await this.clientPhoto.send('create.file',images[0]).toPromise();
             }
@@ -288,10 +316,12 @@ export class MovieService {
             if(dopContent !== 0){
                 await this.clientPhoto.send('add.file',{assenceTable: 'movie', assenceId: movie.id, files: dopContent}).toPromise();
             }
-            return movie
+            return 'Добавлено'
         } catch (e) {
-            console.log(e);
-            return e.message;
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 
@@ -302,11 +332,14 @@ export class MovieService {
             });
             if(!movie) return HttpStatus.NOT_FOUND;
             await this.movieRepository.delete({id: id});
-            await this.clientPhoto.send('delete.main.file',[movie.imgVideo]).toPromise();
+            await this.clientPhoto.send('delete.main.file',{main: [movie.imgVideo], id: movie.id}).toPromise();
             await this.clientActor.send('delete.film',movie.id).toPromise();
             return 'Фильм удален';
         } catch (e) {
-            return e.message;
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 
@@ -322,7 +355,10 @@ export class MovieService {
 
             return movie;
         } catch (e) {
-            return e.message;
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 
@@ -336,7 +372,10 @@ export class MovieService {
             if(!movies) return HttpStatus.NOT_FOUND;
             return movies;
         } catch (e) {
-            return e.message;
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 

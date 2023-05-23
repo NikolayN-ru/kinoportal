@@ -12,7 +12,7 @@ import {Country} from "../country/entity/country.entity";
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: 'postgresMovie',
       port: 5432,
       username: 'postgres',
       password: 'qwerty',

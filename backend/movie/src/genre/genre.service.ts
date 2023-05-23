@@ -18,7 +18,10 @@ export class GenreService {
 
             return await this.genreRepository.save(newGenre);
         } catch (e) {
-            return e.message;
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 
@@ -30,7 +33,10 @@ export class GenreService {
             if(!genre.affected) return HttpStatus.NOT_FOUND;
             return 'Жанр удален';
         } catch (e) {
-            return e.message;
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 
@@ -51,7 +57,10 @@ export class GenreService {
 
             return updatedGenre;
         } catch (e) {
-            return e.message;
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 }

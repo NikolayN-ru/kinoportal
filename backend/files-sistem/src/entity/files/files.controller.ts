@@ -33,7 +33,8 @@ export class PhotoController{
     }
 
     @MessagePattern('delete.main.file')
-    deleteMainFiles(@Payload() data: any, @Ctx() context: RmqContext) {       
-        return this.dirFilesService.deleteMainFile(data);
+    deleteMainFiles(@Payload() data: any, @Ctx() context: RmqContext) {  
+        this.filesService.deleteEntity('movie', data.id);     
+        return this.dirFilesService.deleteMainFile(data.main);
     }
 }

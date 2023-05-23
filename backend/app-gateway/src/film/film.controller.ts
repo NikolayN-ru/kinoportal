@@ -3,9 +3,10 @@ import { ClientProxy } from "@nestjs/microservices";
 import { ApiResponse, ApiTags } from "@nestjs/swagger";
 import { HttpExceptionDto } from "../dto/HttpException/http.exception.dto";
 import { ActorWithImageDto } from "../dto/actor/actor.dto";
+import { MovieDto, MovieDtoWithActors } from "src/dto/movie/movie.dto";
 
-@ApiTags('film')
-@Controller('/film')
+@ApiTags('Movie')
+@Controller('/Movie')
 export class FilmController {
   constructor(@Inject('Actor')
   private clientActor: ClientProxy,
@@ -14,14 +15,16 @@ export class FilmController {
 
 
   @Get('/all')
-  async getAllFilm(){
+  @ApiResponse({status: 200, description: 'get movies actor', type: [MovieDto]})
+  @ApiResponse({status: 404, description: 'movies not found', type: HttpExceptionDto})
+  async getAllMovie(){
     return await this.clientMovie.send('get.all.movies', '').toPromise();
   }
 
   @Get(':id')
-  @ApiResponse({status: 200, description: 'get all film by id', type: [ActorWithImageDto]})
-  @ApiResponse({status: 404, description: 'film not found', type: HttpExceptionDto})
-  async getAllActorForFilm(@Param('id') filmId : number){
+  @ApiResponse({status: 200, description: 'get movie by id', type: MovieDtoWithActors})
+  @ApiResponse({status: 404, description: 'movie not found', type: HttpExceptionDto})
+  async getMovieById(@Param('id') filmId : number){
     try{
       const movie = await this.clientMovie.send('get.movie', filmId).toPromise();
       let actors = [];

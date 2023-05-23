@@ -35,4 +35,6 @@ export class CreateMovieDto {
 
     @IsNotEmpty({message: 'Не введен '})
     readonly imgVideo: string;
+
+    readonly dopContent: Array<any>;
 }

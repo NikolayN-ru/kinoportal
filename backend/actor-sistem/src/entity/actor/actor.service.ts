@@ -102,6 +102,26 @@ export class ActorService {
         }   
     }
 
+
+    async getActorByFio(fio: string){
+        try{
+            const actors = await this.actorRepository
+                .createQueryBuilder()
+                .select('actor')
+                .from(ActorEntity, 'actor')
+                .where(`lower(concat(actor."firstName",' ',actor."lastName")) like lower(('%${fio}%'))`)
+                .getMany();
+
+            return actors;
+        }   
+        catch(e){
+            return {
+                status: e.status,
+                message: e.message
+            };
+        }
+    }
+
     async getAllActors(){
         try{
             const actors = await this.actorRepository.findBy({});

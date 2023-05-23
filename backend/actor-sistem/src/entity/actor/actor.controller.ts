@@ -28,6 +28,11 @@ export class ActorController {
         return this.actorService.getActorsForFilm(data);
     }
 
+    @MessagePattern('get.actor.by.fio')
+    getActorsByFio(@Payload() data: string, @Ctx() context: RmqContext) {       
+        return this.actorService.getActorByFio(data);
+    }
+
     @MessagePattern('post.actor')
     postActor(@Payload() data: AddActorWithImageDto, @Ctx() context: RmqContext) {    
         return this.actorService.addActor(data.actorDto,data.image);
