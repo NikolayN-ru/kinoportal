@@ -10,11 +10,7 @@ interface ModalProps {
   onClose: () => void;
 }
 
-const ModalAdminAuth = ({
-  visible = false,
-  onClose,
-  title,
-}: ModalProps) => {
+const ModalAdminAuth = ({ visible = false, onClose, title }: ModalProps) => {
   const onKeydown = ({ key }: KeyboardEvent) => {
     switch (key) {
       case "Escape":

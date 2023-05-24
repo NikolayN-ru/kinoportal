@@ -82,12 +82,9 @@ export default function Home() {
       </section>
 
       <section className="pageSection">
-        <Title
-          className={`sectionTitle ${s.titleTop10}`}
-          tag="h2"
-          size="md"
-        >
-          <Icon name="top10" /><span className={s.textTop10}>за неделю</span>
+        <Title className={`sectionTitle ${s.titleTop10}`} tag="h2" size="md">
+          <Icon name="top10" />
+          <span className={s.textTop10}>за неделю</span>
         </Title>
         <div className={s.top10Container}>
           <Slider
@@ -102,10 +99,9 @@ export default function Home() {
             ))}
           </Slider>
         </div>
-
       </section>
 
-      {collections.map(({id, name, link, items}) => (
+      {collections.map(({ id, name, link, items }) => (
         <section key={id} className="pageSection">
           <Link
             href={`/collections/${link}`}

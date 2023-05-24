@@ -31,7 +31,9 @@ const DropDownContent: FC<DropDownContentProps> = ({ link }) => {
             .map((genres) => {
               return (
                 <div className={s.genre} key={genres.id}>
-                <Link href={genres.url}><span className={s.item}>{genres.name}</span></Link>  
+                  <Link href={genres.url}>
+                    <span className={s.item}>{genres.name}</span>
+                  </Link>
                 </div>
               );
             })}
@@ -41,27 +43,31 @@ const DropDownContent: FC<DropDownContentProps> = ({ link }) => {
         <span className={s.title}>Страны</span>
         <div className={s.list_item}>
           {content.countries
-          .filter((country) => country.usedFor.includes(link))
-          .map((country) => {
-            return (
-              <div className={s.countries} key={country.id}>
-              <Link href={country.url}><span className={s.item}>{country.name}</span></Link>  
-              </div>
-            );
-          })}
+            .filter((country) => country.usedFor.includes(link))
+            .map((country) => {
+              return (
+                <div className={s.countries} key={country.id}>
+                  <Link href={country.url}>
+                    <span className={s.item}>{country.name}</span>
+                  </Link>
+                </div>
+              );
+            })}
         </div>
         <div className={s.years_block}>
           <span className={s.years_title}>Годы</span>
           <div className={s.list_item_years}>
             {content.years
-            .filter((year) => year.usedFor.includes(link))
-            .map((year) => {
-              return (
-                <div className={s.years} key={year.id}>
-                <Link href={year.url}><span className={s.item}>{year.name}</span></Link>  
-                </div>
-              );
-            })}
+              .filter((year) => year.usedFor.includes(link))
+              .map((year) => {
+                return (
+                  <div className={s.years} key={year.id}>
+                    <Link href={year.url}>
+                      <span className={s.item}>{year.name}</span>
+                    </Link>
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>
@@ -70,14 +76,18 @@ const DropDownContent: FC<DropDownContentProps> = ({ link }) => {
         <div className={s.content_block}>
           <div className={s.sideContent_list_item}>
             {content.sideContent
-            .filter((sideLink) => sideLink.usedFor.includes(link))
-            .map((sideLink) => {
-              return (
-                <div className={s.item_wrap} key={sideLink.id}>
-                 <Link href={sideLink.url}><span className={s.sideContent_item}>{sideLink.name}</span></Link> 
-                </div>
-              );
-            })}
+              .filter((sideLink) => sideLink.usedFor.includes(link))
+              .map((sideLink) => {
+                return (
+                  <div className={s.item_wrap} key={sideLink.id}>
+                    <Link href={sideLink.url}>
+                      <span className={s.sideContent_item}>
+                        {sideLink.name}
+                      </span>
+                    </Link>
+                  </div>
+                );
+              })}
           </div>
         </div>
         <div className={s.sideContent_Widget_block}>

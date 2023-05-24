@@ -34,7 +34,8 @@
     "**/*.tsx",
     "pages/admin/componentsAdmin/Navbar/Navbar.jsx",
     ".next/types/**/*.ts",
-    "components/componentsAdmin/Navbar/NavBar.text.jsx"
-, "public/locales/en.js"  ],
+    "components/componentsAdmin/Navbar/NavBar.text.jsx",
+    "public/locales/en.js"
+  ],
   "exclude": ["node_modules"]
 }

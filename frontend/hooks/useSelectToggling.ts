@@ -1,4 +1,10 @@
-import { Dispatch, MouseEventHandler, SetStateAction, useEffect, useState } from "react";
+import {
+  Dispatch,
+  MouseEventHandler,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 
 type useSelectTogglingResult = [
   isOpen: boolean,
@@ -6,15 +12,18 @@ type useSelectTogglingResult = [
   onSelectClick: MouseEventHandler<HTMLDivElement>
 ];
 
-export const useSelectToggling = (selectName: string): useSelectTogglingResult => {
+export const useSelectToggling = (
+  selectName: string
+): useSelectTogglingResult => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const onDocumentClick = (e: MouseEvent) => {
     if (
-      !(e.target instanceof Element)
-      || (e.target.closest('[data-name="' + selectName + '"]'))
-    ) return;
-    
+      !(e.target instanceof Element) ||
+      e.target.closest('[data-name="' + selectName + '"]')
+    )
+      return;
+
     setIsOpen(false);
   };
 

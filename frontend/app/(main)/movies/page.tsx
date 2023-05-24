@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 
@@ -6,12 +6,13 @@ import FiltersForm from "@components/FiltersForm";
 import MainContainer from "@components/MainContainer";
 import PageDescription from "@components/PageDescription";
 import Title from "@components/Title";
-import GenresSlider, { GenresSliderMode } from "@components/FiltersForm/FilterGenre/GenresSlider";
+import GenresSlider, {
+  GenresSliderMode,
+} from "@components/FiltersForm/FilterGenre/GenresSlider";
 import ActorsSlider from "@components/Slider/ActorsSlider";
 import CollectionSlider from "@components/Slider/CollectionSlider";
 import { collections, genres } from "@mock/filmsData";
 import { actors } from "@mock/actors";
-import SortingSelect from "@components/ui-kit/Select/SortingSelect";
 
 import s from "./page.module.scss";
 
@@ -28,24 +29,16 @@ export default function Home() {
         <PageDescription />
       </section>
 
-      <section className="pageSection">
-        <SortingSelect name="films-sorting" sortings={["По количеству оценок на кинопоиске", "По рейтингу", "По дате выхода", "По алфавиту"]} />
-      </section>
       <section>
         <FiltersForm />
       </section>
 
       <section className="pageSection">
-        <Title
-          className="sectionTitle"
-          tag="h2"
-          size="md"
-          text="Жанры"
-        />
+        <Title className="sectionTitle" tag="h2" size="md" text="Жанры" />
         <GenresSlider items={genres} mode={GenresSliderMode.FULL} />
       </section>
 
-      {collections.map(({id, name, link, items}) => (
+      {collections.map(({ id, name, link, items }) => (
         <section key={id} className="pageSection">
           <Link
             href={`/collections/${link}`}
@@ -59,12 +52,7 @@ export default function Home() {
       ))}
 
       <section className="pageSection">
-        <Title
-          className="sectionTitle"
-          tag="h2"
-          size="md"
-          text="Персоны"
-        />
+        <Title className="sectionTitle" tag="h2" size="md" text="Персоны" />
 
         <ActorsSlider items={actors} />
       </section>

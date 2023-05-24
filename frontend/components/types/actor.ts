@@ -4,4 +4,4 @@ export type Actor = {
   surname: string;
   filmsCount: number;
   image: string;
-}; 
+};

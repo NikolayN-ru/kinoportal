@@ -4,11 +4,11 @@ import cn from "classnames/bind";
 import s from "./Button.module.scss";
 
 export enum Border {
-  GRAY = "gray"
+  GRAY = "gray",
 }
 
 export enum Size {
-  FULL = "full"
+  FULL = "full",
 }
 
 interface ButtonProps {
@@ -34,7 +34,7 @@ const Button: FC<ButtonProps> = ({
   color,
   small,
   border,
-  size
+  size,
 }) => {
   type = type || "button";
 
@@ -51,7 +51,7 @@ const Button: FC<ButtonProps> = ({
     default: !!styles.default,
     additional: !!styles.additional,
     color: !!styles.color,
-    border: !! styles.border,
+    border: !!styles.border,
     size: !!styles.size,
   });
 

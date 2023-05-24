@@ -18,9 +18,7 @@ const SubscriptionSector = ({
   // const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div
-      className={`${className} ${s.sub_content}`}
-    >
+    <div className={`${className} ${s.sub_content}`}>
       {isHovered ? hoverContent : content}
     </div>
   );

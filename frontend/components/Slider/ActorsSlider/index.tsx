@@ -12,7 +12,7 @@ interface ActorsSliderProps {
   items: Actor[];
 }
 
-const ActorsSlider: FC<ActorsSliderProps> = ({items}) => {
+const ActorsSlider: FC<ActorsSliderProps> = ({ items }) => {
   return (
     <div className={s.container}>
       <Slider

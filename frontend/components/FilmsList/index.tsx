@@ -9,12 +9,12 @@ interface FilmsListProps {
   items: CollectionFilm[];
 }
 
-const FilmsList: FC<FilmsListProps> = ({items}) => {
+const FilmsList: FC<FilmsListProps> = ({ items }) => {
   return (
     <div className={s.container}>
-        {items.map((item) => (
-          <FilmCard key={item.id} data={item} />
-        ))}
+      {items.map((item) => (
+        <FilmCard key={item.id} data={item} />
+      ))}
     </div>
   );
 };

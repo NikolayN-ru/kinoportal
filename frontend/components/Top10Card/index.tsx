@@ -11,11 +11,17 @@ interface Top10CardProps {
   number: number;
 }
 
-const Top10Card: FC<Top10CardProps> = ({item, number}) => {
+const Top10Card: FC<Top10CardProps> = ({ item, number }) => {
   return (
     <Link className={s.top10Link} href="#">
       <div className={s.top10ImageContainer}>
-        <Image className={s.top10Image} src={item} width="224" height="456" alt="" />
+        <Image
+          className={s.top10Image}
+          src={item}
+          width="224"
+          height="456"
+          alt=""
+        />
         <div className={s.top10NameContainer}>
           <Image
             className={s.top10NameImage}
@@ -27,18 +33,19 @@ const Top10Card: FC<Top10CardProps> = ({item, number}) => {
         </div>
 
         <div className={s.top10NumberContainer}>
-          {
-            number === 10 
-              ? 
-              <>
-                <Icon className={s.top10NumberImageDuble} name="top10Number1" />
-                <Icon className={s.top10NumberImageDuble} name="top10Number0" />
-              </>
-              :
-              <Icon className={s.top10NumberImage} name={`top10Number${number}`} />
-          }
+          {number === 10 ? (
+            <>
+              <Icon className={s.top10NumberImageDuble} name="top10Number1" />
+              <Icon className={s.top10NumberImageDuble} name="top10Number0" />
+            </>
+          ) : (
+            <Icon
+              className={s.top10NumberImage}
+              name={`top10Number${number}`}
+            />
+          )}
         </div>
-      </div>                    
+      </div>
     </Link>
   );
 };

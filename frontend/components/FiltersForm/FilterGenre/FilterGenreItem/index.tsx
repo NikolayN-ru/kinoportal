@@ -6,8 +6,8 @@ import Icon from "@components/ui-kit/IconComponent/Icon";
 import s from "./FilterGenreItem.module.scss";
 
 export enum FilterGenreItemSize {
-  SM = 'sm',
-  LG = 'lg',
+  SM = "sm",
+  LG = "lg",
 }
 
 const iconClassName = {
@@ -21,7 +21,11 @@ interface FilterGenreItemProps {
   size: FilterGenreItemSize;
 }
 
-const FilterGenreItem: FC<FilterGenreItemProps> = ({ title, iconName, size }) => {
+const FilterGenreItem: FC<FilterGenreItemProps> = ({
+  title,
+  iconName,
+  size,
+}) => {
   const styles = {
     main: s.container,
     additional: iconClassName[size],

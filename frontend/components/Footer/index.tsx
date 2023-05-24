@@ -16,49 +16,88 @@ const Footer: FC = () => {
           <div className={s.column}>
             <div className={s.title}>{t("footer.about")}</div>
             <div className={s.item}>
-              <Link className={s.link} href="https://corp.ivi.ru/" target="_blank">{t("footer.aboutCompany")}</Link>
+              <Link
+                className={s.link}
+                href="https://corp.ivi.ru/"
+                target="_blank"
+              >
+                {t("footer.aboutCompany")}
+              </Link>
             </div>
             <div className={s.item}>
-            <Link className={s.link} href="https://corp.ivi.ru/career/#career-vacancy-block" target="_blank">{t("footer.jobs")}</Link>
-
+              <Link
+                className={s.link}
+                href="https://corp.ivi.ru/career/#career-vacancy-block"
+                target="_blank"
+              >
+                {t("footer.jobs")}
+              </Link>
             </div>
             <div className={s.item}>
-            <Link className={s.link} href="https://www.ivi.ru/pages/beta/" target="_blank">{t("footer.beta")}</Link>
-                
-             
+              <Link
+                className={s.link}
+                href="https://www.ivi.ru/pages/beta/"
+                target="_blank"
+              >
+                {t("footer.beta")}
+              </Link>
             </div>
             <div className={s.item}>
-            <Link className={s.link} href="https://www.ivi.ru/info/partners" target="_blank">{t("footer.information")}</Link>
-                
-              
+              <Link
+                className={s.link}
+                href="https://www.ivi.ru/info/partners"
+                target="_blank"
+              >
+                {t("footer.information")}
+              </Link>
             </div>
             <div className={s.item}>
-            <Link className={s.link} href="https://corp.ivi.ru/advertisers/" target="_blank">{t("footer.advertising")}</Link>
-                
-             
+              <Link
+                className={s.link}
+                href="https://corp.ivi.ru/advertisers/"
+                target="_blank"
+              >
+                {t("footer.advertising")}
+              </Link>
             </div>
             <div className={s.item}>
-            <Link className={s.link} href="https://www.ivi.ru/info/agreement" target="_blank">{t("footer.termsOfUse")}</Link>
-                
-              
+              <Link
+                className={s.link}
+                href="https://www.ivi.ru/info/agreement"
+                target="_blank"
+              >
+                {t("footer.termsOfUse")}
+              </Link>
             </div>
             <div className={s.item}>
-            <Link className={s.link} href="https://www.ivi.ru/info/confidential" target="_blank">{t("footer.provacyPolicy")}</Link>
-                
-              
+              <Link
+                className={s.link}
+                href="https://www.ivi.ru/info/confidential"
+                target="_blank"
+              >
+                {t("footer.provacyPolicy")}
+              </Link>
             </div>
             <div className={s.item}>
-            <Link className={s.link} href="https://www.ivi.ru/info/goryachaya-liniya-komplaens" target="_blank">{t("footer.compliance")}</Link>
-                
-              
+              <Link
+                className={s.link}
+                href="https://www.ivi.ru/info/goryachaya-liniya-komplaens"
+                target="_blank"
+              >
+                {t("footer.compliance")}
+              </Link>
             </div>
           </div>
           <div className={s.column}>
             <div className={s.title}>{t("footer.sections")}</div>
             <div className={s.item}>
-            <Link className={s.link} href="https://www.ivi.ru/new" target="_blank">{t("footer.myIvi")}</Link>
-
-             
+              <Link
+                className={s.link}
+                href="https://www.ivi.ru/new"
+                target="_blank"
+              >
+                {t("footer.myIvi")}
+              </Link>
             </div>
             <div className={s.item}>
               <a className={s.link} href="/" target="_blank">

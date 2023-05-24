@@ -15,13 +15,13 @@ const FilmCardTools: FC<FilmCardToolsProps> = ({ className }) => {
 
   return (
     <div className={containerClassNames.join(" ")}>
-      {tools.map(({name, text, icon}) => (
+      {tools.map(({ name, text, icon }) => (
         <div
           key={name}
           className={`${s.buttonContainer} ${s.containerWithTooltip}`}
           data-text={text}
         >
-          <button className={s.button} aria-label={text} >
+          <button className={s.button} aria-label={text}>
             <Icon name={icon} />
           </button>
           <span className={s.tooltip}>{text}</span>

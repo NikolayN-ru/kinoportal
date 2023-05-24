@@ -1,4 +1,9 @@
-import { Collection, CollectionFilm, Compilation, PromoItemType } from "@components/types/film";
+import {
+  Collection,
+  CollectionFilm,
+  Compilation,
+  PromoItemType,
+} from "@components/types/film";
 
 export const collections: Collection[] = [
   {
@@ -508,7 +513,7 @@ export const films: CollectionFilm[] = [
     rating: 7.2,
     age: 16,
     seasons: 1,
-  },  
+  },
   {
     id: 10,
     name: "Простоквашино",
@@ -688,7 +693,7 @@ export const films: CollectionFilm[] = [
     rating: 7.2,
     age: 16,
     seasons: 1,
-  },  
+  },
   {
     id: 25,
     name: "Простоквашино",
@@ -868,7 +873,7 @@ export const films: CollectionFilm[] = [
     rating: 7.2,
     age: 16,
     seasons: 1,
-  },  
+  },
   {
     id: 40,
     name: "Простоквашино",

@@ -43,10 +43,7 @@ const DropDownAvatar = () => {
   );
   const content = (
     <div className={s.auth_content}>
-      <Button
-        className={s.button_auth}
-        text="Войти или зарегистрироваться"
-      />
+      <Button className={s.button_auth} text="Войти или зарегистрироваться" />
       <div className={s.links_list}>
         <a href="" className={s.link_settings}>
           Настройки

@@ -23,7 +23,6 @@ interface GenresSliderProps {
 const containerClassName = {
   [GenresSliderMode.FULL]: s.containerFull,
   [GenresSliderMode.MINI]: s.containerMini,
-
 };
 
 const GenresSlider: FC<GenresSliderProps> = ({ items, mode }) => {
@@ -39,7 +38,7 @@ const GenresSlider: FC<GenresSliderProps> = ({ items, mode }) => {
       buttonSize = ButtonSize.MD;
       itemSize = FilterGenreItemSize.LG;
       break;
-    
+
     case GenresSliderMode.MINI:
       genresSliderParams = genresSliderParamsMini;
       buttonSize = ButtonSize.SM;
@@ -65,7 +64,11 @@ const GenresSlider: FC<GenresSliderProps> = ({ items, mode }) => {
 
           return (
             <SwiperSlide key={item}>
-              <FilterGenreItem title={item} iconName={iconName} size={itemSize} />
+              <FilterGenreItem
+                title={item}
+                iconName={iconName}
+                size={itemSize}
+              />
             </SwiperSlide>
           );
         })}

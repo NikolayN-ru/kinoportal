@@ -34,10 +34,11 @@ const Select: FC<SelectProps> = ({ title, selectedValues, name, children }) => {
 
   const onDocumentClick = (e: MouseEvent) => {
     if (
-      !(e.target instanceof Element)
-      || (e.target.closest('[data-name="' + name + '"]'))
-    ) return;
-    
+      !(e.target instanceof Element) ||
+      e.target.closest('[data-name="' + name + '"]')
+    )
+      return;
+
     setIsOpen(false);
   };
 

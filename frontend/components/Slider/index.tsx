@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { FC, ReactNode, useRef, useState } from "react";
 import cn from "classnames/bind";

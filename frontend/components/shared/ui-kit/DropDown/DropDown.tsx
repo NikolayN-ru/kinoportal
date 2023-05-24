@@ -4,7 +4,6 @@ import classNames from "classnames";
 import s from "./DropDown.module.scss";
 import { TRANSITION } from "@components/shared/constants/transition";
 
-
 interface IDropDownProps {
   className?: string;
   children?: React.ReactNode;
@@ -31,4 +30,3 @@ export const DropDown: React.FC<IDropDownProps> = ({
     </CSSTransition>
   );
 };
-

@@ -11,7 +11,7 @@ interface SortingSelect {
   sortings: string[];
 }
 
-const SortingSelect: FC<SortingSelect> = ({name, sortings}) => {
+const SortingSelect: FC<SortingSelect> = ({ name, sortings }) => {
   const selectedValueInit = sortings.length ? sortings[0] : "";
 
   const [isOpen, setIsOpen, onSelectClick] = useSelectToggling(name);
@@ -42,24 +42,27 @@ const SortingSelect: FC<SortingSelect> = ({name, sortings}) => {
         </div>
       </div>
 
-      {isOpen &&
-      <div className={s.dropdown}>
-        <div className={s.dropdownTitle}>Сортировать</div>
-        {sortings.map((sorting) => {
-          const itemClassName = [s.sortingItem];
-          (sorting === selectedValue) && itemClassName.push(s.activeItem);
+      {isOpen && (
+        <div className={s.dropdown}>
+          <div className={s.dropdownTitle}>Сортировать</div>
+          {sortings.map((sorting) => {
+            const itemClassName = [s.sortingItem];
+            sorting === selectedValue && itemClassName.push(s.activeItem);
 
-          return (
-            <div
-              key={sorting}
-              className={itemClassName.join(" ")}
-              onClick={() => {onSelectItemClick(sorting)}}
-            >
-              {sorting}
-            </div>
-          )
-        })}  
-      </div>}
+            return (
+              <div
+                key={sorting}
+                className={itemClassName.join(" ")}
+                onClick={() => {
+                  onSelectItemClick(sorting);
+                }}
+              >
+                {sorting}
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

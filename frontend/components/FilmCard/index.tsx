@@ -43,11 +43,11 @@ const FilmCard: FC<FilmCardProps> = ({ className, data, withToolsContext }) => {
         </div>
 
         <div className={s.info}>
-          {
-            withToolsContext
-              ? <ToolsWithContext className={s.tools} />
-              : <FilmCardTools className={s.tools} />
-          }
+          {withToolsContext ? (
+            <ToolsWithContext className={s.tools} />
+          ) : (
+            <FilmCardTools className={s.tools} />
+          )}
           <div className={s.infoProperties}>
             <Rating className={s.rating} value={rating} />
             <div className={s.infoRow}>{`${year}, ${country}, ${genre}`}</div>

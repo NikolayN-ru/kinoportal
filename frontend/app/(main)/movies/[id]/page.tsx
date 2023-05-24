@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import FilmsList from "@components/FilmsList";
 import FiltersForm from "@components/FiltersForm";
@@ -20,11 +20,18 @@ export default function Home() {
           size="lg"
           text="Фильмы смотреть онлайн"
         />
-
       </section>
 
       <section className="pageSection">
-        <SortingSelect name="films-sorting" sortings={["По количеству оценок на кинопоиске", "По рейтингу", "По дате выхода", "По алфавиту"]} />
+        <SortingSelect
+          name="films-sorting"
+          sortings={[
+            "По количеству оценок на кинопоиске",
+            "По рейтингу",
+            "По дате выхода",
+            "По алфавиту",
+          ]}
+        />
       </section>
 
       <section>
@@ -33,7 +40,12 @@ export default function Home() {
 
       <section className="pageSection">
         <FilmsList items={films} />
-        <Button className={s.loadMore} text="Показать еще" border={Border.GRAY} size={Size.FULL} />
+        <Button
+          className={s.loadMore}
+          text="Показать еще"
+          border={Border.GRAY}
+          size={Size.FULL}
+        />
       </section>
     </MainContainer>
   );
