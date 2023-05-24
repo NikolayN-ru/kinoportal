@@ -117,4 +117,17 @@
   .pageSection {
     @apply py-[12px] md:py-[20px] lg:py-[24px];
   }
+
+  .sectionTitle {
+    @apply mb-[24px];
+  }
+
+  .titleLink {
+    @apply relative inline-flex justify-start pr-[14px] text-white;
+  
+    &::after {
+      @apply absolute top-[6px] right-[0] bottom-[0] w-[6px] h-[16px] my-auto content-[""]
+      bg-[url('/svg/arrow-right.svg')] bg-no-repeat;
+    }
+  }
 }

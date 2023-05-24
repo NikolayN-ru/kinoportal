@@ -10,14 +10,16 @@ import { TooltipContextValue } from "../../types/tooltip";
 import { collectionSliderParams } from "./parameters";
 
 import s from "./CollectionSlider.module.scss";
+import ShowAllCard from "@components/FilmCard/ShowAllCard";
 
 export interface CollectionSliderProps {
   items: CollectionFilm[];
+  link: string;
 }
 
 export const TooltipContext = createContext<TooltipContextValue>(null);
 
-const CollectionSlider: FC<CollectionSliderProps> = ({ items }) => {
+const CollectionSlider: FC<CollectionSliderProps> = ({ items, link }) => {
   const sliderContainerRef = useRef<HTMLDivElement>(null);
   const [containerElement, setContainerElement] =
     useState<HTMLDivElement | null>(null);
@@ -40,9 +42,13 @@ const CollectionSlider: FC<CollectionSliderProps> = ({ items }) => {
         >
           {items.map((item) => (
             <SwiperSlide key={item.id}>
-              <FilmCard key={item.id} data={item} />
+              <FilmCard key={item.id} data={item} withToolsContext={true} />
             </SwiperSlide>
           ))}
+
+          <SwiperSlide>
+            <ShowAllCard link={link} />
+          </SwiperSlide>
         </Slider>
       </TooltipContext.Provider>
     </div>

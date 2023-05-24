@@ -52,6 +52,17 @@ import {
   Soviet,
   Sports,
   Declension,
+  Top10,
+  Top10Number0,
+  Top10Number1,
+  Top10Number2,
+  Top10Number3,
+  Top10Number4,
+  Top10Number5,
+  Top10Number6,
+  Top10Number7,
+  Top10Number8,
+  Top10Number9,
 } from "@public/svg";
 
 import s from "./Icon.module.scss";
@@ -111,6 +122,17 @@ const iconTypes: IconTypes = {
   russian: Russian,
   soviet: Soviet,
   sports: Sports,
+  top10: Top10,
+  top10Number0: Top10Number0,
+  top10Number1: Top10Number1,
+  top10Number2: Top10Number2,
+  top10Number3: Top10Number3,
+  top10Number4: Top10Number4,
+  top10Number5: Top10Number5,
+  top10Number6: Top10Number6,
+  top10Number7: Top10Number7,
+  top10Number8: Top10Number8,
+  top10Number9: Top10Number9,
 };
 
 const IconComponent: FC<IconComponentProps> = ({

@@ -63,4 +63,15 @@ export {default as Comics} from './comics.svg';
 export {default as Russian} from './russian.svg';
 export {default as Soviet} from './soviet.svg';
 export {default as Sports} from './sports.svg';
+export {default as Top10} from './top10.svg';
+export {default as Top10Number0} from './top10-number0.svg';
+export {default as Top10Number1} from './top10-number1.svg';
+export {default as Top10Number2} from './top10-number2.svg';
+export {default as Top10Number3} from './top10-number3.svg';
+export {default as Top10Number4} from './top10-number4.svg';
+export {default as Top10Number5} from './top10-number5.svg';
+export {default as Top10Number6} from './top10-number6.svg';
+export {default as Top10Number7} from './top10-number7.svg';
+export {default as Top10Number8} from './top10-number8.svg';
+export {default as Top10Number9} from './top10-number9.svg';
 

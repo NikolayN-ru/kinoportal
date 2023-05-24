@@ -4,22 +4,24 @@ import { FC } from "react";
 
 import { CollectionFilm } from "@components/types/film";
 import FilmCardTools from "./FilmCardTools";
+import ToolsWithContext from "./FilmCardTools/ToolsWithContext";
 import Rating from "./Rating";
 import BadgeAge from "@components/BadgeAge";
-import { declensionOfNum } from "utils";
 import BadgeFilm from "@components/BadgeFilm";
+import { declensionOfNum } from "utils";
 
 import s from "./FilmCard.module.scss";
 
 export interface FilmCardProps {
   className?: string;
   data: CollectionFilm;
+  withToolsContext?: boolean;
 }
 
 const IMAGE_PATH = "/images/";
 const SEASONS_FORMS = ["сезон", "сезона", "сезонов"];
 
-const FilmCard: FC<FilmCardProps> = ({ data, className }) => {
+const FilmCard: FC<FilmCardProps> = ({ className, data, withToolsContext }) => {
   const { name, genre, year, country, rating, age, image, seasons, link } =
     data;
 
@@ -41,7 +43,11 @@ const FilmCard: FC<FilmCardProps> = ({ data, className }) => {
         </div>
 
         <div className={s.info}>
-          <FilmCardTools className={s.tools} />
+          {
+            withToolsContext
+              ? <ToolsWithContext className={s.tools} />
+              : <FilmCardTools className={s.tools} />
+          }
           <div className={s.infoProperties}>
             <Rating className={s.rating} value={rating} />
             <div className={s.infoRow}>{`${year}, ${country}, ${genre}`}</div>

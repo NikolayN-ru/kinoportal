@@ -14,19 +14,30 @@
   @apply pb-0;
 }
 
-.titleLink {
-  @apply relative inline-flex justify-start pr-[14px] text-white;
+.descriptionTitle {
+  @apply mb-[12px];
+}
 
-  &::after {
-    @apply absolute top-[6px] right-[0] bottom-[0] w-[6px] h-[16px] my-auto content-[""]
-    bg-[url('/svg/arrow-right.svg')] bg-no-repeat;
+.titleTop10 {
+  @apply inline-flex items-center;
+
+  svg {
+    @apply w-[116px] h-[28px];
   }
 }
 
-.sectionTitle {
-  @apply mb-[24px];
+.textTop10 {
+  @apply ml-[10px];
 }
 
-.descriptionTitle {
-  @apply mb-[12px];
+.top10Container {
+  @apply relative mr-[-24px];
+}
+
+.top10SliderNext {
+  @apply right-[24px];
+}
+
+.top10SliderWrapper {
+  @apply mx-[-12px] my-[-20px] px-[12px] py-[20px];
 }
