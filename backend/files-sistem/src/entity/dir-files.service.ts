@@ -11,24 +11,25 @@ export class DirFilesService {
     async createFile(file: any, exp: string): Promise<string>{
         try{
             const fileName = uuid.v4() + `.${exp}`;
-            
-            const filePath = path.resolve(__dirname, '../../..','image');
+            const filePath = path.resolve(__dirname, '../..','image');
             if(!fs.existsSync(filePath)){
                 fs.mkdirSync(filePath,{recursive: true})
             }
-            fs.writeFileSync(path.join(filePath,fileName), file.buffer.data.toString());
+            const buffer = Buffer.from(file.buffer.data);
+            fs.writeFileSync(path.join(filePath,fileName),buffer);
 
             return fileName;
         }
         catch(e){
+            console.log(e);
             throw new HttpException('Произошла ошибка при записе файла', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    async deleteFile(files: Array<FilesEntity>){
+    async deleteFile(files: Array<any>){
         try{
             for(let i = 0; i < files.length; i++){
-                const filePath = path.resolve(__dirname, '../../..','image', files[i].fileName.toString());
+                const filePath = path.resolve(__dirname, '../..','image', files[i].fileName.toString());
                 fs.unlink(filePath, err =>{ 
                     if(err){}
                 });
@@ -39,10 +40,22 @@ export class DirFilesService {
         }
     }
 
+    async deleteMainFile(file: string){
+        try{
+            const filePath = path.resolve(__dirname, '../..','image', file.toString());
+            fs.unlink(filePath, err =>{ 
+                if(err){}
+            });
+        }
+        catch(e){
+            throw new HttpException('Произошла ошибка при удалении файла', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     getFullFileName(filesNames:any){
         let otv = [];
         filesNames.forEach(item => {
-            otv.push({filename:path.resolve(__dirname, '../../..','image', item.fileName), id: item.assenceId})
+            otv.push({filename:path.resolve(__dirname, '../..','image', item.fileName), id: item.assenceId})
         })
         return otv;
     }

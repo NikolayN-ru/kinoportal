@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Inject, Param, Post, Put, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { ActorDto, ActorWithImageDto } from 'src/dto/actor/actor.dto';
+import { ActorDto, ActorWitMovie, ActorWithImageDto } from 'src/dto/actor/actor.dto';
 import { ActorIdDto } from 'src/dto/actor/actorId.dto';
 import { AddActorDto } from 'src/dto/actor/add.actor.dto';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
@@ -16,44 +16,22 @@ export class ActorController {
 
   @Get('/all')
   @ApiResponse({status: 200, description: 'get all actor', type: [ActorWithImageDto]})
-  @ApiResponse({status: 404, description: 'actors not found', type: HttpExceptionDto})
   getAllActor(){
     return this.clientActor.send('get.all.actor', '')
   }
 
+  @Get('/filtr')
+  @ApiResponse({status: 200, description: 'get actors by fio', type: [ActorDto]})
+  @ApiBody({type: 'fio'})
+  getActorsByFio(@Body() fio : any){
+    return this.clientActor.send('get.actor.by.fio', fio.fio)
+  }
+
   @Get(':id')
-  @ApiResponse({status: 200, description: 'get actor by id', type: ActorWithImageDto})
+  @ApiResponse({status: 200, description: 'get actor by id', type: ActorWitMovie})
   @ApiResponse({status: 400, description: 'id not entered', type: HttpExceptionDto})
   @ApiResponse({status: 404, description: 'actor not found', type: HttpExceptionDto})
   getActor(@Param('id') actorId : number){
     return this.clientActor.send('get.actor', actorId)
-  }
-
-  @Post()
-  @UseInterceptors(FilesInterceptor('image'))
-  @ApiBody({type: ActorWithImageDto})
-  @ApiResponse({status: 201, description: 'post actor', type: String})
-  @ApiResponse({status: 400, description: 'first_name or last_name not entered', type: HttpExceptionDto})
-  addActor(@Body() actorDto: AddActorDto, 
-  @UploadedFiles() image: Array<Express.Multer.File>){
-    return this.clientActor.send('post.actor', {actorDto,image}).toPromise(); 
-  }
-
-  @Put()
-  @ApiBody({type: ActorDto})
-  @ApiResponse({status: 200, description: 'update actor', type: String})
-  @ApiResponse({status: 400, description: 'id not entered', type: HttpExceptionDto})
-  @ApiResponse({status: 404, description: 'actor not found', type: HttpExceptionDto})
-  updateActor(@Body() actorDto: ActorDto){
-    return this.clientActor.send('put.actor', actorDto).toPromise();
-  }
-
-  @Delete()
-  @ApiBody({type: ActorIdDto})
-  @ApiResponse({status: 200, description: 'delete actor', type: String})
-  @ApiResponse({status: 400, description: 'id not entered', type: HttpExceptionDto})
-  @ApiResponse({status: 404, description: 'actor not found', type: HttpExceptionDto})
-  deleteActor(@Body() actorIdDto: ActorIdDto){
-    return this.clientActor.send('delete.actor', actorIdDto).toPromise();
   }
 }
