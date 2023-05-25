@@ -145,27 +145,6 @@ export class MovieService {
         }
     }
 
-    async getMovies(moviesIds: Array<number>) {
-        try {
-            const movie = await this.movieRepository.createQueryBuilder()
-                .select('movie')
-                .from(Movie, "movie")
-                .where("movie.id in (:...moviesIds)", {moviesIds})
-                .getMany();
-            if(movie.length===0) {
-                    return [];
-            }
-
-            return movie;
-
-        } catch (e) {
-            return {
-                status: e.status,
-                message: e.message
-            };
-        }
-    }
-
     async getFilesForMovies(movies: Array<Movie>, assenceTable: string){
         try{
             const movieId = movies.map(item => item.id);
@@ -187,34 +166,21 @@ export class MovieService {
     async getMovies(moviesIds: Array<number>) {
         try {
             const movie = await this.movieRepository.createQueryBuilder()
-            .select('movie')
-            .from(Movie, "movie")
-            .where("movie.id in (:...moviesIds)", {moviesIds})
-            .getMany();
-            if(!movie) {
-                return HttpStatus.NOT_FOUND;
+                .select('movie')
+                .from(Movie, "movie")
+                .where("movie.id in (:...moviesIds)", {moviesIds})
+                .getMany();
+            if(movie.length===0) {
+                    return [];
             }
 
-            return this.getFilesForMovies(movie,'movie-main');
+            return movie;
 
         } catch (e) {
-            return e.message;
-        }
-
-    }
-
-    async getFilesForMovies(movies: Array<Movie>, assenceTable: string){
-        try{
-            const movieId = await movies.map(item => item.id);
-            const files = await this.clientPhoto.send('get.files',{arrActors: movieId, assenceTable: assenceTable}).toPromise();
-            if(!files) {
-                return movies
-            }
-            const otv = movies.map(movie => ({...movie, ...files.find(file => file.id === movie.id)}));
-            return otv
-        }
-        catch(e){
-            return e.message;
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 
