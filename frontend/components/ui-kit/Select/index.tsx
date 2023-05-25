@@ -33,11 +33,13 @@ const Select: FC<SelectProps> = ({ title, selectedValues, name, children }) => {
   const containerClassName = classNames("container", { isOpen });
 
   const onDocumentClick = (e: MouseEvent) => {
-    if (e.target instanceof Element) {
-      if (!e.target.closest('[data-name="' + name + '"]')) {
-        setIsOpen(false);
-      }
-    }
+    if (
+      !(e.target instanceof Element) ||
+      e.target.closest('[data-name="' + name + '"]')
+    )
+      return;
+
+    setIsOpen(false);
   };
 
   useEffect(() => {

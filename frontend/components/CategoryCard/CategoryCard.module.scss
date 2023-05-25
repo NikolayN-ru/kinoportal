@@ -3,8 +3,8 @@
 }
 
 .card {
-  @apply order-1 relative mb-[8px]
-  bg-backgroundSecondary rounded-default transition-transform w-full pb-[47.36842%];
+  @apply order-1 relative w-full mb-[8px] pb-[47.36842%]
+  bg-backgroundSecondary rounded-default transition-transform;
 
   img {
     @apply absolute w-full h-full rounded-default object-cover;

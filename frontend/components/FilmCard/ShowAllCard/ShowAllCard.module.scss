@@ -1,0 +1,19 @@
+.cardContainer {
+  @apply absolute top-0 w-full p-[12px]
+  text-primary font-semibold text-center rounded-default bg-backgroundSecondary;
+
+  padding-bottom: calc(153.5% - 8px);
+  transform-origin: 50% 100%;
+
+  &:hover:not(:active) {
+    @apply scale-[1.04] text-white duration-[80ms];
+  }
+
+  &:not(:hover):not(:active) {
+    @apply duration-[400ms];
+  }
+}
+
+.title {
+  @apply absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] w-max;
+}

@@ -1,3 +1,5 @@
+"use client";
+
 import { FC, ReactNode, useRef, useState } from "react";
 import cn from "classnames/bind";
 import { Swiper } from "swiper/react";
@@ -11,12 +13,12 @@ import "swiper/scss";
 import "swiper/scss/navigation";
 import s from "./Slider.module.scss";
 
-interface SliderProps {
+export interface SliderProps {
   className?: string;
   prevClassName?: string;
   nextClassName?: string;
   params: SwiperOptions;
-  titles?: boolean;
+  withTitles?: boolean;
   buttonSize?: ButtonSize;
   children: ReactNode;
 }
@@ -27,7 +29,7 @@ const Slider: FC<SliderProps> = ({
   nextClassName,
   children,
   params,
-  titles,
+  withTitles,
   buttonSize,
 }) => {
   const navigationPrevRef = useRef<HTMLButtonElement>(null);
@@ -77,14 +79,14 @@ const Slider: FC<SliderProps> = ({
         direction={"prev"}
         ref={navigationPrevRef}
         className={sliderPrevClassName}
-        offset={titles}
+        offset={withTitles}
         size={buttonSize ?? ButtonSize.MD}
       />
       <SliderButton
         direction={"next"}
         ref={navigationNextRef}
         className={sliderNextClassName}
-        offset={titles}
+        offset={withTitles}
         size={buttonSize ?? ButtonSize.MD}
       />
 

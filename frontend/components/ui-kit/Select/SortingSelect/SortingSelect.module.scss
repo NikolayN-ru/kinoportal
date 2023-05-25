@@ -1,0 +1,71 @@
+.container {
+  @apply relative inline-block text-default leading-default font-semibold;
+}
+
+.selectedContainer {
+  @apply inline-flex items-center h-[20px] text-white leading-[20px] cursor-pointer;
+}
+
+.sortingIcon {
+  @apply relative w-[16px] h-[16px] mr-[8px];
+}
+
+.lines {
+  @apply absolute top-[2px] right-0 left-0 h-[2px] bg-white rounded-[2px];
+
+  &::before,
+  &::after {
+    @apply absolute right-0 h-[2px] bg-white rounded-[2px] content-[""];
+  }
+
+  &::before {
+    @apply bottom-[-6px] left-[4px];
+  }
+
+  &::after {
+    @apply bottom-[-12px] left-[8px];
+  }
+}
+
+.icon {
+  @apply ml-[16px];
+  
+  svg {
+    @apply w-[18px] h-[18px] rotate-90;
+  }
+}
+
+.dropdown {
+  @apply absolute bottom-[-10px] left-0 z-10 overflow-hidden min-w-[250px] pt-[8px] pb-[12px] translate-y-[100%]
+  bg-backgroundSecondary;
+
+  box-shadow: 0 20px 40px rgba(7, 5, 14, 0.4);
+}
+
+.dropdownTitle {
+  @apply mt-[4px] mb-[12px] pr-[16px] pl-[20px] font-normal whitespace-nowrap;
+}
+
+.sortingItem {
+  @apply relative py-[12px] pr-[16px] pl-[20px] whitespace-nowrap cursor-pointer;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  &:hover {
+    @apply text-white bg-backgroundLight;
+  }
+}
+
+.activeItem {
+  &::before {
+    @apply absolute top-0 bottom-0 left-0 w-[4px] bg-red content-[""];
+  }
+}
+
+.isOpen {
+  @apply z-10;
+
+  .icon svg {
+    @apply rotate-[-90deg];
+  }
+}

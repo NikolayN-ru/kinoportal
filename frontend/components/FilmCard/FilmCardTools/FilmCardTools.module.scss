@@ -12,16 +12,45 @@
   svg {
     @apply absolute top-0 right-0 bottom-0 left-0
     w-full h-full m-auto;
+
+    path,
+    rect {
+      fill: var(--color-white);
+    }
   }
 
   &:hover {
     svg path,
     svg rect {
-      fill: #d9d7e0;
+      fill:  var(--color-light);
     }
   }
 }
 
 .button:hover + .tooltip {
   @apply block;
+}
+
+.containerWithTooltip {
+  .tooltip {
+    @apply z-[100] absolute top-[-7px] left-[-2px] translate-y-[-100%] hidden w-max py-[8px] px-[8px]
+    text-[12px] font-semibold tracking-[0.02em] text-white bg-backgroundSecondary
+    rounded-default;
+
+    &::before {
+      @apply absolute bottom-[1px] left-[8px] translate-y-[100%] w-0 h-0 content-[""]
+      border-s-[5px] border-s-transparent
+      border-e-[5px] border-e-transparent
+      border-t-[5px] border-t-backgroundSecondary
+      border-solid;
+    }
+  }
+
+  &:hover .tooltip {
+    @apply block;
+  }
+
+  .tooltip:hover {
+    @apply hidden;
+  }
 }
