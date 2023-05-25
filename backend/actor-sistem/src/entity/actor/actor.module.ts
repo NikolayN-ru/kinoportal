@@ -7,10 +7,11 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ActorFilmService } from '../actor-film/actor.film.service';
 import { ActorFilmModule } from '../actor-film/actor.film.module';
 import { ActorFilmEntity } from '../actor-film/actor.film.entity';
+import { RoleEntity } from '../roles/actor.film.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ActorEntity, ActorFilmEntity]),
+    TypeOrmModule.forFeature([ActorEntity, ActorFilmEntity, RoleEntity]),
     ClientsModule.register([
       {
         name: 'Photo',

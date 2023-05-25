@@ -21,6 +21,10 @@ export class FilesService {
                 .where("files.assenceTable =:assenceTable", {assenceTable})
                 .andWhere("files.assenceId in (:...assenceId)", {assenceId})
                 .getMany();
+            
+            if(files.length === 0){
+                return [];
+            }
             return this.dirFileService.getFullFileName(files);
         }
         catch(e){
@@ -41,7 +45,7 @@ export class FilesService {
             })
         }
         catch(e){
-            throw new Error('Ошибка при добавлении записей в бд с файлами');
+            throw new Error('Ошибка при сохранении entity с файлами');
         }
     }
 
@@ -53,9 +57,21 @@ export class FilesService {
             return file.fileId;
         }
         catch(e){
-            throw new Error('Ошибка при создании файла');
+            throw new Error('Ошибка при создании записи файла в бд');
         }
     }
+
+    async createMainFileForFilm( image: any){
+        try{
+            const exp = image.originalname.split('.')[1];
+            const fileName = await this.dirFileService.createFile(image,exp);
+            return fileName;
+        }
+        catch(e){
+            throw new Error('Ошибка при создании основного файла');
+        }
+    }
+    
 
     async deleteEntity(assenceTable: string, id:number){
         try{
