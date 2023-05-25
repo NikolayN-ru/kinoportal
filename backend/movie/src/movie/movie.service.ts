@@ -10,6 +10,7 @@ import {CreateMovieDto} from "./dto/create-movie.dto";
 import {ClientProxy} from "@nestjs/microservices";
 import {Genre} from "../genre/entity/genre.entity";
 import {Country} from "../country/entity/country.entity";
+import * as path from 'path';
 
 @Injectable()
 export class MovieService {
@@ -25,7 +26,7 @@ export class MovieService {
             const movies = await this.movieRepository.find({
                 take: 100
             })
-            return movies
+            return this.getFullFileName(movies);
         } catch (e) {
             return {
                 status: e.status,
@@ -36,7 +37,7 @@ export class MovieService {
 
     async getAllMovies() {
         try {
-            return this.movieRepository.find();
+            return this.getFullFileName(await this.movieRepository.find());
         } catch (e) {
             return {
                 status: e.status,
@@ -112,7 +113,7 @@ export class MovieService {
             const movies = await this.movieRepository.findBy(param);
 
             if(!movies) return HttpStatus.NOT_FOUND;
-            return movies;
+            return this.getFullFileName(movies);
         } catch (e) {
             return {
                 status: e.status,
@@ -136,7 +137,7 @@ export class MovieService {
             if(!movie)  return HttpStatus.NOT_FOUND;
             let movieInfo;
             await this.getFilesForMovies([movie],'movie').then(res => movieInfo = res[0]);
-            return movieInfo
+            return this.getFullFileName([movieInfo])
         } catch (e) {
             return {
                 status: e.status,
@@ -174,7 +175,7 @@ export class MovieService {
                     return [];
             }
 
-            return movie;
+            return this.getFullFileName(movie);
 
         } catch (e) {
             return {
@@ -411,5 +412,13 @@ export class MovieService {
 
             return newCountry
         })
+    }
+
+    private async getFullFileName(mas: Array<any>){
+        return mas.map(item => {
+            return {...item,
+                imgVideo: path.resolve(__dirname, '../../../files-sistem/image',`${item.imgVideo}`)
+            }
+        });
     }
 }
