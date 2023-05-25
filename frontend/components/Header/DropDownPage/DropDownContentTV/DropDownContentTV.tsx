@@ -29,7 +29,7 @@ const DropDownContentTV = () => {
     <div className={s.content}>
       <div className={s.side_content}>
         <div className={s.list_item}>
-            <div className={s.title}>ТВ онлайн</div>
+          <div className={s.title}>ТВ онлайн</div>
           {genreTv.map((genre) => {
             return (
               <div className={s.item} key={genre.id}>

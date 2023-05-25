@@ -138,6 +138,7 @@ export class MovieService {
             let movieInfo;
             await this.getFilesForMovies([movie],'movie').then(res => movieInfo = res[0]);
             return this.getFullFileName([movieInfo])
+
         } catch (e) {
             return {
                 status: e.status,
@@ -174,7 +175,6 @@ export class MovieService {
             if(movie.length===0) {
                     return [];
             }
-
             return this.getFullFileName(movie);
 
         } catch (e) {
