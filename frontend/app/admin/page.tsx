@@ -1,4 +1,4 @@
-import GrayButton from "@components/GrayButton";
+import Button from "@components/ui-kit/Button";
 import s from "./settings/SettingsAdmin.module.scss";
 
 const SettingsAdmin = () => {
@@ -40,7 +40,7 @@ const SettingsAdmin = () => {
             Повторите пароль
           </div>
           <div className={s.setting}>
-            <GrayButton className={s.save_btn} title="Сохранить изменения" />
+            <Button className={s.save_btn} title="Сохранить изменения" />
           </div>
         </div>
       </div>

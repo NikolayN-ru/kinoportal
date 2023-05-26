@@ -35,6 +35,16 @@ import {
   Fantasy,
   Family,
   Gun,
+  NotifyBig,
+  Favorite,
+  Video,
+  History,
+  Diamond,
+  Certificate,
+  TvChannels,
+  Wallet,
+  ShareSmall,
+  I,
 } from "@public/svg";
 
 import s from "./Icon.module.scss";
@@ -77,6 +87,16 @@ const iconTypes: IconTypes = {
   fantasy: Fantasy,
   family: Family,
   gun: Gun,
+  notify_big:NotifyBig,
+  favorite:Favorite,
+  video:Video,
+  history:History,
+  diamond:Diamond,
+  certificate:Certificate,
+  tv_channels:TvChannels,
+  wallet:Wallet,
+  share_small:ShareSmall,
+  i: I,
 };
 
 const IconComponent: FC<IconComponentProps> = ({
@@ -92,3 +112,5 @@ const IconComponent: FC<IconComponentProps> = ({
 };
 
 export default IconComponent;
+
+

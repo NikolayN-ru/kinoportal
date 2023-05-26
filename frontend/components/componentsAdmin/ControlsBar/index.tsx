@@ -1,24 +1,24 @@
 import IconComponent from "../../ui-kit/IconComponent/Icon";
 import s from "./ControlsBar.module.scss";
-import GrayButton from "../../GrayButton/index";
+import Button from "@components/ui-kit/Button";
 const ControlsBar = () => {
   return (
     <div className={s.controlsBar}>
       <div className={s.row}>
         <div className={s.search_block}>
-          <GrayButton className={s.btn} title="Фильтр" />
-          <GrayButton className={s.btn} title="Сортировка" />
+          <Button className={s.btn} title="Фильтр" />
+          <Button className={s.btn} title="Сортировка" />
           <div className={s.input_block}>
             <input className={s.input} type="text" placeholder="Поиск" />
-            <GrayButton
+            <Button
               className={s.icon}
               title={<IconComponent name="search" />}
             />
           </div>
         </div>
         <div className={s.buttons_block}>
-          <GrayButton className={s.btn} title="Обновить" />
-          <GrayButton className={s.btn} title="Редактировать" />
+          <Button className={s.btn} title="Обновить" />
+          <Button className={s.btn} title="Редактировать" />
         </div>
       </div>
     </div>

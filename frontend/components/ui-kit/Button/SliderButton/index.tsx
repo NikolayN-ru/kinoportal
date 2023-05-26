@@ -9,6 +9,7 @@ export enum ButtonSize {
   SM = "sm",
   MD = "md",
   LG = "lg",
+  XS = "xs",
 }
 
 interface SliderButtonProps {
@@ -25,6 +26,7 @@ const sizeClassNames = {
   [ButtonSize.SM]: s.sm,
   [ButtonSize.MD]: s.md,
   [ButtonSize.LG]: s.lg,
+  [ButtonSize.XS]: s.xs,
 };
 
 const SliderButton = forwardRef<Ref, SliderButtonProps>(

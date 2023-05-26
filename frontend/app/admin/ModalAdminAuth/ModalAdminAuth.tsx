@@ -1,7 +1,7 @@
 import { ReactElement, useEffect } from "react";
 import s from "./ModalAdminAuth.module.scss";
 import Input from "../Input/Input";
-import GrayButton from "@components/GrayButton";
+import Button from "@components/ui-kit/Button";
 
 interface ModalProps {
   title: string;
@@ -49,7 +49,7 @@ const ModalAdminAuth = ({
               />
             </div>
             <div className={s.add_btn_block} onClick={onClose}>
-              <GrayButton className={s.log_btn} title="Войти" />
+              <Button className={s.log_btn} title="Войти" />
             </div>
           </div>
         </div>

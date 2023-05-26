@@ -11,7 +11,7 @@ import "swiper/scss";
 import "swiper/scss/navigation";
 import s from "./Slider.module.scss";
 
-interface SliderProps {
+export interface SliderProps {
   className?: string;
   prevClassName?: string;
   nextClassName?: string;
