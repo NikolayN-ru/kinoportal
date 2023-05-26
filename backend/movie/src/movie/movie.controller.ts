@@ -16,11 +16,6 @@ export class MovieController {
     //     return this.movieService.getMain();
     // }
 
-    @Get('')
-    sortMovies(@Query('sort') sort: string) {
-        return this.movieService.sortMovies(sort)
-    }
-
     @Get('/filters')
     getMovieWithFilter(@Query('genre') genre?: string,
                        @Query('year') year?: string,
@@ -28,8 +23,9 @@ export class MovieController {
                        @Query('rating') rating?: string,
                        @Query('votes') votes?: string,
                        @Query('actor') actor?: string,
-                       @Query('director') director?: string) {
-        return this.movieService.getMovieWithFilter(genre, year, country, +rating, +votes, actor, director);
+                       @Query('director') director?: string,
+                       @Query('sort') sort?: string) {
+        return this.movieService.getMovieWithFilter(genre, year, country, +rating, +votes, actor, director, sort);
     }
 
     @Get('/:id')
@@ -58,8 +54,8 @@ export class MovieController {
     }
 
     @EventPattern('create.movie')
-    createMovie(@Body() dto: CreateMovieDto) {
-        return this.movieService.createMovie(dto);
+    createMovie(dto: CreateMovieDto) {
+        return this.movieService.createMovie(dto, dto.image);
     }
 
     @EventPattern('delete.movie')

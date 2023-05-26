@@ -14,6 +14,8 @@ import {GenreModule} from "../genre/genre.module";
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
+      // type: 'cockroachdb',
+      // url: 'postgresql://syst1337_gmail_com:KHnUBisY6kmPtbuVJhpxWA@oilier-toad-7177.7tc.cockroachlabs.cloud:26257/movie?sslmode=verify-full',
       host: 'localhost',
       port: 5432,
       username: 'postgres',
@@ -21,6 +23,7 @@ import {GenreModule} from "../genre/genre.module";
       database: 'movie',
       entities: [Movie, Review, Comment, Country, Genre],
       synchronize: true,
+      // ssl: true
     }),
     MovieModule,
     CountryModule,

@@ -10,6 +10,7 @@ import {CreateMovieDto} from "./dto/create-movie.dto";
 import {ClientProxy} from "@nestjs/microservices";
 import {Genre} from "../genre/entity/genre.entity";
 import {Country} from "../country/entity/country.entity";
+import path from "path";
 
 @Injectable()
 export class MovieService {
@@ -17,12 +18,17 @@ export class MovieService {
                 @InjectRepository(Review) private reviewRepository: Repository<Review>,
                 @InjectRepository(Genre) private genreRepository: Repository<Genre>,
                 @InjectRepository(Country) private countryRepository: Repository<Country>,
-                @Inject('Photo') private clientPhoto: ClientProxy) {}
+                @Inject('Photo') private clientPhoto: ClientProxy,
+                @Inject('Actor') private clientActor: ClientProxy) {}
 
     async getMain() {
         try {
             const movies = await this.movieRepository.find({
-                take: 100
+                take: 100,
+                relations: {
+                    genres: true,
+                    countries: true
+                }
             })
             return movies
         } catch (e) {
@@ -32,30 +38,40 @@ export class MovieService {
 
     async getAllMovies() {
         try {
-            return this.movieRepository.find();
+            return this.movieRepository.createQueryBuilder("movie")
+                .leftJoinAndSelect("movie.genre", "genre")
+                .leftJoinAndSelect("movie.countries", "countries")
+                .getMany()
         } catch (e) {
             return e.message
         }
     }
 
-    async getMovieWithFilter(genre: string, year: string, country: string, rating: number, votes: number, actor: string, director: string) {
+    async getMovieWithFilter(genre: string, year: string, country: string, rating: number, votes: number, actor: string, director: string, sort: string) {
         try {
             // поиск по актерам и режиссерам
-            let genres, years, countries;
-            const param = {
-                genres: undefined,
-                countries: undefined,
-                year: undefined,
-                rating: undefined,
-                votes: undefined
-            };
+            let genres, years, countries, movieIdForActor;
+            let queryWhere = [];
+
+
+            if(actor){
+                await this.clientActor.send('filt-film-actor',{actorId: actor, roleName: 'Актер'}).toPromise()
+                    .then(result => movieIdForActor = result);
+
+                queryWhere.push(`movie.id IN (${movieIdForActor})`);
+            }
+
+            if(director){
+                await this.clientActor.send('filt-film-actor',{actorId: director, roleName: 'Режиссёр'}).toPromise()
+                    .then(result => movieIdForActor = result);
+
+                queryWhere.push(`movie.id IN (${movieIdForActor})`);
+            }
 
             if(genre) {
-                genres = genre.split(' ');
+                genres = genre.split(' ').map(genre => `'${genre}'`);
 
-                param.genres = {
-                        genre: In(genres)
-                }
+                queryWhere.push(`genres.genre IN (${genres})`)
             }
 
             if(year) {
@@ -65,31 +81,45 @@ export class MovieService {
 
                 switch (years.length) {
                     case 1:
-                        param.year = years[0]
+                        queryWhere.push(`movie.year = ${years[0]}`)
                         break;
                     case 2:
-                        param.year = Between(years[0], years[1])
+                        queryWhere.push(`movie.year BETWEEN ${years[0]} AND ${years[1]}`)
                         break;
                 }
             }
 
             if(country) {
-                countries = country.split(' ');
+                countries = country.split(' ').map(country => `'${country}'`);
 
-                param.countries = {
-                    country: In(countries)
-                }
+                queryWhere.push(`countries.country IN (${countries})`)
             }
 
             if(rating) {
-                param.rating = MoreThan(rating)
+                queryWhere.push(`movie.rating > ${rating}`);
             }
 
             if(votes) {
-                param.votes = MoreThan(votes);
+                queryWhere.push(`movie.votes > ${votes}`);
             }
 
-            const movies = await this.movieRepository.findBy(param);
+            let movies;
+            const queryWhereJoined = queryWhere.join(' AND ');
+
+            if(sort) {
+                movies = await this.movieRepository.createQueryBuilder('movie')
+                    .leftJoinAndSelect('movie.countries', 'countries')
+                    .leftJoinAndSelect('movie.genres', 'genres')
+                    .where(queryWhereJoined)
+                    .orderBy('movie.' + sort, sort === 'title' ? "ASC" : "DESC")
+                    .getMany();
+            } else {
+                movies = await this.movieRepository.createQueryBuilder('movie')
+                    .leftJoinAndSelect('movie.countries', 'countries')
+                    .leftJoinAndSelect('movie.genres', 'genres')
+                    .where(queryWhereJoined)
+                    .getMany();
+            }
 
             if(!movies) return HttpStatus.NOT_FOUND;
             return movies
@@ -110,8 +140,12 @@ export class MovieService {
                     countries: true
                 }
             });
+
             if(!movie) return HttpStatus.NOT_FOUND;
-            return movie;
+
+            let movieInfo;
+            await this.getFilesForMovies([movie],'movie').then(res => movieInfo = res[0]);
+            return this.getFullFileName([movieInfo])
         } catch (e) {
             return e.message;
         }
@@ -124,14 +158,16 @@ export class MovieService {
                 .from(Movie, "movie")
                 .where("movie.id in (:...moviesIds)", {moviesIds})
                 .getMany();
-            if(!movie) {
-                return HttpStatus.NOT_FOUND;
+            if(movie.length===0) {
+                return [];
             }
-
-            return this.getFilesForMovies(movie,'movie-main');
+            return this.getFullFileName(movie);
 
         } catch (e) {
-            return e.message;
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 
@@ -139,14 +175,17 @@ export class MovieService {
         try{
             const movieId = movies.map(item => item.id);
             const files = await this.clientPhoto.send('get.files',{arrActors: movieId, assenceTable: assenceTable}).toPromise();
-            if(!files) {
+            if(files.length === 0) {
                 return movies
             }
-            const otv = movies.map(movie => ({...movie, ...files.find(file => file.id === movie.id)}));
+            const otv = movies.map(movie => ({...movie, dopContent: files.map(item => item.filename)}));
             return otv
         }
         catch(e){
-            return e.message;
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 
@@ -225,7 +264,8 @@ export class MovieService {
             if(!review) return HttpStatus.NOT_FOUND;
 
             const comment = new Comment();
-            comment.text = dto.comment
+            comment.text = dto.comment;
+            comment.parentId = dto.parentId;
 
             review.comments.push(comment);
             await this.reviewRepository.save(review);
@@ -236,7 +276,7 @@ export class MovieService {
         }
     }
 
-    async createMovie(dto: CreateMovieDto) {
+    async createMovie(dto: CreateMovieDto, images: any) {
         try {
             const genres = await this.checkGenres(dto.genres);
             const countries = await this.checkCountries(dto.countries);
@@ -250,10 +290,26 @@ export class MovieService {
             movie.description = dto.description;
             movie.genres = genres;
             movie.countries = countries;
-            movie.imgVideo = dto.imgVideo;
-            // передача актеров, режиссеров
+            movie.votes = dto.votes;
+
+            if(images.length !== 0){
+                movie.imgVideo = await this.clientPhoto.send('create.file',images[0]).toPromise();
+            }
 
             await this.movieRepository.save(movie);
+            let actors;
+            let directors;
+            if(dto.actors.length !== 0){
+                actors = await this.clientActor.send('create.film',{filmId: movie.id, actorsId: dto.actors, role: 'Актер'}).toPromise();
+            }
+            if(dto.directors.length !== 0){
+                directors = await this.clientActor.send('create.film',{filmId: movie.id, actorsId: dto.directors, role: 'Режиссёр'}).toPromise();
+            }
+            let dopContent = images.slice();
+            dopContent.shift();
+            if(dopContent !== 0){
+                await this.clientPhoto.send('add.file',{assenceTable: 'movie', assenceId: movie.id, files: dopContent}).toPromise();
+            }
 
             return movie
         } catch (e) {
@@ -263,11 +319,19 @@ export class MovieService {
 
     async deleteMovie(id: number) {
         try {
-            const movie = await this.movieRepository.delete({id: id});
-            if(!movie.affected) return HttpStatus.NOT_FOUND;
+            const movie = await this.movieRepository.findOneBy({
+                id: id
+            });
+            if(!movie) return HttpStatus.NOT_FOUND;
+            await this.movieRepository.delete(movie);
+            await this.clientPhoto.send('delete.main.file',{main: [movie.imgVideo], id: movie.id}).toPromise();
+            await this.clientActor.send('delete.film',movie.id).toPromise();
             return 'Фильм удален';
         } catch (e) {
-            return e.message;
+            return {
+                status: e.status,
+                message: e.message
+            };
         }
     }
 
@@ -287,22 +351,10 @@ export class MovieService {
         }
     }
 
-    async sortMovies(sort: string) {
-        try {
-            const movies = await this.movieRepository.createQueryBuilder()
-                    .select('movie')
-                    .from(Movie, "movie")
-                    .orderBy('movie.' + sort, sort === 'title' ? "ASC" : "DESC")
-                    .getMany();
-            if(!movies) return HttpStatus.NOT_FOUND;
-            return movies;
-        } catch (e) {
-            return e.message;
-        }
-    }
+
 
     private async checkGenres(genres: string) {
-        let arrayGenres = genres.split(',');
+        let arrayGenres = genres.split(', ');
 
         const genresFromDB = await this.genreRepository.find();
 
@@ -319,7 +371,7 @@ export class MovieService {
     }
 
     private async checkCountries(countries: string) {
-        const arrayCountries = countries.split(',');
+        const arrayCountries = countries.split(', ');
 
         const countriesFromDB = await this.countryRepository.find();
 
@@ -333,5 +385,13 @@ export class MovieService {
 
             return newCountry
         })
+    }
+
+    private async getFullFileName(mas: Array<any>){
+        return mas.map(item => {
+            return {...item,
+                imgVideo: path.resolve(__dirname, '../../../files-sistem/image',`${item.imgVideo}`)
+            }
+        });
     }
 }

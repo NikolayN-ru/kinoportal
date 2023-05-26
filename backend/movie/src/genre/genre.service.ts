@@ -54,4 +54,15 @@ export class GenreService {
             return e.message;
         }
     }
+
+    async getAllGenres() {
+        try {
+            return this.genreRepository.createQueryBuilder()
+                .select("genre")
+                .from(Genre, "genre")
+                .getMany()
+        } catch (e) {
+            return e.message;
+        }
+    }
 }

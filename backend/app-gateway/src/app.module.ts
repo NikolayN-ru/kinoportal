@@ -3,6 +3,7 @@ import { ActorController } from './actor/actor.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { FilmController } from './film/film.controller';
 import { AdminController } from './admin/admin.controller';
+import {JwtModule} from "@nestjs/jwt";
 
 @Module({
   imports: [
@@ -29,7 +30,13 @@ import { AdminController } from './admin/admin.controller';
           }
         }
       }
-    ])
+    ]),
+    JwtModule.register({
+      secret: 'SECRET',
+      signOptions: {
+        expiresIn: '24h'
+      }
+    })
   ],
   controllers: [ActorController,
     FilmController,

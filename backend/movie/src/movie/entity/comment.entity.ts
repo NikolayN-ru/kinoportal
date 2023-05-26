@@ -10,6 +10,9 @@ export class Comment {
     @Column()
     text: string;
 
+    @Column()
+    parentId: number;
+
     @ManyToOne(type => Review,
             review => review.comments,
         {

@@ -26,7 +26,18 @@ import {ClientsModule, Transport} from "@nestjs/microservices";
                     },
                 },
             },
-        ])
+            {
+                name: 'Actor',
+                transport: Transport.RMQ,
+                options: {
+                    urls: ['amqp://localhost:5672'],
+                    queue: 'actor-queue',
+                    queueOptions: {
+                        durable: false
+                    },
+                },
+            },
+        ]),
     ],
     exports:[
         MovieService
