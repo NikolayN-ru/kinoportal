@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Icon from "../ui-kit/IconComponent/Icon";
 import Logo from "../ui-kit/Logo/Logo";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import ModalSearch from "./ModalSearch";
 import s from "./Header.module.scss";
 import { DropDown } from "@components/shared/ui-kit";
@@ -128,18 +128,14 @@ const Header = () => {
                 </div>
               </div>
               <div className={s.user_block}>
-                <button
-                  onClick={() =>
-                    i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru")
-                  }
-                >{`${
-                  i18n.language === "en" ? "изменить на RUS" : "change to EN"
-                }`}</button>
-                {i18n.language === "en" ? (
-                  <Icon name="us" />
-                ) : (
-                  <Icon name="rus" />
-                )}
+              <button className={s.lang}
+              onClick={() =>
+                i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru")
+              }
+            >{`${
+              i18n.language === "en" ? "изменить на RUS" : "change to EN"
+            }`}</button>
+            {i18n.language === "en" ? <Icon className={s.icon_lang} name="us" /> : <Icon className={s.icon_lang} name="rus" />}
                 <div className={s.btn__subscribe}>{t("header.pay")}</div>
                 <>
                   <div className={s.btn__search} onClick={() => setModal(true)}>

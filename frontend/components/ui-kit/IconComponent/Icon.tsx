@@ -35,6 +35,16 @@ import {
   Fantasy,
   Family,
   Gun,
+  NotifyBig,
+  Favorite,
+  Video,
+  History,
+  Diamond,
+  Certificate,
+  TvChannels,
+  Wallet,
+  ShareSmall,
+  I,
   Horror,
   Arthouse,
   Biography,
@@ -106,6 +116,16 @@ const iconTypes: IconTypes = {
   fantasy: Fantasy,
   family: Family,
   gun: Gun,
+  notify_big:NotifyBig,
+  favorite:Favorite,
+  video:Video,
+  history:History,
+  diamond:Diamond,
+  certificate:Certificate,
+  tv_channels:TvChannels,
+  wallet:Wallet,
+  share_small:ShareSmall,
+  i: I,
   horror: Horror,
   arthouse: Arthouse,
   biography: Biography,
@@ -148,3 +168,5 @@ const IconComponent: FC<IconComponentProps> = ({
 };
 
 export default IconComponent;
+
+

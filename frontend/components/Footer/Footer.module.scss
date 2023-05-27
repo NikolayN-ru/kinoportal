@@ -47,7 +47,7 @@
 }
 
 .chat_btn {
-  @apply h-[40px];
+  @apply h-[40px] w-[196px];
 }
 
 .contact__icons {
@@ -82,6 +82,7 @@
 
 .subFooter {
   @apply flex mt-[47px] mb-[47px];
+
 }
 
 .stores {

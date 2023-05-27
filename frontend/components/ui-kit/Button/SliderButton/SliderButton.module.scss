@@ -34,7 +34,13 @@
     @apply ml-auto;
   }
 }
+.xs {
+  @apply w-[15px] xl:w-[17px];
 
+  svg {
+    @apply w-[8px] h-[18px];
+  }
+}
 .sm {
   @apply w-[20px] xl:w-[20px];
 
