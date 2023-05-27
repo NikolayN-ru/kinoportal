@@ -1,0 +1,56 @@
+.top10Link {
+  @apply relative block overflow-hidden pb-[220%] transition-transform rounded-default;
+
+  transform-origin: 50% 50%;
+
+  &:hover:not(:active) {
+    @apply scale-[1.04] duration-[80ms];
+  }
+
+  &:not(:hover):not(:active) {
+    @apply duration-[400ms];
+  }
+}
+
+.top10ImageContainer {
+  @apply absolute top-0 left-0 w-full bg-backgroundSecondary pb-[204%];
+
+  &::before {
+    @apply absolute z-[2] right-0 bottom-0 left-0 h-0 pb-[121%] content-[""];
+
+    background-image: linear-gradient(0deg,#100e19,rgba(16,14,25,0));
+  }
+}
+
+.top10Image {
+  @apply absolute z-[1] top-0 left-0 w-full h-full;
+}
+
+.top10NameContainer {
+  @apply absolute z-[3] bottom-[54px] right-[24px] left-[24px]
+  flex justify-center items-end h-[21%];
+}
+
+.top10NameImage {
+  @apply max-h-full w-auto object-cover select-none;
+}
+
+.top10NumberContainer {
+  @apply absolute z-[3] bottom-[-33px] left-[50%] translate-x-[-50%]
+  flex justify-center items-end h-[66px] select-none;
+}
+
+.top10NumberImage,
+.top10NumberImageDuble {
+  @apply h-full w-auto;
+}
+
+.top10NumberImageDuble {
+  &:first-child {
+    @apply translate-x-[20%];
+  }
+  
+  &:last-child {
+    @apply translate-x-[-20%];
+  }
+}

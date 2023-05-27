@@ -128,14 +128,18 @@ const Header = () => {
                 </div>
               </div>
               <div className={s.user_block}>
-              <button
-              onClick={() =>
-                i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru")
-              }
-            >{`${
-              i18n.language === "en" ? "изменить на RUS" : "change to EN"
-            }`}</button>
-            {i18n.language === "en" ? <Icon name="us" /> : <Icon name="rus" />}
+                <button
+                  onClick={() =>
+                    i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru")
+                  }
+                >{`${
+                  i18n.language === "en" ? "изменить на RUS" : "change to EN"
+                }`}</button>
+                {i18n.language === "en" ? (
+                  <Icon name="us" />
+                ) : (
+                  <Icon name="rus" />
+                )}
                 <div className={s.btn__subscribe}>{t("header.pay")}</div>
                 <>
                   <div className={s.btn__search} onClick={() => setModal(true)}>
@@ -146,7 +150,9 @@ const Header = () => {
                   </div>
                   <ModalSearch
                     visible={isModal}
-                    footer={<button onClick={onClose}>{t("header.close")}</button>}
+                    footer={
+                      <button onClick={onClose}>{t("header.close")}</button>
+                    }
                     onClose={onClose}
                   />
                 </>

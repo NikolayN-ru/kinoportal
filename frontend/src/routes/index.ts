@@ -1,3 +1,3 @@
 export const ROUTES = {
-    DROPDOWN: '/dropdown/',
-}
+  DROPDOWN: "/dropdown/",
+};

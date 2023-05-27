@@ -19,14 +19,18 @@
 }
 
 .card {
-  @apply z-0 order-1 relative mb-[8px] pb-[153.48837209%]
-  bg-backgroundSecondary rounded-default transition-transform duration-[200ms] w-full;
+  @apply z-0 order-1 relative mb-[8px] pb-[153.5%]
+  bg-backgroundSecondary rounded-default transition-transform w-full;
 
   transform-origin: 50% 100%;
 }
 
-.cardContainer:hover .card {
-  @apply lg:scale-[1.04] lg:translate-y-0 lg:z-10;
+.cardContainer:hover:not(:active) .card {
+  @apply lg:scale-[1.04] lg:translate-y-0 lg:z-10 duration-[80ms];
+}
+
+.cardContainer:not(:hover):not(:active) .card {
+  @apply duration-[400ms];
 }
 
 .poster,

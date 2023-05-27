@@ -1,92 +1,60 @@
 import { FC } from "react";
-
-import Slider from "@components/Slider";
 import { SwiperOptions } from "swiper";
+
+import { genresSliderParamsFull, genresSliderParamsMini } from "./parameters";
+import { genresIconNames } from "@mock/filmsData";
+import Slider from "@components/Slider";
 import { SwiperSlide } from "swiper/react";
-import { breakpoints } from "@components/Slider/SliderParams";
+import FilterGenreItem, { FilterGenreItemSize } from "../FilterGenreItem";
+import { ButtonSize } from "@components/ui-kit/Button/SliderButton";
 
 import s from "./GenresSlider.module.scss";
-import FilterGenreItem from "../FilterGenreItem";
-import { ButtonSize } from "@components/ui-kit/Button/SliderButton";
+
+export enum GenresSliderMode {
+  FULL = "full",
+  MINI = "mini",
+}
 
 interface GenresSliderProps {
   items: string[];
+  mode: GenresSliderMode;
 }
 
-const genresIconNames = [
-  {
-    genre: "Комедии",
-    iconName: "comedyMask",
-  },
-  {
-    genre: "Драмы",
-    iconName: "dramaMask",
-  },
-  {
-    genre: "Триллеры",
-    iconName: "thriller",
-  },
-  {
-    genre: "Приключения",
-    iconName: "adventures",
-  },
-  {
-    genre: "Зарубежные",
-    iconName: "globe",
-  },
-  {
-    genre: "Мелодрамы",
-    iconName: "hearts",
-  },
-  {
-    genre: "Фантастика",
-    iconName: "sciFi",
-  },
-  {
-    genre: "Фэнтези",
-    iconName: "fantasy",
-  },
-  {
-    genre: "Семейные",
-    iconName: "family",
-  },
-  {
-    genre: "Боевики",
-    iconName: "gun",
-  },
-];
-
-const genresSliderParams: SwiperOptions = {
-  breakpoints: {
-    [breakpoints.md]: {
-      slidesPerView: 4,
-      slidesPerGroup: 1,
-    },
-    [breakpoints.lg]: {
-      slidesPerView: 5,
-      slidesPerGroup: 2,
-      allowTouchMove: false,
-    },
-    [breakpoints.xl]: {
-      slidesPerView: 5,
-      slidesPerGroup: 2,
-      allowTouchMove: false,
-    },
-  },
-  slidesPerView: 3,
-  slidesPerGroup: 1,
-  spaceBetween: 12,
-  allowTouchMove: true,
+const containerClassName = {
+  [GenresSliderMode.FULL]: s.containerFull,
+  [GenresSliderMode.MINI]: s.containerMini,
 };
 
-const GenresSlider: FC<GenresSliderProps> = ({ items }) => {
+const GenresSlider: FC<GenresSliderProps> = ({ items, mode }) => {
+  let genresSliderParams: SwiperOptions;
+  let buttonSize: ButtonSize;
+  let prevClassName: string | undefined;
+  let nextClassName: string | undefined;
+  let itemSize: FilterGenreItemSize;
+
+  switch (mode) {
+    case GenresSliderMode.FULL:
+      genresSliderParams = genresSliderParamsFull;
+      buttonSize = ButtonSize.MD;
+      itemSize = FilterGenreItemSize.LG;
+      break;
+
+    case GenresSliderMode.MINI:
+      genresSliderParams = genresSliderParamsMini;
+      buttonSize = ButtonSize.SM;
+      prevClassName = s.sliderPrev;
+      nextClassName = s.sliderNext;
+      itemSize = FilterGenreItemSize.SM;
+      break;
+  }
+
   return (
-    <div className={s.container}>
+    <div className={containerClassName[mode]}>
       <Slider
         params={genresSliderParams}
-        buttonSize={ButtonSize.SM}
-        prevClassName={s.sliderPrev}
-        nextClassName={s.sliderNext}
+        buttonSize={buttonSize}
+        prevClassName={prevClassName}
+        nextClassName={nextClassName}
       >
         {items.map((item) => {
           const iconName =
@@ -96,7 +64,11 @@ const GenresSlider: FC<GenresSliderProps> = ({ items }) => {
 
           return (
             <SwiperSlide key={item}>
-              <FilterGenreItem title={item} iconName={iconName} />
+              <FilterGenreItem
+                title={item}
+                iconName={iconName}
+                size={itemSize}
+              />
             </SwiperSlide>
           );
         })}

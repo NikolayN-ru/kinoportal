@@ -4,45 +4,13 @@ import { FC } from "react";
 
 import { FilterProps } from "@components/types/filters";
 import Select from "@components/ui-kit/Select";
+import GenresSlider, { GenresSliderMode } from "./GenresSlider";
 import SelectOptionsList from "@components/ui-kit/Select/SelectOptionsList";
 import Checkbox from "@components/ui-kit/Checkbox";
-import {
-  UseCheckboxChangingResult,
-  useCheckboxChanging,
-} from "hooks/useCheckboxChanging";
+import { useCheckboxChanging } from "hooks/useCheckboxChanging";
+import { genres } from "@mock/filmsData";
 
 import s from "./FiltersGenre.module.scss";
-import GenresSlider from "./GenresSlider";
-
-const genres: string[] = [
-  "Артхаус",
-  "Биография",
-  "Боевики",
-  "Вестерн",
-  "Военные",
-  "Детективы",
-  "Для детей",
-  "Документальные",
-  "Драмы",
-  "Зарубежные",
-  "Исторические",
-  "Катастрофы",
-  "Комедии",
-  "Криминал",
-  "Мелодрамы",
-  "Мистические",
-  "Музыкальные",
-  "По комиксам",
-  "Приключения",
-  "Русские",
-  "Семейные",
-  "Советские",
-  "Спорт",
-  "Триллеры",
-  "Ужасы",
-  "Фантастика",
-  "Фэнтези",
-];
 
 const SELECTED_OPTIONS_DEFAULT: string[] = [];
 
@@ -54,7 +22,7 @@ const FilterGenre: FC<FilterProps> = ({ title }) => {
   return (
     <Select title={title} selectedValues={selectedOptions} name="genre">
       <div className={s.optionsWrapper}>
-        <GenresSlider items={genres} />
+        <GenresSlider items={genres} mode={GenresSliderMode.MINI} />
 
         <SelectOptionsList columns={3} separated>
           {genres.map((genre) => {

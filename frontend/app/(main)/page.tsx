@@ -9,11 +9,43 @@ import Promo from "@components/Promo";
 import PageDescription from "@components/PageDescription";
 import Title from "@components/Title";
 import SubscriptionButton from "@components/ui-kit/Button/SubscriptionButton";
-
 import { collections, compilation } from "mock/filmsData";
+import Icon from "@components/ui-kit/IconComponent/Icon";
+import Image from "next/image";
+import { top10Items } from "@mock/top10";
+import Slider from "@components/Slider";
+import { breakpoints } from "@components/Slider/breakpoints";
+import { SwiperOptions } from "swiper";
+import { SwiperSlide } from "swiper/react";
 
 import s from "./page.module.scss";
+import Top10Card from "@components/Top10Card";
 
+const top10SliderParams: SwiperOptions = {
+  breakpoints: {
+    [breakpoints.md]: {
+      spaceBetween: 12,
+      slidesPerView: 3,
+      slidesPerGroup: 2,
+    },
+    [breakpoints.lg]: {
+      spaceBetween: 24,
+      slidesPerView: 4,
+      slidesPerGroup: 3,
+      allowTouchMove: false,
+    },
+    [breakpoints.xl]: {
+      spaceBetween: 24,
+      slidesPerView: 5,
+      slidesPerGroup: 4,
+      allowTouchMove: false,
+    },
+  },
+  spaceBetween: 12,
+  slidesPerView: 1,
+  slidesPerGroup: 1,
+  allowTouchMove: true,
+};
 
 export default function Home() {
   return (
@@ -25,11 +57,11 @@ export default function Home() {
 
       <section className={s.promoSection}>{<Promo />}</section>
 
-      <section className={s.pageSection + " " + s.subscribeSection}>
+      <section className={"pageSection " + s.subscribeSection}>
         <SubscriptionButton />
       </section>
 
-      <section className={s.pageSection + " " + s.aboutSection}>
+      <section className={"pageSection " + s.aboutSection}>
         <Title
           className={s.descriptionTitle}
           tag="h2"
@@ -39,25 +71,45 @@ export default function Home() {
         <PageDescription />
       </section>
 
-      <section className={s.pageSection}>
+      <section className="pageSection">
         <Title
-          className={s.sectionTitle}
+          className="sectionTitle"
           tag="h2"
           size="md"
           text={compilation.name}
         />
-        {<CompilationSlider items={compilation.items} />}
+        <CompilationSlider items={compilation.items} />
       </section>
 
-      {collections.map((collection) => (
-        <section key={collection.id} className={s.pageSection}>
-          <Link
-            href={`/collections/${collection.link}`}
-            className={s.titleLink + " " + s.sectionTitle}
+      <section className="pageSection">
+        <Title className={`sectionTitle ${s.titleTop10}`} tag="h2" size="md">
+          <Icon name="top10" />
+          <span className={s.textTop10}>за неделю</span>
+        </Title>
+        <div className={s.top10Container}>
+          <Slider
+            className={s.top10SliderWrapper}
+            params={top10SliderParams}
+            nextClassName={s.top10SliderNext}
           >
-            <Title tag="h2" size="md" text={collection.name} />
+            {top10Items.map((item, index) => (
+              <SwiperSlide key={index}>
+                <Top10Card item={item} number={index + 1} />
+              </SwiperSlide>
+            ))}
+          </Slider>
+        </div>
+      </section>
+
+      {collections.map(({ id, name, link, items }) => (
+        <section key={id} className="pageSection">
+          <Link
+            href={`/collections/${link}`}
+            className="titleLink sectionTitle"
+          >
+            <Title tag="h2" size="md" text={name} />
           </Link>
-          <CollectionSlider items={collection.items} />
+          <CollectionSlider items={items} link={`collections/${link}`} />
         </section>
       ))}
     </MainContainer>

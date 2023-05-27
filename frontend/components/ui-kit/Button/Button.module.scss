@@ -6,6 +6,15 @@
   &.red {
     @apply bg-red hover:bg-redHover;
   }
+
+  &.gray {
+    @apply bg-transparent border-[1px] border-solid border-separator
+    hover:bg-transparent hover:border-white;
+  }
+
+  &.full {
+    @apply w-full;
+  }
 }
 
 .content {
