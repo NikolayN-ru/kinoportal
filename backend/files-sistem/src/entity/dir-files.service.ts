@@ -55,7 +55,7 @@ export class DirFilesService {
     getFullFileName(filesNames:any){
         let otv = [];
         filesNames.forEach(item => {
-            otv.push({filename:path.resolve(__dirname, '../..','image', item.fileName), id: item.assenceId})
+            otv.push({filename: item.fileName, id: item.assenceId})
         })
         return otv;
     }

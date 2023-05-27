@@ -22,6 +22,9 @@ export class Movie{
     quality: string;
 
     @Column()
+    time: number
+
+    @Column()
     imgVideo: string;
 
     @Column({type: "real"})
