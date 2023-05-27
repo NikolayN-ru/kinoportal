@@ -4,11 +4,30 @@ import img from "@public/stallone.jpg";
 import s from "./page.module.scss";
 import { useState } from "react";
 import ModalAdminActor from "./ModalAdminActor/ModalAdminActor";
+import { useAllActorsQuery } from "@redux/actorApi";
+
 const ActorsAdmin = () => {
   const [isModal, setModal] = useState(false);
+  const { data = [], error, isLoading } = useAllActorsQuery("all");
+
+  // console.log(data, "data");
+  
   const onClose = () => {
     setModal(false);
   };
+
+  if (isLoading) {
+    return <div>LOADING</div>;
+  }
+
+  interface IactorId {
+    actorId: number;
+    firstName: string;
+    lastName: string;
+    filename: string;
+    story: string;
+  }
+
   return (
     <div>
       <div className={s.add_btn_block}>
@@ -50,6 +69,30 @@ const ActorsAdmin = () => {
               />
             </div>
           </div>
+
+          {data.map(
+            ({ actorId, firstName, lastName, filename, story }: IactorId) => (
+              <div className={s.body_column} key={actorId}>
+                <input className={s.checkbox} type="checkbox" name="" id="" />
+                <div className={s.body_title}>
+                  {firstName} {lastName}
+                </div>
+                <div className={s.body_title}>null - data</div>
+                <div className={s.body_title}>
+                  {story && story.slice(0, 50)}
+                </div>
+                <div className={s.body_title}>
+                  <Image
+                    className={s.actor_img}
+                    src={img}
+                    width={60}
+                    height={60}
+                    alt="actor"
+                  />
+                </div>
+              </div>
+            )
+          )}
         </div>
       </div>
     </div>

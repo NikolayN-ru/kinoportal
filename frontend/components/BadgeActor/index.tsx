@@ -1,10 +1,16 @@
 import { FC } from "react";
 import s from "./BadgeActor.module.scss";
 
-const BadgeActor: FC<any> = ({ img, title }) => {
+interface IBadgeActor {
+  img?: string;
+  title: string;
+  rating?: number;
+}
+
+const BadgeActor: FC<IBadgeActor> = ({ img, title, rating }) => {
   return (
     <div className={s.BadgeActor}>
-      <div className={s.BadgeActorCenter}>8,2</div>
+      <div className={s.BadgeActorCenter}>{rating}</div>
       <div className={s.BadgeActorDescriptiton}>{title}</div>
     </div>
   );
