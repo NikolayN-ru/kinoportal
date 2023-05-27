@@ -4,8 +4,10 @@ import {AuthService} from "./auth.service";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {User} from "../user/user.entity";
 import {JwtModule} from "@nestjs/jwt";
-import {GoogleStrategy} from "./google/google.strategy";
+import {GoogleStrategy} from "./google.strategy";
 import {VkontakteStrategy} from './vkontakte/vkontakte.strategy';
+import {JwtStrategy} from "./jwt.strategy";
+import {Role} from "./roles.entity";
 
 @Module({
     controllers: [AuthController],
@@ -20,11 +22,12 @@ import {VkontakteStrategy} from './vkontakte/vkontakte.strategy';
                     expiresIn: '24h'
                 }
             }),
-        TypeOrmModule.forFeature([User]),
+        TypeOrmModule.forFeature([User, Role]),
     ],
     providers: [
         AuthService,
         GoogleStrategy,
+        JwtStrategy,
         VkontakteStrategy
     ]
 })

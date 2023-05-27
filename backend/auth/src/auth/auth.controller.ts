@@ -1,4 +1,4 @@
-import {Body, Request, Controller, Get, Post, UseGuards, UsePipes, ValidationPipe} from '@nestjs/common';
+import {Body, Request, Controller, Get, Post, UseGuards, UsePipes, ValidationPipe, Req} from '@nestjs/common';
 import {AuthService} from "./auth.service";
 import {CreateUserDto} from "./dto/create-user.dto";
 import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
@@ -14,7 +14,7 @@ export class AuthController {
     constructor(private authService: AuthService) {}
 
     @ApiOperation({summary: 'Логин пользователя'})
-    @ApiResponse({status: 200, type: String})
+    @ApiResponse({status: 200, type: LoginUserDto})
     @UsePipes(ValidationPipe)
     @Post('/login')
     login(@Body() userDto: LoginUserDto) {
@@ -22,7 +22,7 @@ export class AuthController {
     }
 
     @ApiOperation({summary: 'Регистрация пользователя'})
-    @ApiResponse({status: 200, type: String})
+    @ApiResponse({status: 200, type: CreateUserDto})
     @UsePipes(ValidationPipe)
     @Post('/registration')
     registration(@Body() registrationDto: CreateUserDto) {
@@ -34,15 +34,43 @@ export class AuthController {
         return 'hello auth'
     }
 
-    @Get('/google-redirect')
-    @UseGuards(GoogleOAuthGuard)
-    googleLogin(@Request() req) {
-        return this.authService.otherLogin(req);
+    // @Get('google')
+    // @UseGuards(AuthGuard('google'))
+    // async googleAuth(@Req() req) {}
+    //
+    // @ApiOperation({summary: 'Авторизация пользователя через гугл'})
+    // @ApiResponse({status: 200, type: String})
+    // @Get('/google-redirect')
+    // @UseGuards(AuthGuard('google'))
+    // googleLogin(@Request() req) {
+    //     return this.authService.otherLogin(req);
+    // }
+
+    @Get('google')
+    @UseGuards(AuthGuard('google'))
+    googleLogin() {
+        // initiates the Google OAuth2 login flow
     }
 
+    @Get('google-redirect')
+    @UseGuards(AuthGuard('google'))
+    googleLoginCallback(@Req() req,) {
+        // handles the Google OAuth2 callback
+        return this.authService.reportJwt(req)
+    }
+
+    @Get('protected')
+    @UseGuards(AuthGuard('jwt'))
+    protectedResource(@Req() req) {
+        return this.authService.userInfo(req);
+    }
+
+    @ApiOperation({summary: 'Авторизация пользователя через вк'})
+    @ApiResponse({status: 200, type: String})
     @Get('/vkontakte/callback')
     @UseGuards(AuthGuard('vkontakte'))
     vkLogin(@Request() req) {
         return this.authService.otherLogin(req);
     }
+
 }
