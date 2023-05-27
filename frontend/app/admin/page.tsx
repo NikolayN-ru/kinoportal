@@ -40,7 +40,9 @@ const SettingsAdmin = () => {
             Повторите пароль
           </div>
           <div className={s.setting}>
-            <Button className={s.save_btn} title="Сохранить изменения" />
+            <div className={s.save_btn}>
+              <Button title="Сохранить изменения" />
+            </div>
           </div>
         </div>
       </div>

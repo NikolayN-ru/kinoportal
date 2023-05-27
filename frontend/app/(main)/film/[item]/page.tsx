@@ -2,14 +2,14 @@
 
 import { MouseEventHandler, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import cn from "classnames";
+import { usePathname } from "next/navigation";
 
 import CollectionSlider from "@components/Slider/CollectionSlider";
 import ActorRound from "@components/Badge/ActorRound";
 import Quality from "@components/Badge/Quality";
 import BadgeActor from "@components/BadgeActor";
-import GrayButton from "@components/GrayButton";
+// import GrayButton from "@components/GrayButton";
 import Title from "@components/Title";
 import { Play, Save, Share } from "@public/svg";
 
@@ -17,22 +17,31 @@ import { useFilmItemQuery } from "@redux/filmsApi";
 import { collections } from "@mock/filmsData";
 
 import s from "./item.module.scss";
+import { title } from "process";
+import Button from "@components/ui-kit/Button";
 
 const Index = () => {
   const [isClose, setIsClose] = useState<boolean>(true);
-  // const router = useRouter();
-  // const pathname = usePathname();
-  // const searchParams = useSearchParams();
-  // console.log(router, pathname, searchParams);
-  // const {
-  // data = [],
-  // error,
-  // isLoading,
-  // } = useFilmItemQuery(String(router.query.id));
+  const pathname = usePathname();
+  const {
+    data = [],
+    error,
+    isLoading,
+  } = useFilmItemQuery(String(pathname.split("/")[2]));
+  const {
+    title,
+    year,
+    countries,
+    genres,
+    quality,
+    rating,
+    description,
+    actors,
+  } = data;
 
-  // if (isLoading) {
-  // return <div>LOADING</div>;
-  // }
+  if (isLoading) {
+    return <div>LOADING</div>;
+  }
 
   const onToggleButtonClock: MouseEventHandler<
     HTMLButtonElement
@@ -58,52 +67,30 @@ const Index = () => {
             <div className={s.mainLeftWrapper}>
               <div className={s.mainLeftVideo}></div>
               <div className={s.mainBlockButton}>
-                <GrayButton title="Треллер" ico={<Play />} />
-                <GrayButton title="В избранное" ico={<Save />} />
-                <GrayButton title="Поделиться" ico={<Share />} />
+                <Button title="Треллер" ico={<Play />} />
+                <Button title="В избранное" ico={<Save />}/>
+                <Button title="Поделиться" ico={<Share />}/>
               </div>
             </div>
           </div>
           <div className={s.mainRight}>
-            <h1>Остров проклятых</h1>
-            <h1>(Фильм 2009)</h1>
+            <h1>{title}</h1>
+            <h1>(Фильм {year})</h1>
             <div className={s.mainRightMetaData}>
-              <p>2009 2 ч. 12 мин.16+</p>
-              <p>СШАТриллерыДетективыДрамы</p>
-              <p>FullHD Рус · Eng Рус</p>
+              <p>{year} 2 ч. 12 мин.16+</p>
+              <p>{countries.map((_: any) => `${_.country} `)} </p>
+              <p>{genres.map((_: any) => `${_.genre} `)}</p>
+              <p>{quality} Рус · Eng Рус</p>
             </div>
             <div className={s.mainRightActiros}>
-              <BadgeActor title="Рейтинг Иви" />
+              <BadgeActor title="Рейтинг Иви" rating={rating} />
               <BadgeActor title="Марк Руффало" />
               <BadgeActor title="Макс фон Сюдов" />
               <BadgeActor title="Мишель Уильямс" />
               <BadgeActor title="Мишель Уильямс" />
             </div>
             <div className={!isClose ? s.open : s.close}>
-              <div className={s.mainRightDescription}>
-                Четвертая по счету работа блестящего дуэта настоящих
-                профессионалов своего дела Мартина Скорсезе и Леонардо ДиКаприо,
-                на этот раз в жанре мистического триллера с элементами
-                психологической драмы, никого не оставит равнодушным. Америка
-                середины 50-х. На удаленном от всего мира острове расположена
-                специальная лечебница для особо буйных душевнобольных
-                преступников. В клинике происходят странные события: при
-                загадочных обстоятельствах пропала одна из пациенток. Остров
-                хорошо охраняется, вокруг бескрайний океан, а катера приходят
-                лишь в строго определенное время и место. Побег полностью
-                исключен. В поисках разгадки на остров прибывают два судебных
-                пристава с большой земли: Тедди Дениелс, страдающий
-                необъяснимыми головными болями после трагической гибели жены, и
-                его напарник Чак Оул. Даже на первый взгляд им становится
-                понятно, что на острове творится что-то неладное. Охранники
-                постоянно начеку, держат палец на спусковом крючке, а
-                впоследствии выясняется, что руководство клиники скрывает
-                страшную тайну. Для того чтобы узнать, как дальше будут
-                развиваться события, рекомендуем смотреть онлайн «Остров
-                проклятых». Приглашаем посмотреть фильм «Остров проклятых» в
-                нашем онлайн-кинотеатре совершенно бесплатно в хорошем HD
-                качестве. Приятного просмотра!
-              </div>
+              <div className={s.mainRightDescription}>{description}</div>
               <div className={s.line}></div>
               <div className={s.mainRightMetaDataButtom}>
                 <p>Языки</p>
@@ -148,17 +135,20 @@ const Index = () => {
             >
               <Title tag="h2" size="md" text="С фильмом «Спящие» смотрят" />
             </Link>
-            <CollectionSlider items={collection.items} />
+            <CollectionSlider items={collection.items} link={""} />
           </section>
         ))}
         <div className={s.actorSection}>
           <h3>Актёры и создатели</h3>
           <div className={s.actors}>
-            <ActorRound title="name" role="actor" link="/actor/1/director" />
-            <ActorRound title="name" role="actor" link="/actor/1/director" />
-            <ActorRound title="name" role="actor" link="/actor/1/director" />
-            <ActorRound title="name" role="actor" link="/actor/1/director" />
-            <ActorRound title="name" role="actor" link="/actor/1/director" />
+            {actors.map((_: any, id: number) => (
+              <ActorRound
+                key={id}
+                title={`${_.firstName} ${_.lastName}`}
+                role={_.role}
+                link={`/actor/${_.id}/director`}
+              />
+            ))}
           </div>
         </div>
       </div>

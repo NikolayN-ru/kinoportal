@@ -1,4 +1,4 @@
-import { ReactElement, useEffect } from "react";
+import { useEffect } from "react";
 import s from "./ModalAdminAuth.module.scss";
 import Input from "../Input/Input";
 import Button from "@components/ui-kit/Button";
@@ -10,11 +10,7 @@ interface ModalProps {
   onClose: () => void;
 }
 
-const ModalAdminAuth = ({
-  visible = false,
-  onClose,
-  title,
-}: ModalProps) => {
+const ModalAdminAuth = ({ visible = false, onClose, title }: ModalProps) => {
   const onKeydown = ({ key }: KeyboardEvent) => {
     switch (key) {
       case "Escape":
@@ -49,7 +45,9 @@ const ModalAdminAuth = ({
               />
             </div>
             <div className={s.add_btn_block} onClick={onClose}>
-              <Button className={s.log_btn} title="Войти" />
+              <div className={s.log_btn}>
+              <Button title="Войти" />
+              </div>
             </div>
           </div>
         </div>

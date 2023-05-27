@@ -1,9 +1,8 @@
 .container {
-  @apply flex flex-col justify-between items-center h-[88px] py-[16px] px-[8px]
-  border border-separator rounded-[6px] cursor-pointer transition-colors;
+  @apply flex flex-col justify-between items-center cursor-pointer transition-colors;
 
   &:hover {
-    @apply bg-purpleSelected border-purpleSelected duration-[80ms];
+    @apply duration-[80ms];
   }
 
   &:not(:hover) {
@@ -11,11 +10,34 @@
   }
 }
 
+.containerSM {
+  @apply h-[88px] py-[16px] px-[8px] border border-separator rounded-[6px];
+
+  &:hover {
+    @apply bg-purpleSelected border-purpleSelected;
+  }
+
+  .text {
+    @apply h-[16px] text-[13px] leading-[16px];
+  }
+}
+
+.containerLG {
+  @apply h-[108px] py-[24px] px-[8px] bg-purpleDark rounded-[8px];
+
+  &:hover {
+    @apply bg-purpleDarkLighter;
+  }
+
+  .text {
+    @apply h-[20px] text-[15px] leading-[20px];
+  }
+}
+
 .text {
-  @apply overflow-hidden h-[16px] mt-auto
-  text-[13px] leading-[16px] font-semibold text-white text-center whitespace-nowrap text-ellipsis;
+  @apply overflow-hidden mt-auto font-semibold text-white text-center whitespace-nowrap text-ellipsis;
 }
 
 .icon {
-  @apply w-auto h-[32px];
+  @apply h-[32px] w-auto;
 }

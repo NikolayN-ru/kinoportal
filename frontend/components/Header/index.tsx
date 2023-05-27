@@ -146,7 +146,9 @@ const Header = () => {
                   </div>
                   <ModalSearch
                     visible={isModal}
-                    footer={<button onClick={onClose}>{t("header.close")}</button>}
+                    footer={
+                      <button onClick={onClose}>{t("header.close")}</button>
+                    }
                     onClose={onClose}
                   />
                 </>

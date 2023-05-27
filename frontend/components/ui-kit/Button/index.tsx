@@ -3,6 +3,14 @@ import cn from "classnames/bind";
 
 import s from "./Button.module.scss";
 
+export enum Border {
+  GRAY = "gray",
+}
+
+export enum Size {
+  FULL = "full",
+}
+
 interface ButtonProps {
   title?: string | JSX.Element;
   className?: string;
@@ -12,6 +20,8 @@ interface ButtonProps {
   type?: "button" | "submit" | "reset";
   color?: string;
   small?: string;
+  border?: Border;
+  size?: Size;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -23,6 +33,8 @@ const Button: FC<ButtonProps> = ({
   type,
   color,
   small,
+  border,
+  size,
 }) => {
   type = type || "button";
 
@@ -30,6 +42,8 @@ const Button: FC<ButtonProps> = ({
     default: s.button || "",
     additional: className || "",
     color: (color && s[color]) || "",
+    border: (border && s[border]) || "",
+    size: (size && s[size]) || "",
   };
 
   const classNames = cn.bind(styles);
@@ -37,6 +51,8 @@ const Button: FC<ButtonProps> = ({
     default: !!styles.default,
     additional: !!styles.additional,
     color: !!styles.color,
+    border: !!styles.border,
+    size: !!styles.size,
   });
 
   return (

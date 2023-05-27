@@ -6,8 +6,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {Review} from "../movie/entity/review.entity";
 import {Comment} from "../movie/entity/comment.entity";
-import {Country} from "../movie/entity/country.entity";
-import {Genre} from "../movie/entity/genre.entity";
+import {Genre} from "../genre/entity/genre.entity";
+import {Country} from "../country/entity/country.entity";
 @Module({
   imports: [
     TypeOrmModule.forRoot({

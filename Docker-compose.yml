@@ -6,23 +6,6 @@ services:
   #   ports:
   #     - "3000:3000"
 
-  # db:
-  #   image: postgres
-  #   environment:
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_PASSWORD: postgres
-  #     POSTGRES_DB: mydb
-  #   volumes:
-      # - db-data:/var/lib/postgresql/data
-
-  # backend:
-  #   build: ./backend
-  #   ports:
-  #     - "4000:4000"
-  #   depends_on:
-  #     - db
-
-
   # backend
   app-gateway:
     container_name: app-gateway
@@ -41,7 +24,7 @@ services:
       context: ./backend/actor-sistem
     command: npm run start:dev
     depends_on:
-      - postgresActor
+      - postgresactor
       - rabbitmq
     restart: always
 
@@ -51,7 +34,7 @@ services:
       context: ./backend/files-sistem
     command: npm run start:dev
     depends_on:
-      - postgresFiles
+      - postgresfiles
       - rabbitmq
     restart: always
 
@@ -61,37 +44,43 @@ services:
       context: ./backend/movie
     command: npm run listen
     depends_on:
-      - postgresMovie
+      - postgresmovie
       - rabbitmq
     restart: always
 
-  postgresActor:
-    container_name: postgresProfile
-    image: postgres:latest
+  postgresactor:
+    container_name: postgresActor
+    build:
+      context: ./initActor
+      dockerfile: actor.dockerfile
     environment:
-      POSTGRES_DB: "actor"
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: qwerty
       PG_DATA: /var/lib/postgresql/data
     volumes:
       - dataActor:/var/lib/postgresql/data
     restart: always
   
-  postgresFiles:
+  postgresfiles:
     container_name: postgresFiles
-    image: postgres:latest
+    build:
+      context: ./initFiles
+      dockerfile: file.dockerfile
     environment:
-      POSTGRES_DB: "files"
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: qwerty
       PG_DATA: /var/lib/postgresql/data
     volumes:
       - dataFiles:/var/lib/postgresql/data
     restart: always
   
-  postgresMovie:
+  postgresmovie:
     container_name: postgresMovie
-    image: postgres:latest
+    build:
+      context: ./initMovie
+      dockerfile: movie.dockerfile
     environment:
-      POSTGRES_DB: "movie"
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: qwerty
       PG_DATA: /var/lib/postgresql/data
     volumes:

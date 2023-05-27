@@ -78,6 +78,8 @@
 }
 
 .actorSection {
+  overflow: hidden;
+  padding-left: 35px;
   h3 {
     @apply text-3xl mb-[20px];
   }

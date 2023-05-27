@@ -1,0 +1,61 @@
+.container {
+  @apply block select-none;
+  
+  &:hover {  
+    .title {
+      @apply text-white duration-[80ms];
+    }
+
+    .imageSection {
+      @apply  scale-[104%] translate-y-0 duration-[80ms];
+    }
+  }
+
+  &:not(:hover) {
+    .title,
+    .imageSection {
+      @apply duration-[400ms];
+    }
+  }
+}
+
+.imageSection {
+  @apply relative w-full mb-[8px] pb-[100%] scale-[100%] translate-y-0 transition-transform;
+  
+  transform-origin: 50% 100%;
+}
+
+.imageContainer {
+  @apply absolute top-0 right-0 bottom-0 left-0 flex
+  flex-col justify-center items-center overflow-hidden w-full h-full
+  rounded-[50%] bg-backgroundSecondary;
+}
+
+.image {
+  @apply max-w-full w-full h-auto;
+}
+
+.countBadge {
+  @apply absolute bottom-0 left-[4px] z-[1] p-[5px] px-[8px]
+  bg-gradientPurpleStart rounded-[2px];
+
+  &::before {
+    @apply absolute top-[-2px] right-[2px] bottom-0 left-[2px] z-[-1]
+    content-[""] bg-gradientPurpleStart rounded-[2px] opacity-[64%];
+  }
+}
+
+.countBadgeInner {
+  @apply overflow-hidden h-[20px]
+  text-[15px] leading-[20px] font-bold text-white whitespace-nowrap text-ellipsis;
+}
+
+.title {
+  @apply overflow-hidden h-[20px]
+  text-[15px] leading-[20px] font-semibold text-light whitespace-nowrap text-ellipsis;
+}
+
+.filmsCount {
+  @apply overflow-hidden h-[16px]
+  text-[13px] leading-[16px] text-primary whitespace-nowrap text-ellipsis
+}
