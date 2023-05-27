@@ -26,7 +26,7 @@ export class MovieService {
             const movies = await this.movieRepository.find({
                 take: 100
             })
-            return this.getFullFileName(movies);
+            return movies;
         } catch (e) {
             return {
                 status: e.status,
@@ -37,7 +37,7 @@ export class MovieService {
 
     async getAllMovies() {
         try {
-            return this.getFullFileName(await this.movieRepository.find());
+            return await this.movieRepository.find();
         } catch (e) {
             return {
                 status: e.status,
@@ -48,7 +48,6 @@ export class MovieService {
 
     async getMovieWithFilter(genre: string, year: string, country: string, rating: number, votes: number, actor: string, director: string) {
         try {
-            // поиск по актерам и режиссерам
             let genres, years, countries;
             const param = {
                 genres: undefined,
@@ -113,7 +112,7 @@ export class MovieService {
             const movies = await this.movieRepository.findBy(param);
 
             if(!movies) return HttpStatus.NOT_FOUND;
-            return this.getFullFileName(movies);
+            return movies;
         } catch (e) {
             return {
                 status: e.status,
@@ -137,8 +136,7 @@ export class MovieService {
             if(!movie)  return HttpStatus.NOT_FOUND;
             let movieInfo;
             await this.getFilesForMovies([movie],'movie').then(res => movieInfo = res[0]);
-            return this.getFullFileName([movieInfo])
-
+            return movieInfo;
         } catch (e) {
             return {
                 status: e.status,
@@ -175,7 +173,8 @@ export class MovieService {
             if(movie.length===0) {
                     return [];
             }
-            return this.getFullFileName(movie);
+
+            return movie;
 
         } catch (e) {
             return {

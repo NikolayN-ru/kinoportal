@@ -3,9 +3,15 @@ import { ActorController } from './actor/actor.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { FilmController } from './film/film.controller';
 import { AdminController } from './admin/admin.controller';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname,'../..','/files-sistem','image'),
+      serveRoot: '/image',
+    }),
     ClientsModule.register([
       {
         name: 'Actor',
