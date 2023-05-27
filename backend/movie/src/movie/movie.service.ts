@@ -10,7 +10,7 @@ import {CreateMovieDto} from "./dto/create-movie.dto";
 import {ClientProxy} from "@nestjs/microservices";
 import {Genre} from "../genre/entity/genre.entity";
 import {Country} from "../country/entity/country.entity";
-import * as path from 'path';
+import path from "path";
 
 @Injectable()
 export class MovieService {
@@ -24,9 +24,14 @@ export class MovieService {
     async getMain() {
         try {
             const movies = await this.movieRepository.find({
-                take: 100
+                take: 100,
+                relations: {
+                    genres: true,
+                    countries: true
+                }
             })
-            return movies;
+            // добавить вывод картинок
+            return movies
         } catch (e) {
             return {
                 status: e.status,
@@ -37,7 +42,11 @@ export class MovieService {
 
     async getAllMovies() {
         try {
-            return await this.movieRepository.find();
+            return this.movieRepository.createQueryBuilder("movie")
+                .leftJoinAndSelect("movie.genre", "genre")
+                .leftJoinAndSelect("movie.countries", "countries")
+                .getMany()
+            //добавить вывод картинок
         } catch (e) {
             return {
                 status: e.status,
@@ -46,36 +55,30 @@ export class MovieService {
         }
     }
 
-    async getMovieWithFilter(genre: string, year: string, country: string, rating: number, votes: number, actor: string, director: string) {
+    async getMovieWithFilter(genre: string, year: string, country: string, rating: number, votes: number, actor: string, director: string, sort: string) {
         try {
-            let genres, years, countries;
-            const param = {
-                genres: undefined,
-                countries: undefined,
-                year: undefined,
-                rating: undefined,
-                votes: undefined,
-                id: undefined
-            };
+            let genres, years, countries, movieIdForActor;
+            let queryWhere = [];
 
-            let movieIdForActor; 
+
             if(actor){
                 await this.clientActor.send('filt-film-actor',{actorId: actor, roleName: 'Актер'}).toPromise()
-                    .then(result => movieIdForActor = result)
+                    .then(result => movieIdForActor = result);
+
+                queryWhere.push(`movie.id IN (${movieIdForActor})`);
             }
 
             if(director){
                 await this.clientActor.send('filt-film-actor',{actorId: director, roleName: 'Режиссёр'}).toPromise()
-                    .then(result => movieIdForActor = result)
+                    .then(result => movieIdForActor = result);
+
+                queryWhere.push(`movie.id IN (${movieIdForActor})`);
             }
-            
 
             if(genre) {
-                genres = genre.split(' ');
+                genres = genre.split(' ').map(genre => `'${genre}'`);
 
-                param.genres = {
-                        genre: In(genres)
-                }
+                queryWhere.push(`genres.genre IN (${genres})`)
             }
 
             if(year) {
@@ -85,34 +88,48 @@ export class MovieService {
 
                 switch (years.length) {
                     case 1:
-                        param.year = years[0]
+                        queryWhere.push(`movie.year = ${years[0]}`)
                         break;
                     case 2:
-                        param.year = Between(years[0], years[1])
+                        queryWhere.push(`movie.year BETWEEN ${years[0]} AND ${years[1]}`)
                         break;
                 }
             }
 
             if(country) {
-                countries = country.split(' ');
+                countries = country.split(' ').map(country => `'${country}'`);
 
-                param.countries = {
-                    country: In(countries)
-                }
+                queryWhere.push(`countries.country IN (${countries})`)
             }
 
             if(rating) {
-                param.rating = MoreThan(rating)
+                queryWhere.push(`movie.rating > ${rating}`);
             }
 
             if(votes) {
-                param.votes = MoreThan(votes);
+                queryWhere.push(`movie.votes > ${votes}`);
             }
 
-            const movies = await this.movieRepository.findBy(param);
+            let movies;
+            const queryWhereJoined = queryWhere.join(' AND ');
 
+            if(sort) {
+                movies = await this.movieRepository.createQueryBuilder('movie')
+                    .leftJoinAndSelect('movie.countries', 'countries')
+                    .leftJoinAndSelect('movie.genres', 'genres')
+                    .where(queryWhereJoined)
+                    .orderBy('movie.' + sort, sort === 'title' ? "ASC" : "DESC")
+                    .getMany();
+            } else {
+                movies = await this.movieRepository.createQueryBuilder('movie')
+                    .leftJoinAndSelect('movie.countries', 'countries')
+                    .leftJoinAndSelect('movie.genres', 'genres')
+                    .where(queryWhereJoined)
+                    .getMany();
+            }
+            // добавить вывод картинок
             if(!movies) return HttpStatus.NOT_FOUND;
-            return movies;
+            return movies
         } catch (e) {
             return {
                 status: e.status,
@@ -133,7 +150,9 @@ export class MovieService {
                     countries: true
                 }
             });
-            if(!movie)  return HttpStatus.NOT_FOUND;
+
+            if(!movie) return HttpStatus.NOT_FOUND;
+
             let movieInfo;
             await this.getFilesForMovies([movie],'movie').then(res => movieInfo = res[0]);
             return movieInfo;
@@ -171,7 +190,7 @@ export class MovieService {
                 .where("movie.id in (:...moviesIds)", {moviesIds})
                 .getMany();
             if(movie.length===0) {
-                    return [];
+                return [];
             }
 
             return movie;
@@ -197,10 +216,7 @@ export class MovieService {
             if(!movie) return HttpStatus.NOT_FOUND;
             return movie.reviews
         } catch (e) {
-            return {
-                status: e.status,
-                message: e.message
-            };
+            return e.message;
         }
     }
 
@@ -268,7 +284,8 @@ export class MovieService {
             if(!review) return HttpStatus.NOT_FOUND;
 
             const comment = new Comment();
-            comment.text = dto.comment
+            comment.text = dto.comment;
+            comment.parentId = dto.parentId;
 
             review.comments.push(comment);
             await this.reviewRepository.save(review);
@@ -316,7 +333,8 @@ export class MovieService {
             if(dopContent !== 0){
                 await this.clientPhoto.send('add.file',{assenceTable: 'movie', assenceId: movie.id, files: dopContent}).toPromise();
             }
-            return 'Добавлено'
+
+            return movie
         } catch (e) {
             return {
                 status: e.status,
@@ -330,10 +348,14 @@ export class MovieService {
             const movie = await this.movieRepository.findOneBy({
                 id: id
             });
+
             if(!movie) return HttpStatus.NOT_FOUND;
-            await this.movieRepository.delete({id: id});
+
+            await this.movieRepository.delete(movie);
+
             await this.clientPhoto.send('delete.main.file',{main: [movie.imgVideo], id: movie.id}).toPromise();
             await this.clientActor.send('delete.film',movie.id).toPromise();
+
             return 'Фильм удален';
         } catch (e) {
             return {
@@ -354,23 +376,6 @@ export class MovieService {
             await this.movieRepository.save(movie);
 
             return movie;
-        } catch (e) {
-            return {
-                status: e.status,
-                message: e.message
-            };
-        }
-    }
-
-    async sortMovies(sort: string) {
-        try {
-            const movies = await this.movieRepository.createQueryBuilder()
-                    .select('movie')
-                    .from(Movie, "movie")
-                    .orderBy('movie.' + sort, sort === 'title' ? "ASC" : "DESC")
-                    .getMany();
-            if(!movies) return HttpStatus.NOT_FOUND;
-            return movies;
         } catch (e) {
             return {
                 status: e.status,

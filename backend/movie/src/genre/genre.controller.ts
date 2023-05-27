@@ -21,4 +21,9 @@ export class GenreController {
     updateGenre(dto: UpdateGenreDto) {
         return this.genreService.updateGenre(dto.id, dto.genre);
     }
+
+    @EventPattern('get.all.genres')
+    getAllGenres() {
+        return this.genreService.getAllGenres();
+    }
 }

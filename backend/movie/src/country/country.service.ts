@@ -19,10 +19,7 @@ export class CountryService {
 
             return await this.countryRepository.save(newCountry);
         } catch (e) {
-            return {
-                status: e.status,
-                message: e.message
-            };
+            return e.message;
         }
     }
 
@@ -34,10 +31,7 @@ export class CountryService {
             if(!country.affected) return HttpStatus.NOT_FOUND;
             return 'Страна уделена';
         } catch (e) {
-            return {
-                status: e.status,
-                message: e.message
-            };
+            return e.message;
         }
     }
 
@@ -58,10 +52,7 @@ export class CountryService {
 
             return updatedCountry;
         } catch (e) {
-           return {
-                status: e.status,
-                message: e.message
-            };
+            return e.message;
         }
     }
 }

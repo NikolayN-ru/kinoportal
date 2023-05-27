@@ -36,14 +36,6 @@ export class Movie{
     @Column()
     description: string;
 
-
-
-    // @Column()
-    // similarFilms: number[]; // по id
-    //
-    // @Column()
-    // overVideo: number[];
-
     @ManyToMany(() => Genre,
         (genre) => genre.movies,
         {
