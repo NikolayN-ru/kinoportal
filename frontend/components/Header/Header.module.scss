@@ -9,16 +9,19 @@
   font-family: Arial, Helvetica, sans-serif;
   position: relative;
   z-index: 15;
+  width: 100%;
 }
 
 .menu {
   @apply flex flex-row items-center gap-[30px];
   width: 100%;
+  justify-content: space-between;
 }
 
 .logo {
   @apply cursor-pointer;
-  z-index: 15;
+  position: relative;
+  z-index: 900;
 }
 
 .section {
@@ -30,6 +33,7 @@
 .navigation {
   @apply flex gap-[16px];
   z-index: 15;
+  margin-right: 40px;
 }
 
 .DropDownBody {
@@ -126,7 +130,7 @@
 
 .text_avatar:hover {
   border-color: #ffffff;
-} 
+}
 
 .btn__subscribe:hover,
 .btn__search:hover {
@@ -167,7 +171,48 @@
   @apply mt-[2px];
 }
 
-.lang, .icon_lang {
+.lang,
+.icon_lang {
   position: relative;
   z-index: 15;
+}
+
+@media (max-width: 1150px) {
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: 1px solid #383153;
+    z-index: 999;
+    background-color: #100e19;
+  }
+  .container {
+    @apply max-w-[1065px] my-[0] mx-auto;
+  }
+  .navigation {
+    display: none;
+  }
+  .btn__search {
+    display: none;
+  }
+  .row {
+    padding: 0 25px;
+  }
+  .menu {
+    @apply flex flex-row items-center gap-[30px];
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .logo {
+    @apply cursor-pointer;
+    z-index: 15;
+  }
+
+  .section {
+    @apply flex flex-row items-center gap-[30px] justify-between;
+    width: 100%;
+    z-index: 0;
+  }
 }

@@ -6,6 +6,7 @@
 }
 .container {
   @apply w-[100%] max-w-[886px];
+  padding: 0 10px;
 }
 .img__wrapper {
   @apply justify-center;
@@ -93,14 +94,7 @@
   }
 
   .modal_dialog {
-    @apply max-w-[500px] h-[300px];
+    @apply max-w-[500px] h-[500px];
   }
 
-  .modal_content {
-    font-size: 14px;
-    padding: 0 20px 20px 20px;
-  }
-  .modal_title {
-    font-size: 20px;
-  }
 }

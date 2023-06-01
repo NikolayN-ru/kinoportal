@@ -14,11 +14,7 @@ export interface IGenreTV {
 }
 
 const genreTv: IGenreTV[] = [
-  {
-    id: "1",
-    name: "ТВ-каналы",
-    url: "/tvplus",
-  },
+  { id: "1", name: "ТВ-каналы", url: "/tvplus" },
   { id: "2", name: "Развлекательное", url: "/razvlekatelnoe" },
   { id: "3", name: "Дети", url: "/deti" },
   { id: "4", name: "Спортивное ТВ", url: "/sport" },

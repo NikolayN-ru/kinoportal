@@ -74,3 +74,7 @@ export { default as Top10Number6 } from "./top10-number6.svg";
 export { default as Top10Number7 } from "./top10-number7.svg";
 export { default as Top10Number8 } from "./top10-number8.svg";
 export { default as Top10Number9 } from "./top10-number9.svg";
+export { default as Home } from "./home_icon.svg";
+export { default as VideoIcon } from "./video_icon.svg";
+export { default as TvIcon } from "./tv_icon.svg";
+export { default as More } from "./more.svg";

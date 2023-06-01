@@ -1,0 +1,66 @@
+.mobile_bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #1f1b2ee0;
+    height: 50px;
+    z-index: 999;
+    backdrop-filter: blur(20px);
+    margin: 0 auto;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.item {
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.itemGlowImage {
+    text-align: center;
+}
+
+.itemGlowImage svg{
+    width: 25px;
+    height: 25px;
+    margin: 0 auto;
+}
+
+.itemGlowImage path{
+   fill: #a5a1b2;
+}
+
+.text {
+    align-self: center;
+    color: #a5a1b2;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 600;
+    height: 12px;
+    line-height: 12px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.modal {
+    position: fixed;
+    top: -800px;
+    z-index: 1;
+    max-height: calc(100vh - 35px);
+}
+
+.modalPage {
+    position: fixed;
+    top: -800px;
+    z-index: 1;
+    max-height: calc(100vh - 122px);
+}

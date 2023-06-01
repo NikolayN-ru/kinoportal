@@ -6,9 +6,15 @@ interface ModalProps {
   visible: boolean;
   footer: ReactElement | string;
   onClose: () => void;
+  className?: string;
 }
 
-const Modal: FC<ModalProps> = ({ visible = false, footer = "", onClose }) => {
+const Modal: FC<ModalProps> = ({
+  visible = false,
+  footer = "",
+  onClose,
+  className,
+}) => {
   const { t } = useTranslation();
 
   const onKeydown = ({ key }: KeyboardEvent) => {
@@ -27,7 +33,7 @@ const Modal: FC<ModalProps> = ({ visible = false, footer = "", onClose }) => {
   if (!visible) return null;
 
   return (
-    <div className={s.modal} onClick={onClose}>
+    <div className={`${s.modal} ${className}`} onClick={onClose}>
       <div className={s.container}>
         <span className={s.modal_close} onClick={onClose}>
           &times;

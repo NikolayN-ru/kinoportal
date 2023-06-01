@@ -9,14 +9,14 @@ import { genres, countries, years, sideContent } from "./allCollectionsContent";
 import { IFilms } from "./interfaces/FilmsInteface";
 import { Links } from "./interfaces/LinksEnum";
 
-const content: IFilms = {
+export const content: IFilms = {
   genres: genres,
   countries: countries,
   years: years,
   sideContent,
 };
 
- interface DropDownContentProps {
+ export interface DropDownContentProps {
   link: Links;
 }
 
