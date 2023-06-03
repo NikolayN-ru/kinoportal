@@ -16,9 +16,9 @@
 }
 
 .searchItems {
-  @apply mt-[30px];
+  @apply relative z-[1] mt-[30px];
 }
 
 .resetButtonContainer {
-  @apply col-start-1 col-end-[-1];
+  @apply relative z-[0] col-start-1 col-end-[-1];
 }

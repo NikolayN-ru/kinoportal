@@ -1,29 +1,38 @@
 import { FC, useContext } from "react";
 
+import { countries } from "@mock/filmsData";
 import { SelectContext } from "@components/ui-kit/Select";
 import TextSlider from "@components/TextSlider";
+import TextSliderItem from "@components/TextSlider/TextSliderItem";
+import CountriesSliderItem from "./CountriesSliderItem";
 
 import s from "./CountriesSlider.module.scss";
 
-interface CountriesSliderProps {
-  items: string[];
-}
-
 const sliderOptions = {
+  itemsCount: countries.length,
   spaceBetween: 12,
   offsetStep: 100,
 };
 
-const CountriesSlider: FC<CountriesSliderProps> = ({ items }) => {
+const CountriesSlider: FC = () => {
   const isOpen = useContext(SelectContext) ?? true;
 
+  if (!isOpen) return null;
+
   return (
-    (isOpen && (
-      <div className={s.container}>
-        <TextSlider items={items} options={sliderOptions} />
-      </div>
-    )) ||
-    null
+    <div className={s.container}>
+      <TextSlider options={sliderOptions}>
+        {countries.map(({ value, title }) => (
+          <TextSliderItem key={value}>
+            <CountriesSliderItem
+              className={s.sliderItem}
+              name={value}
+              title={title}
+            />
+          </TextSliderItem>
+        ))}
+      </TextSlider>
+    </div>
   );
 };
 

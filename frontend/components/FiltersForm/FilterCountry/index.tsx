@@ -1,81 +1,58 @@
 "use client";
 
 import { FC } from "react";
+import { useDispatch } from "react-redux";
 
+import { useTypedSelector } from "hooks/useTypedSelector";
 import { FilterProps } from "@components/types/filters";
 import Select from "@components/ui-kit/Select";
 import SelectOptionsList from "@components/ui-kit/Select/SelectOptionsList";
 import Checkbox from "@components/ui-kit/Checkbox";
-import { useCheckboxChanging } from "hooks/useCheckboxChanging";
+import CountriesSlider from "./CountriesSlider";
+import { setCountry } from "@redux/filtersApi";
+import { countries } from "@mock/filmsData";
+import { getCountriesTitlesByValues } from "utils/filters";
 
 import s from "./FilterCountry.module.scss";
-import CountriesSlider from "./CountriesSlider";
-
-const countries = [
-  "Австралия",
-  "Аргентина",
-  "Армения",
-  "Беларусь",
-  "Бельгия",
-  "Бразилия",
-  "Великобритания",
-  "Венгрия",
-  "Германия",
-  "Гонконг",
-  "Дания",
-  "Индия",
-  "Ирландия",
-  "Испания",
-  "Италия",
-  "Казахстан",
-  "Канада",
-  "Китай",
-  "Колумбия",
-  "Мексика",
-  "Нидерланды",
-  "Новая Зеландия",
-  "Норвегия",
-  "Польша",
-  "Россия",
-  "СССР",
-  "США",
-  "Таиланд",
-  "Турция",
-  "Финляндия",
-  "Франция",
-  "Швейцария",
-  "Швеция",
-  "ЮАР",
-  "Южная Корея",
-  "Япония",
-];
-
-const SELECTED_OPTIONS_DEFAULT: string[] = [];
 
 const FilterCountry: FC<FilterProps> = ({ title }) => {
-  const [selectedOptions, onCheckboxChange] = useCheckboxChanging(
-    SELECTED_OPTIONS_DEFAULT
+  const selectedCountries = useTypedSelector(
+    (state) => state.filtersApi.filters.country
   );
 
+  const dispatch = useDispatch();
+
+  const onCheckboxChange = (clickedCountry: string, isChecked: boolean) => {
+    const updatedSelectedCountries = isChecked
+      ? selectedCountries.filter((country) => country !== clickedCountry)
+      : [...selectedCountries, clickedCountry];
+
+    dispatch(setCountry(updatedSelectedCountries));
+  };
+
   return (
-    <Select title={title} selectedValues={selectedOptions} name="country">
+    <Select
+      title={title}
+      selectedValues={getCountriesTitlesByValues(countries, selectedCountries)}
+      name="country"
+    >
       <div className={s.optionsWrapper}>
-        <CountriesSlider items={countries} />
+        <CountriesSlider />
 
         <SelectOptionsList columns={3} separated>
-          {countries.map((country) => {
-            const isChecked = selectedOptions.some(
-              (option) => option === country
+          {countries.map(({ value, title }) => {
+            const isChecked = selectedCountries.some(
+              (selectedCountry) => selectedCountry === value
             );
 
             return (
-              <div key={country} className={s.optionItem}>
+              <div key={value} className={s.optionItem}>
                 <Checkbox
-                  value={country}
-                  text={country}
+                  value={value}
+                  text={title}
                   name="country"
                   isChecked={isChecked}
-                  onChange={() => onCheckboxChange(country, isChecked)}
+                  onChange={() => onCheckboxChange(value, isChecked)}
                 />
               </div>
             );

@@ -1,62 +1,50 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC } from "react";
+import { useDispatch } from "react-redux";
 
+import { useTypedSelector } from "hooks/useTypedSelector";
+import { setYear } from "@redux/filtersApi";
 import { FilterProps } from "@components/types/filters";
 import Select from "@components/ui-kit/Select";
-import SelectOptionsList from "@components/ui-kit/Select/SelectOptionsList";
 import Radio from "@components/ui-kit/Radio";
+import SelectOptionsList from "@components/ui-kit/Select/SelectOptionsList";
+import { years } from "@mock/filmsData";
+import { getYearsTitleByValue, isSelectedYears } from "utils/filters";
 
 import s from "./FilterYear.module.scss";
 
-const years = [
-  "Все годы",
-  "2023 год",
-  "2022 год",
-  "2021 год",
-  "2020 год",
-  "2019 год",
-  "2018 год",
-  "2017 год",
-  "2016 год",
-  "2022-2023",
-  "2021-2022",
-  "2020-2022",
-  "2019-2020",
-  "2010-2020",
-  "2010-2015",
-  "2000-2010",
-  "1990-2000",
-  "1980-1990",
-  "до 1980",
-];
-
-const SELECTED_OPTION_DEFAULT: string | null = null;
-
 const FilterYear: FC<FilterProps> = ({ title }) => {
-  const [selectedYear, setSelectedYear] = useState<string | null>(
-    SELECTED_OPTION_DEFAULT
+  const selectedYears = useTypedSelector(
+    ({ filtersApi }) => filtersApi.filters.year
   );
+
+  const dispatch = useDispatch();
+
+  const onRadioChange = (yearsValue: number[]): void => {
+    if (isSelectedYears(yearsValue, selectedYears)) return;
+    dispatch(setYear(yearsValue));
+  };
 
   return (
     <Select
       title={title}
-      selectedValues={(selectedYear && [selectedYear]) || []}
+      selectedValues={[getYearsTitleByValue(years, selectedYears)]}
       name="year"
     >
       <div className={s.optionsWrapper}>
         <SelectOptionsList columns={1}>
-          {years.map((year) => {
-            const isChecked = year === selectedYear;
+          {years.map(({ value, title }) => {
+            const isChecked = isSelectedYears(value, selectedYears);
 
             return (
-              <div key={year} className={s.optionItem}>
+              <div key={title} className={s.optionItem}>
                 <Radio
-                  value={year}
-                  text={year}
+                  value={title}
+                  text={title}
                   name="year"
                   isChecked={isChecked}
-                  onChange={() => setSelectedYear(year)}
+                  onChange={() => onRadioChange(value)}
                 />
               </div>
             );

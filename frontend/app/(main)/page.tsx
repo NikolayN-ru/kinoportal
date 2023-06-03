@@ -6,7 +6,7 @@ import CompilationSlider from "@components/Slider/CompilationSlider";
 import CollectionSlider from "@components/Slider/CollectionSlider";
 import MainContainer from "@components/MainContainer";
 import Promo from "@components/Promo";
-import PageDescription from "@components/PageDescription";
+import PageDescription, { PageNames } from "@components/PageDescription";
 import Title from "@components/Title";
 import SubscriptionButton from "@components/ui-kit/Button/SubscriptionButton";
 import { collections, compilation } from "mock/filmsData";
@@ -61,14 +61,14 @@ export default function Home() {
         <SubscriptionButton />
       </section>
 
-      <section className={"pageSection " + s.aboutSection}>
+      <section className={"pageSection aboutSection"}>
         <Title
           className={s.descriptionTitle}
           tag="h2"
           size="base"
           text="Онлайн-кинотеатр Иви: фильмы в хорошем качестве всегда приносят настоящее удовольствие"
         />
-        <PageDescription />
+        <PageDescription page={PageNames.MAIN} />
       </section>
 
       <section className="pageSection">

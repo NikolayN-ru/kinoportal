@@ -1,12 +1,16 @@
-.descriptionTitle {
-  @apply mt-[24px] mb-[8px];
-}
-
 .description {
   @apply mb-[20px];
 }
 
 .sectionTitle {
   @apply mb-[24px];
+}
+
+.filters {
+  @apply relative z-[2];
+}
+
+.genresSlider {
+  @apply relative z-[1];
 }
 

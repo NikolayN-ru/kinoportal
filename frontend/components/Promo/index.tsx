@@ -6,7 +6,7 @@ import { promoItems } from "@mock/filmsData";
 import PromoItem from "./PromoItem";
 import { breakpoints } from "@components/Slider/breakpoints";
 import SliderButton, {
-  ButtonSize
+  ButtonSize,
 } from "@components/ui-kit/Button/SliderButton";
 
 import s from "./Promo.module.scss";
