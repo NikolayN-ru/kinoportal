@@ -14,6 +14,12 @@ const DropDownAvatar = () => {
     name: string;
     url: string;
   }
+  interface IButtonsDropDown {
+    id: string;
+    iconName: string;
+    text: string;
+  }
+
   const captions: ICaption[] = [
     { id: "1", name: "Изи Иви", url: "/subscription-izi-ivi" },
     { id: "2", name: "Иви", url: "/subscription" },
@@ -21,6 +27,16 @@ const DropDownAvatar = () => {
     { id: "4", name: "Amediateka", url: "/subscription-amediateka" },
     { id: "5", name: "Матч Премьер", url: "/subscription-matchpremier" },
     { id: "6", name: "Матч Футбол", url: "/subscription-matchfootball" },
+  ];
+
+  const buttons: IButtonsDropDown[] = [
+    { id: "1", iconName: "video", text: "Покупки" },
+    { id: "2", iconName: "favorite", text: "Смотреть позже" },
+    { id: "3", iconName: "history", text: "История просмотров" },
+    { id: "4", iconName: "certificate", text: "Активация сертификата" },
+    { id: "5", iconName: "tv_channels", text: "Вход по коду" },
+    { id: "6", iconName: "wallet", text: "Способы оплаты" },
+    { id: "1", iconName: "share_small", text: "Пригласить друзей" },
   ];
 
   const handleMouseEnter = () => {
@@ -38,12 +54,14 @@ const DropDownAvatar = () => {
       <div className={s.icon_sub}>
         <Icon name="diamond" />
       </div>
-      <Button className={s.button_sub} text="Подписки" small="Подключить" />
+      <Button className={s.button_sub} color="grey" text="Подписки" small="Подключить" />
     </div>
   );
   const content = (
     <div className={s.auth_content}>
-      <Button className={s.button_auth} text="Войти или зарегистрироваться" />
+      <div className={s.button_auth_wrap}>
+      <Button className={s.button_auth}  text="Войти или зарегистрироваться" />
+      </div>
       <div className={s.links_list}>
         <a href="" className={s.link_settings}>
           Настройки
@@ -69,54 +87,27 @@ const DropDownAvatar = () => {
       </div>
     </div>
   );
+
   return (
     <div className={s.dropDown_notify}>
       <div className={s.content}>
         <div className={s.main_content}>
           <div className={s.buttons_list}>
-            <div className={s.button_item} onMouseEnter={handleMouseLeave}>
-              <div className={s.icon}>
-                <Icon name="video" />
-              </div>
-              <Button className={s.button} text="Покупки" />
-            </div>
-            <div className={s.button_item} onMouseEnter={handleMouseLeave}>
-              <div className={s.icon}>
-                <Icon name="favorite" />
-              </div>
-              <Button className={s.button} text="Смотреть позже" />
-            </div>
-            <div className={s.button_item} onMouseEnter={handleMouseLeave}>
-              <div className={s.icon}>
-                <Icon name="history" />
-              </div>
-              <Button className={s.button} text="История просмотров" />
-            </div>
+            {buttons.map((button) => {
+              return (
+                <div
+                  className={s.button_item}
+                  onMouseEnter={handleMouseLeave}
+                  key={button.id}
+                >
+                  <div className={s.icon}>
+                    <Icon name={button.iconName} />
+                  </div>
+                  <Button color="grey" className={s.button} text={button.text} />
+                </div>
+              );
+            })}
             {triggerElement}
-            <div className={s.button_item} onMouseEnter={handleMouseLeave}>
-              <div className={s.icon}>
-                <Icon name="certificate" />
-              </div>
-              <Button className={s.button} text="Активация сертификата" />
-            </div>
-            <div className={s.button_item} onMouseEnter={handleMouseLeave}>
-              <div className={s.icon}>
-                <Icon name="tv_channels" />
-              </div>
-              <Button className={s.button} text="Вход по коду" />
-            </div>
-            <div className={s.button_item} onMouseEnter={handleMouseLeave}>
-              <div className={s.icon}>
-                <Icon name="wallet" />
-              </div>
-              <Button className={s.button} text="Способы оплаты" />
-            </div>
-            <div className={s.button_item} onMouseEnter={handleMouseLeave}>
-              <div className={s.icon}>
-                <Icon name="share_small" />
-              </div>
-              <Button className={s.button} text="Пригласить друзей" />
-            </div>
           </div>
         </div>
         <div className={s.side_content}>

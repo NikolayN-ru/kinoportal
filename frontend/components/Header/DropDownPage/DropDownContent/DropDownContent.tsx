@@ -3,7 +3,7 @@ import Link from "next/link";
 import Button from "@components/ui-kit/Button";
 import s from "./DropDownContent.module.scss";
 import Icon from "@components/ui-kit/IconComponent/Icon";
-import Carousel from "@components/Header/Carousel/Carousel";
+import Carousel from "@components/Header/DropDownPage/DropDownWidget/Carousel/Carousel";
 import DropDownWidget from "../DropDownWidget/DropDownWidget";
 import { genres, countries, years, sideContent } from "./allCollectionsContent";
 import { IFilms } from "./interfaces/FilmsInteface";
@@ -16,7 +16,7 @@ const content: IFilms = {
   sideContent,
 };
 
-export interface DropDownContentProps {
+ interface DropDownContentProps {
   link: Links;
 }
 
@@ -93,6 +93,7 @@ const DropDownContent: FC<DropDownContentProps> = ({ link }) => {
         <div className={s.sideContent_Widget_block}>
           <DropDownWidget />
           <Button
+          color="grey"
             className={s.tv}
             title={<Icon name="tv" />}
             text="Смотреть на Smart TV"

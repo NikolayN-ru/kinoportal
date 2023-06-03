@@ -13,6 +13,8 @@ services:
       context: ./backend/app-gateway
     ports:
       - 4000:4000
+    volumes:
+      - ./backend/files-sistem/image:/app/files-sistem/image
     command: npm run start:dev
     depends_on:
       - rabbitmq
@@ -32,6 +34,8 @@ services:
     container_name: files-sistem
     build:
       context: ./backend/files-sistem
+    volumes:
+      - ./backend/files-sistem/image:/app/file-sistem/image
     command: npm run start:dev
     depends_on:
       - postgresfiles

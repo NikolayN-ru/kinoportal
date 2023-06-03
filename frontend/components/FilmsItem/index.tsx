@@ -1,4 +1,4 @@
-import BtnMore from "@components/Btn/BtnMore";
+import ButtonMore from "@components/ui-kit/Button/ButtonMore";
 import s from "./FilmsItem.module.scss";
 
 const FilmsItem = () => {
@@ -12,7 +12,7 @@ const FilmsItem = () => {
           <p>Rating ivi 7.5</p>
         </div>
       </div>
-      <BtnMore title="подробнее" />
+      <ButtonMore title="подробнее" />
     </div>
   );
 };

@@ -8,7 +8,6 @@ export class CreateMovieDto {
     readonly quality: string;
 
     readonly rating: number;
-
     readonly votes: number;
 
     readonly description: string;
@@ -17,9 +16,9 @@ export class CreateMovieDto {
 
     readonly countries: string;
 
-    readonly actors: Array<number>;
+    readonly actors: string;
 
-    readonly directors: Array<number>;
+    readonly directors: string;
 
-    readonly imgVideo: string;
+    readonly image: string;
 }

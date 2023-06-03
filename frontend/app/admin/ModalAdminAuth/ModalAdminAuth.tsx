@@ -1,7 +1,7 @@
-import { ReactElement, useEffect } from "react";
+import { useEffect } from "react";
 import s from "./ModalAdminAuth.module.scss";
 import Input from "../Input/Input";
-import GrayButton from "@components/GrayButton";
+import Button from "@components/ui-kit/Button";
 
 interface ModalProps {
   title: string;
@@ -45,7 +45,9 @@ const ModalAdminAuth = ({ visible = false, onClose, title }: ModalProps) => {
               />
             </div>
             <div className={s.add_btn_block} onClick={onClose}>
-              <GrayButton className={s.log_btn} title="Войти" />
+              <div className={s.log_btn}>
+              <Button title="Войти" />
+              </div>
             </div>
           </div>
         </div>

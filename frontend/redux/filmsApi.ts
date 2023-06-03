@@ -15,6 +15,4 @@ export const allFilms = createApi({
   }),
 });
 
-// ${process.env.DB_HOST}/movie
-
 export const { useAllFilmsQuery, useFilmItemQuery } = allFilms;

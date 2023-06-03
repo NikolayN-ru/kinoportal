@@ -1,30 +1,17 @@
-// body {
-// 	align-items: center;
-// 	background: #E3E3E3;
-// 	display: flex;
-// 	height: 100vh;
-// 	justify-content: center;
-// }
-
 @mixin white-gradient {
-	background: linear-gradient(to right,  rgb(56, 55, 55) 0%,rgba(42, 42, 42, 0) 100%);
+	// background: linear-gradient(to right,  rgb(132, 132, 132) 0%,rgba(141, 139, 139, 0) 100%);
 }
 
 $animationSpeed: 80s;
 
-// Animation
-
-
-
-// Styling
 .slider {
     @keyframes scroll {
         0% { transform: translateX(0); }
-        100% { transform: translateX(calc(-250px * 7))}
+        100% { transform: translateX(calc(-150px * 7))}
     }
     display: flex;
     gap: 5px;
-	box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.226);
+	box-shadow: 10px 10px 20px -5px rgba(0, 0, 0, 0.826);
 	height: 70px;
 	margin: auto;
 	overflow:hidden;

@@ -1,0 +1,67 @@
+@mixin white-gradient {
+	// background: linear-gradient(to right,  rgb(132, 132, 132) 0%,rgba(141, 139, 139, 0) 100%);
+}
+
+$animationSpeed: 80s;
+
+.slider {
+	@keyframes scroll {
+		0% {
+			transform: translateX(calc(-100px * 6));
+			
+		}
+		100% {
+			transform: translateX(0);
+		}
+		
+	}
+	display: flex;
+	gap: 5px;
+	box-shadow: 10px 10px 40px -5px rgba(0, 0, 0, 0.826);
+	height: 70px;
+	margin: auto;
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	border-radius: 8px;
+
+	&::before,
+	&::after {
+		@include white-gradient;
+		content: "";
+		height: 100px;
+		position: absolute;
+		width: 200px;
+		z-index: 2;
+		background-size: cover;
+	}
+
+	&::after {
+		right: 0;
+		top: 0;
+		transform: rotateZ(180deg);
+		background-size: cover;
+	}
+
+	&::before {
+		left: 0;
+		top: 0;
+	}
+
+	.slide_track {
+		animation: scroll $animationSpeed linear infinite;
+		display: flex;
+		gap: 8px;
+		width: calc(-250px * 14);
+	}
+
+	.slide {
+		height: 100px;
+		width: 120px;
+		border-radius: 8px;
+	}
+	.actor_img {
+		background-size: contain;
+		border-radius: 8px;
+	}
+}

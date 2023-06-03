@@ -1,5 +1,4 @@
 import Link from "next/link";
-import GrayButton from "../GrayButton";
 import { FC } from "react";
 import Icon from "../ui-kit/IconComponent/Icon";
 import Button from "@components/ui-kit/Button";
@@ -9,6 +8,23 @@ import "../../i18n";
 
 const Footer: FC = () => {
   const { t } = useTranslation();
+
+  interface IComunityLink {
+    id: string;
+    iconName: string;
+  }
+
+  const comunityLinks: IComunityLink[] = [
+    { id: "1", iconName: "vk" },
+    { id: "2", iconName: "ok" },
+    { id: "3", iconName: "twitter" },
+    { id: "4", iconName: "callback" },
+    { id: "5", iconName: "in" },
+    { id: "6", iconName: "tg" },
+  ];
+
+
+  
   return (
     <div className={s.footer}>
       <div className={s.container}>
@@ -144,16 +160,22 @@ const Footer: FC = () => {
             <div className={s.support_block}>
               <div className={s.chat}>
                 <Button
+                  color="blue"
                   className={s.chat_btn}
                   title={String(t("footer.writeChat"))}
                 />
               </div>
               <div className={s.contact__icons}>
                 <Button
+                  color="blue"
                   className={s.contact_btn}
                   title={<Icon name="message" />}
                 />
-                <Button className={s.contact_btn} title={<Icon name="tel" />} />
+                <Button
+                  color="blue"
+                  className={s.contact_btn}
+                  title={<Icon name="tel" />}
+                />
               </div>
               <div className={s.ask_block}>
                 <span className={s.ask_text}>ask.ivi.ru</span>
@@ -177,6 +199,7 @@ const Footer: FC = () => {
             <div className={s.overturn}>
               <div className={s.overturn_btn_wrap}>
                 <Button
+                  color="blue"
                   className={s.overturn_btn}
                   title={<Icon name="apple" />}
                   preamble={String(t("footer.download"))}
@@ -185,6 +208,7 @@ const Footer: FC = () => {
               </div>
               <div className={s.overturn_btn_wrap}>
                 <Button
+                  color="blue"
                   className={s.overturn_btn}
                   title={<Icon name="android" />}
                   preamble={String(t("footer.available"))}
@@ -193,6 +217,7 @@ const Footer: FC = () => {
               </div>
               <div className={s.overturn_btn_wrap}>
                 <Button
+                  color="blue"
                   className={s.overturn_btn}
                   title={<Icon name="tv" />}
                   preamble={String(t("footer.look"))}
@@ -201,6 +226,7 @@ const Footer: FC = () => {
               </div>
               <div className={s.overturn_btn_wrap}>
                 <Button
+                  color="blue"
                   className={s.overturn_btn}
                   title={<Icon name="desktop" />}
                   text={String(t("footer.allDevices"))}
@@ -217,24 +243,17 @@ const Footer: FC = () => {
             </div>
           </div>
           <div className={s.community}>
-            <div className={s.community_link}>
-              <Button className={s.social} title={<Icon name="vk" />} />
-            </div>
-            <div className={s.community_link}>
-              <Button className={s.social} title={<Icon name="ok" />} />
-            </div>
-            <div className={s.community_link}>
-              <Button className={s.social} title={<Icon name="twitter" />} />
-            </div>
-            <div className={s.community_link}>
-              <Button className={s.social} title={<Icon name="callback" />} />
-            </div>
-            <div className={s.community_link}>
-              <Button className={s.social} title={<Icon name="in" />} />
-            </div>
-            <div className={s.community_link}>
-              <Button className={s.social} title={<Icon name="tg" />} />
-            </div>
+            {comunityLinks.map((comunityLink) => {
+              return (
+                <div className={s.community_link} key={comunityLink.id}>
+                  <Button
+                    color="blue"
+                    className={s.social}
+                    title={<Icon name={comunityLink.iconName} />}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

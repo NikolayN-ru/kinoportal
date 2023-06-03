@@ -1,0 +1,28 @@
+.compilationList {
+  @apply relative;
+  max-width: 650px;
+}
+
+.navButtonDisabled {
+  @apply hidden;
+}
+.container {
+  @apply relative;
+}
+
+.swiperContainer {
+  @apply mx-[-12px] mt-[-12px] px-[12px] pt-[12px];
+}
+
+.navButtonDisabled {
+  display: none!important;
+}
+
+.image {
+  border-radius: 8px;
+  width: auto;
+  height: auto;
+}
+
+
+

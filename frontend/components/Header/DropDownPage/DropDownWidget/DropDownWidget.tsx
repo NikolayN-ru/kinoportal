@@ -1,16 +1,17 @@
-import Carousel from "@components/Header/Carousel/Carousel";
+import Carousel, {filmsFirstLine, filmsSecondLine } from "@components/Header/DropDownPage/DropDownWidget/Carousel/Carousel";
 import Icon from "@components/ui-kit/IconComponent/Icon";
 import Button from "@components/ui-kit/Button";
 import React from "react";
 import s from "./DropDownWidget.module.scss";
+import ReverseCarousel, {widgetFilms} from "./ReverseCarousel/ReverseCarousel";
 
 const DropDownWidget = () => {
   return (
     <div className={s.widget}>
       <div className={s.poster_block}>
-        <Carousel />
-        <Carousel className={s.reverse} />
-        <Carousel />
+        <Carousel filmsFirstLine={filmsFirstLine}   />
+        <ReverseCarousel widgetFilms={widgetFilms} />
+        <Carousel  filmsSecondLine={filmsSecondLine} />
       </div>
       <div className={s.subscribe}>
         <Icon name="i" />

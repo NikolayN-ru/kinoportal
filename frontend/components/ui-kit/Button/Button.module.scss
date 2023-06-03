@@ -6,14 +6,11 @@
   &.red {
     @apply bg-red hover:bg-redHover;
   }
-
-  &.gray {
-    @apply bg-transparent border-[1px] border-solid border-separator
-    hover:bg-transparent hover:border-white;
+  &.grey {
+    @apply bg-[#312b45] hover:bg-[#433b5d];
   }
-
-  &.full {
-    @apply w-full;
+  &.blue {
+    @apply bg-[#1f1b2e] hover:bg-[#312b45];
   }
 }
 
@@ -28,4 +25,7 @@
   font-size: 10px;
 }
 
-
+.small {
+  font-size: 13px;
+  color: #ffffffb7;
+}

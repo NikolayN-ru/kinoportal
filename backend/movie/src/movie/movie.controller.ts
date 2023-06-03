@@ -1,11 +1,10 @@
-import {Body, Controller, Delete, Get, Param, Post, Query, UploadedFiles, UseInterceptors} from '@nestjs/common';
+import {Body, Controller, Get, Param, Post, Query} from '@nestjs/common';
 import {MovieService} from "./movie.service";
 import {CreateReviewDto} from "./dto/create-review.dto";
 import {Ctx, EventPattern, MessagePattern, Payload, RmqContext} from "@nestjs/microservices";
 import {CreateCommentDto} from "./dto/create-comment.dto";
 import {CreateMovieDto} from "./dto/create-movie.dto";
 import {UpdateMovieDto} from "./dto/update-movie.dto";
-import { FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('movie')
 export class MovieController {
@@ -17,11 +16,6 @@ export class MovieController {
     //     return this.movieService.getMain();
     // }
 
-    @Get('')
-    sortMovies(@Query('sort') sort: string) {
-        return this.movieService.sortMovies(sort)
-    }
-
     @Get('/filters')
     getMovieWithFilter(@Query('genre') genre?: string,
                        @Query('year') year?: string,
@@ -29,18 +23,14 @@ export class MovieController {
                        @Query('rating') rating?: string,
                        @Query('votes') votes?: string,
                        @Query('actor') actor?: string,
-                       @Query('director') director?: string) {
-        return this.movieService.getMovieWithFilter(genre, year, country, +rating, +votes, actor, director);
+                       @Query('director') director?: string,
+                       @Query('sort') sort?: string) {
+        return this.movieService.getMovieWithFilter(genre, year, country, +rating, +votes, actor, director, sort);
     }
 
     @Get('/:id')
     getMovie(@Param('id') id: string) {
         return this.movieService.getMovie(+id);
-    }
-
-    @Delete('/:id')
-    deleteMovies(@Param('id') id: string) {
-        return this.movieService.deleteMovie(+id);
     }
 
     @Get('/:id/reviews')
@@ -64,8 +54,8 @@ export class MovieController {
     }
 
     @EventPattern('create.movie')
-    createMovie(data: any) {
-        return this.movieService.createMovie(data.data, data.image);
+    createMovie(dto: CreateMovieDto) {
+        return this.movieService.createMovie(dto, dto.image);
     }
 
     @EventPattern('delete.movie')
