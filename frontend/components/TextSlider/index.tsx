@@ -1,4 +1,11 @@
-import { FC, MouseEventHandler, useEffect, useRef, useState } from "react";
+import {
+  FC,
+  MouseEventHandler,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import cn from "classnames/bind";
 
 import SliderButton, {
@@ -8,18 +15,24 @@ import TextSliderTrack from "./TextSliderTrack";
 
 import s from "./TextSlider.module.scss";
 
+export type TextSliderItem = {
+  name: string;
+  title: string;
+};
+
 export type TextSliderOptions = {
+  itemsCount: number;
   spaceBetween: number;
   offsetStep: number;
 };
 
 interface TextSliderProps {
-  items: string[];
+  children: ReactNode;
   options: TextSliderOptions;
 }
 
-const TextSlider: FC<TextSliderProps> = ({ items, options }) => {
-  const { spaceBetween, offsetStep } = options;
+const TextSlider: FC<TextSliderProps> = ({ children, options }) => {
+  const { itemsCount, spaceBetween, offsetStep } = options;
 
   const [isPrevDisabled, setIsPrevDisabled] = useState(true);
   const [isNextDisabled, setIsNextDisabled] = useState(false);
@@ -38,7 +51,7 @@ const TextSlider: FC<TextSliderProps> = ({ items, options }) => {
   }, []);
 
   const onTrackLoad = (width: number): void => {
-    const fullWidth = width + (items.length - 1) * spaceBetween;
+    const fullWidth = width + (itemsCount - 1) * spaceBetween;
     setTrackWidth(fullWidth);
   };
 
@@ -102,12 +115,14 @@ const TextSlider: FC<TextSliderProps> = ({ items, options }) => {
 
       <div className={s.sliderWrapper} ref={wrapperRef}>
         <TextSliderTrack
-          items={items}
           onLoad={onTrackLoad}
           ref={trackRef}
           offset={offset}
           spaceBetween={spaceBetween}
-        />
+          itemsCount={itemsCount}
+        >
+          {children}
+        </TextSliderTrack>
       </div>
     </div>
   );

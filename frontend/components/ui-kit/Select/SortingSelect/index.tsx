@@ -9,17 +9,21 @@ import s from "./SortingSelect.module.scss";
 interface SortingSelect {
   name: string;
   sortings: string[];
+  selectedValue: string;
+  onSelectChange: (sorting: string) => void;
 }
 
-const SortingSelect: FC<SortingSelect> = ({ name, sortings }) => {
-  const selectedValueInit = sortings.length ? sortings[0] : "";
-
+const SortingSelect: FC<SortingSelect> = ({
+  name,
+  sortings,
+  selectedValue,
+  onSelectChange,
+}) => {
   const [isOpen, setIsOpen, onSelectClick] = useSelectToggling(name);
-  const [selectedValue, setSelectedValue] = useState<string>(selectedValueInit);
 
   const onSelectItemClick = (sorting: string) => {
-    setSelectedValue(sorting);
     setIsOpen(false);
+    onSelectChange(sorting);
   };
 
   const styles = {
@@ -36,7 +40,7 @@ const SortingSelect: FC<SortingSelect> = ({ name, sortings }) => {
         <div className={s.sortingIcon}>
           <span className={s.lines}></span>
         </div>
-        <div className={s.title}>{sortings[0]}</div>
+        <div className={s.title}>{selectedValue}</div>
         <div className={s.icon}>
           <Icon name="arrowRight" />
         </div>

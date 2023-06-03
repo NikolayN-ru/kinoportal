@@ -1,0 +1,9 @@
+.container {
+  @apply py-[8px] px-[16px]
+  text-[13px] leading-[16px] font-semibold text-white whitespace-nowrap
+  border border-separator rounded-[32px] cursor-pointer transition-colors;
+
+  &.isChecked {
+    @apply bg-purpleSelected border-purpleSelected;
+  }
+}

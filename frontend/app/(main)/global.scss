@@ -118,8 +118,16 @@
     @apply py-[12px] md:py-[20px] lg:py-[24px];
   }
 
+  .aboutSection {
+    @apply w-full md:w-[90%] lg:w-[75%] md:pr-[14px] lg:pr-[28px];
+  }
+
   .sectionTitle {
     @apply mb-[24px];
+  }
+
+  .descriptionTitle {
+    @apply mt-[12px] md:mt-[20px] lg:mt-[24px] mb-[8px];
   }
 
   .titleLink {

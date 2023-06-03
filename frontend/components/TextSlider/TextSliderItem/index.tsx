@@ -1,32 +1,29 @@
-import React, { CSSProperties, FC, useEffect, useRef } from "react";
+import React, { FC, ReactNode, useContext, useEffect, useRef } from "react";
 
-import s from "./TextSliderItem.module.scss";
+import { TextSliderContext } from "../TextSliderTrack";
 
 interface TextSliderItemProps {
-  className?: string;
-  title: string;
-  onLoad: (width: number) => void;
-  style?: CSSProperties;
+  children: ReactNode;
 }
 
-const TextSliderItem: FC<TextSliderItemProps> = ({
-  className,
-  title,
-  onLoad,
-  style,
-}) => {
-  const itemRef = useRef<HTMLDivElement>(null);
+const TextSliderItem: FC<TextSliderItemProps> = ({ children }) => {
+  const { spaceBetween, onLoad } = useContext(TextSliderContext) || {
+    spaceBetween: null,
+    onLoad: null,
+  };
 
   useEffect(() => {
-    onLoad(itemRef.current?.offsetWidth ?? 0);
+    onLoad && onLoad(itemRef.current?.offsetWidth ?? 0);
   }, []);
 
-  const classNames = [s.container];
-  className && classNames.push(className);
+  if (spaceBetween === null || !onLoad) return <></>;
+
+  const itemRef = useRef<HTMLDivElement>(null);
+  const marginRight = `${spaceBetween}px`;
 
   return (
-    <div className={classNames.join(" ")} ref={itemRef} style={style}>
-      {title}
+    <div ref={itemRef} style={{ marginRight }}>
+      {children}
     </div>
   );
 };

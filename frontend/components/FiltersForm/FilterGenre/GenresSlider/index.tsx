@@ -1,10 +1,13 @@
 import { FC } from "react";
 import { SwiperOptions } from "swiper";
-
-import { genresSliderParamsFull, genresSliderParamsMini } from "./parameters";
-import { genresIconNames } from "@mock/filmsData";
-import Slider from "@components/Slider";
+import { useDispatch } from "react-redux";
 import { SwiperSlide } from "swiper/react";
+
+import { useTypedSelector } from "hooks/useTypedSelector";
+import { genresSliderParamsFull, genresSliderParamsMini } from "./parameters";
+import { genres, genresIconNames } from "@mock/filmsData";
+import Slider from "@components/Slider";
+import { setGenre } from "@redux/filtersApi";
 import FilterGenreItem, { FilterGenreItemSize } from "../FilterGenreItem";
 import { ButtonSize } from "@components/ui-kit/Button/SliderButton";
 
@@ -16,7 +19,6 @@ export enum GenresSliderMode {
 }
 
 interface GenresSliderProps {
-  items: string[];
   mode: GenresSliderMode;
 }
 
@@ -25,7 +27,21 @@ const containerClassName = {
   [GenresSliderMode.MINI]: s.containerMini,
 };
 
-const GenresSlider: FC<GenresSliderProps> = ({ items, mode }) => {
+const GenresSlider: FC<GenresSliderProps> = ({ mode }) => {
+  const selectedGenres = useTypedSelector(
+    (state) => state.filtersApi.filters.genre
+  );
+
+  const dispatch = useDispatch();
+
+  const onGenreItemClick = (clickedGenre: string, isChecked: boolean) => {
+    const updatedSelectedGenres = isChecked
+      ? selectedGenres.filter((genre) => genre !== clickedGenre)
+      : [...selectedGenres, clickedGenre];
+
+    dispatch(setGenre(updatedSelectedGenres));
+  };
+
   let genresSliderParams: SwiperOptions;
   let buttonSize: ButtonSize;
   let prevClassName: string | undefined;
@@ -56,18 +72,24 @@ const GenresSlider: FC<GenresSliderProps> = ({ items, mode }) => {
         prevClassName={prevClassName}
         nextClassName={nextClassName}
       >
-        {items.map((item) => {
+        {genres.map(({ value, title }) => {
           const iconName =
             genresIconNames.find(
-              (iconNamesItem) => iconNamesItem.genre === item
+              (iconNamesItem) => iconNamesItem.genre === title
             )?.iconName ?? "";
 
+          const isChecked = selectedGenres.some(
+            (selectedGenre) => selectedGenre === value
+          );
+
           return (
-            <SwiperSlide key={item}>
+            <SwiperSlide key={value}>
               <FilterGenreItem
-                title={item}
+                title={title}
                 iconName={iconName}
                 size={itemSize}
+                isChecked={isChecked}
+                onClick={() => onGenreItemClick(value, isChecked)}
               />
             </SwiperSlide>
           );

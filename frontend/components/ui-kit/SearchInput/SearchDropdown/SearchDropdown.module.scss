@@ -1,0 +1,20 @@
+.container {
+  @apply overflow-hidden min-w-[320px] md:w-[500px] p-[16px] translate-y-[100%]
+  bg-backgroundLight rounded-[4px];
+}
+
+.resultsList {
+  @apply grid grid-cols-2 gap-x-[20px];
+}
+
+.resultLink {
+  @apply overflow-hidden h-[20px] my-[6px] leading-[20px] text-white whitespace-nowrap text-ellipsis transition-colors;
+
+  &:hover {
+    @apply text-red duration-[80ms];
+  }
+
+  &:not(:hover) {
+    @apply duration-[400ms];
+  }
+}
