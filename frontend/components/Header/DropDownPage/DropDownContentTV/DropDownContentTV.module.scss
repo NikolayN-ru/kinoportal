@@ -42,7 +42,10 @@
 }
 
 .main_content_popular {
-    padding: 0 0 0 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 0 0 0 40px;
     border-left: 1px solid #ffffff32;
 
 }
@@ -62,4 +65,12 @@
 .side_content_btn {
     width: 178px;
     height: 40px;
+}
+.tv {
+    width: 100%;
+}
+
+.main_title {
+    color: #ffffff;
+    font-weight: 600;
 }

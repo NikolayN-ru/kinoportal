@@ -120,7 +120,7 @@
 }
 
 .text_avatar {
-  @apply rounded-[8px] py-[12px] px-[11px];
+  @apply rounded-[8px] py-[12px] px-[12px];
   border: 2px solid rgba(255, 255, 255, 0.48);
 }
 
@@ -165,4 +165,9 @@
 
 .imgWrapper:only-child {
   @apply mt-[2px];
+}
+
+.lang, .icon_lang {
+  position: relative;
+  z-index: 15;
 }

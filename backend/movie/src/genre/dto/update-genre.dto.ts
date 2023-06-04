@@ -1,3 +1,4 @@
+import {IsNotEmpty, IsNumber} from "class-validator";
 
 export class UpdateGenreDto {
     readonly id: number;

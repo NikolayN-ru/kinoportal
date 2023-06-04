@@ -1,8 +1,8 @@
 import { ReactElement, useEffect } from "react";
 import s from "./ModalAdminFilm.module.scss";
 
-import GrayButton from "@components/GrayButton";
 import Input from "app/admin/Input/Input";
+import Button from "@components/ui-kit/Button";
 
 interface ModalProps {
   title: string;
@@ -75,7 +75,9 @@ const ModalAdminFilm = ({ visible = false, onClose, title }: ModalProps) => {
               />
             </div>
             <div className={s.add_btn_block} onClick={onClose}>
-              <GrayButton className={s.add_btn} title="Сохранить" />
+              <div className={s.add_btn}>
+                <Button title="Сохранить" />
+              </div>
             </div>
           </div>
         </div>

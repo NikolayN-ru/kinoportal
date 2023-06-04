@@ -1,0 +1,13 @@
+.container {
+  @apply relative;
+}
+
+.swiperContainer {
+  @apply mx-[-12px] mt-[-12px] px-[12px] pt-[12px];
+}
+
+.navButtonDisabled {
+  display: none!important;
+}
+
+

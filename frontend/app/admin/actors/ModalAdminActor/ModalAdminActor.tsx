@@ -1,7 +1,8 @@
 import { ReactElement, useEffect } from "react";
 import s from "./ModalAdminActor.module.scss";
-import GrayButton from "@components/GrayButton";
 import Input from "app/admin/Input/Input";
+import Button from "@components/ui-kit/Button";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 interface ModalProps {
   title: string;
@@ -11,12 +12,33 @@ interface ModalProps {
   onClose: () => void;
 }
 
+type Inputs = {
+  name: string;
+  filmParticipation: string;
+  biography: string;
+  image: string;
+};
+
 const ModalAdminActor = ({
   visible = false,
   onClose,
   title,
   placeholder,
 }: ModalProps) => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+    onClose();
+  };
+
+  // console.log(watch("name"));
+
   const onKeydown = ({ key }: KeyboardEvent) => {
     switch (key) {
       case "Escape":
@@ -41,26 +63,44 @@ const ModalAdminActor = ({
         <div className={s.modal_dialog} onClick={(e) => e.stopPropagation()}>
           <div className={s.modal_body}>
             <div className={s.modal_title}>{title}</div>
-            <div className={s.search_input_form}>
-              <Input placeholder="Имя" type="text" className={s.input_search} />
-              <Input
+
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className={s.search_input_form}
+            >
+              <input
+                placeholder="Имя"
+                type="text"
+                className={s.input_search}
+                {...register("name")}
+              />
+              <input
                 placeholder="Участие в фильмах"
                 type="text"
                 className={s.input_search}
+                {...register("filmParticipation")}
               />
-              <Input
+              <input
                 placeholder="Биография"
                 type="text"
                 className={s.input_search}
+                {...register("biography")}
               />
-              <Input
+              <input
                 placeholder="Картинка"
                 type="text"
                 className={s.input_search}
+                {...register("image")}
               />
-            </div>
+
+              <div className={s.add_btn}>
+                <Button title="Сохранить" type="submit" />
+              </div>
+            </form>
             <div className={s.add_btn_block} onClick={onClose}>
-              <GrayButton className={s.add_btn} title="Сохранить" />
+              <div className={s.add_btn}>
+                <Button title="Сохранить" type="submit" />
+              </div>
             </div>
           </div>
         </div>
