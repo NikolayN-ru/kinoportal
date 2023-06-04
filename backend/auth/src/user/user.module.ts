@@ -15,8 +15,8 @@ import {ClientsModule, Transport} from "@nestjs/microservices";
                 name: 'MOVIE_SERVICE',
                 transport: Transport.RMQ,
                 options: {
-                    urls: ['amqps://qeejdkip:7GcdIflUWPSpvj5uk7D48jncu6vqoscW@hawk.rmq.cloudamqp.com/qeejdkip'],
-                    queue: 'queue',
+                    urls: [process.env.rabbitMq],
+                    queue: 'movie-queue',
                     queueOptions: {
                         durable: false
                     },

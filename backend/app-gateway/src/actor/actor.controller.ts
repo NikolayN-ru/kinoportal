@@ -1,12 +1,8 @@
 import { Body, Controller, Delete, Get, Inject, Param, Post, Put, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { ActorDto, ActorWitMovie, ActorWithImageDto } from 'src/dto/actor/actor.dto';
-import { ActorIdDto } from 'src/dto/actor/actorId.dto';
-import { AddActorDto } from 'src/dto/actor/add.actor.dto';
-import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { ActorDto, ActorWitMovie, ActorWithImageDto } from '../dto/actor/actor.dto';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { HttpExceptionDto } from '../dto/HttpException/http.exception.dto';
-import { Test } from '../dto/actor/test';
 
 @ApiTags('actor')
 @Controller('/actor')

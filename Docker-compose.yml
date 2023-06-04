@@ -20,6 +20,16 @@ services:
       - rabbitmq
     restart: always
 
+  auth:
+    container_name: auth
+    build:
+      context: ./backend/auth
+    command: npm run start:dev
+    depends_on:
+      - postgreauth
+      - rabbitmq
+    restart: always
+
   actor:
     container_name: actor-sistem
     build:
@@ -50,6 +60,19 @@ services:
     depends_on:
       - postgresmovie
       - rabbitmq
+    restart: always
+
+  postgreauth:
+    container_name: postgreAuth
+    build:
+      context: ./initAuth
+      dockerfile: auth.dockerfile
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: qwerty
+      PG_DATA: /var/lib/postgresql/data
+    volumes:
+      - dataAuth:/var/lib/postgresql/data
     restart: always
 
   postgresactor:
@@ -104,5 +127,6 @@ services:
 
 volumes:
   dataActor:
+  dataAuth:
   dataFiles:
   dataMovie:

@@ -20,7 +20,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
               name: 'Photo',
               transport: Transport.RMQ,
               options: {
-                urls: ['amqp://rabbitmq:5672'],
+                urls: [process.env.rabbitMq],
                 queue: 'photo-queue',
                 queueOptions: {
                   durable: false
@@ -31,7 +31,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
               name: 'Actor',
               transport: Transport.RMQ,
               options: {
-                urls: ['amqp://rabbitmq:5672'],
+                urls: [process.env.rabbitMq],
                 queue: 'actor-queue',
                 queueOptions: {
                   durable: false
