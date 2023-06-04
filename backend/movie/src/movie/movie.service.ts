@@ -43,7 +43,7 @@ export class MovieService {
     async getAllMovies() {
         try {
             return this.movieRepository.createQueryBuilder("movie")
-                .leftJoinAndSelect("movie.genre", "genre")
+                .leftJoinAndSelect("movie.genres", "genre")
                 .leftJoinAndSelect("movie.countries", "countries")
                 .getMany()
             //добавить вывод картинок
@@ -182,7 +182,7 @@ export class MovieService {
         }
     }
 
-    async getMovies(moviesIds: Array<number>) {
+    async getMoviesById(moviesIds: Array<number>) {
         try {
             const movie = await this.movieRepository.createQueryBuilder()
                 .select('movie')
@@ -416,13 +416,5 @@ export class MovieService {
 
             return newCountry
         })
-    }
-
-    private async getFullFileName(mas: Array<any>){
-        return mas.map(item => {
-            return {...item,
-                imgVideo: path.resolve(__dirname, '../../../files-sistem/image',`${item.imgVideo}`)
-            }
-        });
     }
 }

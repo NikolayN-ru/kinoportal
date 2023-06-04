@@ -17,7 +17,7 @@ import { RoleEntity } from '../roles/actor.film.entity';
         name: 'Photo',
         transport: Transport.RMQ,
         options: {
-          urls: ['amqp://rabbitmq:5672'],
+          urls: [process.env.rabbitMq],
           queue: 'photo-queue',
           queueOptions: {
             durable: false
@@ -28,7 +28,7 @@ import { RoleEntity } from '../roles/actor.film.entity';
         name: 'Movie',
         transport: Transport.RMQ,
         options: {
-          urls: ['amqp://rabbitmq:5672'],
+          urls: [process.env.rabbitMq],
           queue: 'movie-queue',
           queueOptions: {
             durable: false

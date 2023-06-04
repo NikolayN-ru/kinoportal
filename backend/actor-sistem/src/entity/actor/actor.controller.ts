@@ -5,7 +5,7 @@ import { AddActorWithImageDto } from '../../dto/add.actor.dto';
 import { ActorDto } from '../../dto/actor.dto';
 import { ActorIdDto } from '../../dto/actorId.dto';
 import { ActorFilmService } from '../actor-film/actor.film.service';
-import { ActorFilmDto } from 'src/dto/actor.film.dto';
+import { ActorFilmDto } from '../../dto/actor.film.dto';
 
 @Controller()
 export class ActorController {
@@ -15,7 +15,8 @@ export class ActorController {
 
     @MessagePattern('get.actor')
     getActor(@Payload() data: number, @Ctx() context: RmqContext) {  
-        return this.actorService.getActor(data);
+        let actor = this.actorService.getActor(data);
+        return actor;
     }
 
     @MessagePattern('get.all.actor')
@@ -63,35 +64,4 @@ export class ActorController {
     async getmoviesIdForActor(@Payload() data: any, @Ctx() context: RmqContext) {     
         return  (await this.actorFilmService.getFilmsForActorAndRole(data.actorId, data.roleName)).map(item => item.filmId);
     }
-
-    // @EventPattern('get.actor')
-    // getActor(data: number) {  
-    //     return this.actorService.getActor(data);
-    // }
-
-    // @EventPattern('get.all.actor')
-    // getAllActor() {  
-    //     return this.actorService.getAllActors();
-    // }
-
-    // @EventPattern('get.all.actor.film')
-    // getActorForFilm(data: any) {  
-    //     return this.actorService.getActorsForFilm(data);
-    // }
-
-    // @EventPattern('post.actor')
-    // postActor(data: AddActorWithImageDto) {    
-    //     return this.actorService.addActor(data.actorDto,data.image);
-
-    // }
-
-    // @EventPattern('put.actor')
-    // putActor(data: ActorDto) {       
-    //     return this.actorService.updateActor(data);
-    // }
-
-    // @EventPattern('delete.actor')
-    // deleteActor(data: ActorIdDto) {       
-    //     return this.actorService.deleteActor(data.actorId);
-    // }
 }

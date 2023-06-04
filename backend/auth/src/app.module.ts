@@ -8,17 +8,15 @@ import {Role} from "./auth/roles.entity";
 @Module({
   imports: [
       TypeOrmModule.forRoot({
-        // type: "postgres",
-        type: 'cockroachdb',
-        url: 'postgresql://syst1337_gmail_com:KHnUBisY6kmPtbuVJhpxWA@oilier-toad-7177.7tc.cockroachlabs.cloud:26257/auth?sslmode=verify-full',
-        // host: 'localhost',
-        // port: 5432,
-        // username: 'postgres',
-        // password: '12345678',
-        // database: 'auth',
+        type: 'postgres',
+        host: process.env.dbhost,
+        port: 5432,
+        username: process.env.dbusername,
+        password: process.env.password,
+        database: process.env.database,
         entities: [User, Role],
         synchronize: true,
-        ssl: true
+        //ssl: true
     }),
       AuthModule,
       UserModule,

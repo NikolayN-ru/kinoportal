@@ -2,8 +2,7 @@ import {  Controller, Get, Inject, Param } from "@nestjs/common";
 import { ClientProxy } from "@nestjs/microservices";
 import { ApiResponse, ApiTags } from "@nestjs/swagger";
 import { HttpExceptionDto } from "../dto/HttpException/http.exception.dto";
-import { ActorWithImageDto } from "../dto/actor/actor.dto";
-import { MovieDto, MovieDtoWithActors } from "src/dto/movie/movie.dto";
+import { MovieDto, MovieDtoWithActors } from "../dto/movie/movie.dto";
 
 @ApiTags('Movie')
 @Controller('/Movie')
