@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Brackets, Repository } from 'typeorm';
 import { DirFilesService } from '../dir-files.service';
 import { FilesEntity } from './files.entity';
-import { FileDto } from 'src/dto/file.dto';
+import { FileDto } from '../../dto/file.dto';
 
 @Injectable()
 export class FilesService {
@@ -43,6 +43,7 @@ export class FilesService {
             photos.forEach((image)=>{
                 this.create(image, fileDto);
             })
+            return 'Добавлено'
         }
         catch(e){
             throw new Error('Ошибка при сохранении entity с файлами');
@@ -94,6 +95,7 @@ export class FilesService {
                     .execute()
 
             this.dirFileService.deleteFile(files);
+            return 'Удалено'
         }
         catch(e){
             throw new Error('Ошибка при удалении файлов');

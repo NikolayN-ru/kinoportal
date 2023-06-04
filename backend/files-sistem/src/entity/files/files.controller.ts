@@ -1,8 +1,8 @@
 import { Controller, Delete } from "@nestjs/common";
 import { FilesService } from "./files.service";
 import { Ctx, MessagePattern, Payload, RmqContext } from "@nestjs/microservices";
-import { UpdateFilesByEntityDto } from "src/dto/updateFilesByEntity.dto";
-import { DeleteFileByEntityDto } from "src/dto/deleteFileByEntity.dto";
+import { UpdateFilesByEntityDto } from "../../dto/updateFilesByEntity.dto";
+import { DeleteFileByEntityDto } from "../../dto/deleteFileByEntity.dto";
 import { DirFilesService } from "../dir-files.service";
 
 
