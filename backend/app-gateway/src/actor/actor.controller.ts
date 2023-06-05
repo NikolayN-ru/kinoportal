@@ -3,6 +3,7 @@ import { ClientProxy } from '@nestjs/microservices';
 import { ActorDto, ActorWitMovie, ActorWithImageDto } from '../dto/actor/actor.dto';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { HttpExceptionDto } from '../dto/HttpException/http.exception.dto';
+import { ActorFilterDto } from 'src/dto/actor/actor.filter.dto';
 
 @ApiTags('actor')
 @Controller('/actor')
@@ -18,8 +19,8 @@ export class ActorController {
 
   @Get('/filtr')
   @ApiResponse({status: 200, description: 'get actors by fio', type: [ActorDto]})
-  @ApiBody({type: 'fio'})
-  getActorsByFio(@Body() fio : any){
+  @ApiBody({type: ActorFilterDto})
+  getActorsByFio(@Body() fio : ActorFilterDto){
     return this.clientActor.send('get.actor.by.fio', fio.fio)
   }
 

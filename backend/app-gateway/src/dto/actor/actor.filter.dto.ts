@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 
-export class Test{
+export class ActorFilterDto{
     @ApiProperty()
-    filmId:number;
+    fio: string;
 }
