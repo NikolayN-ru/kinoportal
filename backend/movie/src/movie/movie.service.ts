@@ -1,4 +1,4 @@
-import {HttpStatus, Inject, Injectable} from '@nestjs/common';
+import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
 import {Movie} from "./entity/movie.entity";
 import {InjectRepository} from '@nestjs/typeorm';
 import {Between, In, MoreThan, Repository} from 'typeorm';
@@ -11,6 +11,7 @@ import {ClientProxy} from "@nestjs/microservices";
 import {Genre} from "../genre/entity/genre.entity";
 import {Country} from "../country/entity/country.entity";
 import path from "path";
+import {UpdateMovieDto} from "./dto/update-movie.dto";
 
 @Injectable()
 export class MovieService {
@@ -30,7 +31,6 @@ export class MovieService {
                     countries: true
                 }
             })
-            // добавить вывод картинок
             return movies
         } catch (e) {
             return {
@@ -43,10 +43,9 @@ export class MovieService {
     async getAllMovies() {
         try {
             return this.movieRepository.createQueryBuilder("movie")
-                .leftJoinAndSelect("movie.genres", "genre")
+                .leftJoinAndSelect("movie.genre", "genre")
                 .leftJoinAndSelect("movie.countries", "countries")
                 .getMany()
-            //добавить вывод картинок
         } catch (e) {
             return {
                 status: e.status,
@@ -127,7 +126,6 @@ export class MovieService {
                     .where(queryWhereJoined)
                     .getMany();
             }
-            // добавить вывод картинок
             if(!movies) return HttpStatus.NOT_FOUND;
             return movies
         } catch (e) {
@@ -151,7 +149,7 @@ export class MovieService {
                 }
             });
 
-            if(!movie) return HttpStatus.NOT_FOUND;
+            if(!movie)  throw new HttpException('Такого фильма нет', HttpStatus.NOT_FOUND);
 
             let movieInfo;
             await this.getFilesForMovies([movie],'movie').then(res => movieInfo = res[0]);
@@ -182,19 +180,18 @@ export class MovieService {
         }
     }
 
-    async getMoviesById(moviesIds: Array<number>) {
+    async getMovies(moviesIds: Array<number>) {
         try {
-            const movie = await this.movieRepository.createQueryBuilder()
+            const movies = await this.movieRepository.createQueryBuilder()
                 .select('movie')
                 .from(Movie, "movie")
                 .where("movie.id in (:...moviesIds)", {moviesIds})
                 .getMany();
-            if(movie.length===0) {
+            if(movies.length===0) {
                 return [];
             }
 
-            return movie;
-
+            return movies;
         } catch (e) {
             return {
                 status: e.status,
@@ -213,7 +210,7 @@ export class MovieService {
                     reviews: true
                 }
             });
-            if(!movie) return HttpStatus.NOT_FOUND;
+            if(!movie) throw new HttpException('Такого фильма нет', HttpStatus.NOT_FOUND);
             return movie.reviews
         } catch (e) {
             return e.message;
@@ -230,7 +227,7 @@ export class MovieService {
                     reviews: true
                 }
             });
-            if(!movie) return HttpStatus.NOT_FOUND;
+            if(!movie) throw new HttpException('Такого фильма нет', HttpStatus.NOT_FOUND);
 
             const review = new Review();
             review.data = dto.data;
@@ -261,7 +258,7 @@ export class MovieService {
                     comments: true
                 }
             });
-            if(!review) return HttpStatus.NOT_FOUND
+            if(!review) throw new HttpException('Такого ревью нет', HttpStatus.NOT_FOUND);
             return review;
         } catch (e) {
             return {
@@ -281,10 +278,10 @@ export class MovieService {
                     comments: true
                 }
             });
-            if(!review) return HttpStatus.NOT_FOUND;
+            if(!review) throw new HttpException('Такого ревью нет', HttpStatus.NOT_FOUND);
 
             const comment = new Comment();
-            comment.text = dto.comment;
+            comment.text = dto.text;
             comment.parentId = dto.parentId;
 
             review.comments.push(comment);
@@ -308,6 +305,7 @@ export class MovieService {
             movie.title = dto.title;
             movie.titleEng = dto.titleEng;
             movie.year = dto.year;
+            movie.time = dto.time;
             movie.quality = dto.quality;
             movie.rating = dto.rating;
             movie.description = dto.description;
@@ -317,9 +315,12 @@ export class MovieService {
 
             if(images.length !== 0){
                 movie.imgVideo = await this.clientPhoto.send('create.file',images[0]).toPromise();
+            } else {
+                movie.imgVideo = 'нет данных';
             }
 
             await this.movieRepository.save(movie);
+
             let actors;
             let directors;
             if(dto.actors.length !== 0){
@@ -328,13 +329,19 @@ export class MovieService {
             if(dto.directors.length !== 0){
                 directors = await this.clientActor.send('create.film',{filmId: movie.id, actorsId: dto.directors, role: 'Режиссёр'}).toPromise();
             }
-            let dopContent = images.slice();
-            dopContent.shift();
-            if(dopContent !== 0){
-                await this.clientPhoto.send('add.file',{assenceTable: 'movie', assenceId: movie.id, files: dopContent}).toPromise();
+            if(images) {
+                let dopContent = images.slice();
+                dopContent.shift();
+                if(dopContent !== 0){
+                    await this.clientPhoto.send('add.file',{assenceTable: 'movie', assenceId: movie.id, files: dopContent}).toPromise();
+                }
             }
 
-            return movie
+            return {
+                movie: movie,
+                actors: actors,
+                directors: directors
+            };
         } catch (e) {
             return {
                 status: e.status,
@@ -349,7 +356,7 @@ export class MovieService {
                 id: id
             });
 
-            if(!movie) return HttpStatus.NOT_FOUND;
+            if(!movie) throw new HttpException('Такого фильма нет', HttpStatus.NOT_FOUND);
 
             await this.movieRepository.delete(movie);
 
@@ -365,14 +372,15 @@ export class MovieService {
         }
     }
 
-    async updateMovie(id: number, title: string) {
+    async updateMovie(dto: UpdateMovieDto) {
         try {
             const movie = await this.movieRepository.findOneBy({
-                id: id
+                id: dto.id
             });
-            if(!movie) return HttpStatus.NOT_FOUND;
+            if(!movie) throw new HttpException('Такого фильма нет', HttpStatus.NOT_FOUND);
 
-            movie.title = title;
+            movie.title = dto.title;
+            movie.titleEng = dto.titleEng;
             await this.movieRepository.save(movie);
 
             return movie;

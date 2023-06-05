@@ -5,5 +5,5 @@ export class CreateCommentDto {
 
     readonly parentId: number;
 
-    readonly comment: string;
+    readonly text: string;
 }

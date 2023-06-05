@@ -1,8 +1,10 @@
-import {  Controller, Get, Inject, Param } from "@nestjs/common";
+import {Controller, Get, Inject, Param, Query, Post, Body} from "@nestjs/common";
 import { ClientProxy } from "@nestjs/microservices";
 import { ApiResponse, ApiTags } from "@nestjs/swagger";
 import { HttpExceptionDto } from "../dto/HttpException/http.exception.dto";
-import { MovieDto, MovieDtoWithActors } from "../dto/movie/movie.dto";
+import { ActorWithImageDto } from "../dto/actor/actor.dto";
+import { MovieDto, MovieDtoWithActors } from "src/dto/movie/movie.dto";
+import {CreateReviewDto} from "./dto/create-review.dto";
 
 @ApiTags('Movie')
 @Controller('/Movie')
@@ -12,6 +14,43 @@ export class FilmController {
   @Inject('Movie')
   private clientMovie: ClientProxy) {}
 
+  @Get('/filters')
+  getMovieWithFilter(@Query('genre') genre?: string,
+                     @Query('year') year?: string,
+                     @Query('country') country?: string,
+                     @Query('rating') rating?: string,
+                     @Query('votes') votes?: string,
+                     @Query('actor') actor?: string,
+                     @Query('director') director?: string,
+                     @Query('sort') sort?: string) {
+    return this.clientMovie.send('get.movie.with.filter', {
+      genre: genre,
+      year: year,
+      country: country,
+      rating: +rating,
+      votes: +votes,
+      actor: actor,
+      director: director,
+      sort: sort
+  });
+  }
+
+  @Get('/:id')
+  getMovie(@Param('id') id: string) {
+    return this.clientMovie.send('get.movie', +id);
+  }
+
+  @Get('/:id/reviews')
+  getReviews(@Param('id') id: string) {
+    return this.clientMovie.send('get.reviews', +id);
+  }
+
+  @Post('/:id/reviews')
+  createReview(@Param('id') id: string, @Body() reviewDto: CreateReviewDto) {
+    return this.clientMovie.send('create.review', {
+      id: +id,
+      dto: reviewDto});
+  }
 
   @Get('/all')
   @ApiResponse({status: 200, description: 'get movies actor', type: [MovieDto]})
