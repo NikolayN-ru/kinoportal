@@ -5,42 +5,31 @@ import {Ctx, EventPattern, MessagePattern, Payload, RmqContext} from "@nestjs/mi
 import {CreateCommentDto} from "./dto/create-comment.dto";
 import {CreateMovieDto} from "./dto/create-movie.dto";
 import {UpdateMovieDto} from "./dto/update-movie.dto";
+import {getMovieFilerDto} from "./dto/get-movie-filter.dto";
 
 @Controller('movie')
 export class MovieController {
 
     constructor(private movieService: MovieService) {}
 
-    // @Get('')
-    // getMain() {
-    //     return this.movieService.getMain();
-    // }
-
-    @Get('/filters')
-    getMovieWithFilter(@Query('genre') genre?: string,
-                       @Query('year') year?: string,
-                       @Query('country') country?: string,
-                       @Query('rating') rating?: string,
-                       @Query('votes') votes?: string,
-                       @Query('actor') actor?: string,
-                       @Query('director') director?: string,
-                       @Query('sort') sort?: string) {
-        return this.movieService.getMovieWithFilter(genre, year, country, +rating, +votes, actor, director, sort);
+    @EventPattern('get.movie.with.filter')
+    getMovieWithFilter(dto: getMovieFilerDto) {
+        return this.movieService.getMovieWithFilter(dto.genre, dto.year, dto.country, dto.rating, dto.votes, dto.actor, dto.director, dto.sort);
     }
 
-    @Get('/:id')
-    getMovie(@Param('id') id: string) {
-        return this.movieService.getMovie(+id);
+    @EventPattern('get.movie')
+    getMovie(id: number) {
+        return this.movieService.getMovie(id);
     }
 
-    @Get('/:id/reviews')
-    getReviews(@Param('id') id: string) {
-        return this.movieService.getReviews(+id);
+    @EventPattern('get.reviews')
+    getReviews(id: number) {
+        return this.movieService.getReviews(id);
     }
 
-    @Post('/:id/reviews')
-    createReview(@Param('id') id: string, @Body() reviewDto: CreateReviewDto) {
-        return this.movieService.createReview(+id, reviewDto);
+    @EventPattern('create.review')
+    createReview(data) {
+        return this.movieService.createReview(data.id, data.dto);
     }
 
     @EventPattern('get.comments')
@@ -65,7 +54,7 @@ export class MovieController {
 
     @EventPattern('update.movie')
     updateMovie(dto: UpdateMovieDto) {
-        return this.movieService.updateMovie(dto.id, dto.title);
+        return this.movieService.updateMovie(dto);
     }
 
     @EventPattern('get.all.movies')
@@ -75,7 +64,7 @@ export class MovieController {
 
     @MessagePattern('get.movie.for.actor')
     async getMovies(@Payload() data: any, @Ctx() context: RmqContext) {
-        return this.movieService.getMoviesById(data);
+        return this.movieService.getMovies(data);
     }
 
     @MessagePattern('get.movie')
