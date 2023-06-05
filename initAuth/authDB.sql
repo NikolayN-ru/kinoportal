@@ -5,7 +5,7 @@
 -- Dumped from database version 15.2
 -- Dumped by pg_dump version 15.2
 
--- Started on 2023-06-04 20:11:55
+-- Started on 2023-06-05 10:36:01
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -23,7 +23,7 @@ SET row_security = off;
 -- Name: auth; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE auth WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc ;
+CREATE DATABASE auth WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc;
 
 
 ALTER DATABASE auth OWNER TO postgres;
@@ -158,6 +158,8 @@ ALTER TABLE ONLY public."user" ALTER COLUMN id SET DEFAULT nextval('public.user_
 -- Data for Name: role; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO public.role (id, role) VALUES (1, 'User');
+INSERT INTO public.role (id, role) VALUES (2, 'Admin');
 
 
 --
@@ -166,6 +168,8 @@ ALTER TABLE ONLY public."user" ALTER COLUMN id SET DEFAULT nextval('public.user_
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO public."user" (id, username, email, password) VALUES (1, 'Alex', '134@gmail.ru', '$2a$05$lltkNbZ2LFrs/o8j1H8Re.zb2dbMdet.QgYrc8vzcbPunL3VUhYOS');
+INSERT INTO public."user" (id, username, email, password) VALUES (2, 'Admin', 'admin@gmail.ru', '$2a$05$UbCOhJPU/Fx927j/7Mdqzugs9UsVnc3r9Zu2otm5prEf/a6XE5P1e');
 
 
 --
@@ -174,6 +178,9 @@ ALTER TABLE ONLY public."user" ALTER COLUMN id SET DEFAULT nextval('public.user_
 -- Data for Name: user_roles_role; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO public.user_roles_role ("userId", "roleId") VALUES (1, 1);
+INSERT INTO public.user_roles_role ("userId", "roleId") VALUES (2, 1);
+INSERT INTO public.user_roles_role ("userId", "roleId") VALUES (2, 2);
 
 
 --
@@ -182,7 +189,7 @@ ALTER TABLE ONLY public."user" ALTER COLUMN id SET DEFAULT nextval('public.user_
 -- Name: role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.role_id_seq', 1, false);
+SELECT pg_catalog.setval('public.role_id_seq', 2, true);
 
 
 --
@@ -191,7 +198,7 @@ SELECT pg_catalog.setval('public.role_id_seq', 1, false);
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.user_id_seq', 1, false);
+SELECT pg_catalog.setval('public.user_id_seq', 2, true);
 
 
 --
@@ -273,7 +280,7 @@ ALTER TABLE ONLY public.user_roles_role
     ADD CONSTRAINT "FK_5f9286e6c25594c6b88c108db77" FOREIGN KEY ("userId") REFERENCES public."user"(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
--- Completed on 2023-06-04 20:11:56
+-- Completed on 2023-06-05 10:36:02
 
 --
 -- PostgreSQL database dump complete
