@@ -27,6 +27,8 @@ export class AdminController {
   private clientMovie: ClientProxy) {}
 
   @Post('/actor')
+  @Roles('Admin')
+  @UseGuards(RolesGuard)
   @UseInterceptors(FilesInterceptor('image'))
   @ApiBody({type: ActorWithImageDto})
   @ApiResponse({status: 201, description: 'post actor', type: String})
@@ -37,6 +39,8 @@ export class AdminController {
   }
 
   @Put('/actor')
+  @Roles('Admin')
+  @UseGuards(RolesGuard)
   @ApiBody({type: ActorDto})
   @ApiResponse({status: 200, description: 'update actor', type: String})
   @ApiResponse({status: 400, description: 'id not entered', type: HttpExceptionDto})
@@ -46,6 +50,8 @@ export class AdminController {
   }
 
   @Delete('/actor')
+  @Roles('Admin')
+  @UseGuards(RolesGuard)
   @ApiBody({type: ActorIdDto})
   @ApiResponse({status: 200, description: 'delete actor', type: String})
   @ApiResponse({status: 400, description: 'id not entered', type: HttpExceptionDto})
