@@ -3,7 +3,7 @@ import { ClientProxy } from '@nestjs/microservices';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateCommentDto } from 'src/dto/auth/create-comment';
 
-@ApiTags('Комментарии')
+@ApiTags('Comments')
 @Controller('user')
 export class UserController {
     constructor(@Inject('Auth')
