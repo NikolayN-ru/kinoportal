@@ -1,21 +1,20 @@
 import { Body, Controller, Delete, Get, Inject, Param, UseGuards, Post, Put, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { ActorDto, ActorWithImageDto } from 'src/dto/actor/actor.dto';
-import { ActorIdDto } from 'src/dto/actor/actorId.dto';
-import { AddActorDto } from 'src/dto/actor/add.actor.dto';
+import { ActorDto, ActorWithImageDto } from '../dto/actor/actor.dto';
+import { ActorIdDto } from '../dto/actor/actorId.dto';
+import { AddActorDto } from '../dto/actor/add.actor.dto';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { HttpExceptionDto } from '../dto/HttpException/http.exception.dto';
-import { Test } from '../dto/actor/test';
-import { CreateGenreDto } from 'src/dto/genre/create-genre.dto';
-import { DeleteGenreDto } from 'src/dto/genre/delete-genre.dto';
-import { UpdateGenreDto } from 'src/dto/genre/update-genre.dto';
-import { CreateCountryDto } from 'src/dto/country/create-country.dto';
-import { DeleteCountryDto } from 'src/dto/country/delete-country.dto';
-import { UpdateCountryDto } from 'src/dto/country/update-country.dto';
-import { DeleteMovieDto } from 'src/dto/movie/delete-movie.dto';
-import { UpdateMovieDto } from 'src/dto/movie/update-movie.dto';
-import { CreateMovieDto } from 'src/dto/movie/create-movie.dto';
+import { CreateGenreDto } from '../dto/genre/create-genre.dto';
+import { DeleteGenreDto } from '../dto/genre/delete-genre.dto';
+import { UpdateGenreDto } from '../dto/genre/update-genre.dto';
+import { CreateCountryDto } from '../dto/country/create-country.dto';
+import { DeleteCountryDto } from '../dto/country/delete-country.dto';
+import { UpdateCountryDto } from '../dto/country/update-country.dto';
+import { DeleteMovieDto } from '../dto/movie/delete-movie.dto';
+import { UpdateMovieDto } from '../dto/movie/update-movie.dto';
+import { CreateMovieDto } from '../dto/movie/create-movie.dto';
 import {Roles} from "./roles.decorator";
 import {RolesGuard} from "./roles.guard";
 
@@ -28,6 +27,8 @@ export class AdminController {
   private clientMovie: ClientProxy) {}
 
   @Post('/actor')
+  @Roles('Admin')
+  @UseGuards(RolesGuard)
   @UseInterceptors(FilesInterceptor('image'))
   @ApiBody({type: ActorWithImageDto})
   @ApiResponse({status: 201, description: 'post actor', type: String})
@@ -38,6 +39,8 @@ export class AdminController {
   }
 
   @Put('/actor')
+  @Roles('Admin')
+  @UseGuards(RolesGuard)
   @ApiBody({type: ActorDto})
   @ApiResponse({status: 200, description: 'update actor', type: String})
   @ApiResponse({status: 400, description: 'id not entered', type: HttpExceptionDto})
@@ -47,6 +50,8 @@ export class AdminController {
   }
 
   @Delete('/actor')
+  @Roles('Admin')
+  @UseGuards(RolesGuard)
   @ApiBody({type: ActorIdDto})
   @ApiResponse({status: 200, description: 'delete actor', type: String})
   @ApiResponse({status: 400, description: 'id not entered', type: HttpExceptionDto})

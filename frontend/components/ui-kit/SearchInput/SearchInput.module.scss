@@ -1,3 +1,7 @@
+.inputSection {
+  @apply relative;
+}
+
 .container {
   @apply relative h-[40px];
 
@@ -92,4 +96,8 @@
       fill: var(--background-light);
     }
   }
+}
+
+.dropdown {
+  @apply absolute bottom-[-4px] left-0 translate-y-[100%];
 }

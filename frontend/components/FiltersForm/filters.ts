@@ -4,17 +4,36 @@ import FilterYear from "./FilterYear";
 
 export const filtersComponents = [
   {
-    title: "Жанры",
+    filter: {
+      field: "genre",
+      title: "Жанры",
+    },
     component: FilterGenre,
   },
 
   {
-    title: "Страны",
+    filter: {
+      field: "country",
+      title: "Страны",
+    },
     component: FilterCountry,
   },
 
   {
-    title: "Годы",
+    filter: {
+      field: "year",
+      title: "Годы",
+    },
     component: FilterYear,
   },
+];
+
+export const filterNames = [
+  "genre",
+  "country",
+  "year",
+  "rating",
+  "marks",
+  "director",
+  "actor",
 ];

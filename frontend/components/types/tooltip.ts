@@ -18,6 +18,7 @@ export type ShowTooltip = (
   targetY: number,
   text: string
 ) => void;
+
 export type HideTooltip = () => void;
 
 export type UseTooltipResult = [

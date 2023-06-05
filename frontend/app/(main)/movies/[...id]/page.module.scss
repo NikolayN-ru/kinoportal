@@ -1,0 +1,23 @@
+.description {
+  @apply font-medium;
+}
+
+.descriptionItem {
+  @apply relative inline-block pr-[4px];
+
+  &:not(:last-child)::after {
+    @apply content-[",_"];
+  }
+}
+
+.loadMore {
+  @apply my-[24px];
+}
+
+.filters {
+  @apply relative z-[2];
+}
+
+.filmsList {
+  @apply relative z-[1];
+}

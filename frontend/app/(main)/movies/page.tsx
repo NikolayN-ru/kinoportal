@@ -4,38 +4,41 @@ import Link from "next/link";
 
 import FiltersForm from "@components/FiltersForm";
 import MainContainer from "@components/MainContainer";
-import PageDescription from "@components/PageDescription";
+import PageDescription, { PageNames } from "@components/PageDescription";
 import Title from "@components/Title";
 import GenresSlider, {
   GenresSliderMode,
 } from "@components/FiltersForm/FilterGenre/GenresSlider";
 import ActorsSlider from "@components/Slider/ActorsSlider";
 import CollectionSlider from "@components/Slider/CollectionSlider";
-import { collections, genres } from "@mock/filmsData";
+import { collections } from "@mock/filmsData";
 import { actors } from "@mock/actors";
 
 import s from "./page.module.scss";
+import { useFilterRouting } from "hooks/useFilterRouting";
 
 export default function Home() {
+  useFilterRouting("movies", "");
+
   return (
     <MainContainer>
-      <section className={s.description}>
+      <section className={s.description + " aboutSection"}>
         <Title
-          className={s.descriptionTitle}
+          className="descriptionTitle"
           tag="h1"
           size="lg"
           text="Фильмы смотреть онлайн"
         />
-        <PageDescription />
+        <PageDescription page={PageNames.MOVIES} />
       </section>
 
-      <section>
-        <FiltersForm />
+      <section className={s.filters}>
+        <FiltersForm resetDisabled />
       </section>
 
-      <section className="pageSection">
+      <section className={`pageSection ${s.genresSlider}`}>
         <Title className="sectionTitle" tag="h2" size="md" text="Жанры" />
-        <GenresSlider items={genres} mode={GenresSliderMode.FULL} />
+        <GenresSlider mode={GenresSliderMode.FULL} />
       </section>
 
       {collections.map(({ id, name, link, items }) => (

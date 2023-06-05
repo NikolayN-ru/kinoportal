@@ -4,6 +4,7 @@ import {
   Compilation,
   PromoItemType,
 } from "@components/types/film";
+import { SortingNames } from "@redux/filtersApi";
 
 export const collections: Collection[] = [
   {
@@ -364,33 +365,360 @@ export const genresIconNames = [
   },
 ];
 
-export const genres: string[] = [
-  "Артхаус",
-  "Биография",
-  "Боевики",
-  "Вестерн",
-  "Военные",
-  "Детективы",
-  "Для детей",
-  "Драмы",
-  "Зарубежные",
-  "Исторические",
-  "Катастрофы",
-  "Комедии",
-  "Криминал",
-  "Мелодрамы",
-  "Мистические",
-  "Музыкальные",
-  "По комиксам",
-  "Приключения",
-  "Русские",
-  "Семейные",
-  "Советские",
-  "Спорт",
-  "Триллеры",
-  "Ужасы",
-  "Фантастика",
-  "Фэнтези",
+export const genres = [
+  {
+    value: "arthouse",
+    title: "Артхаус",
+  },
+  {
+    value: "biography",
+    title: "Биография",
+  },
+  {
+    value: "actionMovie",
+    title: "Боевики",
+  },
+  {
+    value: "western",
+    title: "Вестерн",
+  },
+  {
+    value: "war",
+    title: "Военные",
+  },
+  {
+    value: "detective",
+    title: "Детективы",
+  },
+  {
+    value: "kids",
+    title: "Для детей",
+  },
+  {
+    value: "drama",
+    title: "Драмы",
+  },
+  {
+    value: "foreign",
+    title: "Зарубежные",
+  },
+  {
+    value: "historical",
+    title: "Исторические",
+  },
+  {
+    value: "catastrophe",
+    title: "Катастрофы",
+  },
+  {
+    value: "comedy",
+    title: "Комедии",
+  },
+  {
+    value: "crime",
+    title: "Криминал",
+  },
+  {
+    value: "melodramas",
+    title: "Мелодрамы",
+  },
+  {
+    value: "mystical",
+    title: "Мистические",
+  },
+  {
+    value: "musical",
+    title: "Музыкальные",
+  },
+  {
+    value: "comics",
+    title: "По комиксам",
+  },
+  {
+    value: "adventure",
+    title: "Приключения",
+  },
+  {
+    value: "russian",
+    title: "Русские",
+  },
+  {
+    value: "family",
+    title: "Семейные",
+  },
+  {
+    value: "soviet",
+    title: "Советские",
+  },
+  {
+    value: "sport",
+    title: "Спорт",
+  },
+  {
+    value: "thriller",
+    title: "Триллеры",
+  },
+  {
+    value: "horror",
+    title: "Ужасы",
+  },
+  {
+    value: "fantastic",
+    title: "Фантастика",
+  },
+  {
+    value: "fantasy",
+    title: "Фэнтези",
+  },
+];
+
+export const countries = [
+  {
+    value: "au",
+    title: "Австралия",
+  },
+  {
+    value: "ar",
+    title: "Аргентина",
+  },
+  {
+    value: "am",
+    title: "Армения",
+  },
+  {
+    value: "by",
+    title: "Беларусь",
+  },
+  {
+    value: "be",
+    title: "Бельгия",
+  },
+  {
+    value: "br",
+    title: "Бразилия",
+  },
+  {
+    value: "gb",
+    title: "Великобритания",
+  },
+  {
+    value: "hu",
+    title: "Венгрия",
+  },
+  {
+    value: "de",
+    title: "Германия",
+  },
+  {
+    value: "hk",
+    title: "Гонконг",
+  },
+  {
+    value: "dk",
+    title: "Дания",
+  },
+  {
+    value: "in",
+    title: "Индия",
+  },
+  {
+    value: "ie",
+    title: "Ирландия",
+  },
+  {
+    value: "es",
+    title: "Испания",
+  },
+  {
+    value: "it",
+    title: "Италия",
+  },
+  {
+    value: "kz",
+    title: "Казахстан",
+  },
+  {
+    value: "ca",
+    title: "Канада",
+  },
+  {
+    value: "cn",
+    title: "Китай",
+  },
+  {
+    value: "co",
+    title: "Колумбия",
+  },
+  {
+    value: "mx",
+    title: "Мексика",
+  },
+  {
+    value: "nl",
+    title: "Нидерланды",
+  },
+  {
+    value: "nz",
+    title: "Новая Зеландия",
+  },
+  {
+    value: "no",
+    title: "Норвегия",
+  },
+  {
+    value: "pl",
+    title: "Польша",
+  },
+  {
+    value: "ru",
+    title: "Россия",
+  },
+  {
+    value: "su",
+    title: "СССР",
+  },
+  {
+    value: "us",
+    title: "США",
+  },
+  {
+    value: "th",
+    title: "Таиланд",
+  },
+  {
+    value: "tr",
+    title: "Турция",
+  },
+  {
+    value: "fi",
+    title: "Финляндия",
+  },
+  {
+    value: "fr",
+    title: "Франция",
+  },
+  {
+    value: "ch",
+    title: "Швейцария",
+  },
+  {
+    value: "se",
+    title: "Швеция",
+  },
+  {
+    value: "za",
+    title: "ЮАР",
+  },
+  {
+    value: "kr",
+    title: "Южная Корея",
+  },
+  {
+    value: "jp",
+    title: "Япония",
+  },
+];
+
+export const YEAR_DEFAULT_TITLE = "Все годы";
+
+export const years = [
+  {
+    value: [],
+    title: YEAR_DEFAULT_TITLE,
+  },
+  {
+    value: [2023],
+    title: "2023 год",
+  },
+  {
+    value: [2022],
+    title: "2022 год",
+  },
+  {
+    value: [2021],
+    title: "2021 год",
+  },
+  {
+    value: [2020],
+    title: "2020 год",
+  },
+  {
+    value: [2019],
+    title: "2019 год",
+  },
+  {
+    value: [2018],
+    title: "2018 год",
+  },
+  {
+    value: [2017],
+    title: "2017 год",
+  },
+  {
+    value: [2016],
+    title: "2016 год",
+  },
+  {
+    value: [2022, 2023],
+    title: "2022-2023",
+  },
+  {
+    value: [2021, 2022],
+    title: "2021-2022",
+  },
+  {
+    value: [2020, 2022],
+    title: "2020-2022",
+  },
+  {
+    value: [2019, 2020],
+    title: "2019-2020",
+  },
+  {
+    value: [2010, 2020],
+    title: "2010-2020",
+  },
+  {
+    value: [2010, 2015],
+    title: "2010-2015",
+  },
+  {
+    value: [2000, 2010],
+    title: "2000-2010",
+  },
+  {
+    value: [1990, 2000],
+    title: "1990-2000",
+  },
+  {
+    value: [1980, 1990],
+    title: "1980-1990",
+  },
+  {
+    value: [1980],
+    title: "до 1980",
+  },
+];
+
+export const filtersData = { genres, countries, years };
+
+export const filmsSorting = [
+  {
+    name: SortingNames.POP,
+    title: "По количеству оценок",
+  },
+  {
+    name: SortingNames.RATING,
+    title: "По рейтингу",
+  },
+  {
+    name: SortingNames.YEAR,
+    title: "По дате выхода",
+  },
+  {
+    name: SortingNames.NAME,
+    title: "По алфавиту",
+  },
 ];
 
 export const films: CollectionFilm[] = [

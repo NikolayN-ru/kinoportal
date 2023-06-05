@@ -13,7 +13,8 @@
 .containerSM {
   @apply h-[88px] py-[16px] px-[8px] border border-separator rounded-[6px];
 
-  &:hover {
+  &:hover,
+  &.isChecked {
     @apply bg-purpleSelected border-purpleSelected;
   }
 

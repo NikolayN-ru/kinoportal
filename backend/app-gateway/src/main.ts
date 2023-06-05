@@ -1,13 +1,15 @@
+require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` });
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const PORT = process.env.PORT || 4000;
 
   const config = new DocumentBuilder()
     .setTitle('kinoportal')
-    .setDescription('The kinoportal API description')
+    .setDescription(`The kinoportal API description( User-admin "email": "admin@gmail.ru", "password": "admin)"`)
     .setVersion('1.0')
     .addTag('actor')
     .addTag('film')
@@ -20,6 +22,6 @@ async function bootstrap() {
     origin: true
   });
 
-  await app.listen(4000);
+  await app.listen(PORT);
 }
 bootstrap();

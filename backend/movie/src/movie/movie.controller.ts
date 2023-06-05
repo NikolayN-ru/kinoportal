@@ -75,7 +75,7 @@ export class MovieController {
 
     @MessagePattern('get.movie.for.actor')
     async getMovies(@Payload() data: any, @Ctx() context: RmqContext) {
-        return this.movieService.getMovies(data);
+        return this.movieService.getMoviesById(data);
     }
 
     @MessagePattern('get.movie')

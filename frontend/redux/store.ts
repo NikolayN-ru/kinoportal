@@ -4,10 +4,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import userApi from "./userApi";
 import { allFilms } from "./filmsApi";
 import { allActors } from "./actorApi";
+import filtersApi from "./filtersApi";
 
 export const store = configureStore({
   reducer: {
-    userApi: userApi,
+    userApi,
+    filtersApi,
     [allFilms.reducerPath]: allFilms.reducer,
     [allActors.reducerPath]: allActors.reducer,
   },

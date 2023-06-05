@@ -100,6 +100,7 @@ export class ActorService {
                 message: e.message
             };
         }   
+        
     }
 
 
@@ -124,7 +125,11 @@ export class ActorService {
 
     async getAllActors(){
         try{
-            const actors = await this.actorRepository.findBy({});
+            const actors = await this.actorRepository
+                .createQueryBuilder()
+                .select('actor')
+                .from(ActorEntity, 'actor')
+                .getMany();
             if(actors.length === 0){
                 return [];
             }
@@ -165,9 +170,12 @@ export class ActorService {
         if(actorId === undefined ){
             throw new HttpException('Введите id актера', HttpStatus.BAD_REQUEST); 
         }
-        const actor = await this.actorRepository.findOne({
-            where: { actorId: actorId }
-        })
+        const actor = await this.actorRepository
+            .createQueryBuilder()
+            .select('actor')
+            .from(ActorEntity, 'actor')
+            .where('actor."actorId" = :actorId', {actorId})
+            .getOne()
         if(!actor){
             throw new HttpException('Нет актера с таким id', HttpStatus.NOT_FOUND); 
         }
