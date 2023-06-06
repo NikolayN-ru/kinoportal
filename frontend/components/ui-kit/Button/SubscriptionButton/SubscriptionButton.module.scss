@@ -16,3 +16,9 @@
     @apply bg-purpleDark duration-[400ms];
   }
 }
+
+@media(max-width:1150px) { 
+  .button {
+    margin-top: 30px;
+  }
+}

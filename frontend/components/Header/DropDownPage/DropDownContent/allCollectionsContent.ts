@@ -1,3 +1,4 @@
+import { IAbout } from "./interfaces/About";
 import { ICountry } from "./interfaces/CountryInterface";
 import { IGenre } from "./interfaces/GenreInterface";
 import { Links } from "./interfaces/LinksEnum";
@@ -396,3 +397,53 @@ export const sideContent: ISideContent[] = [
     usedFor: [Links.Films],
   },
 ];
+export const about: IAbout[] = [
+  {
+    id: "1",
+    name: "О компании",
+    url: "https://corp.ivi.ru",
+    usedFor: [Links.About],
+  },
+  {
+    id: "2",
+    name: "Вакансии",
+    url: "https://corp.ivi.ru/career/#career-vacancy-block",
+    usedFor: [Links.About],
+  },
+  {
+    id: "3",
+    name: "Программа бета-тестирования",
+    url: "https://www.ivi.ru/pages/beta/",
+    usedFor: [Links.About],
+  },
+  {
+    id: "4",
+    name: "Общая информация для партнеров",
+    url: "https://www.ivi.ru/info/partners",
+    usedFor: [Links.About],
+  },
+  {
+    id: "5",
+    name: "Размещение рекламы",
+    url: "https://corp.ivi.ru/advertisers/",
+    usedFor: [Links.About],
+  },
+  {
+    id: "6",
+    name: "Пользовательское соглашение",
+    url: "https://www.ivi.ru/info/agreement",
+    usedFor: [Links.About],
+  },
+  {
+    id: "7",
+    name: "Политика конфиденциальности",
+    url: "https://www.ivi.ru/info/confidential",
+    usedFor: [Links.About],
+  },
+  {
+    id: "8",
+    name: "Комплаенс",
+    url: "https://www.ivi.ru/info/goryachaya-liniya-komplaens",
+    usedFor: [Links.About],
+  },
+]

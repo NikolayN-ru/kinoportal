@@ -90,7 +90,6 @@ const Header = () => {
                 <Logo />
               </Link>
             </div>
-            <section className={s.section}>
               <div className={s.navigation}>
                 <div>
                   <span className={s.text}>{t("header.myIvi")}</span>
@@ -128,14 +127,19 @@ const Header = () => {
                 </div>
               </div>
               <div className={s.user_block}>
-              <button className={s.lang}
-              onClick={() =>
-                i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru")
-              }
-            >{`${
-              i18n.language === "en" ? "изменить на RUS" : "change to EN"
-            }`}</button>
-            {i18n.language === "en" ? <Icon className={s.icon_lang} name="us" /> : <Icon className={s.icon_lang} name="rus" />}
+                <button
+                  className={s.lang}
+                  onClick={() =>
+                    i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru")
+                  }
+                >{`${
+                  i18n.language === "en" ? "RUS" : "EN"
+                }`}</button>
+                {i18n.language === "en" ? (
+                  <Icon className={s.icon_lang} name="us" />
+                ) : (
+                  <Icon className={s.icon_lang} name="rus" />
+                )}
                 <div className={s.btn__subscribe}>{t("header.pay")}</div>
                 <>
                   <div className={s.btn__search} onClick={() => setModal(true)}>
@@ -173,8 +177,7 @@ const Header = () => {
                   {showDropDownAvatarBySelectedLink()}
                 </div>
               </div>
-            </section>
-          </div>
+            </div>
         </div>
       </div>
     </div>
