@@ -77,6 +77,10 @@ import {
   VideoIcon,
   TvIcon,
   More,
+  VideoCam,
+  Rocket,
+  Film,
+  Help,
 } from "@public/svg";
 
 import s from "./Icon.module.scss";
@@ -161,6 +165,10 @@ const iconTypes: IconTypes = {
   videoIcon:VideoIcon,
   tvIcon:TvIcon,
   more: More,
+  video_cam:VideoCam,
+  rocket:Rocket,
+  film:Film,
+  help:Help,
 };
 
 const IconComponent: FC<IconComponentProps> = ({

@@ -1,0 +1,56 @@
+.tooltip {
+  position: relative;
+  animation-name: appear;
+  animation-duration: 300ms;
+}
+.tooltiptext {
+  display: flex;
+  gap: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.tooltiptext:hover {
+  color: #c4c4c4;
+  transition: all 0.4s;
+}
+
+@media (max-width: 1150px) {
+  .test {
+    display: flex;
+  }
+  .testTV {
+    display: flex;
+    flex-direction: column;
+  }
+  .main_title {
+    margin-top: 25px;
+  }
+  .list {
+    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .channel {
+    display: flex;
+  }
+  .image {
+    border-radius: 8px;
+    width: 132;
+    height: 87;
+    cursor: pointer;
+  }
+  .about {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    color: #ffffffb8;
+    font-weight: 400;
+    gap: 15px;
+  }
+  .channel:hover {
+    color: #ffffff;
+    transition: all 0.4s;
+  }
+}

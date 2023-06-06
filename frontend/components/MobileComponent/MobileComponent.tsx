@@ -24,6 +24,7 @@ const MobileComponent = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isMobilePage, setIsMobilePage] = useState(false);
   const [isModal, setModal] = useState(false);
+  const [selectedActiveButton, setSelectedActiveButton] = useState(-1);
 
   useEffect(() => {
     const handleResize = () => {
@@ -35,7 +36,7 @@ const MobileComponent = () => {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  
+
   const onClose = () => {
     setModal(false);
   };
@@ -44,13 +45,22 @@ const MobileComponent = () => {
     setIsMobilePage(false);
   };
 
+  const selectButtonByIndex = (index: number) => {
+    console.log(index);
+    if (selectedActiveButton !== index) {
+      setSelectedActiveButton(index);
+    }
+  };
+  const getClassNameButtonByIndex = (index: number) => {
+    console.log(selectedActiveButton);
+    return selectedActiveButton === index;
+  };
   if (!isMobile) return null;
 
   return (
     <div className={s.mobile_bar}>
       <div className={s.row}>
         {tabButtons.map((button, index) => {
- 
           if (index === 2) {
             return (
               <Link
@@ -58,37 +68,81 @@ const MobileComponent = () => {
                 href={button.href}
                 onClick={() => setModal(true)}
               >
-                <div className={s.item}>
-                  <div className={s.itemGlowImage}>
+                <div
+                  className={s.item}
+                  // className={
+                  //   getClassNameButtonByIndex(index) ? s.activeItem : s.item
+                  // }
+                  // onClick={() => selectButtonByIndex(index)}
+                >
+                  <div
+                    className={
+                      getClassNameButtonByIndex(index)
+                        ? s.activeItemGlowImage
+                        : s.itemGlowImage
+                    }
+                    onClick={() => selectButtonByIndex(index)}
+                  >
                     <Icon name={button.iconName} />
-                    <div className={s.text}>{button.text}</div>
+                    <div className={getClassNameButtonByIndex(index)
+                        ? s.activeText
+                        : s.text}>{button.text}</div>
                   </div>
                 </div>
               </Link>
             );
-          }else if(index === 4) {
-                return (
-                  <Link
-                    key={button.id}
-                    href={button.href}
-                    onClick={() => setIsMobilePage(true)}
+          } else if (index === 4) {
+            return (
+              <Link
+                key={button.id}
+                href={button.href}
+                onClick={() => setIsMobilePage(true)}
+              >
+                <div
+                  className={s.item}
+                  // className={
+                  //   getClassNameButtonByIndex(index) ? s.activeItem : s.item
+                  // }
+                  // onClick={() => selectButtonByIndex(index)}
+                >
+                  <div
+                    className={
+                      getClassNameButtonByIndex(index)
+                        ? s.activeItemGlowImage
+                        : s.itemGlowImage
+                    }
+                    onClick={() => selectButtonByIndex(index)}
                   >
-                    <div className={s.item}>
-                      <div className={s.itemGlowImage}>
-                        <Icon name={button.iconName} />
-                        <div className={s.text}>{button.text}</div>
-                      </div>
-                    </div>
-                  </Link>
-                );
-              
+                    <Icon name={button.iconName} />
+                    <div className={getClassNameButtonByIndex(index)
+                        ? s.activeText
+                        : s.text}>{button.text}</div>
+                  </div>
+                </div>
+              </Link>
+            );
           } else {
             return (
               <Link key={button.id} href={button.href}>
-                <div className={s.item}>
-                  <div className={s.itemGlowImage}>
+                <div
+                  className={s.item}
+                  // className={
+                  //   getClassNameButtonByIndex(index) ? s.activeItem : s.item
+                  // }
+                  // onClick={() => selectButtonByIndex(index)}
+                >
+                  <div
+                    className={
+                      getClassNameButtonByIndex(index)
+                        ? s.activeItemGlowImage
+                        : s.itemGlowImage
+                    }
+                    onClick={() => selectButtonByIndex(index)}
+                  >
                     <Icon name={button.iconName} />
-                    <div className={s.text}>{button.text}</div>
+                    <div className={getClassNameButtonByIndex(index)
+                        ? s.activeText
+                        : s.text}>{button.text}</div>
                   </div>
                 </div>
               </Link>
@@ -101,9 +155,11 @@ const MobileComponent = () => {
           onClose={onClose}
           className={s.modal}
         />
-          <ModalPage
+        <ModalPage
           visible={isMobilePage}
-          footer={<button onClick={onCloseMobilePage}>{t("header.close")}</button>}
+          footer={
+            <button onClick={onCloseMobilePage}>{t("header.close")}</button>
+          }
           onClose={onCloseMobilePage}
           className={s.modalPage}
         />
@@ -112,4 +168,3 @@ const MobileComponent = () => {
   );
 };
 export default MobileComponent;
-

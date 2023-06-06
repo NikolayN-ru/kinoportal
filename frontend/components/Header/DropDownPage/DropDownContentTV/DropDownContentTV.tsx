@@ -6,6 +6,7 @@ import ChannelsSlider, {
   federalChannel,
   sportChannel,
 } from "./ChannelsSlider/ChannelsSlider";
+import SideContentTV from "@components/shared/SideContentTV/SideContentTV";
 
 export interface IGenreTV {
   id: string;
@@ -13,7 +14,7 @@ export interface IGenreTV {
   url: string;
 }
 
-const genreTv: IGenreTV[] = [
+export const genreTv: IGenreTV[] = [
   { id: "1", name: "ТВ-каналы", url: "/tvplus" },
   { id: "2", name: "Развлекательное", url: "/razvlekatelnoe" },
   { id: "3", name: "Дети", url: "/deti" },
@@ -24,23 +25,7 @@ const genreTv: IGenreTV[] = [
 const DropDownContentTV = () => {
   return (
     <div className={s.content}>
-      <div className={s.side_content}>
-        <div className={s.list_item}>
-          <div className={s.title}>ТВ онлайн</div>
-          {genreTv.map((genre) => {
-            return (
-              <div className={s.item} key={genre.id}>
-                {genre.name}
-              </div>
-            );
-          })}
-        </div>
-        <Button
-          color="grey"
-          className={s.side_content_btn}
-          text="Телепрограмма"
-        />
-      </div>
+      <SideContentTV />
       <div className={s.main_content}>
         <div className={s.main_content_popular}>
           <div className={s.main_title}>Федеральные каналы</div>

@@ -78,3 +78,7 @@ export { default as Home } from "./home_icon.svg";
 export { default as VideoIcon } from "./video_icon.svg";
 export { default as TvIcon } from "./tv_icon.svg";
 export { default as More } from "./more.svg";
+export { default as VideoCam } from "./video_cam.svg";
+export { default as Rocket } from "./rocket.svg";
+export { default as Film } from "./film.svg";
+export { default as Help } from "./help.svg";

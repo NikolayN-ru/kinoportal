@@ -4,9 +4,23 @@
   background-color: #100e19;
   animation-name: appear;
   animation-duration: 300ms;
-  border-top: 1px solid #383153;
+  border-top: 1px solid #312b45;
   max-height: calc(100vh - 122px);
-  overflow: auto
+  overflow: auto;
+}
+.modal::-webkit-scrollbar-track {
+  padding: 1px 0;
+  background-color: #4c3f58;
+}
+
+.modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: #2e2845af;
+  width: 10px;
 }
 .container {
   @apply w-[100%] max-w-[1045px];
@@ -23,7 +37,6 @@
   display: flex;
   margin: 32px 0;
   gap: 25px;
-  
 }
 
 .button_item {
@@ -34,10 +47,10 @@
   align-items: flex-start;
   width: 50%;
   flex-wrap: wrap;
-
 }
 
-.button, .button_sub{
+.button,
+.button_sub {
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
@@ -46,6 +59,7 @@
   height: 48px;
   padding-left: 50px;
   padding-bottom: 18px;
+  font-weight: 600;
 }
 .button_sub {
   position: relative;
@@ -77,13 +91,9 @@
   fill: #a5a1b2;
 }
 .icon svg {
-  width:25px ;
-  height:25px ;
+  width: 25px;
+  height: 25px;
 }
-
-
-
-
 
 @keyframes appear {
   from {
@@ -103,11 +113,4 @@
 }
 
 @media (max-width: 945px) {
-
 }
-
-
-
-
-
-

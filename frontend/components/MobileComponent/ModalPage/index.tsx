@@ -14,7 +14,6 @@ interface ModalProps {
 
 const ModalPage: FC<ModalProps> = ({
   visible = false,
-  footer = "",
   onClose,
   className,
 }) => {
