@@ -2,9 +2,9 @@ import {Controller, Get, Inject, Param, Query, Post, Body} from "@nestjs/common"
 import { ClientProxy } from "@nestjs/microservices";
 import { ApiResponse, ApiTags } from "@nestjs/swagger";
 import { HttpExceptionDto } from "../dto/HttpException/http.exception.dto";
-import { ActorWithImageDto } from "../dto/actor/actor.dto";
 import { MovieDto, MovieDtoWithActors } from "src/dto/movie/movie.dto";
 import {CreateReviewDto} from "./dto/create-review.dto";
+import { ReviewDto } from "src/dto/movie/review.dto";
 
 @ApiTags('Movie')
 @Controller('/Movie')
@@ -15,6 +15,8 @@ export class FilmController {
   private clientMovie: ClientProxy) {}
 
   @Get('/filters')
+  @ApiResponse({status: 200, description: 'get reviews', type: [MovieDto]})
+  @ApiResponse({status: 404, description: 'movies not found', type: HttpExceptionDto})
   getMovieWithFilter(@Query('genre') genre?: string,
                      @Query('year') year?: string,
                      @Query('country') country?: string,
@@ -22,7 +24,8 @@ export class FilmController {
                      @Query('votes') votes?: string,
                      @Query('actor') actor?: string,
                      @Query('director') director?: string,
-                     @Query('sort') sort?: string) {
+                     @Query('sort') sort?: string,
+                     @Query('limit') limit?: string){
     return this.clientMovie.send('get.movie.with.filter', {
       genre: genre,
       year: year,
@@ -31,21 +34,21 @@ export class FilmController {
       votes: +votes,
       actor: actor,
       director: director,
-      sort: sort
+      sort: sort,
+      limit: limit
   });
   }
 
-  @Get('/:id')
-  getMovie(@Param('id') id: string) {
-    return this.clientMovie.send('get.movie', +id);
-  }
-
   @Get('/:id/reviews')
+  @ApiResponse({status: 200, description: 'get reviews', type: [ReviewDto]})
+  @ApiResponse({status: 404, description: 'movies not found', type: HttpExceptionDto})
   getReviews(@Param('id') id: string) {
     return this.clientMovie.send('get.reviews', +id);
   }
 
   @Post('/:id/reviews')
+  @ApiResponse({status: 200, description: 'post reviews', type: ReviewDto})
+  @ApiResponse({status: 400, description: 'movies not found', type: HttpExceptionDto})
   createReview(@Param('id') id: string, @Body() reviewDto: CreateReviewDto) {
     return this.clientMovie.send('create.review', {
       id: +id,

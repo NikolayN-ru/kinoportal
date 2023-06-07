@@ -6,6 +6,7 @@ export class CreateCommentDto {
     @IsNotEmpty({message: 'Не введен комментарий'})
     readonly comment: string;
 
+    @ApiProperty({ description: 'id пользователя'})
     @IsOptional()
     @IsNumber()
     parentId: number;

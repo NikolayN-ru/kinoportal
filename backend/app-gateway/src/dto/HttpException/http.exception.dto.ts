@@ -1,8 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 
 export class HttpExceptionDto{
-    @ApiProperty()
+    @ApiProperty({ description: 'статус ошибки'})
     status:number;
-    @ApiProperty()
+    @ApiProperty({ description: 'сообщение ошибки'})
     message:string;
 }

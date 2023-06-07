@@ -12,7 +12,6 @@ async function bootstrap() {
     .setDescription(`The kinoportal API description( User-admin "email": "admin@gmail.ru", "password": "admin)"`)
     .setVersion('1.0')
     .addTag('actor')
-    .addTag('film')
     .addTag('admin')
     .build();
   const document = SwaggerModule.createDocument(app, config);
