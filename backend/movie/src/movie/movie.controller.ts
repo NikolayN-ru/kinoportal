@@ -1,6 +1,5 @@
-import {Body, Controller, Get, Param, Post, Query} from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import {MovieService} from "./movie.service";
-import {CreateReviewDto} from "./dto/create-review.dto";
 import {Ctx, EventPattern, MessagePattern, Payload, RmqContext} from "@nestjs/microservices";
 import {CreateCommentDto} from "./dto/create-comment.dto";
 import {CreateMovieDto} from "./dto/create-movie.dto";
@@ -13,8 +12,8 @@ export class MovieController {
     constructor(private movieService: MovieService) {}
 
     @EventPattern('get.movie.with.filter')
-    getMovieWithFilter(dto: getMovieFilerDto) {
-        return this.movieService.getMovieWithFilter(dto.genre, dto.year, dto.country, dto.rating, dto.votes, dto.actor, dto.director, dto.sort);
+    async getMovieWithFilter(dto: getMovieFilerDto) {
+        return (await this.movieService.getMovieWithFilter(dto.genre, dto.year, dto.country, dto.rating, dto.votes, dto.actor, dto.director, dto.sort)).slice(0,dto.limit);
     }
 
     @EventPattern('get.movie')

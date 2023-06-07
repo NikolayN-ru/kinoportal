@@ -2,29 +2,29 @@ import { ApiProperty } from "@nestjs/swagger";
 import { MovieDto } from "../movie/movie.dto";
 
 export class ActorDto{
-    @ApiProperty()
+    @ApiProperty({ description: 'id актера'})
     actorId: number;
-    @ApiProperty()
+    @ApiProperty({ description: 'имя'})
     firstName:string;
-    @ApiProperty()
+    @ApiProperty({ description: 'фамилия'})
     lastName:string;
-    @ApiProperty()
+    @ApiProperty({ description: 'история'})
     story:string;
-    @ApiProperty()
+    @ApiProperty({ description: 'биография'})
     biography:string;
+
+    @ApiProperty({ description: 'количество фильмов'})
+    countfilms: number;
+
+    @ApiProperty({ description: 'фотокарточка'})
+    image: string
 }
 
-export class ActorWithImageDto{
-    @ApiProperty()
-    actorDto: ActorDto
-    @ApiProperty()
-    image: any
-}
 
 export class ActorWitMovie{
-    @ApiProperty()
-    actor: ActorWithImageDto
+    @ApiProperty({ description: 'актер'})
+    actor: ActorDto
     
-    @ApiProperty()
-    movie: MovieDto
+    @ApiProperty({ description: 'фильмы'})
+    movie: Array<MovieDto>
 }

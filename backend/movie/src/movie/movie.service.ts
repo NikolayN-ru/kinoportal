@@ -1,7 +1,7 @@
 import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
 import {Movie} from "./entity/movie.entity";
 import {InjectRepository} from '@nestjs/typeorm';
-import {Between, In, MoreThan, Repository} from 'typeorm';
+import {Repository} from 'typeorm';
 import {Review} from "./entity/review.entity";
 import {CreateReviewDto} from "./dto/create-review.dto";
 import {Comment} from "./entity/comment.entity"
@@ -10,7 +10,6 @@ import {CreateMovieDto} from "./dto/create-movie.dto";
 import {ClientProxy} from "@nestjs/microservices";
 import {Genre} from "../genre/entity/genre.entity";
 import {Country} from "../country/entity/country.entity";
-import path from "path";
 import {UpdateMovieDto} from "./dto/update-movie.dto";
 
 @Injectable()

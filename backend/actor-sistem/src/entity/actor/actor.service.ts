@@ -6,6 +6,7 @@ import { ActorDto } from '../..//dto/actor.dto'
 import { AddActorDto } from '../../dto/add.actor.dto';
 import { ClientProxy } from '@nestjs/microservices';
 import { ActorFilmService } from '../actor-film/actor.film.service';
+import { ActorFilmEntity } from '../actor-film/actor.film.entity';
 
 @Injectable()
 export class ActorService { 
@@ -16,7 +17,7 @@ export class ActorService {
     private clientPhoto: ClientProxy,
     @Inject('Movie')
     private clientMovie: ClientProxy,
-    private actorFilmService: ActorFilmService){}
+    private actorFilmService: ActorFilmService,){}
 
 
     async addActor(actorDto: AddActorDto, files: any){
@@ -126,10 +127,13 @@ export class ActorService {
     async getAllActors(){
         try{
             const actors = await this.actorRepository
-                .createQueryBuilder()
-                .select('actor')
-                .from(ActorEntity, 'actor')
-                .getMany();
+                .createQueryBuilder('actor')
+                .leftJoin(ActorFilmEntity, 'af', 'af."actorId" = actor."actorId"' )
+                .select('actor."actorId", actor."firstName", actor."lastName", actor."story", actor."biography", count("recordId") as countFilms')
+                .groupBy('actor."actorId"')
+                .orderBy('actor."actorId"')
+                .getRawMany()
+
             if(actors.length === 0){
                 return [];
             }
@@ -139,6 +143,7 @@ export class ActorService {
             return otv.map(actor => ({...actor, id: undefined}))
         }   
         catch(e){
+            console.log(e);
             return {
                 status: e.status,
                 message: e.message
