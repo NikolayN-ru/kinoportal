@@ -68,8 +68,8 @@ const Index = () => {
               <div className={s.mainLeftVideo}></div>
               <div className={s.mainBlockButton}>
                 <Button title="Треллер" ico={<Play />} />
-                <Button title="В избранное" ico={<Save />}/>
-                <Button title="Поделиться" ico={<Share />}/>
+                <Button title="В избранное" ico={<Save />} />
+                <Button title="Поделиться" ico={<Share />} />
               </div>
             </div>
           </div>

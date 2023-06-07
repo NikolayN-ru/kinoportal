@@ -1,3 +1,28 @@
+export type MovieGenre = {
+  id: number;
+  genre: string;
+};
+
+export type MovieCountry = {
+  id: number;
+  country: string;
+};
+
+export type Movie = {
+  id: number;
+  title: string;
+  titleEng: string;
+  year: number;
+  quality: string;
+  rating: number;
+  votes: number;
+  description: string;
+  genres: MovieGenre[];
+  countries: MovieCountry[];
+  imgVideo: string;
+  time: number;
+};
+
 export type CollectionFilm = {
   id: number;
   name: string;
@@ -8,7 +33,6 @@ export type CollectionFilm = {
   country: string;
   rating: number;
   age: number;
-  seasons: number;
 };
 
 export type Collection = {

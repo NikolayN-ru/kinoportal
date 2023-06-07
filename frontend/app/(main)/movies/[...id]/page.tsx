@@ -1,16 +1,20 @@
 "use client";
 
+import { useMemo } from "react";
+
 import { useAllFilmsQuery } from "@redux/filmsApi";
 import { useFilterRouting } from "hooks/useFilterRouting";
-import PageDescription from "@components/PageDescription";
-import { getDescriptionByFilters } from "utils/filters";
 import { useTypedSelector } from "hooks/useTypedSelector";
+import { getDescriptionByFilters } from "utils/filters";
+import PageDescription from "@components/PageDescription";
 import FilmsList from "@components/FilmsList";
 import FiltersForm from "@components/FiltersForm";
 import MainContainer from "@components/MainContainer";
 import Title from "@components/Title";
 import Button, { Border, Size } from "@components/ui-kit/Button";
-import { films, filtersData } from "@mock/filmsData";
+import { filtersData } from "@mock/filmsData";
+import Breadcrumbs, { Breadcrumb } from "@components/Breadcrumbs";
+import { getBreadcrumbsFromDescription } from "utils/breadcrumbs";
 
 import s from "./page.module.scss";
 
@@ -23,33 +27,69 @@ export interface PageDescriptionByFilters {
   [key: string]: string;
 }
 
+type PageDescription = {
+  genre: string;
+  country: string;
+  year: string;
+};
+
 const DEFAULT_PAGE_ID = "all";
 
-const descriptionDefaultByFilters: PageDescriptionByFilters = {
+const descriptionByFiltersInit: PageDescription = {
   genre: "Все жанры",
   country: "Все страны",
   year: "Все годы",
 };
 
+const breadcrumbsInit: Breadcrumb[] = [
+  {
+    title: "Мой Иви",
+    link: "/",
+  },
+];
+
 export default function Home(props: PageProps) {
   useFilterRouting("movies", DEFAULT_PAGE_ID);
-  const filtersState = useTypedSelector(({ filtersApi }) => filtersApi.filters);
+  const { genre, country, year } = useTypedSelector(
+    ({ filtersApi }) => filtersApi.filters
+  );
   const { data, isLoading } = useAllFilmsQuery("");
 
-  console.log(data);
+  const pageDescription = useMemo(
+    () =>
+      getDescriptionByFilters(
+        { genre, country, year },
+        filtersData,
+        descriptionByFiltersInit
+      ),
+    [genre, country, year]
+  );
+
+  const breadcrumbs = useMemo(() => {
+    const breadcrumbsFromParams = getBreadcrumbsFromDescription(
+      pageDescription,
+      Object.values(descriptionByFiltersInit)
+    );
+
+    if (breadcrumbsFromParams && breadcrumbsFromParams.length) {
+      return [
+        ...breadcrumbsInit,
+        { title: "Фильмы", link: "/movies" },
+        ...breadcrumbsFromParams,
+      ];
+    }
+
+    return [...breadcrumbsInit, { title: "Фильмы" }];
+  }, [pageDescription]);
 
   const pageId = props.params.id;
   const pageTitle =
     pageId[0] === DEFAULT_PAGE_ID ? "Все фильмы смотреть онлайн" : "Фильмы";
-  const pageDescriptionItems = getDescriptionByFilters(
-    filtersState,
-    filtersData,
-    descriptionDefaultByFilters
-  );
 
   return (
     <MainContainer>
-      <section>
+      <section className={s.headerSection}>
+        <Breadcrumbs items={breadcrumbs} />
         <Title
           className="descriptionTitle"
           tag="h1"
@@ -58,7 +98,7 @@ export default function Home(props: PageProps) {
         />
         <PageDescription>
           <div className={s.description}>
-            {pageDescriptionItems.map((text) => (
+            {pageDescription.map((text) => (
               <span key={text} className={s.descriptionItem}>
                 {text}
               </span>
@@ -72,13 +112,19 @@ export default function Home(props: PageProps) {
       </section>
 
       <section className={`pageSection ${s.filmsList}`}>
-        <FilmsList items={films} />
-        <Button
-          className={s.loadMore}
-          text="Показать еще"
-          border={Border.GRAY}
-          size={Size.FULL}
-        />
+        {!isLoading && !!data ? (
+          <>
+            <FilmsList items={data} />
+            <Button
+              className={s.loadMore}
+              text="Показать еще"
+              border={Border.GRAY}
+              size={Size.FULL}
+            />
+          </>
+        ) : (
+          <div>Загрузка...</div>
+        )}
       </section>
     </MainContainer>
   );

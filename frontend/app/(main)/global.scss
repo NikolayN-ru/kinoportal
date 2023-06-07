@@ -103,6 +103,11 @@
 }
 
 @layer components {
+  .container {
+    width: 100%;
+    max-width: 100%!important;
+  }
+
   .main-container {
     @apply relative flex flex-col grow w-full min-w-[theme("width.mobile")] xl:max-w-[theme("width.desktop")]
     mx-auto my-0 pb-[24px];

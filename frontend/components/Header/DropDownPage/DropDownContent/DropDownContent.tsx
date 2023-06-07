@@ -16,7 +16,7 @@ const content: IFilms = {
   sideContent,
 };
 
- interface DropDownContentProps {
+interface DropDownContentProps {
   link: Links;
 }
 
@@ -93,7 +93,7 @@ const DropDownContent: FC<DropDownContentProps> = ({ link }) => {
         <div className={s.sideContent_Widget_block}>
           <DropDownWidget />
           <Button
-          color="grey"
+            color="grey"
             className={s.tv}
             title={<Icon name="tv" />}
             text="Смотреть на Smart TV"

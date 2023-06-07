@@ -56,7 +56,15 @@ const FilmsAdmin = () => {
         </div> */}
       </div>
       {data.map(
-        ({ title, year, rating, quality }: { title: string; year: number; rating:number; quality:string }, id: number) => (
+        (
+          {
+            title,
+            year,
+            rating,
+            quality,
+          }: { title: string; year: number; rating: number; quality: string },
+          id: number
+        ) => (
           <div className={s.body_column} key={id}>
             <input className={s.checkbox} type="checkbox" name="" id="" />
             <div className={s.head_title}>{title}</div>

@@ -7,7 +7,7 @@ const DropDownNotify = () => {
       <div className={s.content}>
         <div className={s.main_content}>
           <div className={s.icon}>
-            <Icon name="notify_big"/>
+            <Icon name="notify_big" />
           </div>
         </div>
       </div>

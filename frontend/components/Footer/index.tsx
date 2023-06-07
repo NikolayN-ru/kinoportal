@@ -23,8 +23,6 @@ const Footer: FC = () => {
     { id: "6", iconName: "tg" },
   ];
 
-
-  
   return (
     <div className={s.footer}>
       <div className={s.container}>

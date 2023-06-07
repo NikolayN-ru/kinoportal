@@ -266,7 +266,11 @@ export const getUrlFromFilters = ({
 };
 
 export const getDescriptionByFilters = (
-  filtersState: Filters,
+  filtersState: {
+    genre: string[];
+    country: string[];
+    year: number[];
+  },
   filtersData: {
     genres: FilterGenre[];
     countries: FilterCountry[];

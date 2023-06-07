@@ -3,9 +3,17 @@ import { breakpoints } from "../breakpoints";
 
 export const compilationSliderParams: SwiperOptions = {
   breakpoints: {
+    [breakpoints.sm]: {
+      spaceBetween: 12,
+      slidesPerView: 1,
+      slidesPerGroup: 1,
+      allowTouchMove: true,
+    },
     [breakpoints.md]: {
       spaceBetween: 12,
       slidesPerView: 2,
+      slidesPerGroup: 1,
+      allowTouchMove: true,
     },
     [breakpoints.lg]: {
       spaceBetween: 24,
@@ -18,8 +26,4 @@ export const compilationSliderParams: SwiperOptions = {
       allowTouchMove: false,
     },
   },
-  spaceBetween: 12,
-  slidesPerView: 1,
-  slidesPerGroup: 1,
-  allowTouchMove: true,
 };

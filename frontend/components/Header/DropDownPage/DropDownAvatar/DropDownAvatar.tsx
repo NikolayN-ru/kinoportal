@@ -54,13 +54,18 @@ const DropDownAvatar = () => {
       <div className={s.icon_sub}>
         <Icon name="diamond" />
       </div>
-      <Button className={s.button_sub} color="grey" text="Подписки" small="Подключить" />
+      <Button
+        className={s.button_sub}
+        color="grey"
+        text="Подписки"
+        small="Подключить"
+      />
     </div>
   );
   const content = (
     <div className={s.auth_content}>
       <div className={s.button_auth_wrap}>
-      <Button className={s.button_auth}  text="Войти или зарегистрироваться" />
+        <Button className={s.button_auth} text="Войти или зарегистрироваться" />
       </div>
       <div className={s.links_list}>
         <a href="" className={s.link_settings}>
@@ -103,7 +108,11 @@ const DropDownAvatar = () => {
                   <div className={s.icon}>
                     <Icon name={button.iconName} />
                   </div>
-                  <Button color="grey" className={s.button} text={button.text} />
+                  <Button
+                    color="grey"
+                    className={s.button}
+                    text={button.text}
+                  />
                 </div>
               );
             })}

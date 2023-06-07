@@ -41,3 +41,7 @@ export const convertAmountWithMillionsToString = (amount: number): string => {
 export const convertAmoutWithTenthsToString = (amount: number): string => {
   return String(amount).replace(".", ",");
 };
+
+export const capitalizeFirstLetter = (string: string): string => {
+  return string.replace(string[0], string[0].toUpperCase());
+};

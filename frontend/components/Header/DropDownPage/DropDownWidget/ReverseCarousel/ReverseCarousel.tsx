@@ -24,9 +24,9 @@ export const widgetFilms: IWidgetFilm[] = [
   { id: "7", image: "film_21.png" },
 ];
 
-const ReverseCarousel: FC<Carousel> = ({widgetFilms, className }) => {
-  if(!widgetFilms) {
-    return <div>Контента нет</div>
+const ReverseCarousel: FC<Carousel> = ({ widgetFilms, className }) => {
+  if (!widgetFilms) {
+    return <div>Контента нет</div>;
   }
   return (
     <div className={`${s.slider} ${className}`}>

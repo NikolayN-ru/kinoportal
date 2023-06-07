@@ -1,0 +1,31 @@
+.container {
+  @apply flex;
+}
+
+.item,
+.linkItem {
+  @apply text-[13px] font-semibold;
+
+  &:not(:last-child)::after {
+    @apply inline-block mx-[4px] content-["/"];
+  }
+}
+
+.linkItem {
+  @apply text-white;
+}
+
+.link {
+  @apply text-white transition-shadow;
+
+  box-shadow: 0 2px 0 #7e798f, inset 0 0 0 #7e798f;
+
+  &:hover:not(:active) {
+    @apply duration-[80ms];
+    box-shadow: 0 0 0 #7e798f, inset 0 -1.5em 0 #7e798f;
+  }
+
+  &:not(:hover):not(:active) {
+    @apply duration-[400ms];
+  }
+}

@@ -18,16 +18,16 @@ const Rating: React.FC<RatingProps> = ({ className, value }) => {
           {String(value.toFixed(1)).replace(".", ",")}
         </div>
         <div className={s.bars}>
-          <RatingBar value={38} mode={"s"} />
-          <RatingBar value={33} mode={"s"} />
-          <RatingBar value={22} mode={"s"} />
-          <RatingBar value={11} mode={"s"} />
+          <RatingBar value={3.8} mode={"s"} />
+          <RatingBar value={3.3} mode={"s"} />
+          <RatingBar value={2.2} mode={"s"} />
+          <RatingBar value={1.1} mode={"s"} />
         </div>
       </div>
 
       <div className={s.mainBar}>
         <div className={s.category}>Актёры</div>
-        <RatingBar value={65} mode={"m"} />
+        <RatingBar value={value ?? 0} mode={"m"} />
       </div>
     </div>
   );

@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 
+import Breadcrumbs from "@components/Breadcrumbs";
+import { useAllActorsQuery } from "@redux/actorApi";
+import { useFilterRouting } from "hooks/useFilterRouting";
 import FiltersForm from "@components/FiltersForm";
 import MainContainer from "@components/MainContainer";
 import PageDescription, { PageNames } from "@components/PageDescription";
@@ -15,14 +18,25 @@ import { collections } from "@mock/filmsData";
 import { actors } from "@mock/actors";
 
 import s from "./page.module.scss";
-import { useFilterRouting } from "hooks/useFilterRouting";
+
+const breadcrumbs = [
+  {
+    title: "Мой Иви",
+    link: "/",
+  },
+  {
+    title: "Фильмы",
+  },
+];
 
 export default function Home() {
   useFilterRouting("movies", "");
+  const { data, isLoading } = useAllActorsQuery("");
 
   return (
     <MainContainer>
-      <section className={s.description + " aboutSection"}>
+      <section className={s.headerSection + " aboutSection"}>
+        <Breadcrumbs items={breadcrumbs} />
         <Title
           className="descriptionTitle"
           tag="h1"
@@ -57,7 +71,8 @@ export default function Home() {
       <section className="pageSection">
         <Title className="sectionTitle" tag="h2" size="md" text="Персоны" />
 
-        <ActorsSlider items={actors} />
+        {!isLoading && !!data &&
+        <ActorsSlider items={data} />}
       </section>
     </MainContainer>
   );
