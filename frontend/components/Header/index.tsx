@@ -90,7 +90,6 @@ const Header = () => {
                 <Logo />
               </Link>
             </div>
-            <section className={s.section}>
               <div className={s.navigation}>
                 <div>
                   <span className={s.text}>{t("header.myIvi")}</span>
@@ -134,7 +133,7 @@ const Header = () => {
                     i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru")
                   }
                 >{`${
-                  i18n.language === "en" ? "изменить на RUS" : "change to EN"
+                  i18n.language === "en" ? "RUS" : "EN"
                 }`}</button>
                 {i18n.language === "en" ? (
                   <Icon className={s.icon_lang} name="us" />
@@ -178,8 +177,7 @@ const Header = () => {
                   {showDropDownAvatarBySelectedLink()}
                 </div>
               </div>
-            </section>
-          </div>
+            </div>
         </div>
       </div>
     </div>

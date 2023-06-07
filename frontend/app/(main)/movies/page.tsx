@@ -18,6 +18,7 @@ import { collections } from "@mock/filmsData";
 import { actors } from "@mock/actors";
 
 import s from "./page.module.scss";
+import { useEffect } from "react";
 
 const breadcrumbs = [
   {
@@ -32,6 +33,12 @@ const breadcrumbs = [
 export default function Home() {
   useFilterRouting("movies", "");
   const { data, isLoading } = useAllActorsQuery("");
+  console.log("ACTORS > ", data);
+
+  useEffect(() => {
+
+
+  }, []);
 
   return (
     <MainContainer>

@@ -1,0 +1,116 @@
+.modal {
+  @apply fixed bottom-0 left-0 right-0 w-[100%] z-[1] flex justify-center;
+  margin-top: 85px;
+  background-color: #100e19;
+  animation-name: appear;
+  animation-duration: 300ms;
+  border-top: 1px solid #312b45;
+  max-height: calc(100vh - 122px);
+  overflow: auto;
+}
+.modal::-webkit-scrollbar-track {
+  padding: 1px 0;
+  background-color: #4c3f58;
+}
+
+.modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: #2e2845af;
+  width: 10px;
+}
+.container {
+  @apply w-[100%] max-w-[1045px];
+  padding: 0 10px;
+  background-color: #100e19;
+}
+
+.modal_close {
+  @apply absolute top-[-10px] right-[20px] cursor-pointer  text-[#ffffffb8];
+  font-size: 40px;
+}
+
+.subscription_block {
+  display: flex;
+  margin: 32px 0;
+  gap: 25px;
+}
+
+.button_item {
+  position: relative;
+  display: flex;
+  border-radius: 10px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 50%;
+  flex-wrap: wrap;
+}
+
+.button,
+.button_sub {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  text-align: left;
+  width: 100%;
+  height: 48px;
+  padding-left: 50px;
+  padding-bottom: 18px;
+  font-weight: 600;
+}
+.button_sub {
+  position: relative;
+}
+.button_sub::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #ea003d;
+  border-radius: 50%;
+  top: 8px;
+  right: 8px;
+  -webkit-box-shadow: 0px 0px 7px 1px rgba(234, 0, 61, 1);
+  -moz-box-shadow: 0px 0px 7px 1px rgba(234, 0, 61, 1);
+  box-shadow: 0px 0px 7px 1px rgba(234, 0, 61, 1);
+}
+
+.icon,
+.icon_sub {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  top: 10px;
+  left: 10px;
+  z-index: 999;
+}
+.icon path {
+  fill: #a5a1b2;
+}
+.icon svg {
+  width: 25px;
+  height: 25px;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slide-in {
+  from {
+    transform: translateY(-150px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 945px) {
+}

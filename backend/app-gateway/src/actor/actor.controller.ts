@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Inject, Param, Post, Put, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { ActorDto, ActorWitMovie, ActorWithImageDto } from '../dto/actor/actor.dto';
+import { ActorDto, ActorWitMovie } from '../dto/actor/actor.dto';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { HttpExceptionDto } from '../dto/HttpException/http.exception.dto';
+import { ActorFilterDto } from 'src/dto/actor/actor.filter.dto';
 
 @ApiTags('actor')
 @Controller('/actor')
@@ -11,15 +12,15 @@ export class ActorController {
   private clientActor: ClientProxy) {}
 
   @Get('/all')
-  @ApiResponse({status: 200, description: 'get all actor', type: [ActorWithImageDto]})
+  @ApiResponse({status: 200, description: 'get all actor', type: [ActorDto]})
   getAllActor(){
     return this.clientActor.send('get.all.actor', '')
   }
 
   @Get('/filtr')
   @ApiResponse({status: 200, description: 'get actors by fio', type: [ActorDto]})
-  @ApiBody({type: 'fio'})
-  getActorsByFio(@Body() fio : any){
+  @ApiBody({type: ActorFilterDto})
+  getActorsByFio(@Body() fio : ActorFilterDto){
     return this.clientActor.send('get.actor.by.fio', fio.fio)
   }
 

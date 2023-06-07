@@ -1,0 +1,72 @@
+.mobileNavigation {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+}
+.button_caption {
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-top: 1px solid #383153;
+}
+.button_item:hover {
+    color: #c4c4c4;
+    transition: all 0.4s;
+}
+
+.tooltip_caption {
+    margin-top: 15px;
+}
+.buttons {
+    margin-top: 16px;
+    margin-bottom: 25px;
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.overturn_btn {
+    padding: 5px;
+    height: 40px;
+    width: 50%;
+}
+
+.overturn_btn_wrap svg {
+    height: 20px;
+    width: 20px;
+}
+
+.community {
+    @apply flex gap-[12px] justify-start;
+    padding: 25px 20px;
+    border-top: 1px solid #383153;
+}
+
+.social {
+    @apply rounded-[50%] p-[12.5px];
+    margin-top: 20px;
+}
+
+.copyright {
+    padding: 25px 20px;
+    color: #ffffffb8;
+    font-weight: 400;
+}
+.title_wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.title {
+    display: flex;
+    gap: 5px;
+}
+.title_wrap path {
+    fill: #ffffff;
+}
+.title_wrap svg {
+    width: 20px;
+    height: 20px;
+}

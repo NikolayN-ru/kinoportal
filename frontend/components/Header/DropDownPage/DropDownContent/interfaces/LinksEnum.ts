@@ -5,4 +5,5 @@ export enum Links {
   TV,
   Notify,
   Avatar,
+  About
 }

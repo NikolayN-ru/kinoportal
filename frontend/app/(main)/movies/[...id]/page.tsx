@@ -112,7 +112,7 @@ export default function Home(props: PageProps) {
       </section>
 
       <section className={`pageSection ${s.filmsList}`}>
-        {!isLoading && !!data ? (
+        {!isLoading && !!data && data.length && (
           <>
             <FilmsList items={data} />
             <Button
@@ -122,9 +122,9 @@ export default function Home(props: PageProps) {
               size={Size.FULL}
             />
           </>
-        ) : (
+        ) || isLoading && (
           <div>Загрузка...</div>
-        )}
+        ) || <div>Фильмы не найдены</div>}
       </section>
     </MainContainer>
   );

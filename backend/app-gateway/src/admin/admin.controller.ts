@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, Inject, Param, UseGuards, Post, Put, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { ActorDto, ActorWithImageDto } from '../dto/actor/actor.dto';
+import { ActorDto } from '../dto/actor/actor.dto';
 import { ActorIdDto } from '../dto/actor/actorId.dto';
-import { AddActorDto } from '../dto/actor/add.actor.dto';
+import { AddActorDto, AddActorDtoWithImage } from '../dto/actor/add.actor.dto';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { HttpExceptionDto } from '../dto/HttpException/http.exception.dto';
@@ -27,8 +27,10 @@ export class AdminController {
   private clientMovie: ClientProxy) {}
 
   @Post('/actor')
+  @Roles('Admin')
+  @UseGuards(RolesGuard)
   @UseInterceptors(FilesInterceptor('image'))
-  @ApiBody({type: ActorWithImageDto})
+  @ApiBody({type: AddActorDtoWithImage})
   @ApiResponse({status: 201, description: 'post actor', type: String})
   @ApiResponse({status: 400, description: 'first_name or last_name not entered', type: HttpExceptionDto})
   addActor(@Body() actorDto: AddActorDto, 
@@ -37,6 +39,8 @@ export class AdminController {
   }
 
   @Put('/actor')
+  @Roles('Admin')
+  @UseGuards(RolesGuard)
   @ApiBody({type: ActorDto})
   @ApiResponse({status: 200, description: 'update actor', type: String})
   @ApiResponse({status: 400, description: 'id not entered', type: HttpExceptionDto})
@@ -46,6 +50,8 @@ export class AdminController {
   }
 
   @Delete('/actor')
+  @Roles('Admin')
+  @UseGuards(RolesGuard)
   @ApiBody({type: ActorIdDto})
   @ApiResponse({status: 200, description: 'delete actor', type: String})
   @ApiResponse({status: 400, description: 'id not entered', type: HttpExceptionDto})

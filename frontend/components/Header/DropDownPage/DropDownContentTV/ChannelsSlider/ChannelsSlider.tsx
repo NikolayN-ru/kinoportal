@@ -1,12 +1,12 @@
+import { FC } from "react";
 import { SwiperSlide } from "swiper/react";
 import { SwiperOptions } from "swiper";
-import s from "./ChannelsSlider.module.scss";
 import Image from "next/image";
 import Slider from "@components/Slider";
-import { breakpoints } from "@components/Slider/breakpoints";
-import { FC } from "react";
 import { ButtonSize } from "@components/ui-kit/Button/SliderButton";
 import Link from "next/link";
+import { breakpoints } from "@components/Slider/breakpoints";
+import s from "./ChannelsSlider.module.scss";
 
 const compilationSliderParams: SwiperOptions = {
   breakpoints: {

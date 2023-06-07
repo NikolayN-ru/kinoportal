@@ -56,3 +56,10 @@
 .transparent {
   @apply opacity-[0.3];
 }
+
+@media(max-width:1150px) {
+  .promo {
+    top: 90px;
+    overflow:visible;
+  }
+}
