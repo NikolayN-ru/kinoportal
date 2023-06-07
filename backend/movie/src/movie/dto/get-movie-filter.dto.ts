@@ -8,5 +8,6 @@ export class getMovieFilerDto {
     actor?: string;
      director?: string;
      sort?: string;
-     limit?: number;
+     limitStart?: number;
+     limitEnd?: number;
 }
