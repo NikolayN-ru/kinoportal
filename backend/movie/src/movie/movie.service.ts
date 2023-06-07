@@ -42,7 +42,7 @@ export class MovieService {
     async getAllMovies() {
         try {
             return this.movieRepository.createQueryBuilder("movie")
-                .leftJoinAndSelect("movie.genre", "genre")
+                .leftJoinAndSelect("movie.genres", "genre")
                 .leftJoinAndSelect("movie.countries", "countries")
                 .getMany()
         } catch (e) {
