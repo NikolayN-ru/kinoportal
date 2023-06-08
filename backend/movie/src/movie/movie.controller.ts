@@ -13,7 +13,7 @@ export class MovieController {
 
     @EventPattern('get.movie.with.filter')
     async getMovieWithFilter(dto: getMovieFilerDto) {
-        return (await this.movieService.getMovieWithFilter(dto.genre, dto.year, dto.country, dto.rating, dto.votes, dto.actor, dto.director, dto.sort)).slice(0,dto.limit);
+        return (await this.movieService.getMovieWithFilter(dto.genre, dto.year, dto.country, dto.rating, dto.votes, dto.actor, dto.director, dto.sort)).slice(dto.limitStart,dto.limitEnd);
     }
 
     @EventPattern('get.movie')

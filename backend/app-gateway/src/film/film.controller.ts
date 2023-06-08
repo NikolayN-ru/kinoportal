@@ -25,7 +25,8 @@ export class FilmController {
                      @Query('actor') actor?: string,
                      @Query('director') director?: string,
                      @Query('sort') sort?: string,
-                     @Query('limit') limit?: string){
+                     @Query('limitStart') limitStart?: string,
+                     @Query('limitEnd') limitEnd?: string){
     return this.clientMovie.send('get.movie.with.filter', {
       genre: genre,
       year: year,
@@ -35,7 +36,8 @@ export class FilmController {
       actor: actor,
       director: director,
       sort: sort,
-      limit: limit
+      limitStart: limitStart,
+      limitEnd: limitEnd
   });
   }
 

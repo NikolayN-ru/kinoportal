@@ -125,8 +125,15 @@ export class MovieService {
                     .where(queryWhereJoined)
                     .getMany();
             }
-            if(!movies) return HttpStatus.NOT_FOUND;
-            return movies
+            
+            const genresFromDB = await this.genreRepository.find();
+            const countriesFromDB = await this.countryRepository.find();
+            
+            return {
+                movies: movies,
+                genres: genresFromDB,
+                countries: countriesFromDB
+            }
         } catch (e) {
             return {
                 status: e.status,
