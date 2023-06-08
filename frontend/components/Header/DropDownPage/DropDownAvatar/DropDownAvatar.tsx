@@ -36,7 +36,7 @@ const DropDownAvatar = () => {
     { id: "4", iconName: "certificate", text: "Активация сертификата" },
     { id: "5", iconName: "tv_channels", text: "Вход по коду" },
     { id: "6", iconName: "wallet", text: "Способы оплаты" },
-    { id: "1", iconName: "share_small", text: "Пригласить друзей" },
+    { id: "7", iconName: "share_small", text: "Пригласить друзей" },
   ];
 
   const handleMouseEnter = () => {

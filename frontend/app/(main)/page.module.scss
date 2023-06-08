@@ -1,5 +1,9 @@
 .promoSection {
   @apply relative h-[42vw] md:h-[28.9vw] xl:h-[370px] max-h-[370px];
+
+  @media(max-width:1150px) {
+    @apply mt-[72px];
+  }
 }
 
 .subscribeSection {
