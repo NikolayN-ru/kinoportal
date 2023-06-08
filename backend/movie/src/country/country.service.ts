@@ -55,4 +55,15 @@ export class CountryService {
             return e.message;
         }
     }
+
+    async getAllCountries() {
+        try {
+            return this.countryRepository.createQueryBuilder()
+                .select("country")
+                .from(Country, "country")
+                .getMany()
+        } catch (e) {
+            return e.message;
+        }
+    }
 }
