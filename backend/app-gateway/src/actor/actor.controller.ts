@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Param } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param, Query } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { ActorDto, ActorWitMovie } from '../dto/actor/actor.dto';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -19,9 +19,8 @@ export class ActorController {
 
   @Get('/filtr')
   @ApiResponse({status: 200, description: 'get actors by fio', type: [ActorDto]})
-  @ApiBody({type: ActorFilterDto})
-  getActorsByFio(@Body() fio : ActorFilterDto){
-    return this.clientActor.send('get.actor.by.fio', fio.fio)
+  getActorsByFio(@Query('fio') fio?: string){
+    return this.clientActor.send('get.actor.by.fio', fio)
   }
 
   @Get(':id')

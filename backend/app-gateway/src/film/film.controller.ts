@@ -5,6 +5,8 @@ import { HttpExceptionDto } from "../dto/HttpException/http.exception.dto";
 import { MovieDto, MovieDtoWithActors } from "src/dto/movie/movie.dto";
 import {CreateReviewDto} from "./dto/create-review.dto";
 import { ReviewDto } from "src/dto/movie/review.dto";
+import { CountryDto } from "src/dto/movie/country.dto";
+import { GenreDto } from "src/dto/movie/genre.dto";
 
 @ApiTags('Movie')
 @Controller('/Movie')
@@ -59,9 +61,21 @@ export class FilmController {
 
   @Get('/all')
   @ApiResponse({status: 200, description: 'get movies actor', type: [MovieDto]})
-  @ApiResponse({status: 404, description: 'movies not found', type: HttpExceptionDto})
   async getAllMovie(){
     return await this.clientMovie.send('get.all.movies', '').toPromise();
+  }
+
+
+  @Get('/all/genres')
+  @ApiResponse({status: 200, description: 'get genres', type: [GenreDto]})
+  async getAllGenres(){
+    return await this.clientMovie.send('get.all.genres', '').toPromise();
+  }
+
+  @Get('/all/country')
+  @ApiResponse({status: 200, description: 'get countrys', type: [CountryDto]})
+  async getAllCountry(){
+    return await this.clientMovie.send('get.all.countries', '').toPromise();
   }
 
   @Get(':id')
