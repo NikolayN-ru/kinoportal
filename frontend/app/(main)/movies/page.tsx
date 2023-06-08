@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 
 import Breadcrumbs from "@components/Breadcrumbs";
@@ -15,10 +16,8 @@ import GenresSlider, {
 import ActorsSlider from "@components/Slider/ActorsSlider";
 import CollectionSlider from "@components/Slider/CollectionSlider";
 import { collections } from "@mock/filmsData";
-import { actors } from "@mock/actors";
 
 import s from "./page.module.scss";
-import { useEffect } from "react";
 
 const breadcrumbs = [
   {
@@ -33,12 +32,6 @@ const breadcrumbs = [
 export default function Home() {
   useFilterRouting("movies", "");
   const { data, isLoading } = useAllActorsQuery("");
-  console.log("ACTORS > ", data);
-
-  useEffect(() => {
-
-
-  }, []);
 
   return (
     <MainContainer>
@@ -78,8 +71,10 @@ export default function Home() {
       <section className="pageSection">
         <Title className="sectionTitle" tag="h2" size="md" text="Персоны" />
 
-        {!isLoading && !!data &&
-        <ActorsSlider items={data} />}
+        {!isLoading && !!data && data.length && 
+          <ActorsSlider items={data} />
+          || isLoading && <div>Загружаем список актёров...</div>
+          || <div>Актёры не найдены</div>}
       </section>
     </MainContainer>
   );

@@ -5,7 +5,6 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 
 import {
-  Filters,
   FiltersApi,
   resetFilters,
   setActor,
@@ -44,12 +43,12 @@ const FiltersForm: FC<FiltersFormProps> = ({ showSorting, resetDisabled }) => {
 
   useEffect(() => {
     const { filters, sorting } = filtersFull;
-    const { genre, country, year, mark, rating, actor, director } = filters;
+    const { genre, country, year, votes, rating, actor, director } = filters;
 
     dispatch(setGenre(genre));
     dispatch(setCountry(country));
     dispatch(setYear(year));
-    dispatch(setMark(Number(mark)));
+    dispatch(setMark(Number(votes)));
     dispatch(setRating(rating));
     dispatch(setActor(actor));
     dispatch(setDirector(director));

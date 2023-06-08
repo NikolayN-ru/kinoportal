@@ -8,7 +8,7 @@ export const allActors = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: `http://localhost:4000/actor` }),
   endpoints: (builder) => ({
     allActors: builder.query<any, string>({
-      query: (all = "all") => `/${all}`,
+      query: () => `all`,
     }),
     actorItem: builder.query<any, string>({
       query: (id) => `/${id}`,

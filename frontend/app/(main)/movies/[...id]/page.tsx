@@ -2,10 +2,10 @@
 
 import { useMemo } from "react";
 
-import { useAllFilmsQuery } from "@redux/filmsApi";
+import { useFilteredFilmsQuery } from "@redux/filmsApi";
 import { useFilterRouting } from "hooks/useFilterRouting";
 import { useTypedSelector } from "hooks/useTypedSelector";
-import { getDescriptionByFilters } from "utils/filters";
+import { getDescriptionByFilters, getServerQueryStringFromFilters } from "utils/filters";
 import PageDescription from "@components/PageDescription";
 import FilmsList from "@components/FilmsList";
 import FiltersForm from "@components/FiltersForm";
@@ -50,10 +50,14 @@ const breadcrumbsInit: Breadcrumb[] = [
 
 export default function Home(props: PageProps) {
   useFilterRouting("movies", DEFAULT_PAGE_ID);
-  const { genre, country, year } = useTypedSelector(
-    ({ filtersApi }) => filtersApi.filters
-  );
-  const { data, isLoading } = useAllFilmsQuery("");
+  const { filters, sorting } = useTypedSelector(({ filtersApi }) => filtersApi);
+  const { genre, country, year } = filters;
+
+  const queryString = useMemo(() => getServerQueryStringFromFilters({filters, sorting}), [filters, sorting]);
+
+  console.log("QUERY STRING > ", queryString);
+
+  const { data, isLoading } = useFilteredFilmsQuery(queryString);
 
   const pageDescription = useMemo(
     () =>

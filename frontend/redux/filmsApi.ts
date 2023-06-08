@@ -10,10 +10,13 @@ export const allFilms = createApi({
     allFilms: builder.query<any, string>({
       query: () => `/all`,
     }),
+    filteredFilms: builder.query<any, string>({
+      query: (query) => `/filters?${query}`,
+    }),
     filmItem: builder.query<any, string>({
       query: (id) => `/${id}`,
     }),
   }),
 });
 
-export const { useAllFilmsQuery, useFilmItemQuery } = allFilms;
+export const { useAllFilmsQuery, useFilteredFilmsQuery, useFilmItemQuery } = allFilms;

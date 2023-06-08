@@ -5,5 +5,5 @@ export type Actor = {
   story: string;
   biography: string;
   filename: string;
-  filmsCount: number;
+  countfilms: number;
 };

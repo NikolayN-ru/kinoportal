@@ -158,7 +158,7 @@ const parseFiltersFromPath = (path: string): FiltersFromPath => {
 const parseFiltersFromQuery = (query: string): FiltersFromQuery => {
   const filters: FiltersFromQuery = {
     rating: 0,
-    mark: 0,
+    votes: 0,
     director: "",
     actor: "",
   };
@@ -252,11 +252,11 @@ export const getUrlFromFilters = ({
   filters: Filters;
   sorting: SortingNames;
 }): string => {
-  const { genre, country, year, rating, mark, director, actor } = filters;
+  const { genre, country, year, rating, votes, director, actor } = filters;
 
   const pathString = getPathnameFromFilters({ genre, country, year });
   const queryString = getQueryFromFilters(
-    { rating, mark, director, actor },
+    { rating, votes, director, actor },
     sorting
   );
 
@@ -299,4 +299,27 @@ export const getDescriptionByFilters = (
     : descriptionDefaultByFilters.year;
 
   return [genreDescription, countryDescription, yearDescription];
+};
+
+export const getServerQueryStringFromFilters = (fullFilters: FiltersApi): string => {
+  const {filters, sorting} = fullFilters;
+  const queryItems: string[] = [];
+
+  for (const [filterName, filterValue] of Object.entries(filters)) {
+    if (Array.isArray(filterValue) && !filterValue.length) continue;
+
+    if (Array.isArray(filterValue)) {
+      const valueString = filterValue.join("%20");
+      queryItems.push(`${filterName}=${valueString}`);
+      continue;
+    }
+
+    if (!!String(filterValue)) {
+      queryItems.push(`${filterName}=${filterValue}`);
+    }
+  }
+
+  queryItems.push(`sort=${sorting}`);
+
+  return queryItems.join("&");
 };

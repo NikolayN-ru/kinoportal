@@ -39,7 +39,7 @@ export interface FiltersFromPath extends FiltersFromPathDynamicKeys {
 
 export interface FiltersFromQuery extends FiltersFromQueryDynamicKeys {
   rating: number;
-  mark: number;
+  votes: number;
   director: string;
   actor: string;
 }
