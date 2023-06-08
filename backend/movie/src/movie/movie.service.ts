@@ -126,14 +126,7 @@ export class MovieService {
                     .getMany();
             }
             
-            const genresFromDB = await this.genreRepository.find();
-            const countriesFromDB = await this.countryRepository.find();
-            
-            return {
-                movies: movies,
-                genres: genresFromDB,
-                countries: countriesFromDB
-            }
+            return movies;
         } catch (e) {
             return {
                 status: e.status,

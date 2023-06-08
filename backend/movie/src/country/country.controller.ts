@@ -23,4 +23,8 @@ export class CountryController {
         return this.countryService.updateCountry(dto.id, dto.country);
     }
 
+    @EventPattern('get.all.countries')
+    getAllGenres() {
+        return this.countryService.getAllCountries();
+    }
 }
