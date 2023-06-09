@@ -112,6 +112,7 @@ export class ActorService {
                 .select('actor')
                 .from(ActorEntity, 'actor')
                 .where(`lower(concat(actor."firstName",' ',actor."lastName")) like lower(('%${fio}%'))`)
+                .orderBy('actor."firstName"')
                 .getMany();
 
             return actors;

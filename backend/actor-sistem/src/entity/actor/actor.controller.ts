@@ -62,6 +62,6 @@ export class ActorController {
 
     @MessagePattern('filt-film-actor')
     async getmoviesIdForActor(@Payload() data: any, @Ctx() context: RmqContext) {     
-        return  (await this.actorFilmService.getFilmsForActorAndRole(data.actorId, data.roleName)).map(item => item.filmId);
+        return  (await this.actorFilmService.getFilmsForActorAndRole(data.actor, data.roleName)).map(item => item.filmId);
     }
 }
