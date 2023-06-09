@@ -27,42 +27,6 @@ export class ActorFilmService {
                 .getRawMany(); 
 
             return actors
-            // let filmActor = await this.actorFilmRepository.find({
-            //     relations : {
-            //         role: true,
-            //         actors: true
-            //     },
-            //     where: {
-            //         filmId: filmId
-            //     }
-            // });
-
-            // let actorss = await this.actorRepository.find({
-            //     select: {
-            //         actorId: true,
-            //         firstName: true,
-            //         lastName: true,
-            //     },
-            //     where: {
-            //         films: filmActor
-            //     }
-            // })
-            // if(actorss.length === 0){
-            //     return [];
-            // }
-            // return actorss.map(item => {
-            //     let actor = ({...item, 
-            //     ...filmActor.find(film => film.actors.actorId === item.actorId), 
-            //     actors: undefined,
-            //     filmId: undefined,
-            //     recordId: undefined
-            //     })
-            //     let role = actor.role;
-            //     return {
-            //         ...actor,
-            //         role: role.roleName
-            //     }
-            // });
         }   
         catch(e){
             throw e;
