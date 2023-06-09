@@ -1,11 +1,17 @@
 "use client";
 
-import { FC, FormEventHandler, useEffect, useState } from "react";
+import { FC, FormEventHandler, useEffect, useMemo, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 
+import FilterGenre from "./FilterGenre";
+import FilterCountry from "./FilterCountry";
+import FilterYear from "./FilterYear";
+import { years } from "./filters";
+import { useAllFilmsCountriesQuery, useAllFilmsGenresQuery } from "@redux/filmsApi";
+import { useTypedSelector } from "hooks/useTypedSelector";
+import { setCountryData, setGenreData } from "@redux/filtersDataApi";
 import {
-  FiltersApi,
   resetFilters,
   setActor,
   setCountry,
@@ -17,7 +23,6 @@ import {
   setYear,
 } from "@redux/filtersApi";
 import FilmsSorting from "./FilmsSorting";
-import { filtersComponents } from "./filters";
 import FilterRating from "./FilterRating";
 import FilterMarks from "./FilterMarks";
 import SearchDirector from "./SearchDirector";
@@ -33,14 +38,42 @@ interface FiltersFormProps {
 }
 
 const FiltersForm: FC<FiltersFormProps> = ({ showSorting, resetDisabled }) => {
+  const allFilmsGenres = useAllFilmsGenresQuery("");
+  const genres = allFilmsGenres.data;
+  const genresIsLoading = allFilmsGenres.isLoading;
+
+  const allFilmsCountries = useAllFilmsCountriesQuery("");
+  const countries = allFilmsCountries.data;
+  const countriesIsLoading = allFilmsCountries.isLoading;
+
+  const dispatch = useDispatch();
+
+  const {genreData, countryData} = useTypedSelector(({filtersDataApi}) => filtersDataApi);
+
+  useEffect(() => {
+    dispatch(setGenreData({items: genres, isLoading: genresIsLoading}));
+  }, [genres, genresIsLoading]);
+
+  useEffect(() => {
+    dispatch(setCountryData({items: countries, isLoading: countriesIsLoading}));
+  }, [countries, countriesIsLoading]);
+
   const pathname = usePathname();
   const queryString = useSearchParams().toString();
-  const [filtersFull] = useState<FiltersApi>(
-    parseFiltersFromURL(pathname, queryString)
+  const filtersFull = useMemo(
+    () => parseFiltersFromURL(
+      decodeURIComponent(pathname),
+      decodeURIComponent(queryString),
+      {
+        genres: genreData.items || [],
+        countries: countryData.items || []
+      }
+    ),
+    [pathname, queryString, genreData, countryData]
   );
-  const dispatch = useDispatch();
+  
   const [reset, setReset] = useState<boolean>(false);
-
+ 
   useEffect(() => {
     const { filters, sorting } = filtersFull;
     const { genre, country, year, votes, rating, actor, director } = filters;
@@ -68,14 +101,9 @@ const FiltersForm: FC<FiltersFormProps> = ({ showSorting, resetDisabled }) => {
         </div>
       )}
       <div className={`${s.mainContainer} ${s.section}`}>
-        {filtersComponents.map(({ filter, component }, index) => {
-          const FilterComponent = component;
-          return (
-            !!FilterComponent && (
-              <FilterComponent key={index} title={filter.title} />
-            )
-          );
-        })}
+        <FilterGenre title="Жанры" />
+        <FilterCountry title="Страны" />
+        <FilterYear title="Годы" items={years} />
 
         <div className={`${s.rangeItems} ${s.section}`}>
           <div className={s.rangeContainer}>

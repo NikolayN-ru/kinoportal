@@ -1,3 +1,4 @@
+import { years } from "@components/FiltersForm/filters";
 import {
   FilmsSorting,
   FilterCountry,
@@ -6,28 +7,14 @@ import {
   FiltersFromPath,
   FiltersFromQuery,
 } from "@components/types/filters";
-import { countries, genres, years } from "@mock/filmsData";
 import {
   Filters,
   FiltersApi,
   SORTING_DEFAULT,
   SortingNames,
 } from "@redux/filtersApi";
-import { PageDescriptionByFilters } from "app/(main)/movies/[...id]/page";
-
-export const getGenresTitlesByValues = (
-  genres: FilterGenre[],
-  genresValues: string[]
-): string[] => {
-  const genresTitles: string[] = [];
-
-  genresValues.forEach((genresValue) => {
-    const foundGenre = genres.find(({ value }) => value === genresValue);
-    foundGenre && genresTitles.push(foundGenre.title);
-  });
-
-  return genresTitles;
-};
+import { PageDescription } from "app/(main)/movies/[...id]/page";
+import { capitalizeFirstLetter } from "utils";
 
 export const isSelectedYears = (
   years: number[],
@@ -51,22 +38,6 @@ export const getYearsTitleByValue = (
   );
 
   return (foundFilter && foundFilter.title) || "";
-};
-
-export const getCountriesTitlesByValues = (
-  countries: FilterCountry[],
-  countriesValues: string[]
-): string[] => {
-  const countriesTitles: string[] = [];
-
-  countriesValues.forEach((countriesValue) => {
-    const foundCountry = countries.find(
-      ({ value }) => value === countriesValue
-    );
-    foundCountry && countriesTitles.push(foundCountry.title);
-  });
-
-  return countriesTitles;
 };
 
 export const getFilmsSortingValues = (
@@ -97,12 +68,12 @@ export const getSortingNameByValue = (
 
 function checkGenreQuery(items: FilterGenre[], query: string): boolean {
   const queryParts = query.split("+");
-  return queryParts.every((part) => items.find(({ value }) => value === part));
+  return queryParts.every((part) => items.find(({ genre }) => genre === part));
 }
 
 function checkCountryQuery(items: FilterCountry[], query: string): boolean {
   const queryParts = query.split("+");
-  return queryParts.every((part) => items.find(({ value }) => value === part));
+  return queryParts.every((part) => items.find(({ country }) => country === part));
 }
 
 function checkYearQuery(items: FilterYear[], query: string): boolean {
@@ -126,7 +97,7 @@ const splitPathPartString = (part: string): string[] => {
 const getYearsFromPathPart = (part: string): number[] =>
   part.split("-").map((item) => Number(item));
 
-const parseFiltersFromPath = (path: string): FiltersFromPath => {
+const parseFiltersFromPath = (path: string, genres: FilterGenre[], countries: FilterCountry[]): FiltersFromPath => {
   const filters: FiltersFromPath = {
     genre: [],
     country: [],
@@ -195,9 +166,10 @@ const parseSortingFromQuery = (query: string): SortingNames => {
 
 export const parseFiltersFromURL = (
   path: string,
-  query: string
+  query: string,
+  {genres, countries}: {genres: FilterGenre[]; countries: FilterCountry[]}
 ): FiltersApi => {
-  const filtersFromPath = parseFiltersFromPath(path);
+  const filtersFromPath = parseFiltersFromPath(path, genres, countries);
   const filtersFromQuery = parseFiltersFromQuery(query);
   const sortingFromQuery = parseSortingFromQuery(query);
 
@@ -267,38 +239,30 @@ export const getUrlFromFilters = ({
 
 export const getDescriptionByFilters = (
   filtersState: {
-    genre: string[];
-    country: string[];
-    year: number[];
+    selectedGenre: string[];
+    selectedCountry: string[];
+    selectedYear: number[];
   },
-  filtersData: {
-    genres: FilterGenre[];
-    countries: FilterCountry[];
-    years: FilterYear[];
-  },
-  descriptionDefaultByFilters: PageDescriptionByFilters
-): string[] => {
-  const { genres, countries, years } = filtersData;
+  descriptionDefaultByFilters: PageDescription
+): string => {
+  const DESCRIPTION_ITEMS_DELIMITER = ", ";
+  const YEARS_DELIMITER = "-";
 
-  const genresTitles = getGenresTitlesByValues(genres, filtersState.genre);
-  const genreDescription = genresTitles.length
-    ? genresTitles.join(", ")
-    : descriptionDefaultByFilters.genre;
+  const { selectedGenre, selectedCountry, selectedYear } = filtersState;
 
-  const countriesTitles = getCountriesTitlesByValues(
-    countries,
-    filtersState.country
-  );
-  const countryDescription = countriesTitles.length
-    ? countriesTitles.join(", ")
-    : descriptionDefaultByFilters.country;
+  const descriptionGenre = selectedGenre.length
+    ? selectedGenre.map((genre) => capitalizeFirstLetter(genre)).join(DESCRIPTION_ITEMS_DELIMITER)
+    : descriptionDefaultByFilters.selectedGenre;
 
-  const yearsTitle = getYearsTitleByValue(years, filtersState.year);
-  const yearDescription = yearsTitle
-    ? yearsTitle
-    : descriptionDefaultByFilters.year;
+  const descriptionCountry = selectedCountry.length
+    ? selectedCountry.join(DESCRIPTION_ITEMS_DELIMITER)
+    : descriptionDefaultByFilters.selectedCountry;
 
-  return [genreDescription, countryDescription, yearDescription];
+  const descriptionYear = selectedYear.length
+    ? selectedYear.join(YEARS_DELIMITER)
+    : descriptionDefaultByFilters.selectedYear;
+
+  return [descriptionGenre, descriptionCountry, descriptionYear].join(DESCRIPTION_ITEMS_DELIMITER);
 };
 
 export const getServerQueryStringFromFilters = (fullFilters: FiltersApi): string => {
@@ -309,7 +273,9 @@ export const getServerQueryStringFromFilters = (fullFilters: FiltersApi): string
     if (Array.isArray(filterValue) && !filterValue.length) continue;
 
     if (Array.isArray(filterValue)) {
-      const valueString = filterValue.join("%20");
+      const valueString = (typeof filterValue[0] === "number")
+        ? filterValue.join("-")
+        : filterValue.join("%20");
       queryItems.push(`${filterName}=${valueString}`);
       continue;
     }

@@ -12,9 +12,8 @@ import FiltersForm from "@components/FiltersForm";
 import MainContainer from "@components/MainContainer";
 import Title from "@components/Title";
 import Button, { Border, Size } from "@components/ui-kit/Button";
-import { filtersData } from "@mock/filmsData";
 import Breadcrumbs, { Breadcrumb } from "@components/Breadcrumbs";
-import { getBreadcrumbsFromDescription } from "utils/breadcrumbs";
+import { getBreadcrumbsFromFilters } from "utils/breadcrumbs";
 
 import s from "./page.module.scss";
 
@@ -27,18 +26,18 @@ export interface PageDescriptionByFilters {
   [key: string]: string;
 }
 
-type PageDescription = {
-  genre: string;
-  country: string;
-  year: string;
+export type PageDescription = {
+  selectedGenre: string;
+  selectedCountry: string;
+  selectedYear: string;
 };
 
 const DEFAULT_PAGE_ID = "all";
 
 const descriptionByFiltersInit: PageDescription = {
-  genre: "Все жанры",
-  country: "Все страны",
-  year: "Все годы",
+  selectedGenre: "Все жанры",
+  selectedCountry: "Все страны",
+  selectedYear: "Все годы",
 };
 
 const breadcrumbsInit: Breadcrumb[] = [
@@ -55,21 +54,34 @@ export default function Home(props: PageProps) {
 
   const queryString = useMemo(() => getServerQueryStringFromFilters({filters, sorting}), [filters, sorting]);
 
-  console.log("QUERY STRING > ", queryString);
-
   const { data, isLoading } = useFilteredFilmsQuery(queryString);
 
   const pageDescription = useMemo(
     () =>
       getDescriptionByFilters(
-        { genre, country, year },
-        filtersData,
+        { selectedGenre: genre, selectedCountry: country, selectedYear: year },
         descriptionByFiltersInit
       ),
     [genre, country, year]
   );
 
   const breadcrumbs = useMemo(() => {
+    const breadcrumbsFromFilters = getBreadcrumbsFromFilters(
+      { selectedGenre: genre, selectedCountry: country, selectedYear: year }
+    );
+
+    if (breadcrumbsFromFilters && breadcrumbsFromFilters.length) {
+      return [
+        ...breadcrumbsInit,
+        { title: "Фильмы", link: "/movies" },
+        ...breadcrumbsFromFilters,
+      ];
+    }
+
+    return [...breadcrumbsInit, { title: "Фильмы" }];
+  }, [genre, country, year]);
+
+  /*const breadcrumbs = useMemo(() => {
     const breadcrumbsFromParams = getBreadcrumbsFromDescription(
       pageDescription,
       Object.values(descriptionByFiltersInit)
@@ -84,7 +96,7 @@ export default function Home(props: PageProps) {
     }
 
     return [...breadcrumbsInit, { title: "Фильмы" }];
-  }, [pageDescription]);
+  }, [pageDescription]);*/
 
   const pageId = props.params.id;
   const pageTitle =
@@ -93,7 +105,7 @@ export default function Home(props: PageProps) {
   return (
     <MainContainer>
       <section className={s.headerSection}>
-        <Breadcrumbs items={breadcrumbs} />
+        {<Breadcrumbs items={breadcrumbs} />}
         <Title
           className="descriptionTitle"
           tag="h1"
@@ -102,11 +114,12 @@ export default function Home(props: PageProps) {
         />
         <PageDescription>
           <div className={s.description}>
-            {pageDescription.map((text) => (
+            {/*pageDescription.map((text) => (
               <span key={text} className={s.descriptionItem}>
                 {text}
               </span>
-            ))}
+            ))*/}
+            {pageDescription}
           </div>
         </PageDescription>
       </section>

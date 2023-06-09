@@ -5,11 +5,13 @@ import userApi from "./userApi";
 import { allFilms } from "./filmsApi";
 import { allActors } from "./actorApi";
 import filtersApi from "./filtersApi";
+import filtersDataApi from "./filtersDataApi";
 
 export const store = configureStore({
   reducer: {
     userApi,
     filtersApi,
+    filtersDataApi,
     [allFilms.reducerPath]: allFilms.reducer,
     [allActors.reducerPath]: allActors.reducer,
   },

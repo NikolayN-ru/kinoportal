@@ -1,22 +1,41 @@
 import { Breadcrumb } from "@components/Breadcrumbs";
+import { capitalizeFirstLetter } from "utils";
 
-export const getBreadcrumbsFromDescription = (
-  descriptionItems: string[],
-  descriptionItemsDefault: string[]
+const getBreadcrumbTitleFromTextItems = (
+  items: string[],
+  delimiter: string
+): string => items.length > 3
+  ? items.slice(0, 3).join(delimiter) + "..."
+  : items.join(delimiter);
+
+export const getBreadcrumbsFromFilters = (
+  { selectedGenre, selectedCountry, selectedYear }: {
+    selectedGenre: string[];
+    selectedCountry: string[];
+    selectedYear: number[];
+  }
 ): Breadcrumb[] => {
-  const breadcrumbs: Breadcrumb[] = [];
-  const descriptionTextDelimiter = ", ";
+  const TEXT_DELIMITER = ", ";
+  const YEARS_DELIMITER = "-";
 
-  descriptionItems.forEach((text, index) => {
-    if (text !== descriptionItemsDefault[index]) {
-      const textItems = text.split(descriptionTextDelimiter);
-      const title =
-        textItems.length > 3
-          ? textItems.slice(0, 3).join(descriptionTextDelimiter) + "..."
-          : textItems.join(descriptionTextDelimiter);
-      breadcrumbs.push({ title });
-    }
-  });
+  const breadcrumbs: Breadcrumb[] = [];
+
+  if (selectedGenre.length) {
+    breadcrumbs.push({
+      title: getBreadcrumbTitleFromTextItems(
+        selectedGenre.map((genre) => capitalizeFirstLetter(genre)),
+        TEXT_DELIMITER
+      )
+    });
+  } else if (selectedCountry.length) {
+    breadcrumbs.push({
+      title: getBreadcrumbTitleFromTextItems(selectedCountry, TEXT_DELIMITER)
+    });
+  }
+
+  if (selectedYear.length) {
+    breadcrumbs.push({ title: selectedYear.join(YEARS_DELIMITER)});
+  }
 
   return breadcrumbs;
 };

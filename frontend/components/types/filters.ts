@@ -5,13 +5,13 @@ export interface FilterProps {
 }
 
 export interface FilterGenre {
-  value: string;
-  title: string;
+  id: number;
+  genre: string;
 }
 
 export interface FilterCountry {
-  value: string;
-  title: string;
+  id: number;
+  country: string;
 }
 export interface FilterYear {
   value: number[];
