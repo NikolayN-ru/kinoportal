@@ -35,4 +35,13 @@ export class UserService {
             return e.message;
         }
     }
+
+    async deleteUser(email: string) {
+        const user = await this.userRepository.findOneBy({email: email});
+        if(user) {
+            await this.userRepository.remove(user);
+            return 'Удален';
+        }
+        return 'Нет такого';
+    }
 }

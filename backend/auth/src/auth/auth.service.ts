@@ -2,7 +2,6 @@ import {
     HttpException,
     HttpStatus,
     Injectable,
-    InternalServerErrorException,
     UnauthorizedException
 } from '@nestjs/common';
 import {CreateUserDto} from "./dto/create-user.dto";
@@ -12,7 +11,6 @@ import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
 import * as bcrypt from 'bcryptjs';
 import {LoginUserDto} from "./dto/login-user.dto";
-import { sign } from 'jsonwebtoken';
 import {Role} from "./roles.entity";
 
 export enum Provider {
@@ -151,35 +149,4 @@ export class AuthService {
             }
         }
     }
-
-    async validateOAuthLogin(thirdPartyId: string, provider: Provider, name: string, email: string, picture: string): Promise<string> {
-        try {
-            const payload = {thirdPartyId, provider, name, email, picture};
-            return sign(payload, this.JWT_SECRET_KEY, {expiresIn: 3600});                        // create jwt, valid for 1 hour
-        } catch (err) {
-            throw new InternalServerErrorException('validateOAuthLogin', err.message);
-        }
-    }
-
-    reportJwt(req) {
-        const jwt: string = req.user.jwt;
-        if (jwt) return {
-            message: 'authentication succeeded',
-            jwt: jwt,
-        };
-        else return {message: "Authentication failed."}
-    }
-
-    userInfo(req) {
-        if (!req.user) {
-            return 'nothing found!';
-        }
-        console.log(req.user)
-        return {
-            firstName: req.user.name.givenName,
-            email: req.user.email[0].value,
-            picture: req.user.picture
-        };
-    }
-
 }

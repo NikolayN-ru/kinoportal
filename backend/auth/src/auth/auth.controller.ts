@@ -33,58 +33,13 @@ export class AuthController {
         return this.authService.userInfo(data);
     }
 
-    @MessagePattern('otherLogin')
+    @MessagePattern('VKLogin')
     vkLogin(@Payload() data: any, @Ctx() context: RmqContext) {  
         return this.authService.otherLogin(data);
     }
 
-    // @UsePipes(ValidationPipe)
-    // @Post('/login')
-    // login(@Body() userDto: LoginUserDto) {
-    //     return this.authService.login(userDto);
-    // }
-
-    // @UsePipes(ValidationPipe)
-    // @Post('/registration')
-    // registration(@Body() registrationDto: CreateUserDto) {
-    //     return this.authService.registration(registrationDto);
-    // }
-
-    // @Get('google')
-    // @UseGuards(AuthGuard('google'))
-    // async googleAuth(@Req() req) {}
-    //
-    // @ApiOperation({summary: 'Авторизация пользователя через гугл'})
-    // @ApiResponse({status: 200, type: String})
-    // @Get('/google-redirect')
-    // @UseGuards(AuthGuard('google'))
-    // googleLogin(@Request() req) {
-    //     return this.authService.otherLogin(req);
-    // }
-
-    // @Get('google')
-    // @UseGuards(AuthGuard('google'))
-    // googleLogin() {
-    //     // initiates the Google OAuth2 login flow
-    // }
-
-    // @Get('google-redirect')
-    // @UseGuards(AuthGuard('google'))
-    // googleLoginCallback(@Req() req,) {
-    //     // handles the Google OAuth2 callback
-    //     return this.authService.reportJwt(req)
-    // }
-
-    // @Get('protected')
-    // @UseGuards(AuthGuard('jwt'))
-    // protectedResource(@Req() req) {
-    //     return this.authService.userInfo(req);
-    // }
-
-    // @Get('/vkontakte/callback')
-    // @UseGuards(AuthGuard('vkontakte'))
-    // vkLogin(@Request() req) {
-    //     return this.authService.otherLogin(req);
-    // }
-
+    @MessagePattern('googleLogin')
+    googleLogin(@Payload() data: any, @Ctx() context: RmqContext) {  
+        return this.authService.otherLogin(data);
+    }
 }
