@@ -111,9 +111,7 @@ export class ActorService {
                 .createQueryBuilder()
                 .select('actor')
                 .from(ActorEntity, 'actor')
-                .where(`lower(actor."firstName") like lower(('%${fio}%'))`)
-                .orWhere(`lower(actor."lastName") like lower(('%${fio}%'))`)
-                .orWhere(`lower(concat(actor."firstName",' ',actor."lastName")) like lower(('%${fio}%'))`)
+                .where(`lower(concat(actor."firstName",' ',actor."lastName")) like lower(('%${fio}%'))`)
                 .orderBy('actor."firstName"')
                 .getMany();
 
