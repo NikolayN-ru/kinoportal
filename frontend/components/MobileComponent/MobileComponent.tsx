@@ -46,13 +46,11 @@ const MobileComponent = () => {
   };
 
   const selectButtonByIndex = (index: number) => {
-    console.log(index);
     if (selectedActiveButton !== index) {
       setSelectedActiveButton(index);
     }
   };
   const getClassNameButtonByIndex = (index: number) => {
-    console.log(selectedActiveButton);
     return selectedActiveButton === index;
   };
   if (!isMobile) return null;
@@ -68,13 +66,7 @@ const MobileComponent = () => {
                 href={button.href}
                 onClick={() => setModal(true)}
               >
-                <div
-                  className={s.item}
-                  // className={
-                  //   getClassNameButtonByIndex(index) ? s.activeItem : s.item
-                  // }
-                  // onClick={() => selectButtonByIndex(index)}
-                >
+                <div className={s.item}>
                   <div
                     className={
                       getClassNameButtonByIndex(index)
@@ -84,9 +76,13 @@ const MobileComponent = () => {
                     onClick={() => selectButtonByIndex(index)}
                   >
                     <Icon name={button.iconName} />
-                    <div className={getClassNameButtonByIndex(index)
-                        ? s.activeText
-                        : s.text}>{button.text}</div>
+                    <div
+                      className={
+                        getClassNameButtonByIndex(index) ? s.activeText : s.text
+                      }
+                    >
+                      {button.text}
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -98,13 +94,7 @@ const MobileComponent = () => {
                 href={button.href}
                 onClick={() => setIsMobilePage(true)}
               >
-                <div
-                  className={s.item}
-                  // className={
-                  //   getClassNameButtonByIndex(index) ? s.activeItem : s.item
-                  // }
-                  // onClick={() => selectButtonByIndex(index)}
-                >
+                <div className={s.item}>
                   <div
                     className={
                       getClassNameButtonByIndex(index)
@@ -114,9 +104,13 @@ const MobileComponent = () => {
                     onClick={() => selectButtonByIndex(index)}
                   >
                     <Icon name={button.iconName} />
-                    <div className={getClassNameButtonByIndex(index)
-                        ? s.activeText
-                        : s.text}>{button.text}</div>
+                    <div
+                      className={
+                        getClassNameButtonByIndex(index) ? s.activeText : s.text
+                      }
+                    >
+                      {button.text}
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -124,13 +118,7 @@ const MobileComponent = () => {
           } else {
             return (
               <Link key={button.id} href={button.href}>
-                <div
-                  className={s.item}
-                  // className={
-                  //   getClassNameButtonByIndex(index) ? s.activeItem : s.item
-                  // }
-                  // onClick={() => selectButtonByIndex(index)}
-                >
+                <div className={s.item}>
                   <div
                     className={
                       getClassNameButtonByIndex(index)
@@ -140,9 +128,13 @@ const MobileComponent = () => {
                     onClick={() => selectButtonByIndex(index)}
                   >
                     <Icon name={button.iconName} />
-                    <div className={getClassNameButtonByIndex(index)
-                        ? s.activeText
-                        : s.text}>{button.text}</div>
+                    <div
+                      className={
+                        getClassNameButtonByIndex(index) ? s.activeText : s.text
+                      }
+                    >
+                      {button.text}
+                    </div>
                   </div>
                 </div>
               </Link>
