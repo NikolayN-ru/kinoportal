@@ -60,14 +60,14 @@ export class MovieService {
 
 
             if(actor){
-                await this.clientActor.send('filt-film-actor',{actorId: actor, roleName: 'Актер'}).toPromise()
+                await this.clientActor.send('filt-film-actor',{actor: actor, roleName: 'Актер'}).toPromise()
                     .then(result => movieIdForActor = result);
 
                 queryWhere.push(`movie.id IN (${movieIdForActor})`);
             }
 
             if(director){
-                await this.clientActor.send('filt-film-actor',{actorId: director, roleName: 'Режиссёр'}).toPromise()
+                await this.clientActor.send('filt-film-actor',{actor: director, roleName: 'Режиссёр'}).toPromise()
                     .then(result => movieIdForActor = result);
 
                 queryWhere.push(`movie.id IN (${movieIdForActor})`);

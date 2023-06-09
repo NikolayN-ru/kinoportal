@@ -18,42 +18,15 @@ export class ActorFilmService {
 
     async getActorsForFilms(filmId: any){
         try{
-            let filmActor = await this.actorFilmRepository.find({
-                relations : {
-                    role: true,
-                    actors: true
-                },
-                where: {
-                    filmId: filmId
-                }
-            });
 
-            let actorss = await this.actorRepository.find({
-                select: {
-                    actorId: true,
-                    firstName: true,
-                    lastName: true,
-                },
-                where: {
-                    films: filmActor
-                }
-            })
-            if(actorss.length === 0){
-                return [];
-            }
-            return actorss.map(item => {
-                let actor = ({...item, 
-                ...filmActor.find(film => film.actors.actorId === item.actorId), 
-                actors: undefined,
-                filmId: undefined,
-                recordId: undefined
-                })
-                let role = actor.role;
-                return {
-                    ...actor,
-                    role: role.roleName
-                }
-            });
+            let actors = await this.actorFilmRepository.createQueryBuilder('films')
+                .innerJoin(ActorEntity, 'actor', 'films."actorId" = actor."actorId"')
+                .innerJoin(RoleEntity, 'role', 'role."roleId" = films."roleId"')
+                .select('actor."actorId", actor."firstName", actor."lastName", role."roleId", role."roleName"')
+                .where(` films."filmId" = ${filmId}`)
+                .getRawMany(); 
+
+            return actors
         }   
         catch(e){
             throw e;
@@ -77,27 +50,18 @@ export class ActorFilmService {
         }   
     }
 
-    async getFilmsForActorAndRole(actorId: number, roleName: string){
+    async getFilmsForActorAndRole(fio: string, roleName: string){
         try{
 
-            let role = await this.roleRepository.findOne({
-                where: {roleName: roleName}
-            })
-
-            let actor = await this.actorRepository.findOne({
-                where: {actorId: actorId}
-            })
-
-            let films = await this.actorFilmRepository.find({
-                where: {
-                    actors: actor,
-                    role: role
-                },
-                relations : {
-                    actors: true,
-                    role: true,
-                }
-            })
+            let films = await this.actorFilmRepository.createQueryBuilder()
+                .select('films')
+                .from(ActorFilmEntity, 'films')
+                .innerJoin(ActorEntity, 'actor', 'films."actorId" = actor."actorId"')
+                .innerJoin(RoleEntity, 'role', 'role."roleId" = films."roleId"')
+                .where(`lower(concat(actor."firstName",' ',actor."lastName")) like lower('%${fio}%')`)
+                .andWhere(`role."roleName" like '${roleName}'`)
+                .getMany()
+            
             if(films.length === 0){
                 return [];
             }
