@@ -446,4 +446,4 @@ export const about: IAbout[] = [
     url: "https://www.ivi.ru/info/goryachaya-liniya-komplaens",
     usedFor: [Links.About],
   },
-]
+];

@@ -61,7 +61,10 @@ const Select: FC<SelectProps> = ({ title, selectedValues, name, children }) => {
         <div className={s.titleContainer}>
           <div className={s.title}>{title}</div>
           <div className={s.selectedValues}>
-            {!!selectedValues && selectedValues.map((value) => capitalizeFirstLetter(value)).join(", ")}
+            {!!selectedValues &&
+              selectedValues
+                .map((value) => capitalizeFirstLetter(value))
+                .join(", ")}
           </div>
         </div>
 

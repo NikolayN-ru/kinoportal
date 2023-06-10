@@ -4,7 +4,7 @@ import cn from "classnames/bind";
 import s from "./Button.module.scss";
 
 export enum Border {
-  GRAY = "gray",
+  GRAY = "borderGray",
 }
 
 export enum Size {
@@ -22,6 +22,7 @@ interface ButtonProps {
   small?: string;
   border?: Border;
   size?: Size;
+  onClick?: () => void;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -35,6 +36,7 @@ const Button: FC<ButtonProps> = ({
   small,
   border,
   size,
+  onClick,
 }) => {
   type = type || "button";
 
@@ -56,7 +58,13 @@ const Button: FC<ButtonProps> = ({
   });
 
   return (
-    <button className={buttonClassName} type={type}>
+    <button
+      className={buttonClassName}
+      type={type}
+      onClick={() => {
+        onClick && onClick();
+      }}
+    >
       {ico && ico}
       {title && title}
       {text && (

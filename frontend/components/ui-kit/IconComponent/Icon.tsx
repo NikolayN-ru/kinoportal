@@ -81,6 +81,11 @@ import {
   Rocket,
   Film,
   Help,
+  Winnie,
+  Noir,
+  Musical,
+  Anime,
+  Documentary,
 } from "@public/svg";
 
 import s from "./Icon.module.scss";
@@ -161,14 +166,19 @@ const iconTypes: IconTypes = {
   top10Number7: Top10Number7,
   top10Number8: Top10Number8,
   top10Number9: Top10Number9,
-  home:Home,
-  videoIcon:VideoIcon,
-  tvIcon:TvIcon,
+  home: Home,
+  videoIcon: VideoIcon,
+  tvIcon: TvIcon,
   more: More,
-  video_cam:VideoCam,
-  rocket:Rocket,
-  film:Film,
-  help:Help,
+  video_cam: VideoCam,
+  rocket: Rocket,
+  film: Film,
+  help: Help,
+  winnie: Winnie,
+  noir: Noir,
+  musical: Musical,
+  anime: Anime,
+  documentary: Documentary,
 };
 
 const IconComponent: FC<IconComponentProps> = ({

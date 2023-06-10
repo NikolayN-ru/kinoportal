@@ -82,9 +82,13 @@ const MobileComponent = () => {
                     onClick={() => selectButtonByIndex(index)}
                   >
                     <Icon name={button.iconName} />
-                    <div className={getClassNameButtonByIndex(index)
-                        ? s.activeText
-                        : s.text}>{button.text}</div>
+                    <div
+                      className={
+                        getClassNameButtonByIndex(index) ? s.activeText : s.text
+                      }
+                    >
+                      {button.text}
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -112,9 +116,13 @@ const MobileComponent = () => {
                     onClick={() => selectButtonByIndex(index)}
                   >
                     <Icon name={button.iconName} />
-                    <div className={getClassNameButtonByIndex(index)
-                        ? s.activeText
-                        : s.text}>{button.text}</div>
+                    <div
+                      className={
+                        getClassNameButtonByIndex(index) ? s.activeText : s.text
+                      }
+                    >
+                      {button.text}
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -138,9 +146,13 @@ const MobileComponent = () => {
                     onClick={() => selectButtonByIndex(index)}
                   >
                     <Icon name={button.iconName} />
-                    <div className={getClassNameButtonByIndex(index)
-                        ? s.activeText
-                        : s.text}>{button.text}</div>
+                    <div
+                      className={
+                        getClassNameButtonByIndex(index) ? s.activeText : s.text
+                      }
+                    >
+                      {button.text}
+                    </div>
                   </div>
                 </div>
               </Link>

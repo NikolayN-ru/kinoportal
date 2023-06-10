@@ -9,7 +9,9 @@ import CountriesSliderItem from "./CountriesSliderItem";
 import s from "./CountriesSlider.module.scss";
 
 const CountriesSlider: FC = () => {
-  const {items} = useTypedSelector(({filtersDataApi}) => filtersDataApi.countryData);
+  const { items } = useTypedSelector(
+    ({ filtersDataApi }) => filtersDataApi.countryData
+  );
   const isOpen = useContext(SelectContext) ?? true;
 
   if (!isOpen || !items || !items.length) return null;

@@ -28,7 +28,9 @@ const containerClassName = {
 };
 
 const GenresSlider: FC<GenresSliderProps> = ({ mode }) => {
-  const {items} = useTypedSelector(({filtersDataApi}) => filtersDataApi.genreData);
+  const { items } = useTypedSelector(
+    ({ filtersDataApi }) => filtersDataApi.genreData
+  );
 
   const selectedGenres = useTypedSelector(
     (state) => state.filtersApi.filters.genre
@@ -44,7 +46,7 @@ const GenresSlider: FC<GenresSliderProps> = ({ mode }) => {
     dispatch(setGenre(updatedSelectedGenres));
   };
 
-  if ( !items || !items.length) return null;
+  if (!items || !items.length) return null;
 
   let genresSliderParams: SwiperOptions;
   let buttonSize: ButtonSize;
@@ -79,7 +81,8 @@ const GenresSlider: FC<GenresSliderProps> = ({ mode }) => {
         {items.map(({ id, genre }) => {
           const iconName =
             genresIconNames.find(
-              (iconNamesItem) => iconNamesItem.genre.toLowerCase() === genre.toLowerCase()
+              (iconNamesItem) =>
+                iconNamesItem.genre.toLowerCase() === genre.toLowerCase()
             )?.iconName ?? "";
 
           const isChecked = selectedGenres.some(

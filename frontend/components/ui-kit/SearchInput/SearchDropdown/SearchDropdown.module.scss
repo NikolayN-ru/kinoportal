@@ -8,7 +8,8 @@
 }
 
 .resultLink {
-  @apply overflow-hidden h-[20px] my-[6px] leading-[20px] text-white whitespace-nowrap text-ellipsis transition-colors;
+  @apply overflow-hidden h-[20px] my-[6px] leading-[20px]
+  text-white whitespace-nowrap text-ellipsis transition-colors cursor-pointer;
 
   &:hover {
     @apply text-red duration-[80ms];

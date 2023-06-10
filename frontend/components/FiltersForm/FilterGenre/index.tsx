@@ -1,12 +1,16 @@
 "use client";
 
 import { FC } from "react";
+import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
+
 import { useTypedSelector } from "hooks/useTypedSelector";
 import { setGenre } from "@redux/filtersApi";
 import Select from "@components/ui-kit/Select";
 import GenresSlider, { GenresSliderMode } from "./GenresSlider";
-import SelectOptionsList from "@components/ui-kit/Select/SelectOptionsList";
+import SelectOptionsList, {
+  ColumnsCount,
+} from "@components/ui-kit/Select/SelectOptionsList";
 import Checkbox from "@components/ui-kit/Checkbox";
 import { capitalizeFirstLetter } from "utils";
 
@@ -17,8 +21,10 @@ interface FilterGenreProps {
 }
 
 const FilterGenre: FC<FilterGenreProps> = ({ title }) => {
-  const {items, isLoading} = useTypedSelector(({filtersDataApi}) => filtersDataApi.genreData);
-  
+  const { items, isLoading } = useTypedSelector(
+    ({ filtersDataApi }) => filtersDataApi.genreData
+  );
+
   const selectedGenres = useTypedSelector(
     (state) => state.filtersApi.filters.genre
   );
@@ -33,17 +39,33 @@ const FilterGenre: FC<FilterGenreProps> = ({ title }) => {
     dispatch(setGenre(updatedSelectedGenres));
   };
 
+  const isMobile = useMediaQuery({
+    query: "(max-width: 600px)",
+  });
+
+  const isTablet = useMediaQuery({
+    query: "(max-width: 1024px)",
+  });
+
+  let columnsCount: ColumnsCount;
+
+  if (isMobile) {
+    columnsCount = 1;
+  } else if (isTablet) {
+    columnsCount = 2;
+  } else {
+    columnsCount = 3;
+  }
+
   return (
-    <Select
-      title={title}
-      selectedValues={selectedGenres}
-      name="genre"
-    >
+    <Select title={title} selectedValues={selectedGenres} name="genre">
       <div className={s.optionsWrapper}>
         <GenresSlider mode={GenresSliderMode.MINI} />
 
-        <SelectOptionsList columns={3} separated>
-          {!isLoading && !!items && items.length &&
+        <SelectOptionsList columns={columnsCount} separated>
+          {(!isLoading &&
+            !!items &&
+            items.length &&
             items.map(({ id, genre }) => {
               const isChecked = selectedGenres.some(
                 (selectedGenre) => selectedGenre === genre
@@ -60,10 +82,10 @@ const FilterGenre: FC<FilterGenreProps> = ({ title }) => {
                   />
                 </div>
               );
-            }) || isLoading && (
-              <div>Загрузка...</div>
-            ) || <div>Жанры не найдены</div>
-          }
+            })) ||
+            (isLoading && <div>Загрузка...</div>) || (
+              <div>Жанры не найдены</div>
+            )}
         </SelectOptionsList>
       </div>
     </Select>

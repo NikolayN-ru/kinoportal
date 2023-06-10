@@ -34,7 +34,8 @@
     "sass": "^1.62.0",
     "scss": "^0.2.4",
     "swiper": "^9.2.4",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "react-responsive": "^9.0.2"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.21.4",

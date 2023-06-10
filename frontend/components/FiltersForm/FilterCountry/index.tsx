@@ -17,7 +17,9 @@ interface FilterCountryProps {
 }
 
 const FilterCountry: FC<FilterCountryProps> = ({ title }) => {
-  const {items, isLoading} = useTypedSelector(({filtersDataApi}) => filtersDataApi.countryData);
+  const { items, isLoading } = useTypedSelector(
+    ({ filtersDataApi }) => filtersDataApi.countryData
+  );
 
   const selectedCountries = useTypedSelector(
     (state) => state.filtersApi.filters.country
@@ -34,16 +36,14 @@ const FilterCountry: FC<FilterCountryProps> = ({ title }) => {
   };
 
   return (
-    <Select
-      title={title}
-      selectedValues={selectedCountries}
-      name="country"
-    >
+    <Select title={title} selectedValues={selectedCountries} name="country">
       <div className={s.optionsWrapper}>
         <CountriesSlider />
 
         <SelectOptionsList columns={3} separated>
-          {!isLoading && !!items && items.length &&
+          {(!isLoading &&
+            !!items &&
+            items.length &&
             items.map(({ id, country }) => {
               const isChecked = selectedCountries.some(
                 (selectedCountry) => selectedCountry === country
@@ -60,10 +60,10 @@ const FilterCountry: FC<FilterCountryProps> = ({ title }) => {
                   />
                 </div>
               );
-            }) || isLoading && (
-              <div>Загрузка...</div>
-            ) || <div>Страны не найдены</div>
-          }
+            })) ||
+            (isLoading && <div>Загрузка...</div>) || (
+              <div>Страны не найдены</div>
+            )}
         </SelectOptionsList>
       </div>
     </Select>

@@ -30,5 +30,5 @@ export const {
   useFilteredFilmsQuery,
   useFilmItemQuery,
   useAllFilmsGenresQuery,
-  useAllFilmsCountriesQuery
+  useAllFilmsCountriesQuery,
 } = allFilms;

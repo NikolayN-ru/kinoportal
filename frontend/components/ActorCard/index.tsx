@@ -40,9 +40,11 @@ const ActorCard: FC<ActorCardProps> = ({ data }) => {
 
       <div className={s.title}>{firstName}</div>
       <div className={s.title}>{lastName}</div>
-      {countfilms && <div className={s.filmsCount}>
-        {countfilms} {declensionOfNum(countfilms, FILMS_FORMS)}
-      </div>}
+      {countfilms && (
+        <div className={s.filmsCount}>
+          {countfilms} {declensionOfNum(countfilms, FILMS_FORMS)}
+        </div>
+      )}
     </Link>
   );
 };

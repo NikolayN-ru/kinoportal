@@ -90,94 +90,92 @@ const Header = () => {
                 <Logo />
               </Link>
             </div>
-              <div className={s.navigation}>
-                <div>
-                  <span className={s.text}>{t("header.myIvi")}</span>
-                </div>
-                <div>
-                  <span className={s.text}> {t("header.whatsNew")}</span>
-                </div>
-                <div
-                  onMouseEnter={() => handleToggleDropDown(Links.Films)}
-                  onMouseLeave={() => handleToggleDropDown(undefined)}
-                >
-                  <span className={s.text}> {t("header.films")}</span>{" "}
-                  {showDropDownBySelectedLink(Links.Films)}
-                </div>
-                <div
-                  onMouseEnter={() => handleToggleDropDown(Links.Serials)}
-                  onMouseLeave={() => handleToggleDropDown(undefined)}
-                >
-                  <span className={s.text}> {t("header.serials")}</span>
-                  {showDropDownBySelectedLink(Links.Serials)}
-                </div>
-                <div
-                  onMouseEnter={() => handleToggleDropDown(Links.Multfilms)}
-                  onMouseLeave={() => handleToggleDropDown(undefined)}
-                >
-                  <span className={s.text}> {t("header.cartoon")}</span>
-                  {showDropDownBySelectedLink(Links.Multfilms)}
-                </div>
-                <div
-                  onMouseEnter={() => handleToggleDropDown(Links.TV)}
-                  onMouseLeave={() => handleToggleDropDown(undefined)}
-                >
-                  <span className={s.text}>{t("header.TV")}</span>
-                  {showDropDownBySelectedLink(Links.TV)}
-                </div>
+            <div className={s.navigation}>
+              <div>
+                <span className={s.text}>{t("header.myIvi")}</span>
               </div>
-              <div className={s.user_block}>
-                <button
-                  className={s.lang}
-                  onClick={() =>
-                    i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru")
-                  }
-                >{`${
-                  i18n.language === "en" ? "RUS" : "EN"
-                }`}</button>
-                {i18n.language === "en" ? (
-                  <Icon className={s.icon_lang} name="us" />
-                ) : (
-                  <Icon className={s.icon_lang} name="rus" />
-                )}
-                <div className={s.btn__subscribe}>{t("header.pay")}</div>
-                <>
-                  <div className={s.btn__search} onClick={() => setModal(true)}>
-                    <div className={s.imgWrapper}>
-                      <Icon name="search" />
-                    </div>
-                    {t("header.search")}
-                  </div>
-                  <ModalSearch
-                    visible={isModal}
-                    footer={
-                      <button onClick={onClose}>{t("header.close")}</button>
-                    }
-                    onClose={onClose}
-                  />
-                </>
-                <div
-                  className={s.btn__notify}
-                  onMouseEnter={() => handleToggleDropDown(Links.Notify)}
-                  onMouseLeave={() => handleToggleDropDown(undefined)}
-                >
-                  <span className={s.text}>
-                    <Icon name="notify" />
-                  </span>
-                  {showDropDownNotifyBySelectedLink()}
-                </div>
-                <div
-                  className={s.btn__avatar}
-                  onMouseEnter={() => handleToggleDropDown(Links.Avatar)}
-                  onMouseLeave={() => handleToggleDropDown(undefined)}
-                >
-                  <span className={s.text_avatar}>
-                    <Icon name="avatar" />
-                  </span>
-                  {showDropDownAvatarBySelectedLink()}
-                </div>
+              <div>
+                <span className={s.text}> {t("header.whatsNew")}</span>
+              </div>
+              <div
+                onMouseEnter={() => handleToggleDropDown(Links.Films)}
+                onMouseLeave={() => handleToggleDropDown(undefined)}
+              >
+                <span className={s.text}> {t("header.films")}</span>{" "}
+                {showDropDownBySelectedLink(Links.Films)}
+              </div>
+              <div
+                onMouseEnter={() => handleToggleDropDown(Links.Serials)}
+                onMouseLeave={() => handleToggleDropDown(undefined)}
+              >
+                <span className={s.text}> {t("header.serials")}</span>
+                {showDropDownBySelectedLink(Links.Serials)}
+              </div>
+              <div
+                onMouseEnter={() => handleToggleDropDown(Links.Multfilms)}
+                onMouseLeave={() => handleToggleDropDown(undefined)}
+              >
+                <span className={s.text}> {t("header.cartoon")}</span>
+                {showDropDownBySelectedLink(Links.Multfilms)}
+              </div>
+              <div
+                onMouseEnter={() => handleToggleDropDown(Links.TV)}
+                onMouseLeave={() => handleToggleDropDown(undefined)}
+              >
+                <span className={s.text}>{t("header.TV")}</span>
+                {showDropDownBySelectedLink(Links.TV)}
               </div>
             </div>
+            <div className={s.user_block}>
+              <button
+                className={s.lang}
+                onClick={() =>
+                  i18n.changeLanguage(i18n.language === "ru" ? "en" : "ru")
+                }
+              >{`${i18n.language === "en" ? "RUS" : "EN"}`}</button>
+              {i18n.language === "en" ? (
+                <Icon className={s.icon_lang} name="us" />
+              ) : (
+                <Icon className={s.icon_lang} name="rus" />
+              )}
+              <div className={s.btn__subscribe}>{t("header.pay")}</div>
+              <>
+                <div className={s.btn__search} onClick={() => setModal(true)}>
+                  <div className={s.imgWrapper}>
+                    <Icon name="search" />
+                  </div>
+                  {t("header.search")}
+                </div>
+                <ModalSearch
+                  visible={isModal}
+                  footer={
+                    <button onClick={onClose}>{t("header.close")}</button>
+                  }
+                  onClose={onClose}
+                />
+              </>
+              <div
+                className={s.btn__notify}
+                onMouseEnter={() => handleToggleDropDown(Links.Notify)}
+                onMouseLeave={() => handleToggleDropDown(undefined)}
+              >
+                <span className={s.text}>
+                  <Icon name="notify" />
+                </span>
+                {showDropDownNotifyBySelectedLink()}
+              </div>
+              <div
+                className={s.btn__avatar}
+                onMouseEnter={() => handleToggleDropDown(Links.Avatar)}
+                onMouseLeave={() => handleToggleDropDown(undefined)}
+              >
+                <span className={s.text_avatar}>
+                  <Icon name="avatar" />
+                </span>
+                {showDropDownAvatarBySelectedLink()}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

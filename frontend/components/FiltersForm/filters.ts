@@ -1,4 +1,5 @@
 import { FilterYear } from "@components/types/filters";
+import { SortingNames } from "@redux/filtersApi";
 
 export const filterNames = [
   "genre",
@@ -8,6 +9,25 @@ export const filterNames = [
   "marks",
   "director",
   "actor",
+];
+
+export const filmsSorting = [
+  {
+    name: SortingNames.POP,
+    title: "По количеству оценок",
+  },
+  {
+    name: SortingNames.RATING,
+    title: "По рейтингу",
+  },
+  {
+    name: SortingNames.YEAR,
+    title: "По дате выхода",
+  },
+  {
+    name: SortingNames.NAME,
+    title: "По алфавиту",
+  },
 ];
 
 export const YEAR_DEFAULT_TITLE = "Все годы";
@@ -175,5 +195,25 @@ export const genresIconNames = [
   {
     genre: "спорт",
     iconName: "sports",
+  },
+  {
+    genre: "мультфильм",
+    iconName: "winnie",
+  },
+  {
+    genre: "фильм-нуар",
+    iconName: "noir",
+  },
+  {
+    genre: "мюзикл",
+    iconName: "musical",
+  },
+  {
+    genre: "аниме",
+    iconName: "anime",
+  },
+  {
+    genre: "документальный",
+    iconName: "documentary",
   },
 ];

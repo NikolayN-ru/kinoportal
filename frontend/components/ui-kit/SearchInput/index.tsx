@@ -3,7 +3,6 @@
 import {
   ChangeEventHandler,
   FC,
-  FocusEventHandler,
   KeyboardEventHandler,
   MouseEventHandler,
   useEffect,
@@ -22,9 +21,12 @@ interface SearchInputProps {
   initValue?: string;
   placeholder?: string;
   name: string;
-  reset: boolean;
+  isReset: boolean;
+  foundResults: string[];
   setReset: (reset: boolean) => void;
-  onValueConfirm: (value: string) => void;
+  onConfirm: (value: string) => void;
+  onChange: (value: string) => void;
+  onClear: () => void;
 }
 
 const INIT_VALUE = "";
@@ -34,13 +36,15 @@ const SearchInput: FC<SearchInputProps> = ({
   placeholder,
   name,
   initValue,
-  reset,
+  isReset,
+  foundResults,
   setReset,
-  onValueConfirm,
+  onConfirm,
+  onChange,
+  onClear,
 }) => {
   const [value, setValue] = useState<string>(initValue ?? INIT_VALUE);
   const [isFocused, setIsFocused] = useState<boolean>(false);
-  const [isDropdownActive, setIsDropdownActive] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const removeInputFocus = (e: MouseEvent) => {
@@ -63,11 +67,12 @@ const SearchInput: FC<SearchInputProps> = ({
   }, []);
 
   useEffect(() => {
-    if (!reset) return;
+    if (!isReset) return;
 
     setValue(INIT_VALUE);
+    onClear();
     setIsFocused(false);
-  }, [reset]);
+  }, [isReset]);
 
   useEffect(() => {
     initValue && setValue(initValue);
@@ -75,12 +80,14 @@ const SearchInput: FC<SearchInputProps> = ({
 
   const onInputChange: ChangeEventHandler<HTMLInputElement> = (e): void => {
     setValue(e.currentTarget.value);
+    onChange(e.currentTarget.value);
     setReset(false);
   };
 
   const clearInput = (): void => {
     setValue(INIT_VALUE);
     setIsFocused(true);
+    onClear();
   };
 
   const setInputFocus: MouseEventHandler<HTMLDivElement> = () => {
@@ -88,19 +95,15 @@ const SearchInput: FC<SearchInputProps> = ({
     inputRef.current?.focus();
   };
 
-  const onInputKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
-    if (e.key !== "Enter") return;
-
-    onValueConfirm(e.currentTarget.value);
+  const submitInput = (value: string): void => {
+    onConfirm(value);
     clearInput();
   };
 
-  const onInputFocus: FocusEventHandler<HTMLInputElement> = () => {
-    setIsDropdownActive(true);
-  };
+  const onInputKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
+    if (e.key !== "Enter") return;
 
-  const onInputBlur: FocusEventHandler<HTMLInputElement> = () => {
-    setIsDropdownActive(false);
+    submitInput(e.currentTarget.value);
   };
 
   const styles = {
@@ -131,11 +134,9 @@ const SearchInput: FC<SearchInputProps> = ({
         <input
           className={inputClassName}
           type="text"
-          value={value}
+          value={value.split("+").join(" ")}
           onChange={onInputChange}
           onKeyDown={onInputKeyDown}
-          onFocus={onInputFocus}
-          onBlur={onInputBlur}
           ref={inputRef}
         />
 
@@ -151,9 +152,11 @@ const SearchInput: FC<SearchInputProps> = ({
         </button>
       </div>
 
-      {isDropdownActive && (
-        <SearchDropdown className={s.dropdown} searchValue={value} />
-      )}
+      <SearchDropdown
+        className={s.dropdown}
+        results={foundResults}
+        onChoise={submitInput}
+      />
     </div>
   );
 };

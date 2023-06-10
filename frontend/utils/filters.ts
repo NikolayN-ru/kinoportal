@@ -73,7 +73,9 @@ function checkGenreQuery(items: FilterGenre[], query: string): boolean {
 
 function checkCountryQuery(items: FilterCountry[], query: string): boolean {
   const queryParts = query.split("+");
-  return queryParts.every((part) => items.find(({ country }) => country === part));
+  return queryParts.every((part) =>
+    items.find(({ country }) => country === part)
+  );
 }
 
 function checkYearQuery(items: FilterYear[], query: string): boolean {
@@ -97,7 +99,11 @@ const splitPathPartString = (part: string): string[] => {
 const getYearsFromPathPart = (part: string): number[] =>
   part.split("-").map((item) => Number(item));
 
-const parseFiltersFromPath = (path: string, genres: FilterGenre[], countries: FilterCountry[]): FiltersFromPath => {
+const parseFiltersFromPath = (
+  path: string,
+  genres: FilterGenre[],
+  countries: FilterCountry[]
+): FiltersFromPath => {
   const filters: FiltersFromPath = {
     genre: [],
     country: [],
@@ -167,7 +173,7 @@ const parseSortingFromQuery = (query: string): SortingNames => {
 export const parseFiltersFromURL = (
   path: string,
   query: string,
-  {genres, countries}: {genres: FilterGenre[]; countries: FilterCountry[]}
+  { genres, countries }: { genres: FilterGenre[]; countries: FilterCountry[] }
 ): FiltersApi => {
   const filtersFromPath = parseFiltersFromPath(path, genres, countries);
   const filtersFromQuery = parseFiltersFromQuery(query);
@@ -251,7 +257,9 @@ export const getDescriptionByFilters = (
   const { selectedGenre, selectedCountry, selectedYear } = filtersState;
 
   const descriptionGenre = selectedGenre.length
-    ? selectedGenre.map((genre) => capitalizeFirstLetter(genre)).join(DESCRIPTION_ITEMS_DELIMITER)
+    ? selectedGenre
+        .map((genre) => capitalizeFirstLetter(genre))
+        .join(DESCRIPTION_ITEMS_DELIMITER)
     : descriptionDefaultByFilters.selectedGenre;
 
   const descriptionCountry = selectedCountry.length
@@ -262,20 +270,25 @@ export const getDescriptionByFilters = (
     ? selectedYear.join(YEARS_DELIMITER)
     : descriptionDefaultByFilters.selectedYear;
 
-  return [descriptionGenre, descriptionCountry, descriptionYear].join(DESCRIPTION_ITEMS_DELIMITER);
+  return [descriptionGenre, descriptionCountry, descriptionYear].join(
+    DESCRIPTION_ITEMS_DELIMITER
+  );
 };
 
-export const getServerQueryStringFromFilters = (fullFilters: FiltersApi): string => {
-  const {filters, sorting} = fullFilters;
+export const getServerQueryStringFromFilters = (
+  fullFilters: FiltersApi
+): string => {
+  const { filters, sorting } = fullFilters;
   const queryItems: string[] = [];
 
   for (const [filterName, filterValue] of Object.entries(filters)) {
     if (Array.isArray(filterValue) && !filterValue.length) continue;
 
     if (Array.isArray(filterValue)) {
-      const valueString = (typeof filterValue[0] === "number")
-        ? filterValue.join("-")
-        : filterValue.join("%20");
+      const valueString =
+        typeof filterValue[0] === "number"
+          ? filterValue.join("-")
+          : filterValue.join("%20");
       queryItems.push(`${filterName}=${valueString}`);
       continue;
     }

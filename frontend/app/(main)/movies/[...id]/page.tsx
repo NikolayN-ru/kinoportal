@@ -1,11 +1,14 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 import { useFilteredFilmsQuery } from "@redux/filmsApi";
 import { useFilterRouting } from "hooks/useFilterRouting";
 import { useTypedSelector } from "hooks/useTypedSelector";
-import { getDescriptionByFilters, getServerQueryStringFromFilters } from "utils/filters";
+import {
+  getDescriptionByFilters,
+  getServerQueryStringFromFilters,
+} from "utils/filters";
 import PageDescription from "@components/PageDescription";
 import FilmsList from "@components/FilmsList";
 import FiltersForm from "@components/FiltersForm";
@@ -47,14 +50,26 @@ const breadcrumbsInit: Breadcrumb[] = [
   },
 ];
 
+const FILMS_ON_PAGE = 20;
+const CURRENT_PAGE_INIT = 1;
+
 export default function Home(props: PageProps) {
   useFilterRouting("movies", DEFAULT_PAGE_ID);
   const { filters, sorting } = useTypedSelector(({ filtersApi }) => filtersApi);
   const { genre, country, year } = filters;
 
-  const queryString = useMemo(() => getServerQueryStringFromFilters({filters, sorting}), [filters, sorting]);
+  const [currentPage, setCurrentPage] = useState(CURRENT_PAGE_INIT);
+  const limitEnd = currentPage * FILMS_ON_PAGE + 1;
+  const limitQueryString = `limitStart=0&limitEnd=${limitEnd}`;
 
-  const { data, isLoading } = useFilteredFilmsQuery(queryString);
+  const filterQueryString = useMemo(
+    () => getServerQueryStringFromFilters({ filters, sorting }),
+    [filters, sorting]
+  );
+
+  const { data, isLoading } = useFilteredFilmsQuery(
+    [filterQueryString, limitQueryString].join("&")
+  );
 
   const pageDescription = useMemo(
     () =>
@@ -66,9 +81,11 @@ export default function Home(props: PageProps) {
   );
 
   const breadcrumbs = useMemo(() => {
-    const breadcrumbsFromFilters = getBreadcrumbsFromFilters(
-      { selectedGenre: genre, selectedCountry: country, selectedYear: year }
-    );
+    const breadcrumbsFromFilters = getBreadcrumbsFromFilters({
+      selectedGenre: genre,
+      selectedCountry: country,
+      selectedYear: year,
+    });
 
     if (breadcrumbsFromFilters && breadcrumbsFromFilters.length) {
       return [
@@ -81,22 +98,9 @@ export default function Home(props: PageProps) {
     return [...breadcrumbsInit, { title: "Фильмы" }];
   }, [genre, country, year]);
 
-  /*const breadcrumbs = useMemo(() => {
-    const breadcrumbsFromParams = getBreadcrumbsFromDescription(
-      pageDescription,
-      Object.values(descriptionByFiltersInit)
-    );
-
-    if (breadcrumbsFromParams && breadcrumbsFromParams.length) {
-      return [
-        ...breadcrumbsInit,
-        { title: "Фильмы", link: "/movies" },
-        ...breadcrumbsFromParams,
-      ];
-    }
-
-    return [...breadcrumbsInit, { title: "Фильмы" }];
-  }, [pageDescription]);*/
+  const onShowMoreClick = (): void => {
+    setCurrentPage(currentPage + 1);
+  };
 
   const pageId = props.params.id;
   const pageTitle =
@@ -113,14 +117,7 @@ export default function Home(props: PageProps) {
           text={pageTitle}
         />
         <PageDescription>
-          <div className={s.description}>
-            {/*pageDescription.map((text) => (
-              <span key={text} className={s.descriptionItem}>
-                {text}
-              </span>
-            ))*/}
-            {pageDescription}
-          </div>
+          <div className={s.description}>{pageDescription}</div>
         </PageDescription>
       </section>
 
@@ -129,19 +126,24 @@ export default function Home(props: PageProps) {
       </section>
 
       <section className={`pageSection ${s.filmsList}`}>
-        {!isLoading && !!data && data.length && (
+        {(!isLoading && !!data && data.length && (
           <>
-            <FilmsList items={data} />
-            <Button
-              className={s.loadMore}
-              text="Показать еще"
-              border={Border.GRAY}
-              size={Size.FULL}
-            />
+            <FilmsList items={data.slice(0, limitEnd - 1)} />
+
+            {data.length === limitEnd && (
+              <Button
+                className={s.loadMore}
+                text="Показать еще"
+                border={Border.GRAY}
+                size={Size.FULL}
+                onClick={onShowMoreClick}
+              />
+            )}
           </>
-        ) || isLoading && (
-          <div>Загрузка...</div>
-        ) || <div>Фильмы не найдены</div>}
+        )) ||
+          (isLoading && <div>Загрузка...</div>) || (
+            <div className="itemsNotFound">Фильмы не найдены</div>
+          )}
       </section>
     </MainContainer>
   );

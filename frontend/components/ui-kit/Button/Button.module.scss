@@ -7,10 +7,21 @@
     @apply bg-red hover:bg-redHover;
   }
   &.grey {
-    @apply bg-[#312b45] hover:bg-[#433b5d];
+    @apply bg-backgroundLight hover:bg-[#433b5d];
   }
   &.blue {
-    @apply bg-[#1f1b2e] hover:bg-[#312b45];
+    @apply bg-purpleDark hover:bg-backgroundLight;
+  }
+  &.borderGray {
+    @apply block w-full py-[13px] px-[15px] bg-transparent border border-separator;
+
+    &:hover:not(:active) {
+      @apply border-white duration-[80ms];
+    }
+
+    &:not(:hover):not(:active) {
+      @apply border-separator duration-[400ms];
+    }
   }
 }
 

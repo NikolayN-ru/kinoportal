@@ -143,4 +143,8 @@
       bg-[url('/svg/arrow-right.svg')] bg-no-repeat;
     }
   }
+
+  .itemsNotFound {
+    @apply text-[18px] text-white font-semibold text-center;
+  }
 }

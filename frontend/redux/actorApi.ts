@@ -1,5 +1,6 @@
 "use client";
 
+import { Actor } from "@components/types/actor";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const allActors = createApi({
@@ -13,7 +14,11 @@ export const allActors = createApi({
     actorItem: builder.query<any, string>({
       query: (id) => `/${id}`,
     }),
+    actorByName: builder.query<Actor[], string>({
+      query: (name: string) => `/filtr?fio=${name}`,
+    }),
   }),
 });
 
-export const { useAllActorsQuery, useActorItemQuery } = allActors;
+export const { useAllActorsQuery, useActorItemQuery, useActorByNameQuery } =
+  allActors;

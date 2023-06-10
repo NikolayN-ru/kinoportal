@@ -8,7 +8,10 @@ import FilterGenre from "./FilterGenre";
 import FilterCountry from "./FilterCountry";
 import FilterYear from "./FilterYear";
 import { years } from "./filters";
-import { useAllFilmsCountriesQuery, useAllFilmsGenresQuery } from "@redux/filmsApi";
+import {
+  useAllFilmsCountriesQuery,
+  useAllFilmsGenresQuery,
+} from "@redux/filmsApi";
 import { useTypedSelector } from "hooks/useTypedSelector";
 import { setCountryData, setGenreData } from "@redux/filtersDataApi";
 import {
@@ -25,7 +28,6 @@ import {
 import FilmsSorting from "./FilmsSorting";
 import FilterRating from "./FilterRating";
 import FilterMarks from "./FilterMarks";
-import SearchDirector from "./SearchDirector";
 import SearchActor from "./SearchActor";
 import ResetButton from "@components/ui-kit/Button/ResetButton";
 import { parseFiltersFromURL } from "utils/filters";
@@ -48,32 +50,37 @@ const FiltersForm: FC<FiltersFormProps> = ({ showSorting, resetDisabled }) => {
 
   const dispatch = useDispatch();
 
-  const {genreData, countryData} = useTypedSelector(({filtersDataApi}) => filtersDataApi);
+  const { genreData, countryData } = useTypedSelector(
+    ({ filtersDataApi }) => filtersDataApi
+  );
 
   useEffect(() => {
-    dispatch(setGenreData({items: genres, isLoading: genresIsLoading}));
+    dispatch(setGenreData({ items: genres, isLoading: genresIsLoading }));
   }, [genres, genresIsLoading]);
 
   useEffect(() => {
-    dispatch(setCountryData({items: countries, isLoading: countriesIsLoading}));
+    dispatch(
+      setCountryData({ items: countries, isLoading: countriesIsLoading })
+    );
   }, [countries, countriesIsLoading]);
 
   const pathname = usePathname();
   const queryString = useSearchParams().toString();
   const filtersFull = useMemo(
-    () => parseFiltersFromURL(
-      decodeURIComponent(pathname),
-      decodeURIComponent(queryString),
-      {
-        genres: genreData.items || [],
-        countries: countryData.items || []
-      }
-    ),
+    () =>
+      parseFiltersFromURL(
+        decodeURIComponent(pathname),
+        decodeURIComponent(queryString),
+        {
+          genres: genreData.items || [],
+          countries: countryData.items || [],
+        }
+      ),
     [pathname, queryString, genreData, countryData]
   );
-  
+
   const [reset, setReset] = useState<boolean>(false);
- 
+
   useEffect(() => {
     const { filters, sorting } = filtersFull;
     const { genre, country, year, votes, rating, actor, director } = filters;
@@ -93,8 +100,12 @@ const FiltersForm: FC<FiltersFormProps> = ({ showSorting, resetDisabled }) => {
     setReset(true);
   };
 
+  const onFiltersSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+  };
+
   return (
-    <form onReset={onFiltersReset}>
+    <form onReset={onFiltersReset} onSubmit={onFiltersSubmit}>
       {showSorting && (
         <div className="pageSection">
           <FilmsSorting />
@@ -116,8 +127,8 @@ const FiltersForm: FC<FiltersFormProps> = ({ showSorting, resetDisabled }) => {
         </div>
 
         <div className={`${s.searchItems} ${s.section}`}>
-          <SearchDirector reset={reset} setReset={setReset} />
-          <SearchActor reset={reset} setReset={setReset} />
+          <SearchActor reset={reset} setReset={setReset} mode="director" />
+          <SearchActor reset={reset} setReset={setReset} mode="actor" />
         </div>
 
         <div className={s.resetButtonContainer}>
