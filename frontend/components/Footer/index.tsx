@@ -14,7 +14,7 @@ const Footer: FC = () => {
     iconName: string;
   }
 
- const comunityLinks: IComunityLink[] = [
+  const comunityLinks: IComunityLink[] = [
     { id: "1", iconName: "vk" },
     { id: "2", iconName: "ok" },
     { id: "3", iconName: "twitter" },
@@ -23,8 +23,6 @@ const Footer: FC = () => {
     { id: "6", iconName: "tg" },
   ];
 
-
-  
   return (
     <div className={s.footer}>
       <div className={s.container}>
