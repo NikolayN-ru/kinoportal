@@ -17,7 +17,7 @@ export interface IButtonsDropDown {
 }
 const DropDownAvatar = () => {
   const [isHovered, setIsHovered] = useState(false);
-  
+
   interface ICaption {
     id: string;
     name: string;

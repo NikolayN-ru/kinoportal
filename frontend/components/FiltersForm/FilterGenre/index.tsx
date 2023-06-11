@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 
 import { useTypedSelector } from "hooks/useTypedSelector";
 import { setGenre } from "@redux/filtersApi";
-import Select from "@components/ui-kit/Select";
+import Select, { DropdownPosition } from "@components/ui-kit/Select";
 import GenresSlider, { GenresSliderMode } from "./GenresSlider";
 import SelectOptionsList, {
   ColumnsCount,
@@ -44,7 +44,7 @@ const FilterGenre: FC<FilterGenreProps> = ({ title }) => {
   });
 
   const isTablet = useMediaQuery({
-    query: "(max-width: 1024px)",
+    query: "(min-width: 600px) and (max-width: 1024px)",
   });
 
   let columnsCount: ColumnsCount;
@@ -58,7 +58,12 @@ const FilterGenre: FC<FilterGenreProps> = ({ title }) => {
   }
 
   return (
-    <Select title={title} selectedValues={selectedGenres} name="genre">
+    <Select
+      title={title}
+      selectedValues={selectedGenres}
+      dropdownPosition={DropdownPosition.LEFT}
+      name="genre"
+    >
       <div className={s.optionsWrapper}>
         <GenresSlider mode={GenresSliderMode.MINI} />
 

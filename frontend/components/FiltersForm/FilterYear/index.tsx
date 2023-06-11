@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { useTypedSelector } from "hooks/useTypedSelector";
 import { setYear } from "@redux/filtersApi";
 import { FilterYear } from "@components/types/filters";
-import Select from "@components/ui-kit/Select";
+import Select, { DropdownPosition } from "@components/ui-kit/Select";
 import Radio from "@components/ui-kit/Radio";
 import SelectOptionsList from "@components/ui-kit/Select/SelectOptionsList";
 import { getYearsTitleByValue, isSelectedYears } from "utils/filters";
@@ -35,6 +35,7 @@ const FilterYear: FC<FilterYearProps> = ({ title, items }) => {
       title={title}
       selectedValues={[getYearsTitleByValue(items, selectedYears)]}
       name="year"
+      dropdownPosition={DropdownPosition.LEFT}
     >
       <div className={s.optionsWrapper}>
         <SelectOptionsList columns={1}>

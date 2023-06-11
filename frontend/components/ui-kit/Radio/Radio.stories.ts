@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import Radio from '.';
+import type { Meta, StoryObj } from "@storybook/react";
+import Radio from ".";
 
 const meta: Meta<typeof Radio> = {
-  title: 'shared/Radio',
+  title: "shared/Radio",
   component: Radio,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     disabled: false,
-    text: 'Radio',
+    text: "Radio",
     isChecked: false,
   },
 };
@@ -16,36 +16,36 @@ export default meta;
 type Story = StoryObj<typeof Radio>;
 
 export const Radio1: Story = {
-  name: 'Отображение включенного радиобаттона',
+  name: "Отображение включенного радиобаттона",
   args: {
     disabled: false,
-    text: 'Включен',
+    text: "Включен",
     isChecked: true,
   },
 };
 export const Radio2: Story = {
-  name: 'Отображение выключенного радиобаттона',
+  name: "Отображение выключенного радиобаттона",
   args: {
     disabled: false,
-    text: 'Выключен',
+    text: "Выключен",
     isChecked: false,
   },
 };
 
 export const Radio3: Story = {
-  name: 'Отображение включенного радиобаттона заблокированного',
+  name: "Отображение включенного радиобаттона заблокированного",
   args: {
     disabled: true,
-    text: 'Включен',
+    text: "Включен",
     isChecked: true,
   },
 };
 
 export const UncheckedAndDisabled: Story = {
-  name: 'Отображение выключенного радиобаттона заблокированного',
+  name: "Отображение выключенного радиобаттона заблокированного",
   args: {
     disabled: true,
-    text: 'Выключен',
+    text: "Выключен",
     isChecked: false,
   },
 };
