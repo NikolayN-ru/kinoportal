@@ -30,8 +30,21 @@
 }
 
 .dropdown {
-  @apply absolute bottom-[-4px] left-0 z-10 hidden overflow-hidden p-[16px] translate-y-[100%]
+  @apply absolute bottom-[-4px] z-10
+  hidden overflow-hidden min-w-full p-[16px] translate-y-[100%]
   bg-backgroundLight rounded-[4px];
+
+  &.left {
+    @apply left-0;
+  }
+
+  &.right {
+    @apply right-0;
+  }
+
+  &.center {
+    @apply left-0 translate-x-[-50%];
+  }
 }
 
 .isOpen {
@@ -46,6 +59,6 @@
   }
 
   .dropdown {
-    @apply block min-w-full;
+    @apply block;
   }
 }

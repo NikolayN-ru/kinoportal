@@ -9,7 +9,10 @@ import ChannelsSlider from "@components/Header/DropDownPage/DropDownContentTV/Ch
 import Link from "next/link";
 import { about } from "@components/Header/DropDownPage/DropDownContent/allCollectionsContent";
 import Icon from "@components/ui-kit/IconComponent/Icon";
-import { federalChannel, sportChannel } from "@components/Header/DropDownPage/DropDownContentTV/ChannelsSlider/channels";
+import {
+  federalChannel,
+  sportChannel,
+} from "@components/Header/DropDownPage/DropDownContentTV/ChannelsSlider/channels";
 
 interface TooltipProps {
   title: string;
@@ -17,7 +20,7 @@ interface TooltipProps {
 }
 
 const IMAGE_PATH = "/images/tvChannel/";
-const ExpansionPanel: React.FC<TooltipProps> = ({ title, link }) => {
+const ExpansionPanel: FC<TooltipProps> = ({ title, link }) => {
   const [showText, setShowText] = useState(false);
 
   return (
@@ -72,6 +75,7 @@ const ExpansionPanel: React.FC<TooltipProps> = ({ title, link }) => {
           </div>
         </div>
       )}
+
       {showText && link !== Links.TV && link !== Links.About && (
         <div className={s.test}>
           <ContentByLink link={link} />

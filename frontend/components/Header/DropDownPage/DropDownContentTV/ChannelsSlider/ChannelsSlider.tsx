@@ -45,7 +45,6 @@ export interface IChannelsItem {
 
 const IMAGE_PATH = "/images/tvChannel/";
 
-
 const ChannelSlider: FC<IChannelProps> = ({ federalChannel, sportChannel }) => {
   const films = federalChannel || sportChannel;
 

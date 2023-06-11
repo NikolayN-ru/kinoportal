@@ -4,7 +4,7 @@ import { FC } from "react";
 import { useDispatch } from "react-redux";
 
 import { useTypedSelector } from "hooks/useTypedSelector";
-import Select from "@components/ui-kit/Select";
+import Select, { DropdownPosition } from "@components/ui-kit/Select";
 import SelectOptionsList from "@components/ui-kit/Select/SelectOptionsList";
 import Checkbox from "@components/ui-kit/Checkbox";
 import CountriesSlider from "./CountriesSlider";
@@ -36,7 +36,12 @@ const FilterCountry: FC<FilterCountryProps> = ({ title }) => {
   };
 
   return (
-    <Select title={title} selectedValues={selectedCountries} name="country">
+    <Select
+      title={title}
+      selectedValues={selectedCountries}
+      name="country"
+      dropdownPosition={DropdownPosition.LEFT}
+    >
       <div className={s.optionsWrapper}>
         <CountriesSlider />
 

@@ -15,8 +15,6 @@ export interface IWidgetFilm {
 
 const IMAGE_PATH = "/images/tv_widget/";
 
-
-
 const Carousel: FC<CarouselProps> = ({
   filmsFirstLine,
   filmsSecondLine,

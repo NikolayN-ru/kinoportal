@@ -1,7 +1,4 @@
-import Carousel, {
-  filmsFirstLine,
-  filmsSecondLine,
-} from "@components/Header/DropDownPage/DropDownWidget/Carousel/Carousel";
+import Carousel from "@components/Header/DropDownPage/DropDownWidget/Carousel/Carousel";
 import Icon from "@components/ui-kit/IconComponent/Icon";
 import Button from "@components/ui-kit/Button";
 import React from "react";
@@ -9,6 +6,7 @@ import s from "./DropDownWidget.module.scss";
 import ReverseCarousel, {
   widgetFilms,
 } from "./ReverseCarousel/ReverseCarousel";
+import { filmsFirstLine, filmsSecondLine } from "./Carousel/carouselContent";
 
 const DropDownWidget = () => {
   return (

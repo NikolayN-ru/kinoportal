@@ -1,24 +1,18 @@
 "use client";
 
 import { MouseEventHandler, useState } from "react";
-import Link from "next/link";
-import cn from "classnames";
 import { usePathname } from "next/navigation";
 
-import CollectionSlider from "@components/Slider/CollectionSlider";
 import ActorRound from "@components/Badge/ActorRound";
 import Quality from "@components/Badge/Quality";
 import BadgeActor from "@components/BadgeActor";
-// import GrayButton from "@components/GrayButton";
-import Title from "@components/Title";
 import { Play, Save, Share } from "@public/svg";
-
+import Button from "@components/ui-kit/Button";
+import CollectionsSet from "@components/CollectionsSet";
 import { useFilmItemQuery } from "@redux/filmsApi";
-import { collections } from "@mock/filmsData";
 
 import s from "./item.module.scss";
-import { title } from "process";
-import Button from "@components/ui-kit/Button";
+
 
 const Index = () => {
   const [isClose, setIsClose] = useState<boolean>(true);
@@ -127,17 +121,7 @@ const Index = () => {
             </div>
           </div>
         </div>
-        {collections.map((collection) => (
-          <section key={collection.id} className={s.pageSection}>
-            <Link
-              href={`/collections/${collection.link}`}
-              className={cn(s.titleLink, s.collectionTitle)}
-            >
-              <Title tag="h2" size="md" text="С фильмом «Спящие» смотрят" />
-            </Link>
-            <CollectionSlider items={collection.items} link={""} />
-          </section>
-        ))}
+        <CollectionsSet startNumber={4} endNumber={5} />
         <div className={s.actorSection}>
           <h3>Актёры и создатели</h3>
           <div className={s.actors}>

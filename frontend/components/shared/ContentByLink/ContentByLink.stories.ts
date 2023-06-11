@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import ContentByLink from './ContentByLink';
-import { Links } from '@components/Header/DropDownPage/DropDownContent/interfaces/LinksEnum';
-import './ContentByLink.module.scss';
+import type { Meta, StoryObj } from "@storybook/react";
+import ContentByLink from "./ContentByLink";
+import { Links } from "@components/Header/DropDownPage/DropDownContent/interfaces/LinksEnum";
+import "./ContentByLink.module.scss";
 
 const meta: Meta<typeof ContentByLink> = {
-  title: 'shared/ContentByLink',
+  title: "shared/ContentByLink",
   component: ContentByLink,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
-    link: Links
+    link: Links,
   },
 };
 
@@ -16,24 +16,22 @@ export default meta;
 type Story = StoryObj<typeof ContentByLink>;
 
 export const Films: Story = {
-    name: 'Отображение контента фильмов',
+  name: "Отображение контента фильмов",
   args: {
-    link:Links.Films
+    link: Links.Films,
   },
-  parameters: { 
-
-  },
+  parameters: {},
 };
 export const Serials: Story = {
-    name: 'Отображение контента сериалов',
-    args: {
-      link:Links.Serials
-    },
-  };
+  name: "Отображение контента сериалов",
+  args: {
+    link: Links.Serials,
+  },
+};
 
-  export const Multfilms: Story = {
-    name: 'Отображение контента мультфильмов',
-    args: {
-      link:Links.Multfilms
-    },
-  };
+export const Multfilms: Story = {
+  name: "Отображение контента мультфильмов",
+  args: {
+    link: Links.Multfilms,
+  },
+};
