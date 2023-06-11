@@ -11,7 +11,6 @@ import Title from "@components/Title";
 import SubscriptionButton from "@components/ui-kit/Button/SubscriptionButton";
 import { collections, compilation } from "mock/filmsData";
 import Icon from "@components/ui-kit/IconComponent/Icon";
-import Image from "next/image";
 import { top10Items } from "@mock/top10";
 import Slider from "@components/Slider";
 import { breakpoints } from "@components/Slider/breakpoints";

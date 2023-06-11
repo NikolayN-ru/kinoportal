@@ -5,13 +5,11 @@ import SideContent from "@components/shared/SideContent/SideContent";
 import { Links } from "@components/Header/DropDownPage/DropDownContent/interfaces/LinksEnum";
 import SideContentTV from "@components/shared/SideContentTV/SideContentTV";
 import Image from "next/image";
-import ChannelsSlider, {
-  federalChannel,
-  sportChannel,
-} from "@components/Header/DropDownPage/DropDownContentTV/ChannelsSlider/ChannelsSlider";
+import ChannelsSlider from "@components/Header/DropDownPage/DropDownContentTV/ChannelsSlider/ChannelsSlider";
 import Link from "next/link";
 import { about } from "@components/Header/DropDownPage/DropDownContent/allCollectionsContent";
 import Icon from "@components/ui-kit/IconComponent/Icon";
+import { federalChannel, sportChannel } from "@components/Header/DropDownPage/DropDownContentTV/ChannelsSlider/channels";
 
 interface TooltipProps {
   title: string;
@@ -29,7 +27,7 @@ const ExpansionPanel: React.FC<TooltipProps> = ({ title, link }) => {
       </div>
 
       {showText && link === Links.TV && (
-        <div className={s.testTV}>
+        <div className={s.blockTV}>
           <SideContentTV />
           <div className={s.main_content_popular}>
             <div className={s.main_title}>Федеральные каналы</div>
@@ -76,7 +74,7 @@ const ExpansionPanel: React.FC<TooltipProps> = ({ title, link }) => {
       )}
 
       {showText && link !== Links.TV && link !== Links.About &&(
-        <div className={s.test}>
+        <div className={s.block}>
           <ContentByLink link={link} />
           <SideContent link={link} />
         </div>

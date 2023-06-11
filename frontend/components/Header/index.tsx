@@ -47,7 +47,7 @@ const Header = () => {
   function showDropDownNotifyBySelectedLink(): JSX.Element | undefined {
     if (selectedLink === Links.Notify) {
       return (
-        <DropDown className={s.DropDownBody} isOpen={isDropDownOpen}>
+        <DropDown className={s.DropDownBodyNotify} isOpen={isDropDownOpen}>
           <div className={s.menu_block}>
             <ul className={s.menuDropDown}>
               <DropDownNotify />
@@ -61,7 +61,7 @@ const Header = () => {
   function showDropDownAvatarBySelectedLink(): JSX.Element | undefined {
     if (selectedLink === Links.Avatar) {
       return (
-        <DropDown className={s.DropDownBody} isOpen={isDropDownOpen}>
+        <DropDown className={s.DropDownBodyAvatar} isOpen={isDropDownOpen}>
           <div className={s.menu_block}>
             <ul className={s.menuDropDown}>
               <DropDownAvatar />
@@ -101,7 +101,7 @@ const Header = () => {
                   onMouseEnter={() => handleToggleDropDown(Links.Films)}
                   onMouseLeave={() => handleToggleDropDown(undefined)}
                 >
-                  <span className={s.text}> {t("header.films")}</span>{" "}
+                  <Link href='/movies'><span className={s.text}> {t("header.films")}</span></Link>{" "}
                   {showDropDownBySelectedLink(Links.Films)}
                 </div>
                 <div

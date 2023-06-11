@@ -1,6 +1,11 @@
 {
-  "extends": ["airbnb-base"],
-  "plugins": ["import"],
+  "extends": [
+    "airbnb-base",
+    "plugin:storybook/recommended"
+  ],
+  "plugins": [
+    "import"
+  ],
   "rules": {
     "import/order": [
       "error",
@@ -23,7 +28,9 @@
             "group": "internal"
           }
         ],
-        "pathGroupsExcludedImportTypes": ["builtin"],
+        "pathGroupsExcludedImportTypes": [
+          "builtin"
+        ],
         "newlines-between": "always",
         "alphabetize": {
           "order": "asc",

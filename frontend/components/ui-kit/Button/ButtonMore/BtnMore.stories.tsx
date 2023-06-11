@@ -2,7 +2,7 @@ import ButtonMore from "./index";
 import s from "./ButtonMore.module.scss";
 
 export default {
-  title: "ButtonMore",
+  title: "shared/ButtonMore",
   component: ButtonMore,
   decorators: [
     (Story: any) => (

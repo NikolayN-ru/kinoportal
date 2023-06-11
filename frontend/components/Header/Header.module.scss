@@ -36,7 +36,9 @@
   margin-right: 40px;
 }
 
-.DropDownBody {
+.DropDownBody,
+.DropDownBodyNotify,
+.DropDownBodyAvatar {
   opacity: 0;
   animation: ani 0.4s forwards;
   height: 100%;
@@ -213,5 +215,9 @@
     @apply flex flex-row items-center gap-[30px] justify-between;
     width: 100%;
     z-index: 0;
+  }
+  .DropDownBodyNotify,
+  .DropDownBodyAvatar {
+    display: none;
   }
 }

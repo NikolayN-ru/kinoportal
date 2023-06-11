@@ -2,11 +2,9 @@ import DropDownWidget from "../DropDownWidget/DropDownWidget";
 import Button from "@components/ui-kit/Button";
 import Icon from "@components/ui-kit/IconComponent/Icon";
 import s from "./DropDownContentTV.module.scss";
-import ChannelsSlider, {
-  federalChannel,
-  sportChannel,
-} from "./ChannelsSlider/ChannelsSlider";
+import ChannelsSlider from "./ChannelsSlider/ChannelsSlider";
 import SideContentTV from "@components/shared/SideContentTV/SideContentTV";
+import { federalChannel, sportChannel } from "./ChannelsSlider/channels";
 
 export interface IGenreTV {
   id: string;
