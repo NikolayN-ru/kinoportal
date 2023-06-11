@@ -29,11 +29,16 @@ export class UserService {
             const user = await this.userRepository.findOneBy({id: userId});
             if(!user) return HttpStatus.NOT_FOUND;
             if(!dto.parentId) dto.parentId = 0;
-            const review = await this.client.send('create.comment', {reviewId: reviewId, comment: dto.comment, parentId: dto.parentId})
+            const review = await this.client.send('create.comment', {reviewId: reviewId, text: dto.comment, parentId: dto.parentId})
             return review;
         } catch (e) {
             return e.message;
         }
+    }
+
+    async deleteComment(id: number){
+        const comment = await this.client.send('delete.comment', id)
+        return comment;
     }
 
     async deleteUser(email: string) {
