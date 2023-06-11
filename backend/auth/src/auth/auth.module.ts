@@ -4,9 +4,8 @@ import {AuthService} from "./auth.service";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {User} from "../user/user.entity";
 import {JwtModule} from "@nestjs/jwt";
-import {GoogleStrategy} from "./google.strategy";
+import {GoogleStrategy} from "./google/google.strategy";
 import {VkontakteStrategy} from './vkontakte/vkontakte.strategy';
-import {JwtStrategy} from "./jwt.strategy";
 import {Role} from "./roles.entity";
 
 @Module({
@@ -27,7 +26,6 @@ import {Role} from "./roles.entity";
     providers: [
         AuthService,
         GoogleStrategy,
-        JwtStrategy,
         VkontakteStrategy
     ]
 })

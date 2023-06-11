@@ -29,23 +29,16 @@ export class AuthController {
         return this.clientAuth.send('registration',registrationDto);
     }
 
-    @Get('')
-    regHello() {
-        return 'hello auth'
-    }
-
-
-    @Get('google-redirect')
+    @Get('google')
     @UseGuards(AuthGuard('google'))
-    googleLoginCallback(@Req() req,) {
-        // handles the Google OAuth2 callback
-        return this.clientAuth.send('reportJwt',req);
-    }
+    async googleAuth(@Req() req) {}
 
-    @Get('protected')
-    @UseGuards(AuthGuard('jwt'))
-    protectedResource(@Req() req) {
-        return this.clientAuth.send('userInfo',req);
+    @ApiOperation({summary: 'Авторизация пользователя через гугл'})
+    @ApiResponse({status: 200, type: String})
+    @Get('/google-redirect')
+    @UseGuards(AuthGuard('google'))
+    googleLogin(@Request() req) {
+        return this.clientAuth.send('googleLogin', req);
     }
 
     @ApiOperation({summary: 'Авторизация пользователя через вк'})
@@ -53,7 +46,6 @@ export class AuthController {
     @Get('/vkontakte/callback')
     @UseGuards(AuthGuard('vkontakte'))
     vkLogin(@Request() req) {
-        return this.clientAuth.send('otherLogin',req);
+        return this.clientAuth.send('VKLogin',req);
     }
-
 }

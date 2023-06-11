@@ -6,8 +6,8 @@ import { Injectable } from '@nestjs/common';
 export class VkontakteStrategy extends PassportStrategy(Strategy, 'vkontakte') {
     constructor() {
         super({
-            clientID: "51628818",
-            clientSecret: "PhCRfWyvCpC8nWFTR7lL",
+            clientID: "51671991",
+            clientSecret: "nmHGgG66fmWzXkg3JL6a",
             callbackURL: 'http://localhost:3000/auth/vkontakte/callback',
             scope: ['email', 'profile']
         }, function ( accessToken: string,

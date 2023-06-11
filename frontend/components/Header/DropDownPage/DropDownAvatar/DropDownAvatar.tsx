@@ -1,14 +1,23 @@
 import React, { useState } from "react";
 import Link from "next/link";
-
 import Icon from "@components/ui-kit/IconComponent/Icon";
 import Button from "@components/ui-kit/Button";
 import SubscriptionSector from "./SubscriptionSector/SubscriptionSector";
-
 import s from "./DropDownAvatar.module.scss";
-
+import { buttons, captions } from "./avatar";
+export interface ICaption {
+  id: string;
+  name: string;
+  url: string;
+}
+export interface IButtonsDropDown {
+  id: string;
+  iconName: string;
+  text: string;
+}
 const DropDownAvatar = () => {
   const [isHovered, setIsHovered] = useState(false);
+  
   interface ICaption {
     id: string;
     name: string;

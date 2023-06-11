@@ -1,4 +1,4 @@
-import Title from "./Title";
+import Title from "./index";
 import s from "./Title.module.scss";
 
 export default {
