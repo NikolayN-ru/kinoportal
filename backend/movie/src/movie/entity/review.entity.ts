@@ -14,8 +14,8 @@ export class Review {
     @Column()
     userName: string;
 
-    @Column()
-    data: number;
+    @Column({type: "date"})
+    data: string;
 
     @Column()
     like: number;

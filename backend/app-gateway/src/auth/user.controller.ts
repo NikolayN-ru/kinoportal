@@ -1,4 +1,4 @@
-import {Body, Controller, Get,  Inject,  Param, Post} from '@nestjs/common';
+import {Body, Controller, Delete, Get,  Inject,  Param, Post} from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateCommentDto } from 'src/dto/auth/create-comment';
@@ -26,5 +26,10 @@ export class UserController {
         return this.clientAuth.send('createComment',{userId,reviewId,commentDto});
     }
 
-    //добавить удаление комментария
+    @ApiOperation({summary: 'Удаления комментария под резенцией'})
+    @ApiResponse({status: 200, type: String})
+    @Delete('/comment/:id')
+    deleteComment(@Param('id') id: number) {
+        return this.clientAuth.send('deleteComment',id);
+    }
 }

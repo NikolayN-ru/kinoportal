@@ -23,16 +23,6 @@ export class AuthController {
         return this.authService.registration(data);
     }
 
-    @MessagePattern('reportJwt')
-    googleLoginCallback(@Payload() data: any, @Ctx() context: RmqContext) {  
-        return this.authService.reportJwt(data)
-    }
-
-    @MessagePattern('userInfo')
-    protectedResource(@Payload() data: any, @Ctx() context: RmqContext) {  
-        return this.authService.userInfo(data);
-    }
-
     @MessagePattern('VKLogin')
     vkLogin(@Payload() data: any, @Ctx() context: RmqContext) {  
         return this.authService.otherLogin(data);

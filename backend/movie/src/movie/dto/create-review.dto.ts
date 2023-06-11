@@ -8,7 +8,7 @@ export class CreateReviewDto {
     readonly userName: string;
 
     @IsNotEmpty()
-    readonly data: number;
+    readonly data: string;
 
     @IsNotEmpty({message: 'Не введено количество лайков '})
     @IsNumber()
