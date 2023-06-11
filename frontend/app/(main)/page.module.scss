@@ -1,9 +1,9 @@
 .promoSection {
-  @apply relative h-[42vw] md:h-[28.9vw] xl:h-[370px];
-}
+  @apply relative h-[42vw] md:h-[28.9vw] xl:h-[370px] max-h-[370px];
 
-.promoSection {
-  @apply relative h-[63.33vh] max-h-[370px];
+  @media(max-width:1150px) {
+    @apply mt-[72px];
+  }
 }
 
 .subscribeSection {
@@ -31,9 +31,10 @@
 }
 
 .top10SliderNext {
-  @apply right-[24px];
+  right: 24px!important;
 }
 
 .top10SliderWrapper {
-  @apply mx-[-12px] my-[-20px] px-[12px] py-[20px];
+  margin: -20px -12px!important;
+  padding: 20px 12px!important;
 }

@@ -3,10 +3,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export enum SortingNames {
-  POP = "pop",
+  POP = "votes",
   RATING = "rating",
   YEAR = "year",
-  NAME = "name",
+  NAME = "title",
 }
 
 export interface Filters {
@@ -14,7 +14,7 @@ export interface Filters {
   country: string[];
   year: number[];
   rating: number;
-  mark: number;
+  votes: number;
   director: string;
   actor: string;
 }
@@ -33,7 +33,7 @@ const initialState: FiltersApi = {
     country: [],
     year: [],
     rating: 0,
-    mark: 0,
+    votes: 0,
     director: "",
     actor: "",
   },
@@ -64,7 +64,7 @@ export const filtersApi = createSlice({
     },
 
     setMark: (state, { payload }: { payload: number }) => {
-      state.filters.mark = payload;
+      state.filters.votes = payload;
     },
 
     setDirector: (state, { payload }: { payload: string }) => {

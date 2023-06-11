@@ -3,9 +3,10 @@
 }
 
 .sliderWrapper {
-  @apply mx-[-12px] mt-[-12px] px-[12px] pt-[12px];
+  margin: -12px -12px 0 -12px!important;
+  padding: 12px 12px 0 12px!important;
 }
 
 .sliderNext {
-  @apply right-[24px];
+  right: 24px!important;
 }

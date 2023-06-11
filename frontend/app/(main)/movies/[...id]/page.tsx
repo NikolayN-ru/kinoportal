@@ -1,16 +1,22 @@
 "use client";
 
-import { useAllFilmsQuery } from "@redux/filmsApi";
+import { useMemo, useState } from "react";
+
+import { useFilteredFilmsQuery } from "@redux/filmsApi";
 import { useFilterRouting } from "hooks/useFilterRouting";
-import PageDescription from "@components/PageDescription";
-import { getDescriptionByFilters } from "utils/filters";
 import { useTypedSelector } from "hooks/useTypedSelector";
+import {
+  getDescriptionByFilters,
+  getServerQueryStringFromFilters,
+} from "utils/filters";
+import PageDescription from "@components/PageDescription";
 import FilmsList from "@components/FilmsList";
 import FiltersForm from "@components/FiltersForm";
 import MainContainer from "@components/MainContainer";
 import Title from "@components/Title";
 import Button, { Border, Size } from "@components/ui-kit/Button";
-import { films, filtersData } from "@mock/filmsData";
+import Breadcrumbs, { Breadcrumb } from "@components/Breadcrumbs";
+import { getBreadcrumbsFromFilters } from "utils/breadcrumbs";
 
 import s from "./page.module.scss";
 
@@ -23,33 +29,87 @@ export interface PageDescriptionByFilters {
   [key: string]: string;
 }
 
+export type PageDescription = {
+  selectedGenre: string;
+  selectedCountry: string;
+  selectedYear: string;
+};
+
 const DEFAULT_PAGE_ID = "all";
 
-const descriptionDefaultByFilters: PageDescriptionByFilters = {
-  genre: "Все жанры",
-  country: "Все страны",
-  year: "Все годы",
+const descriptionByFiltersInit: PageDescription = {
+  selectedGenre: "Все жанры",
+  selectedCountry: "Все страны",
+  selectedYear: "Все годы",
 };
+
+const breadcrumbsInit: Breadcrumb[] = [
+  {
+    title: "Мой Иви",
+    link: "/",
+  },
+];
+
+const FILMS_ON_PAGE = 20;
+const CURRENT_PAGE_INIT = 1;
 
 export default function Home(props: PageProps) {
   useFilterRouting("movies", DEFAULT_PAGE_ID);
-  const filtersState = useTypedSelector(({ filtersApi }) => filtersApi.filters);
-  const { data, isLoading } = useAllFilmsQuery("");
+  const { filters, sorting } = useTypedSelector(({ filtersApi }) => filtersApi);
+  const { genre, country, year } = filters;
 
-  console.log(data);
+  const [currentPage, setCurrentPage] = useState(CURRENT_PAGE_INIT);
+  const limitEnd = currentPage * FILMS_ON_PAGE + 1;
+  const limitQueryString = `limitStart=0&limitEnd=${limitEnd}`;
+
+  const filterQueryString = useMemo(
+    () => getServerQueryStringFromFilters({ filters, sorting }),
+    [filters, sorting]
+  );
+
+  const { data, isLoading } = useFilteredFilmsQuery(
+    [filterQueryString, limitQueryString].join("&")
+  );
+
+  const pageDescription = useMemo(
+    () =>
+      getDescriptionByFilters(
+        { selectedGenre: genre, selectedCountry: country, selectedYear: year },
+        descriptionByFiltersInit
+      ),
+    [genre, country, year]
+  );
+
+  const breadcrumbs = useMemo(() => {
+    const breadcrumbsFromFilters = getBreadcrumbsFromFilters({
+      selectedGenre: genre,
+      selectedCountry: country,
+      selectedYear: year,
+    });
+
+    if (breadcrumbsFromFilters && breadcrumbsFromFilters.length) {
+      return [
+        ...breadcrumbsInit,
+        { title: "Фильмы", link: "/movies" },
+        ...breadcrumbsFromFilters,
+      ];
+    }
+
+    return [...breadcrumbsInit, { title: "Фильмы" }];
+  }, [genre, country, year]);
+
+  const onShowMoreClick = (): void => {
+    setCurrentPage(currentPage + 1);
+  };
 
   const pageId = props.params.id;
   const pageTitle =
     pageId[0] === DEFAULT_PAGE_ID ? "Все фильмы смотреть онлайн" : "Фильмы";
-  const pageDescriptionItems = getDescriptionByFilters(
-    filtersState,
-    filtersData,
-    descriptionDefaultByFilters
-  );
 
   return (
     <MainContainer>
-      <section>
+      <section className={s.headerSection}>
+        {<Breadcrumbs items={breadcrumbs} />}
         <Title
           className="descriptionTitle"
           tag="h1"
@@ -57,13 +117,7 @@ export default function Home(props: PageProps) {
           text={pageTitle}
         />
         <PageDescription>
-          <div className={s.description}>
-            {pageDescriptionItems.map((text) => (
-              <span key={text} className={s.descriptionItem}>
-                {text}
-              </span>
-            ))}
-          </div>
+          <div className={s.description}>{pageDescription}</div>
         </PageDescription>
       </section>
 
@@ -72,13 +126,24 @@ export default function Home(props: PageProps) {
       </section>
 
       <section className={`pageSection ${s.filmsList}`}>
-        <FilmsList items={films} />
-        <Button
-          className={s.loadMore}
-          text="Показать еще"
-          border={Border.GRAY}
-          size={Size.FULL}
-        />
+        {(!isLoading && !!data && data.length && (
+          <>
+            <FilmsList items={data.slice(0, limitEnd - 1)} />
+
+            {data.length === limitEnd && (
+              <Button
+                className={s.loadMore}
+                text="Показать еще"
+                border={Border.GRAY}
+                size={Size.FULL}
+                onClick={onShowMoreClick}
+              />
+            )}
+          </>
+        )) ||
+          (isLoading && <div>Загрузка...</div>) || (
+            <div className="itemsNotFound">Фильмы не найдены</div>
+          )}
       </section>
     </MainContainer>
   );

@@ -4,8 +4,9 @@ import { SwiperOptions } from "swiper";
 export const genresSliderParamsMini: SwiperOptions = {
   breakpoints: {
     [breakpoints.md]: {
-      slidesPerView: 4,
+      slidesPerView: 3,
       slidesPerGroup: 1,
+      allowTouchMove: true,
     },
     [breakpoints.lg]: {
       slidesPerView: 5,
@@ -18,7 +19,7 @@ export const genresSliderParamsMini: SwiperOptions = {
       allowTouchMove: false,
     },
   },
-  slidesPerView: 3,
+  slidesPerView: 2,
   slidesPerGroup: 1,
   spaceBetween: 12,
   allowTouchMove: true,
@@ -30,6 +31,7 @@ export const genresSliderParamsFull: SwiperOptions = {
       slidesPerView: 4,
       slidesPerGroup: 3,
       spaceBetween: 24,
+      allowTouchMove: true,
     },
     [breakpoints.lg]: {
       slidesPerView: 5,

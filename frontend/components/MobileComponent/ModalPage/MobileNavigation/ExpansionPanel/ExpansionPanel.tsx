@@ -72,9 +72,8 @@ const ExpansionPanel: React.FC<TooltipProps> = ({ title, link }) => {
           </div>
         </div>
       )}
-
-      {showText && link !== Links.TV && link !== Links.About &&(
-        <div className={s.block}>
+      {showText && link !== Links.TV && link !== Links.About && (
+        <div className={s.test}>
           <ContentByLink link={link} />
           <SideContent link={link} />
         </div>

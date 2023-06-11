@@ -46,7 +46,7 @@ const ModalAdminAuth = ({ visible = false, onClose, title }: ModalProps) => {
             </div>
             <div className={s.add_btn_block} onClick={onClose}>
               <div className={s.log_btn}>
-              <Button title="Войти" />
+                <Button title="Войти" />
               </div>
             </div>
           </div>

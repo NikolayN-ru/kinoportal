@@ -1,5 +1,4 @@
 import { FC } from "react";
-import Link from "next/link";
 import Button from "@components/ui-kit/Button";
 import s from "./DropDownContent.module.scss";
 import Icon from "@components/ui-kit/IconComponent/Icon";

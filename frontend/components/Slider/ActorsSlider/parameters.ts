@@ -7,6 +7,7 @@ export const actorsSliderParams: SwiperOptions = {
       spaceBetween: 24,
       slidesPerView: 4,
       slidesPerGroup: 3,
+      allowTouchMove: true,
     },
     [breakpoints.lg]: {
       spaceBetween: 24,

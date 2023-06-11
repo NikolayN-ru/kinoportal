@@ -2,6 +2,7 @@ import { FC, MouseEventHandler } from "react";
 import cn from "classnames/bind";
 
 import Icon from "@components/ui-kit/IconComponent/Icon";
+import { capitalizeFirstLetter } from "utils";
 
 import s from "./FilterGenreItem.module.scss";
 
@@ -42,7 +43,7 @@ const FilterGenreItem: FC<FilterGenreItemProps> = ({
   return (
     <div className={className} onClick={onClick}>
       <Icon className={s.icon} name={iconName} />
-      <div className={s.text}>{title}</div>
+      <div className={s.text}>{capitalizeFirstLetter(title)}</div>
     </div>
   );
 };

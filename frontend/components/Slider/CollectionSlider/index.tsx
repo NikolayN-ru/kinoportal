@@ -4,16 +4,19 @@ import { SwiperSlide } from "swiper/react";
 import Slider from "@components/Slider";
 import FilmCard from "@components/FilmCard";
 import FilmCardTooltip from "@components/FilmCard/FilmCardTooltip";
-import { CollectionFilm } from "../../types/film";
+import { Movie } from "../../types/film";
 import { useTooltip } from "../../../hooks/useTooltip";
 import { TooltipContextValue } from "../../types/tooltip";
-import { collectionSliderParams } from "./parameters";
-
-import s from "./CollectionSlider.module.scss";
+import {
+  ITEMS_IN_COLLECTION_SLIDER,
+  collectionSliderParams,
+} from "./parameters";
 import ShowAllCard from "@components/FilmCard/ShowAllCard";
 
+import s from "./CollectionSlider.module.scss";
+
 export interface CollectionSliderProps {
-  items: CollectionFilm[];
+  items: Movie[];
   link: string;
 }
 
@@ -40,15 +43,17 @@ const CollectionSlider: FC<CollectionSliderProps> = ({ items, link }) => {
           withTitles={true}
           nextClassName={s.sliderNext}
         >
-          {items.map((item) => (
+          {items.slice(0, ITEMS_IN_COLLECTION_SLIDER).map((item) => (
             <SwiperSlide key={item.id}>
               <FilmCard key={item.id} data={item} withToolsContext={true} />
             </SwiperSlide>
           ))}
 
-          <SwiperSlide>
-            <ShowAllCard link={link} />
-          </SwiperSlide>
+          {items.length > ITEMS_IN_COLLECTION_SLIDER && (
+            <SwiperSlide>
+              <ShowAllCard link={link} />
+            </SwiperSlide>
+          )}
         </Slider>
       </TooltipContext.Provider>
     </div>

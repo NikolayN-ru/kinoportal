@@ -16,7 +16,12 @@
 
 .buttonPrev,
 .buttonNext {
-  @apply absolute top-0 bottom-0 z-10 hidden lg:flex my-auto lg:w-promoSliderButtonLG xxl:w-promoSliderButtonXL;
+  @apply absolute top-0 bottom-0 z-10 lg:flex my-auto lg:w-promoSliderButtonLG xxl:w-promoSliderButtonXL;
+
+  @media (max-width: 600px) {
+    display: none!important;
+  }
+
 }
 
 .buttonPrev {
@@ -52,9 +57,11 @@
   @apply opacity-[0.3];
 }
 
+/*
 @media(max-width:1150px) {
   .promo {
     top: 90px;
     overflow:visible;
   }
 }
+*/

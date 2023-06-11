@@ -7,6 +7,7 @@ export const collectionSliderParams: SwiperOptions = {
       slidesPerView: 5,
       slidesPerGroup: 1,
       spaceBetween: 12,
+      allowTouchMove: true,
     },
     [breakpoints.lg]: {
       slidesPerView: 7,
@@ -26,3 +27,5 @@ export const collectionSliderParams: SwiperOptions = {
   spaceBetween: 12,
   allowTouchMove: true,
 };
+
+export const ITEMS_IN_COLLECTION_SLIDER = 15;

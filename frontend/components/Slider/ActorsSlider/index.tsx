@@ -22,8 +22,8 @@ const ActorsSlider: FC<ActorsSliderProps> = ({ items }) => {
         nextClassName={s.sliderNext}
       >
         {items.map((item) => (
-          <SwiperSlide key={item.id}>
-            <ActorCard key={item.id} data={item} />
+          <SwiperSlide key={item.actorId}>
+            <ActorCard data={item} />
           </SwiperSlide>
         ))}
       </Slider>

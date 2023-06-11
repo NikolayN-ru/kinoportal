@@ -9,6 +9,7 @@ import {
 import cn from "classnames/bind";
 
 import Icon from "@components/ui-kit/IconComponent/Icon";
+import { capitalizeFirstLetter } from "utils";
 
 import s from "./Select.module.scss";
 
@@ -60,7 +61,10 @@ const Select: FC<SelectProps> = ({ title, selectedValues, name, children }) => {
         <div className={s.titleContainer}>
           <div className={s.title}>{title}</div>
           <div className={s.selectedValues}>
-            {!!selectedValues && selectedValues.join(", ")}
+            {!!selectedValues &&
+              selectedValues
+                .map((value) => capitalizeFirstLetter(value))
+                .join(", ")}
           </div>
         </div>
 

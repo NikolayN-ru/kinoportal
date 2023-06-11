@@ -9,7 +9,7 @@ import {
   getSortingNameByValue,
   getSortingValueByName,
 } from "utils/filters";
-import { filmsSorting } from "@mock/filmsData";
+import { filmsSorting } from "../filters";
 
 const FilmsSorting: FC = () => {
   const selectedSorting = useTypedSelector(

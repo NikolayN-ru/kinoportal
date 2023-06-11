@@ -1,12 +1,12 @@
 import { FC } from "react";
 
-import { CollectionFilm } from "@components/types/film";
+import { CollectionFilm, Movie } from "@components/types/film";
 import FilmCard from "@components/FilmCard";
 
 import s from "./FilmsList.module.scss";
 
 interface FilmsListProps {
-  items: CollectionFilm[];
+  items: Movie[];
 }
 
 const FilmsList: FC<FilmsListProps> = ({ items }) => {

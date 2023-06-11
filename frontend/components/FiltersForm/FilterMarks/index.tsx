@@ -16,7 +16,7 @@ interface FilterRatingProps {
 
 const FilterMarks: FC<FilterRatingProps> = ({ reset, setReset }) => {
   const selectedMark = useTypedSelector(
-    ({ filtersApi }) => filtersApi.filters.mark
+    ({ filtersApi }) => filtersApi.filters.votes
   );
   const dispatch = useDispatch();
 

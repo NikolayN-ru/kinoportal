@@ -9,6 +9,13 @@ interface BadgeFilmProps {
   option: FilmBadge;
 }
 
+export const badgeFilmOptions = {
+  popular: { text: "популярный", color: "orange" },
+  choice: { text: "выбор Иви", color: "red" },
+  new: { text: "новинка", color: "green" },
+  classic: { text: "классика", color: "blue" },
+};
+
 const BadgeFilm: FC<BadgeFilmProps> = ({ className, option }) => {
   const { text, color } = option;
 

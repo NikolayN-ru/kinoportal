@@ -1,33 +1,19 @@
 import { FC } from "react";
 
 import s from "./SearchDropdown.module.scss";
-import Link from "next/link";
 
 interface SearchDropdownProps {
   className?: string;
-  searchValue: string;
+  results: string[];
+  onChoise: (value: string) => void;
 }
 
 const RESULTS_COUNT = 10;
 
-const results = [
-  "Джек Ричер",
-  "Джентльмены удачи",
-  "Джек Райан: Теория хаоса",
-  "Джентльмены",
-  "Джеки Браун",
-  "Дже-Юн Ли",
-  "Дже-Ми Шишидо",
-  "Дже-Беом Пак",
-  "Сценарист",
-  "Фильмы с Джеком Блэком",
-  "Актёр",
-  "Актёр",
-];
-
 const SearchDropdown: FC<SearchDropdownProps> = ({
   className,
-  searchValue,
+  results,
+  onChoise,
 }) => {
   const classNames = [s.container];
   className && classNames.push(className);
@@ -38,9 +24,13 @@ const SearchDropdown: FC<SearchDropdownProps> = ({
     <div className={classNames.join(" ")}>
       <div className={s.resultsList}>
         {results.slice(0, RESULTS_COUNT).map((result, index) => (
-          <Link key={index} className={s.resultLink} href="#">
+          <div
+            key={index}
+            className={s.resultLink}
+            onClick={() => onChoise(result)}
+          >
             {result}
-          </Link>
+          </div>
         ))}
       </div>
     </div>

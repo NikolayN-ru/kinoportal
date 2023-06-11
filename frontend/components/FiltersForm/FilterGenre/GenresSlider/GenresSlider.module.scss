@@ -14,5 +14,5 @@
 }
 
 .sliderPrev {
-  @apply translate-x-[0];
+  transform: translateX(0)!important;
 }

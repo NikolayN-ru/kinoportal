@@ -3,9 +3,11 @@ import cn from "classnames/bind";
 
 import s from "./SelectOptionsList.module.scss";
 
+export type ColumnsCount = 1 | 2 | 3;
+
 interface SelectOptionsListProps {
   children: ReactNode;
-  columns: 1 | 2 | 3;
+  columns: ColumnsCount;
   separated?: boolean;
 }
 

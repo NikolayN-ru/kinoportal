@@ -103,6 +103,11 @@
 }
 
 @layer components {
+  .container {
+    width: 100%;
+    max-width: 100%!important;
+  }
+
   .main-container {
     @apply relative flex flex-col grow w-full min-w-[theme("width.mobile")] xl:max-w-[theme("width.desktop")]
     mx-auto my-0 pb-[24px];
@@ -137,5 +142,9 @@
       @apply absolute top-[6px] right-[0] bottom-[0] w-[6px] h-[16px] my-auto content-[""]
       bg-[url('/svg/arrow-right.svg')] bg-no-repeat;
     }
+  }
+
+  .itemsNotFound {
+    @apply text-[18px] text-white font-semibold text-center;
   }
 }

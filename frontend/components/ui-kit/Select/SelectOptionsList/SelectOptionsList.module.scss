@@ -3,11 +3,11 @@
 }
 
 .oneColumn {
-
+  @apply grid-cols-1;
 }
 
 .twoColumns {
-
+  @apply grid-cols-2;
 }
 
 .threeColumns {

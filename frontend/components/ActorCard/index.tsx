@@ -15,41 +15,38 @@ const IMAGE_PATH = "/images/";
 const FILMS_FORMS = ["фильм", "фильма", "фильмов"];
 
 const ActorCard: FC<ActorCardProps> = ({ data }) => {
-  const { name, surname, filmsCount, image } = data;
+  const { actorId, firstName, lastName, countfilms, filename } = data;
 
   return (
-    <Link className={s.container} href="#">
+    <Link
+      className={s.container}
+      href="/actor/[id]/actor"
+      as={`/actor/${actorId}/actor`}
+    >
       <div className={s.imageSection}>
         <div className={s.imageContainer}>
           <Image
             className={s.image}
-            src={IMAGE_PATH + image}
+            src={IMAGE_PATH + filename}
             width={153}
             height={183}
             alt=""
           />
         </div>
         <div className={s.countBadge}>
-          <div className={s.countBadgeInner}>{filmsCount}</div>
+          {countfilms && <div className={s.countBadgeInner}>{countfilms}</div>}
         </div>
       </div>
 
-      <div className={s.title}>{name}</div>
-      <div className={s.title}>{surname}</div>
-      <div className={s.filmsCount}>
-        {filmsCount} {declensionOfNum(filmsCount, FILMS_FORMS)}
-      </div>
+      <div className={s.title}>{firstName}</div>
+      <div className={s.title}>{lastName}</div>
+      {countfilms && (
+        <div className={s.filmsCount}>
+          {countfilms} {declensionOfNum(countfilms, FILMS_FORMS)}
+        </div>
+      )}
     </Link>
   );
 };
 
 export default ActorCard;
-
-/*
-<div className={s.imageContainer}>
-          <Image className={s.image} src={IMAGE_PATH + image} width={153} height={183} alt="" />
-        </div>
-        <div className={s.countBadge}>
-          <div className={s.countBadgeInner}>{filmsCount}</div>
-        </div>
-*/

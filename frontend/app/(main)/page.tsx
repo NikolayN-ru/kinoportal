@@ -1,24 +1,22 @@
 "use client";
 
-import Link from "next/link";
-
 import CompilationSlider from "@components/Slider/CompilationSlider";
-import CollectionSlider from "@components/Slider/CollectionSlider";
 import MainContainer from "@components/MainContainer";
 import Promo from "@components/Promo";
 import PageDescription, { PageNames } from "@components/PageDescription";
 import Title from "@components/Title";
 import SubscriptionButton from "@components/ui-kit/Button/SubscriptionButton";
-import { collections, compilation } from "mock/filmsData";
+import { compilation } from "mock/filmsData";
 import Icon from "@components/ui-kit/IconComponent/Icon";
 import { top10Items } from "@mock/top10";
 import Slider from "@components/Slider";
 import { breakpoints } from "@components/Slider/breakpoints";
 import { SwiperOptions } from "swiper";
 import { SwiperSlide } from "swiper/react";
+import Top10Card from "@components/Top10Card";
+import CollectionsSet from "@components/CollectionsSet";
 
 import s from "./page.module.scss";
-import Top10Card from "@components/Top10Card";
 
 const top10SliderParams: SwiperOptions = {
   breakpoints: {
@@ -41,7 +39,7 @@ const top10SliderParams: SwiperOptions = {
     },
   },
   spaceBetween: 12,
-  slidesPerView: 1,
+  slidesPerView: 2,
   slidesPerGroup: 1,
   allowTouchMove: true,
 };
@@ -54,7 +52,9 @@ export default function Home() {
         бесплатно в хорошем качестве.
       </h1>
 
-      <section className={s.promoSection}>{<Promo />}</section>
+      <section className={s.promoSection}>
+        <Promo />
+      </section>
 
       <section className={"pageSection " + s.subscribeSection}>
         <SubscriptionButton />
@@ -100,17 +100,7 @@ export default function Home() {
         </div>
       </section>
 
-      {collections.map(({ id, name, link, items }) => (
-        <section key={id} className="pageSection">
-          <Link
-            href={`/collections/${link}`}
-            className="titleLink sectionTitle"
-          >
-            <Title tag="h2" size="md" text={name} />
-          </Link>
-          <CollectionSlider items={items} link={`collections/${link}`} />
-        </section>
-      ))}
+      <CollectionsSet startNumber={0} endNumber={1} />
     </MainContainer>
   );
 }

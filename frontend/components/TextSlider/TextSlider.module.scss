@@ -27,7 +27,7 @@
 }
 
 .isDisabled {
-  @apply hidden;
+  display: none!important;
 }
 
 .sliderWrapper {

@@ -5,13 +5,13 @@ export interface FilterProps {
 }
 
 export interface FilterGenre {
-  value: string;
-  title: string;
+  id: number;
+  genre: string;
 }
 
 export interface FilterCountry {
-  value: string;
-  title: string;
+  id: number;
+  country: string;
 }
 export interface FilterYear {
   value: number[];
@@ -39,7 +39,7 @@ export interface FiltersFromPath extends FiltersFromPathDynamicKeys {
 
 export interface FiltersFromQuery extends FiltersFromQueryDynamicKeys {
   rating: number;
-  mark: number;
+  votes: number;
   director: string;
   actor: string;
 }

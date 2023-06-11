@@ -42,7 +42,7 @@ const MobileNavigation = () => {
         <div className={s.button_caption}>
           {linksButton.map((link) => {
             return (
-              <div className={s.button_item}>
+              <div key={link.id} className={s.button_item}>
                 <Link href={link.href}>{link.text}</Link>
               </div>
             );
@@ -50,7 +50,7 @@ const MobileNavigation = () => {
           <div className={s.title_wrap}>
             {titles.map((title) => {
               return (
-                <div className={s.title}>
+                <div key={title.id} className={s.title}>
                   <Icon name={title.image} />
                   <ExpansionPanel title={title.title} link={title.link} />
                 </div>

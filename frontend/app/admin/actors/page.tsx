@@ -11,7 +11,7 @@ const ActorsAdmin = () => {
   const { data = [], error, isLoading } = useAllActorsQuery("all");
 
   // console.log(data, "data");
-  
+
   const onClose = () => {
     setModal(false);
   };

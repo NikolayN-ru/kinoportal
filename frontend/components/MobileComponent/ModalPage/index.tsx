@@ -12,11 +12,7 @@ interface ModalProps {
   className?: string;
 }
 
-const ModalPage: FC<ModalProps> = ({
-  visible = false,
-  onClose,
-  className,
-}) => {
+const ModalPage: FC<ModalProps> = ({ visible = false, onClose, className }) => {
   const { t } = useTranslation();
 
   const onKeydown = ({ key }: KeyboardEvent) => {

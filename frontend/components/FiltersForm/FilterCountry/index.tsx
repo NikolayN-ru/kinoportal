@@ -4,18 +4,23 @@ import { FC } from "react";
 import { useDispatch } from "react-redux";
 
 import { useTypedSelector } from "hooks/useTypedSelector";
-import { FilterProps } from "@components/types/filters";
 import Select from "@components/ui-kit/Select";
 import SelectOptionsList from "@components/ui-kit/Select/SelectOptionsList";
 import Checkbox from "@components/ui-kit/Checkbox";
 import CountriesSlider from "./CountriesSlider";
 import { setCountry } from "@redux/filtersApi";
-import { countries } from "@mock/filmsData";
-import { getCountriesTitlesByValues } from "utils/filters";
 
 import s from "./FilterCountry.module.scss";
 
-const FilterCountry: FC<FilterProps> = ({ title }) => {
+interface FilterCountryProps {
+  title: string;
+}
+
+const FilterCountry: FC<FilterCountryProps> = ({ title }) => {
+  const { items, isLoading } = useTypedSelector(
+    ({ filtersDataApi }) => filtersDataApi.countryData
+  );
+
   const selectedCountries = useTypedSelector(
     (state) => state.filtersApi.filters.country
   );
@@ -31,32 +36,34 @@ const FilterCountry: FC<FilterProps> = ({ title }) => {
   };
 
   return (
-    <Select
-      title={title}
-      selectedValues={getCountriesTitlesByValues(countries, selectedCountries)}
-      name="country"
-    >
+    <Select title={title} selectedValues={selectedCountries} name="country">
       <div className={s.optionsWrapper}>
         <CountriesSlider />
 
         <SelectOptionsList columns={3} separated>
-          {countries.map(({ value, title }) => {
-            const isChecked = selectedCountries.some(
-              (selectedCountry) => selectedCountry === value
-            );
+          {(!isLoading &&
+            !!items &&
+            items.length &&
+            items.map(({ id, country }) => {
+              const isChecked = selectedCountries.some(
+                (selectedCountry) => selectedCountry === country
+              );
 
-            return (
-              <div key={value} className={s.optionItem}>
-                <Checkbox
-                  value={value}
-                  text={title}
-                  name="country"
-                  isChecked={isChecked}
-                  onChange={() => onCheckboxChange(value, isChecked)}
-                />
-              </div>
-            );
-          })}
+              return (
+                <div key={id} className={s.optionItem}>
+                  <Checkbox
+                    value={country}
+                    text={country}
+                    name="country"
+                    isChecked={isChecked}
+                    onChange={() => onCheckboxChange(country, isChecked)}
+                  />
+                </div>
+              );
+            })) ||
+            (isLoading && <div>Загрузка...</div>) || (
+              <div>Страны не найдены</div>
+            )}
         </SelectOptionsList>
       </div>
     </Select>

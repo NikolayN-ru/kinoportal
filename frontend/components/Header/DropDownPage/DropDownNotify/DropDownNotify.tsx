@@ -9,9 +9,6 @@ const DropDownNotify = () => {
           <div className={s.icon}>
             <Icon name="notify_big" />
           </div>
-          <div className={s.notify_text}>
-            Здесь появляются только важные сообщения
-          </div>
         </div>
       </div>
     </div>
