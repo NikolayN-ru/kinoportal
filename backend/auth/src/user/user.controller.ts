@@ -22,4 +22,9 @@ export class UserController {
     createComment(@Payload() data: any, @Ctx() context: RmqContext) {  
         return this.userService.createComment(data.userId, data.reviewId, data.commentDto)
     }
+
+    @MessagePattern('deleteComment')
+    deleteComment(@Payload() data: number, @Ctx() context: RmqContext) {  
+        return this.userService.deleteComment(data)
+    }
 }

@@ -13,7 +13,9 @@ export class MovieController {
 
     @EventPattern('get.movie.with.filter')
     async getMovieWithFilter(dto: getMovieFilerDto) {
-        return (await this.movieService.getMovieWithFilter(dto.genre, dto.year, dto.country, dto.rating, dto.votes, dto.actor, dto.director, dto.sort)).slice(dto.limitStart,dto.limitEnd);
+        const movie = await this.movieService.getMovieWithFilter(dto.genre, dto.year, dto.country, dto.rating, dto.votes, dto.actor, dto.director, dto.sort);
+        if(typeof(movie) === "object") return movie
+        return movie.slice(dto.limitStart,dto.limitEnd);
     }
 
     @EventPattern('get.movie')
@@ -41,10 +43,16 @@ export class MovieController {
         return this.movieService.createComment(dto);
     }
 
+    @EventPattern('delete.comment')
+    deleteComment(dto: number) {
+        return this.movieService.deleteComment(dto);
+    }
+
     @EventPattern('create.movie')
     createMovie(dto: CreateMovieDto) {
         return this.movieService.createMovie(dto, dto.image);
     }
+    
 
     @EventPattern('delete.movie')
     deleteMovie(id: number) {

@@ -18,6 +18,7 @@ export class MovieService {
                 @InjectRepository(Review) private reviewRepository: Repository<Review>,
                 @InjectRepository(Genre) private genreRepository: Repository<Genre>,
                 @InjectRepository(Country) private countryRepository: Repository<Country>,
+                @InjectRepository(Comment) private commentRepository: Repository<Comment>,
                 @Inject('Photo') private clientPhoto: ClientProxy,
                 @Inject('Actor') private clientActor: ClientProxy) {}
 
@@ -288,6 +289,22 @@ export class MovieService {
 
             return review;
         } catch (e) {
+            return {
+                status: e.status,
+                message: e.message
+            };
+        }
+    }
+
+    async deleteComment(id: number){
+        try{
+            const comment = await this.commentRepository.findOneBy({id});
+            if(!comment) throw new HttpException('Такого комментария нет', HttpStatus.NOT_FOUND);
+
+            await this.commentRepository.delete(comment);
+            return "Удален";
+        }
+        catch(e){
             return {
                 status: e.status,
                 message: e.message

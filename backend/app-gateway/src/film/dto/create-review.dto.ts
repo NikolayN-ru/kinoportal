@@ -12,7 +12,7 @@ export class CreateReviewDto {
 
     @ApiProperty({ description: 'дата'})
     @IsNotEmpty()
-    readonly data: number;
+    readonly data: string;
 
     @ApiProperty({ description: 'количество лайков'})
     @IsNotEmpty({message: 'Не введено количество лайков '})
