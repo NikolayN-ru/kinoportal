@@ -101,7 +101,7 @@ const Header = () => {
                 onMouseEnter={() => handleToggleDropDown(Links.Films)}
                 onMouseLeave={() => handleToggleDropDown(undefined)}
               >
-                <span className={s.text}> {t("header.films")}</span>{" "}
+                <Link href='/movies'><span className={s.text}> {t("header.films")}</span></Link>{" "}
                 {showDropDownBySelectedLink(Links.Films)}
               </div>
               <div
