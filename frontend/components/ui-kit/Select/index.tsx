@@ -13,25 +13,41 @@ import { capitalizeFirstLetter } from "utils";
 
 import s from "./Select.module.scss";
 
+export enum DropdownPosition {
+  LEFT = "left",
+  CENTER = "center",
+  RIGHT = "right",
+}
+
 interface SelectProps {
   title: string;
   selectedValues: string[];
   name: string;
   children: ReactNode;
+  dropdownPosition: DropdownPosition;
 }
 
 export const SelectContext = createContext<boolean | null>(null);
 
-const Select: FC<SelectProps> = ({ title, selectedValues, name, children }) => {
+const Select: FC<SelectProps> = ({
+  title,
+  selectedValues,
+  name,
+  children,
+  dropdownPosition,
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const styles = {
     container: s.container,
     isOpen: s.isOpen,
+    dropdown: s.dropdown,
+    dropdownPosition: s[dropdownPosition] || "",
   };
 
   const classNames = cn.bind(styles);
   const containerClassName = classNames("container", { isOpen });
+  const dropdownClassName = classNames("dropdown", { dropdownPosition });
 
   const onDocumentClick = (e: MouseEvent) => {
     if (
@@ -74,7 +90,7 @@ const Select: FC<SelectProps> = ({ title, selectedValues, name, children }) => {
       </div>
 
       <SelectContext.Provider value={isOpen}>
-        <div className={s.dropdown}>{children}</div>
+        <div className={dropdownClassName}>{children}</div>
       </SelectContext.Provider>
     </div>
   );

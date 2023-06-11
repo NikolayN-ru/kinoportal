@@ -66,13 +66,7 @@ const MobileComponent = () => {
                 href={button.href}
                 onClick={() => setModal(true)}
               >
-                <div
-                  className={s.item}
-                  // className={
-                  //   getClassNameButtonByIndex(index) ? s.activeItem : s.item
-                  // }
-                  // onClick={() => selectButtonByIndex(index)}
-                >
+                <div className={s.item}>
                   <div
                     className={
                       getClassNameButtonByIndex(index)
@@ -100,13 +94,7 @@ const MobileComponent = () => {
                 href={button.href}
                 onClick={() => setIsMobilePage(true)}
               >
-                <div
-                  className={s.item}
-                  // className={
-                  //   getClassNameButtonByIndex(index) ? s.activeItem : s.item
-                  // }
-                  // onClick={() => selectButtonByIndex(index)}
-                >
+                <div className={s.item}>
                   <div
                     className={
                       getClassNameButtonByIndex(index)
@@ -130,13 +118,7 @@ const MobileComponent = () => {
           } else {
             return (
               <Link key={button.id} href={button.href}>
-                <div
-                  className={s.item}
-                  // className={
-                  //   getClassNameButtonByIndex(index) ? s.activeItem : s.item
-                  // }
-                  // onClick={() => selectButtonByIndex(index)}
-                >
+                <div className={s.item}>
                   <div
                     className={
                       getClassNameButtonByIndex(index)
