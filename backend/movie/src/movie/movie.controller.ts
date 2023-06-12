@@ -14,8 +14,8 @@ export class MovieController {
     @EventPattern('get.movie.with.filter')
     async getMovieWithFilter(dto: getMovieFilerDto) {
         const movie = await this.movieService.getMovieWithFilter(dto.genre, dto.year, dto.country, dto.rating, dto.votes, dto.actor, dto.director, dto.sort);
-        if(typeof(movie) === "object") return movie
-        return movie.slice(dto.limitStart,dto.limitEnd);
+        if(Object.prototype.toString.call(movie) === '[object Array]') return movie.slice(dto.limitStart,dto.limitEnd);
+        return movie;
     }
 
     @EventPattern('get.movie')
